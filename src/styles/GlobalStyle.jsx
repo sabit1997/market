@@ -34,7 +34,7 @@ button {
   border: none;
 }
 
-input:hover, input:focus {
+input {
   border: none;
 }
 
