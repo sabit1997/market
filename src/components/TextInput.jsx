@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 
-function TextInput() {
+function TextInput(props) {
   return (
     <>
-      <IdInput type="text" placeholder="아이디" />
+      <IdInput
+        type={props.type}
+        placeholder={props.placeholder}
+        marginB={props.marginB}
+      />
     </>
   );
 }
@@ -15,6 +19,7 @@ const IdInput = styled.input`
   font-size: 16px;
   font-weight: 400;
   line-height: 1.25;
+  margin-bottom: ${(props) => props.marginB};
   &::placeholder {
     color: #767676;
   }
