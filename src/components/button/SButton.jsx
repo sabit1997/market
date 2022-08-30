@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-export default function SButton() {
+export default function SButton(props) {
   return (
     <>
-      <Button>버튼</Button>
+      <Button>{props.value}</Button>
     </>
   );
 }
