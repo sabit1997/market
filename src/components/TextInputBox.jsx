@@ -24,7 +24,9 @@ function TextInputBox(props) {
         </>
       ) : (
         <>
-          <Txt htmlFor="box_input">{props.value}</Txt>
+          <Txt htmlFor="box_input" marginT={props.marginT}>
+            {props.value}
+          </Txt>
           <Input
             type={props.type}
             id="box_input"
@@ -49,6 +51,7 @@ const Txt = styled.label`
   font-weight: 400;
   line-height: 1.25;
   color: #767676;
+  margin-top: ${(props) => props.marginT};
   margin-bottom: 10px;
   display: block;
 `;

@@ -42,6 +42,17 @@ export default function Join(props) {
             <TextInputBox value="이름" type="text" marginB="16px" />
             <TextInputBox value="휴대폰번호" marginB="16px" />
             <TextInputBox value="이메일" />
+            {joinType === 'seller' ? (
+              <>
+                <TextInputBox
+                  value="사업자 등록번호"
+                  type="number"
+                  marginT="50px"
+                  marginB="16px"
+                />
+                <TextInputBox value="스토어 이름" type="text" />
+              </>
+            ) : null}
           </InputBox>
         </LoginBox>
         <CheckText
