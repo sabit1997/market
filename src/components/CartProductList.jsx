@@ -1,7 +1,6 @@
 import styled from 'styled-components';
-import minusIcon from '../assets/icon-minus-line.svg';
-import plusIcon from '../assets/icon-plus-line.svg';
 import deleteIcon from '../assets/icon-delete.svg';
+import Amount from './Amount';
 
 function CartProductList() {
   return (
@@ -15,11 +14,7 @@ function CartProductList() {
         <ProductPrice>17,500</ProductPrice>
         <Shipping>택배배송 / 무료배송</Shipping>
       </ProductInfoWarpper>
-      <Quantity>
-        <QuantityBtn />
-        <QuantityNum>1</QuantityNum>
-        <QuantityBtn />
-      </Quantity>
+      <Amount />
       <OderWarpper>
         <OrderPrice>17,500원</OrderPrice>
         <OrderBtn>주문하기</OrderBtn>
@@ -92,38 +87,6 @@ const Shipping = styled.span`
   font-weight: 400;
   line-height: 1.25;
   color: #767676;
-`;
-
-const Quantity = styled.div`
-  width: 150px;
-  height: 50px;
-  border-radius: 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-right: 148px;
-  border: 1px solid #c4c4c4c4;
-`;
-
-const QuantityBtn = styled.button`
-  width: 47px;
-  height: 50px;
-  background-image: url(${minusIcon});
-  background-repeat: no-repeat;
-  background-size: 20px;
-  background-position: center;
-  border-right: 1px solid #c4c4c4c4;
-  &:last-child {
-    background-image: url(${plusIcon});
-    border-right: none;
-    border-left: 1px solid #c4c4c4c4;
-  }
-`;
-
-const QuantityNum = styled.p`
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 1.25;
 `;
 
 const OderWarpper = styled.div`
