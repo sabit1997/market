@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-export default function TabActiveButton() {
+export default function TabActiveButton(props) {
   return (
     <>
-      <Button>버튼</Button>
+      <Button>{props.value}</Button>
     </>
   );
 }
