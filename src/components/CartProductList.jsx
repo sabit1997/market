@@ -2,9 +2,9 @@ import styled from 'styled-components';
 import deleteIcon from '../assets/icon-delete.svg';
 import Amount from './Amount';
 
-function CartProductList() {
+function CartProductList(props) {
   return (
-    <Warpper>
+    <Warpper marginB={props.marginB}>
       <Label for="inp_radio" />
       <input type="radio" id="inp_radio" name="inp_radio" className="ir" />
       <Product src="" />
@@ -33,7 +33,13 @@ const Warpper = styled.section`
   border: 2px solid #e0e0e0;
   border-radius: 10px;
   padding: 20px 0 20px 30px;
+  margin-bottom: 10px;
   position: relative;
+  margin-bottom: 10px;
+  /* 마지막 컴포넌트만 80px로 바꾸고 싶다... */
+  &:last-child {
+    margin-bottom: 80px;
+  }
 `;
 
 const Label = styled.label`
