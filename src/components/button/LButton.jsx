@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-export default function LButton() {
+export default function LButton(props) {
   return (
     <>
-      <Button>버튼</Button>
+      <Button>{props.value}</Button>
     </>
   );
 }
