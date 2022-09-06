@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-function TabTitle() {
+function TabTitle(props) {
   return (
-    <Warpper>
+    <Warpper marginB={props.marginB}>
       <Label for="inp_radio" />
       <input type="radio" id="inp_radio" name="inp_radio" className="ir" />
       <Txt>상품정보</Txt>
@@ -19,6 +19,7 @@ const Warpper = styled.section`
   height: 60px;
   background-color: #f2f2f2;
   border-radius: 10px;
+  margin-bottom: ${(props) => props.marginB};
 `;
 
 const Label = styled.label`
