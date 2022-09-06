@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
-export default function MDarkButton() {
+export default function MDarkButton(props) {
   return (
     <>
-      <Button>버튼</Button>
+      <Button wd={props.wd}>{props.value}</Button>
     </>
   );
 }
 
 const Button = styled.button`
-  width: 480px;
+  width: ${(props) => props.wd};
   height: 60px;
   font-size: 18px;
   font-weight: 700;
