@@ -3,13 +3,15 @@ import styled from 'styled-components';
 export default function MButton(props) {
   return (
     <>
-      <Button>{props.value}</Button>
+      <Button wd={props.wd} marginR={props.marginR}>
+        {props.value}
+      </Button>
     </>
   );
 }
 
 const Button = styled.button`
-  width: 480px;
+  width: ${(props) => props.wd};
   height: 60px;
   font-size: 18px;
   font-weight: 700;
@@ -17,4 +19,5 @@ const Button = styled.button`
   background-color: #21bf48;
   color: #fff;
   border-radius: 5px;
+  margin-right: ${(props) => props.marginR};
 `;
