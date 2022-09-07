@@ -22,6 +22,11 @@ const Warpper = styled.section`
   align-items: center;
   padding: 8px 77px 18px 8px;
   position: relative;
+  border-bottom: 1px solid #c4c4c4;
+  margin-bottom: 16px;
+  &:last-child {
+    margin-bottom: 30px;
+  }
 `;
 
 const ProductImg = styled.img`
