@@ -2,12 +2,25 @@ import styled from 'styled-components';
 
 function TabTitle(props) {
   return (
-    <Warpper marginB={props.marginB}>
-      <Label for="inp_radio" />
-      <input type="radio" id="inp_radio" name="inp_radio" className="ir" />
-      <Txt>상품정보</Txt>
-      <Txt>수량</Txt>
-      <Txt>상품금액</Txt>
+    <Warpper marginB={props.marginB} category={props.category}>
+      {props.category === 'payment' ? (
+        <>
+          <Txt marginR="360px" marginL="261px">
+            상품정보
+          </Txt>
+          <Txt marginR="188px">할인</Txt>
+          <Txt marginR="171px">배송비</Txt>
+          <Txt>주문금액</Txt>
+        </>
+      ) : (
+        <>
+          <Label for="inp_radio" />
+          <input type="radio" id="inp_radio" name="inp_radio" className="ir" />
+          <Txt marginR="379px">상품정보</Txt>
+          <Txt marginR="238px">수량</Txt>
+          <Txt>상품금액</Txt>
+        </>
+      )}
     </Warpper>
   );
 }
@@ -15,7 +28,7 @@ function TabTitle(props) {
 const Warpper = styled.section`
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 1280px;
   height: 60px;
   background-color: #f2f2f2;
   border-radius: 10px;
@@ -36,5 +49,8 @@ const Txt = styled.p`
   font-size: 18px;
   font-weight: 400;
   line-height: 1.25;
+  margin-left: ${(props) => props.marginL};
+  margin-right: ${(props) => props.marginR};
+  word-break: keep-all;
 `;
 export default TabTitle;
