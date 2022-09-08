@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export default function LButton(props) {
   return (
     <>
-      <Button>{props.value}</Button>
+      <Button margin={props.margin}>{props.value}</Button>
     </>
   );
 }
@@ -17,4 +17,5 @@ const Button = styled.button`
   color: #fff;
   background-color: #21bf48;
   border-radius: 5px;
+  margin: ${(props) => props.margin};
 `;
