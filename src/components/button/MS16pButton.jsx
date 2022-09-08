@@ -1,16 +1,18 @@
 import styled from 'styled-components';
 
-export default function MS16pButton() {
+export default function MS16pButton(props) {
   return (
     <>
-      <Button>버튼</Button>
+      <Button wd={props.wd} hg={props.hg}>
+        {props.value}
+      </Button>
     </>
   );
 }
 
 const Button = styled.button`
-  width: 166px;
-  height: 55px;
+  width: ${(props) => props.wd};
+  height: ${(props) => props.hg};
   border-radius: 5px;
   font-size: 16px;
   font-weight: 500;
