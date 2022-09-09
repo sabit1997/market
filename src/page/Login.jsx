@@ -2,8 +2,10 @@ import styled from 'styled-components';
 import logo from '../assets/Logo-hodu.png';
 import TextInput from '../components/TextInput';
 import Mbutton from '../components/button/MButton';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
+  const navigate = useNavigate();
   return (
     <>
       <Warpper>
@@ -14,11 +16,11 @@ export default function Login() {
           <InputBox>
             <TextInput type="text" placeholder="아이디" marginB="6px" />
             <TextInput type="password" placeholder="비밀번호" marginB="36px" />
-            <Mbutton value="로그인" />
+            <Mbutton value="로그인" wd="100%" />
           </InputBox>
         </LoginBox>
         <MoveTxtWarpper>
-          <MoveTxt>회원가입</MoveTxt>
+          <MoveTxt onClick={() => navigate('/join')}>회원가입</MoveTxt>
           <MoveTxt>비밀번호찾기</MoveTxt>
         </MoveTxtWarpper>
       </Warpper>
