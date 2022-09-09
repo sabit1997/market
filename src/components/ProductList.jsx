@@ -11,7 +11,7 @@ function ProductList() {
   );
 }
 
-const Warpper = styled.section`
+const Warpper = styled.li`
   width: 380px;
   height: 490px;
   background-color: #fff;
