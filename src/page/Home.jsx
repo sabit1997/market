@@ -7,25 +7,27 @@ import RightArrow from '../assets/icon-rhigt-arrow.svg';
 import insta from '../assets/icon-insta.svg';
 import facebook from '../assets/icon-fb.svg';
 import youtube from '../assets/icon-yt.svg';
+import ProductList from '../components/ProductList';
 
 export default function Home() {
   // const CarouselImgArr = [CarouselImg1, CarouselImg2, CarouselImg3];
   return (
-    <>
+    <PageWarpper>
       <TopNavBar />
       <Carousel>
         <CarouselImg src="" />
         <CarouselBtn />
         <CarouselBtn />
       </Carousel>
-      <ProductList>
-        <li>
-          <ProductImg src="" />
-          <Seller>정예지</Seller>
-          <ProductName>정예지</ProductName>
-          <ProductPrice>25800</ProductPrice>
-        </li>
-      </ProductList>
+      <ProductListSection>
+        <ProductList />
+        <ProductList />
+        <ProductList />
+        <ProductList />
+        <ProductList />
+        <ProductList />
+        <ProductList />
+      </ProductListSection>
       <Footer>
         <TopWarpper>
           <FooterNav>
@@ -53,9 +55,15 @@ export default function Home() {
           <Dd>김호두</Dd>
         </Dl>
       </Footer>
-    </>
+    </PageWarpper>
   );
 }
+
+const PageWarpper = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const Carousel = styled.section`
   display: flex;
@@ -84,51 +92,19 @@ const CarouselImg = styled.img`
   width: 100%;
   height: 500px;
 `;
-const ProductList = styled.ul`
-  width: 100%;
+const ProductListSection = styled.ul`
+  width: 1280px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 70px 78px;
   padding: 80px 0 180px;
 `;
 
-const ProductImg = styled.img`
-  width: 380px;
-  height: 380px;
-  border-radius: 10px;
-  border: 1px solid #c4c4c4;
-  margin-bottom: 16px;
-`;
-
-const Seller = styled.p`
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.375;
-  margin-bottom: 10px;
-`;
-
-const ProductName = styled.p`
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 1.222222222222222;
-  margin-bottom: 10px;
-`;
-
-const ProductPrice = styled.p`
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 1.252083333333333;
-  margin-right: 2px;
-  &::after {
-    content: '원';
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1.251875;
-    vertical-align: middle;
-  }
-`;
-
 const Footer = styled.footer`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: #f2f2f2;
   padding: 60px 0 63px;
 `;
@@ -159,6 +135,7 @@ const FooterLi = styled.li`
 `;
 
 const TopWarpper = styled.div`
+  width: 1280px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -193,6 +170,7 @@ const SnsItem = styled.li`
 `;
 
 const Dl = styled.dl`
+  width: 1280px;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.714285714285714;
