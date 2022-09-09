@@ -3,12 +3,15 @@ import { useState } from 'react';
 import logo from '../assets/Logo-hodu.png';
 import TextInputBox from '../components/TextInputBox';
 import CheckText from '../components/CheckText';
+import MS16pButton from '../components/button/MS16pButton';
 import MButton from '../components/button/MButton';
 import MDisabledButton from '../components/button/MDisabledButton';
+import { useNavigate } from 'react-router-dom';
 
 export default function Join(props) {
   const [checked, setChecked] = useState(Boolean);
   const [joinType, setJoinType] = useState('buyer');
+  const navigate = useNavigate();
 
   const changeBuyer = () => {
     setJoinType('buyer');
@@ -23,7 +26,7 @@ export default function Join(props) {
   return (
     <>
       <Warpper>
-        <Logo src={logo} />
+        <Logo src={logo} onClick={() => navigate('/')} />
         <LoginBox>
           <LoginSelletor joinType={joinType} onClick={changeBuyer}>
             구매회원가입
@@ -32,7 +35,10 @@ export default function Join(props) {
             판매회원가입
           </LoginSelletor>
           <InputBox joinType={joinType}>
-            <TextInputBox value="아이디" type="text" marginB="12px" />
+            <IdInputWarpper>
+              <TextInputBox value="아이디" type="text" marginB="12px" />
+              <MS16pButton value="중복확인" wd="122px" margin="30px 0 0 12px" />
+            </IdInputWarpper>
             <TextInputBox value="비밀번호" type="password" marginB="12px" />
             <TextInputBox
               value="비밀번호 재확인"
@@ -44,12 +50,15 @@ export default function Join(props) {
             <TextInputBox value="이메일" />
             {joinType === 'seller' ? (
               <>
-                <TextInputBox
-                  value="사업자 등록번호"
-                  type="number"
-                  marginT="50px"
-                  marginB="16px"
-                />
+                <IdInputWarpper>
+                  <TextInputBox
+                    value="사업자 등록번호"
+                    type="number"
+                    marginT="50px"
+                    marginB="16px"
+                  />
+                  <MS16pButton value="인증" wd="122px" margin="80px 0 0 12px" />
+                </IdInputWarpper>
                 <TextInputBox value="스토어 이름" type="text" />
               </>
             ) : null}
@@ -63,7 +72,7 @@ export default function Join(props) {
         />
         {checked ? (
           <>
-            <MButton value="가입하기" />
+            <MButton value="가입하기" wd="480px" />
           </>
         ) : (
           <>
@@ -128,4 +137,10 @@ const InputBox = styled.form`
     ${(props) => (props.joinType === 'buyer' ? 'left: 0;' : 'right: 0;')}
     background-color: #fff;
   }
+`;
+
+const IdInputWarpper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 `;
