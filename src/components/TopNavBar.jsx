@@ -3,11 +3,13 @@ import logo from '../assets/Logo-hodu.png';
 import searchBtn from '../assets/search.png';
 import cart from '../assets/icon-shopping-cart.svg';
 import myInfo from '../assets/icon-user.svg';
+import { useNavigate } from 'react-router-dom';
 export default function TopNavBar() {
+  const navigate = useNavigate();
   return (
     <Warpper>
       <LeftWarpper>
-        <Logo src={logo} />
+        <Logo src={logo} onClick={() => navigate('/')} />
         <Search>
           <SearchInput placeholder="상품을 검색해보세요!" />
           <SearchBtn />
@@ -15,10 +17,10 @@ export default function TopNavBar() {
       </LeftWarpper>
       <ButtonWarpper>
         {/* 판매자 로그인 시 다르게 */}
-        <MoveBtn wd="46px">
+        <MoveBtn wd="46px" onClick={() => navigate('/cart')}>
           <BtnTxt>장바구니</BtnTxt>
         </MoveBtn>
-        <MoveBtn wd="56px">
+        <MoveBtn wd="56px" onClick={() => navigate('/login')}>
           <BtnTxt>마이페이지</BtnTxt>
         </MoveBtn>
       </ButtonWarpper>
@@ -31,7 +33,6 @@ const Warpper = styled.section`
   align-items: center;
   justify-content: space-between;
   width: 1280px;
-  margin: 0 auto;
   height: 90px;
 `;
 
