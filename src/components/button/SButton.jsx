@@ -3,13 +3,13 @@ import styled from 'styled-components';
 export default function SButton(props) {
   return (
     <>
-      <Button>{props.value}</Button>
+      <Button wd={props.wd}>{props.value}</Button>
     </>
   );
 }
 
 const Button = styled.button`
-  width: 80px;
+  width: ${(props) => props.wd};
   height: 40px;
   border-radius: 5px;
   background-color: #21bf48;
