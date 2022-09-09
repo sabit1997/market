@@ -1,23 +1,26 @@
 import styled from 'styled-components';
 
-export default function SWhiteButton() {
+export default function SWhiteButton(props) {
   return (
     <>
-      <Button>버튼</Button>
+      <Button wd={props.wd} marginR={props.marginR}>
+        {props.value}
+      </Button>
     </>
   );
 }
 
 const Button = styled.button`
-  width: 80px;
+  width: ${(props) => props.wd};
   height: 40px;
-  border: 1px solid c4c4c4;
+  border: 1px solid #c4c4c4;
   border-radius: 5px;
   background-color: #fff;
   color: #767676;
   font-size: 16px;
   font-weight: 500;
   line-height: 1.251875;
+  margin-right: ${(props) => props.marginR};
   &:hover {
     border: 1px solid #767676;
     color: #000;
