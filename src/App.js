@@ -5,6 +5,7 @@ import Login from './page/login/Login';
 import Join from './page/join/Join';
 import Cart from './page/cart/Cart';
 import Payment from './page/payment/Payment';
+import './App.css';
 
 function App() {
   return (

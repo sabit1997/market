@@ -1,13 +1,20 @@
 @font-face {
-  font-family: 'OSeongandHanEum-B';
-  src: url('./assets/font/OSeongandHanEum-Bold.ttf') format(truetype);
-  font-weight: narmal;
+  font-family: 'SpoqaHanSansNeo-B';
+  src: url('./assets/font/SpoqaHanSansNeo-Bold.woff2') format('woff2');
+  font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'OSeongandHanEum-R';
-  src: url('./assets/font/OSeongandHanEum-Regular.ttf') format(truetype);
-  font-weight: narmal;
+  font-family: 'SpoqaHanSansNeo-M';
+  src: url('./assets/font/SpoqaHanSansNeo-Medium.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'SpoqaHanSansNeo-R';
+  src: url('./assets/font/SpoqaHanSansNeo-Regular.woff2') format('woff2');
+  font-weight: normal;
   font-style: normal;
 }
