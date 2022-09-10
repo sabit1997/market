@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import checkBox from '../assets/check-box.svg';
-import fillCheckBox from '../assets/check-fill-box.svg';
+import checkBox from '../../assets/check-box.svg';
+import fillCheckBox from '../../assets/check-fill-box.svg';
 
 export default function CheckText(props) {
   const [check, setCheck] = useState(false);

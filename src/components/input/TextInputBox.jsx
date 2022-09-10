@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import NumDropdown from './NumDropdown';
-import checkOff from '../assets/icon-check-off.svg';
-import checkOn from '../assets/icon-check-on.svg';
+import NumDropdown from '../etc/NumDropdown';
+import checkOff from '../../assets/icon-check-off.svg';
+import checkOn from '../../assets/icon-check-on.svg';
 
 function TextInputBox(props) {
   return (

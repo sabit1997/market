@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import logo from '../assets/Logo-hodu.png';
-import searchBtn from '../assets/search.png';
-import cart from '../assets/icon-shopping-cart.svg';
-import myInfo from '../assets/icon-user.svg';
+import logo from '../../assets/Logo-hodu.png';
+import searchBtn from '../../assets/search.png';
+import cart from '../../assets/icon-shopping-cart.svg';
+import myInfo from '../../assets/icon-user.svg';
 import { useNavigate } from 'react-router-dom';
 export default function TopNavBar() {
   const navigate = useNavigate();

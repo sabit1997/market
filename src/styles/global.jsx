@@ -1,16 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
 
 const GlobalStyle = createGlobalStyle`
-
-@font-face {
-  font-family: 'OSeongandHanEum-B';
-  src: url('../assetsfont/OSeongandHanEum-Bold.ttf');
-}
-
-@font-face {
-  font-family: 'OSeongandHanEum-R';
-  src: url('../assetsfont/OSeongandHanEum-Regular.ttf');
-}
+${reset}
 
 * {
   padding: 0;

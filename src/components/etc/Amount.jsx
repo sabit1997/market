@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import minusIcon from '../assets/icon-minus-line.svg';
-import plusIcon from '../assets/icon-plus-line.svg';
+import minusIcon from '../../assets/icon-minus-line.svg';
+import plusIcon from '../../assets/icon-plus-line.svg';
 
 export default function Amount(props) {
   return (

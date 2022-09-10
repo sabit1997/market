@@ -1,17 +1,15 @@
 import { Routes, Route } from 'react-router-dom';
-import GlobalStyle from './styles/GlobalStyle';
-import { Reset } from 'styled-reset';
-import Home from './page/Home';
-import Login from './page/Login';
-import Join from './page/Join';
-import Cart from './page/Cart';
-import Payment from './page/Payment';
+import GlobalStyle from './styles/global';
+import Home from './page/home/Home';
+import Login from './page/login/Login';
+import Join from './page/join/Join';
+import Cart from './page/cart/Cart';
+import Payment from './page/payment/Payment';
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <Reset />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

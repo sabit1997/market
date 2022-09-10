@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import deleteIcon from '../assets/icon-delete.svg';
-import Amount from './Amount';
+import deleteIcon from '../../assets/icon-delete.svg';
+import Amount from '../etc/Amount';
 
 function CartProductList(props) {
   return (

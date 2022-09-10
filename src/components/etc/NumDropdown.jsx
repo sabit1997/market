@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import iconDownArrow from '../assets/icon-down-arrow.svg';
-import iconUpArrow from '../assets/icon-up-arrow.svg';
+import iconDownArrow from '../../assets/icon-down-arrow.svg';
+import iconUpArrow from '../../assets/icon-up-arrow.svg';
 
 export default function NumDropdown() {
   const valueArr = ['010', '011', '016', '017', '018', '019'];

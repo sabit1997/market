@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'OSeongandHanEum-B';
+  src: url('./assets/font/OSeongandHanEum-Bold.ttf') format(truetype);
+  font-weight: narmal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OSeongandHanEum-R';
+  src: url('./assets/font/OSeongandHanEum-Regular.ttf') format(truetype);
+  font-weight: narmal;
+  font-style: normal;
+}
