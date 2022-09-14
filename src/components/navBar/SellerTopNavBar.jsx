@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import logo from '../assets/Logo-hodu.png';
+import logo from '../../assets/Logo-hodu.png';
 
 export default function SellerTopNavBar() {
   return (
