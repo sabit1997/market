@@ -35,6 +35,7 @@ const Warpper = styled.section`
   padding: 20px 0 20px 30px;
   margin-bottom: 10px;
   position: relative;
+  margin-top: 35px;
   margin-bottom: 10px;
   /* 마지막 컴포넌트만 80px로 바꾸고 싶다... */
   &:last-child {
