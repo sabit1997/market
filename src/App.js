@@ -5,6 +5,7 @@ import Login from './page/login/Login';
 import Join from './page/join/Join';
 import Cart from './page/cart/Cart';
 import Payment from './page/payment/Payment';
+import NotFound from './page/NotFound/NotFound';
 import './App.css';
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
         <Route path="/payment" element={<Payment />} />
         <Route path="product" />
         <Route path="payment" />
-        <Route path="notfound" />
+        <Route path="notfound" element={<NotFound />} />
       </Routes>
     </>
   );
