@@ -14,11 +14,29 @@ import MS16pButton from '../../components/button/MS16pButton';
 import MButton from '../../components/button/MButton';
 import MDisabledButton from '../../components/button/MDisabledButton';
 import { useNavigate } from 'react-router-dom';
+import client from '../../client/client';
 
-export default function Join(props) {
+export default function Join() {
   const [checked, setChecked] = useState(Boolean);
   const [joinType, setJoinType] = useState('buyer');
   const navigate = useNavigate();
+
+  const [inputs, setInputs] = useState({
+    userName: '',
+    password: '',
+    password2: '',
+    name: '',
+    phoneNumber1: '',
+    phoneNumber2: '',
+    email: '',
+  });
+
+  const { userName, password, password2, name, phoneNumber1, phoneNumber2 } =
+    inputs;
+
+  const onChange = (value) => {
+    setInputs(value);
+  };
 
   const changeBuyer = () => {
     setJoinType('buyer');
@@ -28,6 +46,20 @@ export default function Join(props) {
     setJoinType('seller');
     console.log(joinType);
   };
+
+  const handleJoin = () => {
+    if (joinType === 'buyer') {
+      client.post('/accounts/signup/', {
+        username: userName,
+        password: password,
+        password2: password2,
+        phone_number: `${phoneNumber1}${phoneNumber2}`,
+        name: name,
+      });
+    }
+  };
+
+  console.log(inputs);
 
   console.log(checked);
   return (
@@ -41,19 +73,39 @@ export default function Join(props) {
           <LoginSelletor joinType={joinType} onClick={changeSeller}>
             판매회원가입
           </LoginSelletor>
-          <InputBox joinType={joinType}>
+          <InputBox joinType={joinType} onSubmit={handleJoin}>
             <IdInputWarpper>
-              <TextInputBox value="아이디" type="text" marginB="12px" />
+              <TextInputBox
+                value="아이디"
+                type="text"
+                marginB="12px"
+                onChange={onChange}
+              />
               <MS16pButton value="중복확인" wd="122px" margin="30px 0 0 12px" />
             </IdInputWarpper>
-            <TextInputBox value="비밀번호" type="password" marginB="12px" />
+            <TextInputBox
+              value="비밀번호"
+              type="password"
+              marginB="12px"
+              onChange={onChange}
+            />
             <TextInputBox
               value="비밀번호 재확인"
               type="password"
               marginB="50px"
+              onChange={onChange}
             />
-            <TextInputBox value="이름" type="text" marginB="16px" />
-            <TextInputBox value="휴대폰번호" marginB="16px" />
+            <TextInputBox
+              value="이름"
+              type="text"
+              marginB="16px"
+              onChange={onChange}
+            />
+            <TextInputBox
+              value="휴대폰번호"
+              marginB="16px"
+              onChange={onChange}
+            />
             <TextInputBox value="이메일" />
             {joinType === 'seller' ? (
               <>

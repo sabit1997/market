@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Warpper = styled.form`
+export const Warpper = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
