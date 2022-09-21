@@ -62,6 +62,10 @@ export default function Join() {
   console.log(inputs);
 
   console.log(checked);
+
+  const [accountValid, setAccountVaild] = useState('');
+  console.log(accountValid.Success);
+
   return (
     <>
       <Warpper>
@@ -76,17 +80,24 @@ export default function Join() {
           <InputBox joinType={joinType} onSubmit={handleJoin}>
             <IdInputWarpper>
               <TextInputBox
+                name="아이디"
                 value="아이디"
                 type="text"
-                marginB="12px"
                 onChange={onChange}
+                accountValid={accountValid}
               />
-              <MS16pButton value="중복확인" wd="122px" margin="30px 0 0 12px" />
+              <MS16pButton
+                value="중복확인"
+                wd="122px"
+                margin="30px 0 0 12px"
+                type="button"
+                username={userName}
+                setAccountVaild={setAccountVaild}
+              />
             </IdInputWarpper>
             <TextInputBox
               value="비밀번호"
               type="password"
-              marginB="12px"
               onChange={onChange}
             />
             <TextInputBox

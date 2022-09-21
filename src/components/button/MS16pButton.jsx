@@ -1,9 +1,30 @@
 import styled from 'styled-components';
+import client from '../../client/client';
 
 export default function MS16pButton(props) {
+  const handleButton = () => {
+    if (props.value === '중복확인') {
+      client
+        .post(`/accounts/signup/valid/username/`, {
+          username: props.username,
+        })
+        .then((res) => {
+          console.log(res);
+          props.setAccountVaild(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
   return (
     <>
-      <Button wd={props.wd} margin={props.margin}>
+      <Button
+        wd={props.wd}
+        margin={props.margin}
+        type={props.type}
+        onClick={handleButton}
+      >
         {props.value}
       </Button>
     </>
@@ -21,4 +42,5 @@ const Button = styled.button`
   color: #fff;
   margin: ${(props) => props.margin};
   flex-shrink: 0;
+  cursor: pointer;
 `;
