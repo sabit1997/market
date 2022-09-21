@@ -2,8 +2,10 @@ import styled from 'styled-components';
 
 export const Warpper = styled.div`
   width: 100%;
+  height: 114px;
   display: flex;
   flex-direction: column;
+  margin-bottom: ${(props) => props.marginB};
 `;
 
 export const InputWarpper = styled.section`
@@ -42,6 +44,7 @@ export const PasswordInputWarpper = styled.div`
   border: 1px solid #c4c4c4;
   border-radius: 5px;
   overflow: hidden;
+  margin-bottom: ${(props) => props.marginB};
 `;
 
 export const PasswordInput = styled.input`
