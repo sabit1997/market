@@ -63,8 +63,10 @@ export default function Join() {
 
   console.log(checked);
 
-  const [accountValid, setAccountVaild] = useState('');
-  console.log(accountValid.Success);
+  const [accountValid, setAccountValid] = useState('');
+  console.log(accountValid);
+  console.log(Object.keys(accountValid)[0]);
+  console.log(accountValid[0]);
 
   return (
     <>
@@ -92,7 +94,7 @@ export default function Join() {
                 margin="30px 0 0 12px"
                 type="button"
                 username={userName}
-                setAccountVaild={setAccountVaild}
+                setAccountValid={setAccountValid}
               />
             </IdInputWarpper>
             <TextInputBox
@@ -103,7 +105,6 @@ export default function Join() {
             <TextInputBox
               value="비밀번호 재확인"
               type="password"
-              marginB="50px"
               onChange={onChange}
             />
             <TextInputBox
