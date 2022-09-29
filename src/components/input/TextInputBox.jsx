@@ -3,11 +3,13 @@ import {
   Warpper,
   InputWarpper,
   Txt,
+  IdInput,
   Input,
   PasswordInputWarpper,
   PasswordInput,
   PasswordCheck,
   AtSign,
+  ValidMessage,
 } from './TextInputBoxStyle';
 import checkOff from '../../assets/icon-check-off.svg';
 import checkOn from '../../assets/icon-check-on.svg';
@@ -24,27 +26,36 @@ export default function TextInputBox(props) {
   return (
     <>
       {props.value === '아이디' ? (
-        <>
-          <Warpper>
-            <Txt htmlFor="id_text_input" marginT={props.marginT}>
-              {props.value}
-            </Txt>
-            <Input
-              type="text"
-              id="id_text_input"
-              name="userName"
-              wd="100%"
-              marginB={props.marginB}
-              onChange={handleInputs}
-              value={props.userName}
-            />
-          </Warpper>
-        </>
+        <Warpper marginB="12px">
+          <Txt htmlFor="id_text_input">{props.value}</Txt>
+          <IdInput
+            type="text"
+            id="id_text_input"
+            name="userName"
+            wd="100%"
+            onChange={handleInputs}
+            value={props.userName}
+            border={
+              Object.keys(props.accountValid)[0] === 'FAIL_Message'
+                ? '1px solid #EB5757'
+                : '1px solid #c4c4c4'
+            }
+          />
+          {Object.keys(props.accountValid)[0] === 'FAIL_Message' ? (
+            <ValidMessage color="red">
+              {props.accountValid['FAIL_Message']}
+            </ValidMessage>
+          ) : (
+            (Object.keys(props.accountValid)[0] = 'Success' ? (
+              <ValidMessage color="#21BF48">
+                {props.accountValid['Success']}
+              </ValidMessage>
+            ) : null)
+          )}
+        </Warpper>
       ) : props.value === '비밀번호' ? (
-        <Warpper>
-          <Txt htmlFor="password_text_input" marginT={props.marginT}>
-            {props.value}
-          </Txt>
+        <Warpper marginB="12px">
+          <Txt htmlFor="password_text_input">{props.value}</Txt>
           <PasswordInputWarpper>
             <PasswordInput
               type="text"
@@ -52,15 +63,14 @@ export default function TextInputBox(props) {
               onChange={handleInputs}
               name="password"
               value={props.password}
+              marginB="12px"
             />
             <PasswordCheck src={checkOff} />
           </PasswordInputWarpper>
         </Warpper>
       ) : props.value === '비밀번호 재확인' ? (
-        <Warpper>
-          <Txt htmlFor="password2_text_input" marginT={props.marginT}>
-            {props.value}
-          </Txt>
+        <Warpper marginB="50px">
+          <Txt htmlFor="password2_text_input">{props.value}</Txt>
           <PasswordInputWarpper>
             <PasswordInput
               type="text"
@@ -74,15 +84,13 @@ export default function TextInputBox(props) {
         </Warpper>
       ) : props.value === '이름' ? (
         <Warpper>
-          <Txt htmlFor="input_text_input" marginT={props.marginT}>
-            {props.value}
-          </Txt>
+          <Txt htmlFor="input_text_input">{props.value}</Txt>
           <Input
             type="text"
             id="input_text_input"
             name="name"
             wd="100%"
-            marginB={props.marginB}
+            marginB="16px"
             onChange={handleInputs}
             value={props.name}
           />
@@ -90,7 +98,7 @@ export default function TextInputBox(props) {
       ) : props.value === '휴대폰번호' ? (
         <>
           <Txt htmlFor="phonenumber_text_input">{props.value}</Txt>
-          <InputWarpper marginB={props.marginB}>
+          <InputWarpper marginB="16px">
             <NumDropdown />
             <Input
               type="number"
@@ -115,12 +123,7 @@ export default function TextInputBox(props) {
           <InputWarpper>
             <Input wd="220px" type="text" />
             <AtSign>@</AtSign>
-            <Input
-              wd="220px"
-              type="text"
-              id="email_text_input"
-              marginB={props.marginB}
-            />
+            <Input wd="220px" type="text" id="email_text_input" />
           </InputWarpper>
         </>
       ) : null}
