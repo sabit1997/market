@@ -10,10 +10,10 @@ export default function MS16pButton(props) {
         })
         .then((res) => {
           console.log(res);
-          props.setAccountVaild(res.data);
+          props.setAccountValid(res.data);
         })
         .catch((error) => {
-          console.log(error);
+          props.setAccountValid(error.response.data);
         });
     }
   };
