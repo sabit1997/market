@@ -5,6 +5,7 @@ export const Warpper = styled.section`
   flex-direction: column;
   align-items: center;
   padding-top: 100px;
+  position: relative;
 `;
 
 export const Logo = styled.img`
@@ -23,15 +24,16 @@ export const LoginSelletor = styled.button`
   width: 275px;
   border: 1px solid #c4c4c4;
   border-radius: 10px;
-  background-color: #fff;
-  z-index: -1;
-  position: relative;
+  background-color: ${(props) =>
+    props.loginType === 'BUYER' ? '#fff' : '#f2f2f2'};
   font-size: 18px;
   font-weight: 500;
   line-height: 1.222222222222222;
   padding: 20px 0 38px;
+  cursor: pointer;
   &:nth-child(2) {
-    background-color: #f2f2f2;
+    background-color: ${(props) =>
+      props.loginType === 'SELLER' ? '#fff' : '#f2f2f2'};
   }
 `;
 
@@ -50,7 +52,7 @@ export const InputBox = styled.form`
     height: 15px;
     position: absolute;
     top: -5px;
-    left: 0;
+    ${(props) => (props.loginType === 'BUYER' ? 'left: 0;' : 'right: 0;')}
     background-color: #fff;
   }
 `;
