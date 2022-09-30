@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-function ProductList() {
+function ProductList({ productItem, i }) {
   return (
     <Warpper>
-      <ProductImg src="" />
-      <Seller>우당탕탕 라이캣의 실험실</Seller>
-      <ProductName>Hack Your Life 개발자 노트북 파우치</ProductName>
-      <ProductPrice>29,000</ProductPrice>
+      <ProductImg src={productItem[i].image} />
+      <Seller>{productItem[i].seller}</Seller>
+      <ProductName>{productItem[i].product_name}</ProductName>
+      <ProductPrice>{productItem[i].price}</ProductPrice>
     </Warpper>
   );
 }
