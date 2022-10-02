@@ -68,7 +68,7 @@ export const PasswordInputWarpper = styled.div`
 
 export const PasswordInput = styled.input`
   width: 100%;
-  height: 54px;
+  padding: 17px 0 17px 16px;
   border: none;
 `;
 
