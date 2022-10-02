@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Warpper = styled.section`
+export const Warpper = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,7 +35,7 @@ export const LoginSelletor = styled.button`
   }
 `;
 
-export const InputBox = styled.form`
+export const InputBox = styled.section`
   width: 550px;
   border-radius: 10px;
   background-color: #fff;
