@@ -15,26 +15,18 @@ import checkOff from '../../assets/icon-check-off.svg';
 import checkOn from '../../assets/icon-check-on.svg';
 
 export default function TextInputBox(props) {
-  const handleInputs = (e) => {
-    const { value, name } = e.target;
-    props.onChange({
-      ...props.inputs,
-      [name]: value,
-    });
-  };
-
   return (
     <>
-      {props.value === '아이디' ? (
+      {props.title === '아이디' ? (
         <Warpper marginB="12px">
-          <Txt htmlFor="id_text_input">{props.value}</Txt>
+          <Txt htmlFor="id_text_input">{props.title}</Txt>
           <IdInput
             type="text"
             id="id_text_input"
-            name="userName"
+            name={props.name}
             wd="100%"
-            onChange={handleInputs}
-            value={props.userName}
+            onChange={props.onChange}
+            value={props.value}
             border={
               Object.keys(props.accountValid)[0] === 'FAIL_Message'
                 ? '1px solid #EB5757'
@@ -53,73 +45,73 @@ export default function TextInputBox(props) {
             ) : null)
           )}
         </Warpper>
-      ) : props.value === '비밀번호' ? (
+      ) : props.title === '비밀번호' ? (
         <Warpper marginB="12px">
-          <Txt htmlFor="password_text_input">{props.value}</Txt>
+          <Txt htmlFor="password_text_input">{props.title}</Txt>
           <PasswordInputWarpper>
             <PasswordInput
-              type="text"
+              type="password"
               id="password_text_input"
-              onChange={handleInputs}
+              onChange={props.onChange}
               name="password"
-              value={props.password}
+              value={props.value}
               marginB="12px"
             />
             <PasswordCheck src={checkOff} />
           </PasswordInputWarpper>
         </Warpper>
-      ) : props.value === '비밀번호 재확인' ? (
+      ) : props.title === '비밀번호 재확인' ? (
         <Warpper marginB="50px">
-          <Txt htmlFor="password2_text_input">{props.value}</Txt>
+          <Txt htmlFor="password2_text_input">{props.title}</Txt>
           <PasswordInputWarpper>
             <PasswordInput
-              type="text"
+              type="password"
               id="password2_text_input"
-              onChange={handleInputs}
+              onChange={props.onChange}
               name="password2"
-              value={props.password2}
+              value={props.value}
             />
             <PasswordCheck src={checkOff} />
           </PasswordInputWarpper>
         </Warpper>
-      ) : props.value === '이름' ? (
+      ) : props.title === '이름' ? (
         <Warpper>
-          <Txt htmlFor="input_text_input">{props.value}</Txt>
+          <Txt htmlFor="input_text_input">{props.title}</Txt>
           <Input
             type="text"
             id="input_text_input"
             name="name"
             wd="100%"
             marginB="16px"
-            onChange={handleInputs}
-            value={props.name}
+            onChange={props.onChange}
+            value={props.value}
           />
         </Warpper>
-      ) : props.value === '휴대폰번호' ? (
+      ) : props.title === '휴대폰번호' ? (
         <>
-          <Txt htmlFor="phonenumber_text_input">{props.value}</Txt>
+          <Txt htmlFor="phonenumber_text_input">{props.title}</Txt>
           <InputWarpper marginB="16px">
             <NumDropdown />
             <Input
               type="number"
               id="phonenumber_text_input"
               wd="152px"
-              onChange={handleInputs}
+              onChange={props.onChange}
               name="phoneNumber1"
-              value={props.phoneNumber1}
+              value={props.value}
             />
             <Input
               type="number"
               wd="152px"
-              onChange={handleInputs}
+              onChange={props.onChange}
               name="phoneNumber2"
-              value={props.phoneNumber2}
+              value={props.value2}
             />
           </InputWarpper>
         </>
-      ) : props.value === '이메일' ? (
+      ) : props.title === '이메일' ? (
         <>
-          <Txt htmlFor="email_text_input">{props.value}</Txt>
+          <Txt htmlFor="email_text_input">{props.title}</Txt>
           <InputWarpper>
             <Input wd="220px" type="text" />
             <AtSign>@</AtSign>

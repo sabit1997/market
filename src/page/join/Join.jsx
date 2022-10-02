@@ -6,7 +6,7 @@ import {
   InputBox,
   IdInputWarpper,
 } from '../../components/join/JoinStyle';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import logo from '../../assets/Logo-hodu.png';
 import TextInputBox from '../../components/input/TextInputBox';
 import CheckText from '../../components/etc/CheckText';
@@ -21,6 +21,7 @@ export default function Join() {
   const [joinType, setJoinType] = useState('buyer');
   const navigate = useNavigate();
 
+  // inputs 값 왜 제대로 설정안되는지 알아보기
   const [inputs, setInputs] = useState({
     userName: '',
     password: '',
@@ -28,15 +29,18 @@ export default function Join() {
     name: '',
     phoneNumber1: '',
     phoneNumber2: '',
-    email: '',
   });
 
   const { userName, password, password2, name, phoneNumber1, phoneNumber2 } =
     inputs;
 
-  const onChange = (value) => {
-    setInputs(value);
-  };
+  function onChange(e) {
+    const { value, name } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value,
+    });
+  }
 
   const changeBuyer = () => {
     setJoinType('buyer');
@@ -47,19 +51,29 @@ export default function Join() {
     console.log(joinType);
   };
 
-  const handleJoin = () => {
+  const handleJoin = (event) => {
+    event.preventDefault();
     if (joinType === 'buyer') {
-      client.post('/accounts/signup/', {
-        username: userName,
-        password: password,
-        password2: password2,
-        phone_number: `${phoneNumber1}${phoneNumber2}`,
-        name: name,
-      });
+      client
+        .post('/accounts/signup/', {
+          username: userName,
+          password: password,
+          password2: password2,
+          phone_number: `${phoneNumber1}${phoneNumber2}`,
+          name: name,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   };
 
-  console.log(inputs);
+  useEffect(() => {
+    console.log(inputs);
+  }, [inputs]);
 
   console.log(checked);
 
@@ -70,7 +84,7 @@ export default function Join() {
 
   return (
     <>
-      <Warpper>
+      <Warpper onSubmit={handleJoin}>
         <Logo src={logo} onClick={() => navigate('/')} />
         <LoginBox>
           <LoginSelletor joinType={joinType} onClick={changeBuyer}>
@@ -79,11 +93,12 @@ export default function Join() {
           <LoginSelletor joinType={joinType} onClick={changeSeller}>
             판매회원가입
           </LoginSelletor>
-          <InputBox joinType={joinType} onSubmit={handleJoin}>
+          <InputBox joinType={joinType}>
             <IdInputWarpper>
               <TextInputBox
-                name="아이디"
-                value="아이디"
+                name="userName"
+                value={userName}
+                title="아이디"
                 type="text"
                 onChange={onChange}
                 accountValid={accountValid}
@@ -98,27 +113,32 @@ export default function Join() {
               />
             </IdInputWarpper>
             <TextInputBox
-              value="비밀번호"
+              title="비밀번호"
+              value={password}
               type="password"
               onChange={onChange}
             />
             <TextInputBox
-              value="비밀번호 재확인"
+              title="비밀번호 재확인"
+              value={password2}
               type="password"
               onChange={onChange}
             />
             <TextInputBox
-              value="이름"
+              title="이름"
+              value={userName}
               type="text"
               marginB="16px"
               onChange={onChange}
             />
             <TextInputBox
-              value="휴대폰번호"
+              title="휴대폰번호"
+              value={phoneNumber1}
+              value2={phoneNumber2}
               marginB="16px"
               onChange={onChange}
             />
-            <TextInputBox value="이메일" />
+            <TextInputBox title="이메일" />
             {joinType === 'seller' ? (
               <>
                 <IdInputWarpper>
