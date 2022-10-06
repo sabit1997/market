@@ -70,9 +70,13 @@ export default function TextInputBox(props) {
               onChange={props.onChange}
               name="password2"
               value={props.value}
+              onBlur={props.onBlur}
             />
             <PasswordCheck src={checkOff} />
           </PasswordInputWarpper>
+          {props.stateValue === false ? (
+            <ValidMessage color="red">{props.arlertMessage}</ValidMessage>
+          ) : null}
         </Warpper>
       ) : props.title === '이름' ? (
         <Warpper>
@@ -99,6 +103,7 @@ export default function TextInputBox(props) {
               onChange={props.onChange}
               name="phoneNumber1"
               value={props.value}
+              maxLength="4"
             />
             <Input
               type="number"
@@ -106,6 +111,7 @@ export default function TextInputBox(props) {
               onChange={props.onChange}
               name="phoneNumber2"
               value={props.value2}
+              maxLength="4"
             />
           </InputWarpper>
         </>

@@ -21,7 +21,6 @@ export default function Join() {
   const [joinType, setJoinType] = useState('buyer');
   const navigate = useNavigate();
 
-  // inputs 값 왜 제대로 설정안되는지 알아보기
   const [inputs, setInputs] = useState({
     userName: '',
     password: '',
@@ -50,6 +49,18 @@ export default function Join() {
     setJoinType('seller');
     console.log(joinType);
   };
+
+  const [arlertMessage, setAlertMessage] = useState('');
+  const [stateValue, setStateValue] = useState(Boolean);
+
+  function passwordMatched() {
+    if (password !== password2) {
+      setAlertMessage('비밀번호가 일치하지 않습니다.');
+      setStateValue(false);
+    } else {
+      setStateValue(true);
+    }
+  }
 
   const handleJoin = (event) => {
     event.preventDefault();
@@ -122,11 +133,14 @@ export default function Join() {
               title="비밀번호 재확인"
               value={password2}
               type="password"
+              stateValue={stateValue}
+              arlertMessage={arlertMessage}
               onChange={onChange}
+              onBlur={passwordMatched}
             />
             <TextInputBox
               title="이름"
-              value={userName}
+              value={name}
               type="text"
               marginB="16px"
               onChange={onChange}
