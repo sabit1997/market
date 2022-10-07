@@ -3,9 +3,25 @@ import logo from '../../assets/Logo-hodu.png';
 import searchBtn from '../../assets/search.png';
 import cart from '../../assets/icon-shopping-cart.svg';
 import myInfo from '../../assets/icon-user.svg';
+import myInfoActive from '../../assets/icon-user-2.svg';
+import MyPageDropdown from '../../components/etc/MyPageDropdown';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 export default function TopNavBar() {
   const navigate = useNavigate();
+  const [modal, setModal] = useState(false);
+
+  function handleMyPageButton() {
+    if (localStorage.getItem('token') === null) {
+      navigate('/login');
+    } else if (modal === true) {
+      setModal(false);
+    } else {
+      setModal(true);
+    }
+  }
+
+  console.log(modal);
   return (
     <Warpper>
       <LeftWarpper>
@@ -20,8 +36,9 @@ export default function TopNavBar() {
         <MoveBtn wd="46px" onClick={() => navigate('/cart')}>
           <BtnTxt>장바구니</BtnTxt>
         </MoveBtn>
-        <MoveBtn wd="56px" onClick={() => navigate('/login')}>
-          <BtnTxt>마이페이지</BtnTxt>
+        <MoveBtn wd="56px" onClick={handleMyPageButton} modal={modal}>
+          <BtnTxt modal={modal}>마이페이지</BtnTxt>
+          {modal === true ? <MyPageDropdown setModal={setModal} /> : null}
         </MoveBtn>
       </ButtonWarpper>
     </Warpper>
@@ -87,7 +104,9 @@ const MoveBtn = styled.button`
   width: ${(props) => props.wd};
   height: 50px;
   background-image: ${(props) =>
-    props.wd === '46px' ? `url(${cart})` : `url(${myInfo})`};
+    props.wd === '46px'
+      ? `url(${cart})`
+      : `url(${props.modal === true ? `${myInfoActive}` : `${myInfo}`})`};
   background-repeat: no-repeat;
   background-position: top center;
   position: relative;
@@ -101,7 +120,7 @@ const BtnTxt = styled.span`
   font-size: 12px;
   line-height: 1.1666;
   vertical-align: bottom;
-  color: #767676;
+  color: ${(props) => (props.modal === true ? '#21BF48' : '#767676')};
   word-break: keep-all;
   position: absolute;
   bottom: 0;
