@@ -18,7 +18,7 @@ import client from '../../client/client';
 
 export default function Join() {
   const [checked, setChecked] = useState(Boolean);
-  const [joinType, setJoinType] = useState('buyer');
+  const [joinType, setJoinType] = useState('BUYER');
   const navigate = useNavigate();
 
   const [inputs, setInputs] = useState({
@@ -42,11 +42,11 @@ export default function Join() {
   }
 
   const changeBuyer = () => {
-    setJoinType('buyer');
+    setJoinType('BUYER');
   };
 
   const changeSeller = () => {
-    setJoinType('seller');
+    setJoinType('SELLER');
     console.log(joinType);
   };
 

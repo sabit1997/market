@@ -79,14 +79,13 @@ export default function TextInputBox(props) {
           ) : null}
         </Warpper>
       ) : props.title === '이름' ? (
-        <Warpper>
+        <Warpper marginB="16px">
           <Txt htmlFor="input_text_input">{props.title}</Txt>
           <Input
             type="text"
             id="input_text_input"
             name="name"
             wd="100%"
-            marginB="16px"
             onChange={props.onChange}
             value={props.value}
           />
