@@ -57,7 +57,7 @@ export default function TextInputBox(props) {
               value={props.value}
               marginB="12px"
             />
-            <PasswordCheck src={checkOff} />
+            <PasswordCheck src={props.password !== '' ? checkOn : checkOff} />
           </PasswordInputWarpper>
         </Warpper>
       ) : props.title === '비밀번호 재확인' ? (
@@ -72,7 +72,7 @@ export default function TextInputBox(props) {
               value={props.value}
               onBlur={props.onBlur}
             />
-            <PasswordCheck src={checkOff} />
+            <PasswordCheck src={props.password2 !== '' ? checkOn : checkOff} />
           </PasswordInputWarpper>
           {props.stateValue === false ? (
             <ValidMessage color="red">{props.arlertMessage}</ValidMessage>

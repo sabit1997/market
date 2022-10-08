@@ -50,18 +50,6 @@ export default function Join() {
     console.log(joinType);
   };
 
-  const [arlertMessage, setAlertMessage] = useState('');
-  const [stateValue, setStateValue] = useState(Boolean);
-
-  function passwordMatched() {
-    if (password !== password2) {
-      setAlertMessage('비밀번호가 일치하지 않습니다.');
-      setStateValue(false);
-    } else {
-      setStateValue(true);
-    }
-  }
-
   const handleJoin = (event) => {
     event.preventDefault();
     if (joinType === 'buyer') {
@@ -128,15 +116,14 @@ export default function Join() {
               value={password}
               type="password"
               onChange={onChange}
+              password={password}
             />
             <TextInputBox
               title="비밀번호 재확인"
               value={password2}
               type="password"
-              stateValue={stateValue}
-              arlertMessage={arlertMessage}
               onChange={onChange}
-              onBlur={passwordMatched}
+              password2={password2}
             />
             <TextInputBox
               title="이름"
