@@ -37,6 +37,8 @@ export default function ProductDetail() {
         console.log(error);
       });
   }, [product_id]);
+
+  console.log(productDetail.stock);
   return (
     <>
       <TopNavBar />
@@ -51,7 +53,7 @@ export default function ProductDetail() {
             marginB="138px"
           ></LPrice>
           <Shipping>{`${productDetail.shipping_method} / ${productDetail.shipping_fee}`}</Shipping>
-          <Amount marginT="52px" />
+          <Amount marginT="52px" stock={productDetail.stock} />
           <PriceWarpper>
             <TotalPriceTxt>총 상품 금액</TotalPriceTxt>
             <RightWarpper>
@@ -63,7 +65,12 @@ export default function ProductDetail() {
             </RightWarpper>
           </PriceWarpper>
           <MButton wd="416px" value="바로 구매" marginR="14px" />
-          <MDarkButton wd="200px" value="장바구니" />
+          <MDarkButton
+            wd="200px"
+            value="장바구니"
+            product_id={product_id}
+            productDetail={productDetail}
+          />
         </ProductInfo>
       </ProductWarpper>
       <ButtonWarpper>
