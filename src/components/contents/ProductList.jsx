@@ -1,8 +1,14 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 function ProductList({ productItem, i }) {
+  const navigate = useNavigate();
   return (
-    <Warpper>
+    <Warpper
+      onClick={() => {
+        navigate(`/detail/${productItem[i].product_id}`);
+      }}
+    >
       <ProductImg src={productItem[i].image} />
       <Seller>{productItem[i].seller}</Seller>
       <ProductName>{productItem[i].product_name}</ProductName>
