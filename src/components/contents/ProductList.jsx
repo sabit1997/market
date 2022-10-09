@@ -10,7 +10,7 @@ function ProductList({ productItem, i }) {
       }}
     >
       <ProductImg src={productItem[i].image} />
-      <Seller>{productItem[i].seller}</Seller>
+      <Seller>{productItem[i].store_name}</Seller>
       <ProductName>{productItem[i].product_name}</ProductName>
       <ProductPrice>{productItem[i].price}</ProductPrice>
     </Warpper>
