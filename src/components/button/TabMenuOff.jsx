@@ -1,20 +1,24 @@
 import styled from 'styled-components';
 
-export default function TabMenuOff() {
+export default function TabMenuOff(props) {
   return (
     <>
-      <Warpper>
-        <Txt>판매중인 상품(3)</Txt>
+      <Warpper type={props.type}>
+        <Txt type={props.type}>{props.value}</Txt>
+        {props.type === 'false' ? null : <NoticeTxt>1</NoticeTxt>}
       </Warpper>
     </>
   );
 }
 
 const Warpper = styled.section`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 250px;
   height: 50px;
   border-radius: 5px;
-  position: relative;
+  padding: 0 15px 0 20px;
   background-color: #fff;
   &:hover {
     background-color: #effff3;
@@ -26,20 +30,17 @@ const Txt = styled.p`
   font-weight: 500;
   line-height: 1.251875;
   text-align: center;
-  position: absolute;
-  top: 50%;
-  left: 20px;
-  transform: translateY(-50%);
-  &::after {
-    content: '1';
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 1.251666666666667;
-    padding: 2px 6px 3px 6px;
-    background-color: #eb5757;
-    color: #fff;
-    border-radius: 50px;
-    margin-left: 77px;
-    text-align: center;
-  }
+`;
+
+const NoticeTxt = styled.span`
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.251666666666667;
+  padding: 2px 0 3px 0;
+  background-color: #eb5757;
+  color: #fff;
+  border-radius: 50px;
+  text-align: center;
 `;
