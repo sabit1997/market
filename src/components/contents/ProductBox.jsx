@@ -4,10 +4,10 @@ function ProductBox() {
   return (
     <Warpper>
       <ProductImg src="" />
-      <div>
+      <ProductInfoWarpper>
         <ProductName>딥러닝 개발자 무릎 담요</ProductName>
         <StockNum>수량: 1개</StockNum>
-      </div>
+      </ProductInfoWarpper>
       <ProductPrice>17,500원</ProductPrice>
       <Btn bg="#21BF48">수정</Btn>
       <Btn bg="#fff">삭제</Btn>
@@ -16,11 +16,13 @@ function ProductBox() {
 }
 
 const Warpper = styled.section`
-  width: 100%;
+  width: 1440px;
   height: 103px;
   display: flex;
   align-items: center;
   padding: 16px 30px;
+  background-color: #fff;
+  border-bottom: 1px solid #c4c4c4;
 `;
 
 const ProductImg = styled.img`
@@ -30,16 +32,21 @@ const ProductImg = styled.img`
   margin-right: 30px;
 `;
 
-const ProductName = styled.h2`
+const ProductInfoWarpper = styled.div`
   width: 500px;
+  margin-right: 267px;
+`;
+
+const ProductName = styled.h2`
+  width: 100%;
   font-size: 18px;
   font-weight: 400;
   line-height: 1.22;
-  margin-right: 267px;
   margin-bottom: 10px;
 `;
 
 const StockNum = styled.span`
+  width: 100%;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.25;
