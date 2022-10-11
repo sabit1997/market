@@ -1,27 +1,46 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import deleteIcon from '../../assets/icon-delete.svg';
 import Amount from '../etc/Amount';
 
-function CartProductList(props) {
-  return (
-    <Warpper marginB={props.marginB}>
-      <Label for="inp_radio" />
-      <input type="radio" id="inp_radio" name="inp_radio" className="ir" />
-      <Product src="" />
-      <ProductInfoWarpper>
-        <Seller>백엔드글로벌</Seller>
-        <ProductName>딥러닝 개발자 무릎 담요</ProductName>
-        <ProductPrice>17,500</ProductPrice>
-        <Shipping>택배배송 / 무료배송</Shipping>
-      </ProductInfoWarpper>
-      <Amount />
-      <OderWarpper>
-        <OrderPrice>17,500원</OrderPrice>
-        <OrderBtn>주문하기</OrderBtn>
-      </OderWarpper>
-      <DeleteBtn />
-    </Warpper>
-  );
+function CartProductList({ marginB, cartData, i, productData }) {
+  const [cartItem, setCartItem] = useState([]);
+
+  useEffect(() => {
+    // product_id 값이 같은 값 반환하기
+    const compare = cartData.map((_, i) =>
+      productData.filter((x) => x.product_id === cartData[i].product_id).flat()
+    );
+    // 배열 합치기.
+    const merged = [].concat.apply([], compare);
+    console.log(merged);
+
+    setCartItem(merged);
+  }, [cartData, i, productData]);
+
+  if (cartItem !== []) {
+    return (
+      <Warpper marginB={marginB}>
+        <Label for="inp_radio" />
+        <input type="radio" id="inp_radio" name="inp_radio" className="ir" />
+        <Product src={cartItem[i].image} />
+        <ProductInfoWarpper>
+          <Seller>{cartItem[i].store_name}</Seller>
+          <ProductName>{cartItem[i].product_name}</ProductName>
+          <ProductPrice>{cartItem[i].price}</ProductPrice>
+          <Shipping>{`${cartItem[i].shipping_method} / ${cartItem[i].shipping_fee}`}</Shipping>
+        </ProductInfoWarpper>
+        <Amount />
+        <OderWarpper>
+          <OrderPrice>
+            {`${cartItem[i].price + cartItem[i].shipping_fee}원`}
+          </OrderPrice>
+          <OrderBtn>주문하기</OrderBtn>
+        </OderWarpper>
+        <DeleteBtn />
+      </Warpper>
+    );
+  }
 }
 
 const Warpper = styled.section`
