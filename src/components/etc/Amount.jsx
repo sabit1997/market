@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import minusIcon from '../../assets/icon-minus-line.svg';
 import plusIcon from '../../assets/icon-plus-line.svg';
 
-export default function Amount(props) {
+export default function Amount(props, { setAmountQuantity }) {
   const [quantity, setQuantity] = useState(1);
   const [overValue, setOverValue] = useState(false);
   console.log(props.stock);
   function handleMinusButton() {
     if (quantity >= 2) {
       setQuantity(quantity - 1);
+      setAmountQuantity(quantity);
     }
   }
   function handlePlusButton() {
@@ -18,8 +19,10 @@ export default function Amount(props) {
     }
     if (!overValue) {
       setQuantity(quantity + 1);
+      setAmountQuantity(quantity);
     }
   }
+
   return (
     <Quantity marginT={props.marginT}>
       <QuantityBtn onClick={handleMinusButton} />
