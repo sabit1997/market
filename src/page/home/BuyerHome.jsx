@@ -7,28 +7,16 @@ import { PageWarpper } from '../../components/common/Common';
 import { ProductListSection } from '../../components/home/HomeStyle';
 import Footer from '../../components/footer/Footer';
 import Carousel from '../../components/carousel/Carousel';
-import client from '../../client/client';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import { useProductDataContext } from '../../context/ProductDataContext';
 
 export default function BuyerHome() {
-  const [productItem, setProductItem] = useState([]);
-  useEffect(() => {
-    client
-      .get('/products/')
-      .then((res) => {
-        setProductItem(res.data.results);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  const { productData } = useProductDataContext();
 
-  const productList = productItem.map((_, i) => (
+  const productList = productData.map((_, i) => (
     <ProductList
-      productItem={productItem}
+      productData={productData}
       i={i}
-      key={productItem[i].product_id}
+      key={productData[i].product_id}
     />
   ));
 
