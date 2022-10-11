@@ -31,7 +31,6 @@ export default function Cart() {
       });
   }, [cartData.length]);
 
-  // 얘는 또 왜 밑줄 떠 ㅡㅡ
   console.log(type);
   console.log(cartData.length);
 
