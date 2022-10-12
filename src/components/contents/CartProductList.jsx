@@ -9,7 +9,7 @@ function CartProductList({ marginB, cartData, i, productData }) {
   useEffect(() => {
     // product_id 값이 같은 값 반환하기
     const compare = cartData.map((_, i) =>
-      productData.filter((x) => x.product_id === cartData[i].product_id).flat()
+      productData.filter((x) => x.product_id === cartData[i].product_id)
     );
     // 배열 합치기.
     const merged = [].concat.apply([], compare);
