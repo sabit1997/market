@@ -2,28 +2,13 @@ import styled from 'styled-components';
 import client from '../../client/client';
 
 export default function MS16pButton(props) {
-  const handleButton = () => {
-    if (props.value === '중복확인') {
-      client
-        .post(`/accounts/signup/valid/username/`, {
-          username: props.username,
-        })
-        .then((res) => {
-          console.log(res);
-          props.setAccountValid(res.data);
-        })
-        .catch((error) => {
-          props.setAccountValid(error.response.data);
-        });
-    }
-  };
   return (
     <>
       <Button
         wd={props.wd}
         margin={props.margin}
         type={props.type}
-        onClick={handleButton}
+        onClick={props.onClick}
       >
         {props.value}
       </Button>

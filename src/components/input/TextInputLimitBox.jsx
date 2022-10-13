@@ -1,11 +1,17 @@
 import styled from 'styled-components';
 
-export default function TextInputLimitBox() {
+export default function TextInputLimitBox(props) {
   return (
     <>
       <ProductName for="name_input">상품명</ProductName>
       <InputSection>
-        <Input type="text" id="name_input" name="name_input" />
+        <Input
+          type="text"
+          id="name_input"
+          name={props.name}
+          value={props.value}
+          onChange={props.onChange}
+        />
         <InputLimit>13/50</InputLimit>
       </InputSection>
     </>
@@ -26,6 +32,7 @@ const InputSection = styled.div`
   width: 826px;
   border: 1px solid #c4c4c4;
   border-radius: 5px;
+  margin-bottom: 16px;
 `;
 
 const Input = styled.input`

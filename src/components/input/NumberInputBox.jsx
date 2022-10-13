@@ -1,12 +1,18 @@
 import styled from 'styled-components';
 
-export default function NumberInputBox() {
+export default function NumberInputBox(props) {
   return (
     <>
-      <H2 for="price_input">판매가</H2>
+      <H2 for="price_input">{props.title}</H2>
       <PriceSection>
-        <Input type="number" id="price_input" name="price_input" />
-        <Won>원</Won>
+        <Input
+          type="number"
+          id="price_input"
+          name={props.name}
+          value={props.value}
+          onChange={props.onChange}
+        />
+        <Won>{props.unit}</Won>
       </PriceSection>
     </>
   );
@@ -26,6 +32,11 @@ const PriceSection = styled.div`
   border-radius: 5px;
   border: 1px solid #c4c4c4;
   display: flex;
+  margin-bottom: 16px;
+  overflow: hidden;
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 
 const Input = styled.input`

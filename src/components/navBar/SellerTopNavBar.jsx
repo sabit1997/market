@@ -13,8 +13,9 @@ export default function SellerTopNavBar() {
 const Warpper = styled.section`
   display: flex;
   align-items: center;
-  width: 100%;
-  padding-left: 100px;
+  width: 1920px;
+  padding: 26px 0 26px 100px;
+  box-shadow: 0px 4px 5px 0px #0000001a;
 `;
 
 const Logo = styled.img`

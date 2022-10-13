@@ -3,7 +3,9 @@ import styled from 'styled-components';
 export default function MWhiteButton(props) {
   return (
     <>
-      <Button wd={props.wd}>{props.value}</Button>
+      <Button wd={props.wd} marginR={props.marginR} onClick={props.onClick}>
+        {props.value}
+      </Button>
     </>
   );
 }
@@ -18,4 +20,5 @@ const Button = styled.button`
   color: #767676;
   border: 1px solid #c4c4c4;
   border-radius: 5px;
+  margin-right: ${(props) => props.marginR};
 `;
