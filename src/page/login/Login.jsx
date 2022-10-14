@@ -58,6 +58,7 @@ export default function Login() {
         console.log(res);
         navigate('/');
         localStorage.setItem('token', res.data.token);
+        localStorage.setItem('type', loginType);
       })
       .catch((error) => {
         console.log(error);
