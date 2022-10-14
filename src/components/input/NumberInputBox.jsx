@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export default function NumberInputBox(props) {
   return (
     <>
-      <H2 for="price_input">{props.title}</H2>
+      <H2 htmlFor="price_input">{props.title}</H2>
       <PriceSection>
         <Input
           type="number"
@@ -43,6 +43,9 @@ const Input = styled.input`
   width: 100%;
   padding: 17px 0 17px 16px;
   overflow: hidden;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.251875;
 `;
 
 const Won = styled.p`

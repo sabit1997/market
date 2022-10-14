@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export default function TextInputLimitBox(props) {
   return (
     <>
-      <ProductName for="name_input">상품명</ProductName>
+      <ProductName htmlFor="name_input">상품명</ProductName>
       <InputSection>
         <Input
           type="text"
@@ -11,8 +11,9 @@ export default function TextInputLimitBox(props) {
           name={props.name}
           value={props.value}
           onChange={props.onChange}
+          maxLength="50"
         />
-        <InputLimit>13/50</InputLimit>
+        <InputLimit>{props.productName.length}/50</InputLimit>
       </InputSection>
     </>
   );
@@ -38,6 +39,9 @@ const InputSection = styled.div`
 const Input = styled.input`
   width: 92%;
   padding: 17px 0 17px 16px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.251875;
 `;
 
 const InputLimit = styled.span`

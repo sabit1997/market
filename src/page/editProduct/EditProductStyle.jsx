@@ -25,7 +25,7 @@ export const Span = styled.span`
   color: #eb5757;
 `;
 
-export const TextBox = styled.p`
+export const TextBox = styled.div`
   width: 320px;
   height: 346px;
   padding: 20px;

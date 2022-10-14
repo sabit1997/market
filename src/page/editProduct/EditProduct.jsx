@@ -20,8 +20,8 @@ import {
   EditerSection,
   ButtonWarpper,
 } from './EditProductStyle';
-import instance from '../../client/instance';
 import { useRef, useState } from 'react';
+import instance from '../../client/instance';
 
 export default function EditProduct() {
   const [firstBtn, setFirstBtn] = useState(true);
@@ -34,8 +34,10 @@ export default function EditProduct() {
     stock: '',
     image: '',
   });
+  const [image, setImage] = useState('');
+  const token = localStorage.getItem('token');
 
-  const { productName, price, shippingFee, stock, image } = inputs; // 비구조화 할당을 통해 값 추출
+  const { productName, price, shippingFee, stock } = inputs; // 비구조화 할당을 통해 값 추출
 
   function handleInput(e) {
     const { value, name } = e.target;
@@ -67,33 +69,47 @@ export default function EditProduct() {
   // 이미지 미리보기
   function handleImgPreview(e) {
     setPreview(URL.createObjectURL(e.target.files[0]));
-    const img = e.target.files[0];
-    let formData = new FormData();
-    formData.append('image', img);
+    setImage(e.target.files[0]);
   }
 
-  function uploadImage(e) {}
+  console.log(image);
+
+  // function uploadImage(e) {}
 
   // 상품 등록
   function handleSubmit(e) {
     e.preventDefault();
-
     if (
       preview !== '' &&
       productName !== '' &&
       price !== '' &&
       shipping !== '' &&
       shippingFee !== '' &&
-      stock !== ''
+      stock !== '' &&
+      image !== ''
     ) {
-      instance.post('/products/', {
-        product_name: productName,
-        price: price,
-        shipping_method: shipping,
-        shipping_fee: shippingFee,
-        stock: stock,
-        products_info: 'asdfe',
-      });
+      const formData = new FormData();
+      formData.append('product_name', productName);
+      formData.append('price', price);
+      formData.append('shipping_method', shipping);
+      formData.append('shipping_fee', shippingFee);
+      formData.append('stock', stock);
+      formData.append('product_info', 'abcdef');
+      formData.append('image', image);
+      formData.append('token', token);
+
+      instance
+        .post('https://openmarket.weniv.co.kr/products/', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   }
 
@@ -136,8 +152,6 @@ export default function EditProduct() {
                   ref={inpRef}
                   onChange={handleImgPreview}
                   className="ir"
-                  name="image"
-                  value={image}
                 />
                 <ImgUploadButton htmlFor="imageUploadInput" />
               </ImgPreveiw>
@@ -146,6 +160,7 @@ export default function EditProduct() {
               <TextInputLimitBox
                 name="productName"
                 value={productName}
+                productName={productName}
                 onChange={handleInput}
               />
               <NumberInputBox
