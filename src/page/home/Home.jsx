@@ -2,7 +2,10 @@ import BuyerHome from './BuyerHome';
 import SellerHome from './SellerHome';
 
 export default function Home() {
-  // logintype 나눠주기
-  const loginType = 'seller';
-  return <>{loginType === 'buyer' ? <BuyerHome /> : <SellerHome />}</>;
+  const loginType = localStorage.getItem('type');
+  if (loginType === 'SELLER') {
+    return <SellerHome />;
+  } else if (loginType === 'BUYER') {
+    return <BuyerHome />;
+  }
 }
