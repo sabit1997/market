@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
-function ProductBox() {
+function ProductBox({ i, productBoxData }) {
   return (
     <Warpper>
-      <ProductImg src="" />
+      <ProductImg src={productBoxData[i].image} />
       <ProductInfoWarpper>
-        <ProductName>딥러닝 개발자 무릎 담요</ProductName>
-        <StockNum>수량: 1개</StockNum>
+        <ProductName>{productBoxData[i].product_name}</ProductName>
+        <StockNum>{productBoxData[i].stock}</StockNum>
       </ProductInfoWarpper>
-      <ProductPrice>17,500원</ProductPrice>
+      <ProductPrice></ProductPrice>
       <Btn bg="#21BF48">수정</Btn>
       <Btn bg="#fff">삭제</Btn>
     </Warpper>
