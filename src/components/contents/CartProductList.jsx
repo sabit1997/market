@@ -3,37 +3,62 @@ import styled from 'styled-components';
 import deleteIcon from '../../assets/icon-delete.svg';
 import Amount from '../etc/Amount';
 
-function CartProductList({ marginB, cartData, i, productData }) {
-  const [cartItem, setCartItem] = useState([]);
+function CartProductList({ cartData, cartItem, i, setChecked, checked }) {
+  function shippingValue(fee, method) {
+    if (method === 'PARCEL') {
+      if (fee === 0) {
+        return '소포배송 / 무료배송';
+      } else if (fee !== 0) {
+        return `소포배송 / ${fee?.toLocaleString()}원`;
+      }
+    } else if (method === 'DELIVERY') {
+      if (fee === 0) {
+        return '택배배송 / 무료배송';
+      } else if (fee !== 0) {
+        return `택배배송 / ${fee?.toLocaleString()}원`;
+      }
+    }
+  }
 
-  useEffect(() => {
-    // product_id 값이 같은 값 반환하기
-    const compare = cartData.map((_, i) =>
-      productData.filter((x) => x.product_id === cartData[i].product_id)
-    );
-    // 배열 합치기.
-    const merged = [].concat.apply([], compare);
-    console.log(merged);
+  // function handleCheckButton() {
+  //   if (checked.i === false) {
+  //     setChecked({
+  //       ...checked,
+  //       [i]: true,
+  //     });
+  //   } else if (checked.i === true) {
+  //     setChecked({
+  //       ...checked,
+  //       [i]: false,
+  //     });
+  //   }
+  // }
 
-    setCartItem(merged);
-  }, [cartData, i, productData]);
-
-  if (cartItem !== []) {
+  if (cartItem !== '') {
     return (
-      <Warpper marginB={marginB}>
-        <Label for="inp_radio" />
-        <input type="radio" id="inp_radio" name="inp_radio" className="ir" />
+      <Warpper>
+        <CheckButton checked={checked} /*onClick={handleCheckButton}*/ />
         <Product src={cartItem[i].image} />
         <ProductInfoWarpper>
           <Seller>{cartItem[i].store_name}</Seller>
           <ProductName>{cartItem[i].product_name}</ProductName>
-          <ProductPrice>{cartItem[i].price}</ProductPrice>
-          <Shipping>{`${cartItem[i].shipping_method} / ${cartItem[i].shipping_fee}`}</Shipping>
+          <ProductPrice>{`${cartItem[
+            i
+          ].price?.toLocaleString()}원`}</ProductPrice>
+          <Shipping>
+            {shippingValue(
+              cartItem[i].shipping_fee,
+              cartItem[i].shipping_method
+            )}
+          </Shipping>
         </ProductInfoWarpper>
-        <Amount />
+        <Amount value={cartData[i].quantity} />
         <OderWarpper>
           <OrderPrice>
-            {`${cartItem[i].price + cartItem[i].shipping_fee}원`}
+            {`${(
+              cartItem[i].price * cartData[i].quantity +
+              cartItem[i].shipping_fee
+            )?.toLocaleString()}원`}
           </OrderPrice>
           <OrderBtn>주문하기</OrderBtn>
         </OderWarpper>
@@ -62,13 +87,27 @@ const Warpper = styled.section`
   }
 `;
 
-const Label = styled.label`
+const CheckButton = styled.button`
   box-sizing: border-box;
   width: 20px;
   height: 20px;
   border: 2px solid #21bf48;
   border-radius: 50%;
   margin-right: 40px;
+  cursor: pointer;
+  position: relative;
+  &::after {
+    content: '';
+    display: ${(props) => (props.checked.i === false ? 'none;' : 'block')};
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #21bf48;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 `;
 
 const Product = styled.img`
