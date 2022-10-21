@@ -51,12 +51,13 @@ export default function SellerCenter() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [productBoxData.length]);
 
   // ProductBoxMap
   const productBoxList = productBoxData.map((_, i) => (
     <ProductBox
       i={i}
+      setProductBoxData={setProductBoxData}
       productBoxData={productBoxData}
       key={productBoxData[i].product_id}
     />

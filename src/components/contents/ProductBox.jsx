@@ -1,6 +1,27 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import instance from '../../client/instance';
 
-function ProductBox({ i, productBoxData }) {
+function ProductBox({ i, productBoxData, setProductBoxData }) {
+  const navigate = useNavigate();
+  // 상품 삭제
+  function handleDelteBtn() {
+    instance
+      .delete(`/products/${productBoxData[i].product_id}/`)
+      .then((res) => {
+        if (res.status === 204) {
+          setProductBoxData(
+            productBoxData.filter(
+              (el) => el.product_id !== productBoxData[i].product_id
+            )
+          );
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return (
     <Warpper>
       <ProductImg src={productBoxData[i].image} />
@@ -9,8 +30,17 @@ function ProductBox({ i, productBoxData }) {
         <StockNum>{productBoxData[i].stock}</StockNum>
       </ProductInfoWarpper>
       <ProductPrice></ProductPrice>
-      <Btn bg="#21BF48">수정</Btn>
-      <Btn bg="#fff">삭제</Btn>
+      <Btn
+        bg="#21BF48"
+        onClick={() => {
+          navigate('/');
+        }}
+      >
+        수정
+      </Btn>
+      <Btn bg="#fff" onClick={handleDelteBtn}>
+        삭제
+      </Btn>
     </Warpper>
   );
 }
