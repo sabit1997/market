@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export default function MsIconButton(props) {
   return (
     <Button onClick={props.onClick} wd={props.wd}>
-      <Img src={props.img} />
+      <Img src={props.src} />
       {props.value}
     </Button>
   );
