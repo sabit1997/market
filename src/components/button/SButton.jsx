@@ -3,7 +3,9 @@ import styled from 'styled-components';
 export default function SButton(props) {
   return (
     <>
-      <Button wd={props.wd}>{props.value}</Button>
+      <Button wd={props.wd} onClick={props.onClick}>
+        {props.value}
+      </Button>
     </>
   );
 }

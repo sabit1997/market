@@ -4,10 +4,13 @@ import searchBtn from '../../assets/search.png';
 import cart from '../../assets/icon-shopping-cart.svg';
 import myInfo from '../../assets/icon-user.svg';
 import myInfoActive from '../../assets/icon-user-2.svg';
+import shoppingBag from '../../assets/icon-shopping-bag.svg';
 import MyPageDropdown from '../../components/etc/MyPageDropdown';
+import MsIconButton from '../button/MsIconButton';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-export default function TopNavBar() {
+
+export default function TopNavBar(props) {
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
 
@@ -21,9 +24,8 @@ export default function TopNavBar() {
     }
   }
 
-  console.log(modal);
   return (
-    <Warpper>
+    <Warpper vlaue={props.value}>
       <LeftWarpper>
         <Logo src={logo} onClick={() => navigate('/')} />
         <Search>
@@ -33,13 +35,30 @@ export default function TopNavBar() {
       </LeftWarpper>
       <ButtonWarpper>
         {/* 판매자 로그인 시 다르게 */}
-        <MoveBtn wd="46px" onClick={() => navigate('/cart')}>
-          <BtnTxt>장바구니</BtnTxt>
-        </MoveBtn>
-        <MoveBtn wd="56px" onClick={handleMyPageButton} modal={modal}>
-          <BtnTxt modal={modal}>마이페이지</BtnTxt>
-          {modal === true ? <MyPageDropdown setModal={setModal} /> : null}
-        </MoveBtn>
+        {props.value === 'seller' ? (
+          <>
+            <MoveBtn wd="56px" onClick={handleMyPageButton} modal={modal}>
+              <BtnTxt modal={modal}>마이페이지</BtnTxt>
+              {modal === true ? <MyPageDropdown setModal={setModal} /> : null}
+            </MoveBtn>
+            <MsIconButton
+              value="판매자센터"
+              wd="168px"
+              src={shoppingBag}
+              onClick={() => navigate('/sellercenter')}
+            />
+          </>
+        ) : (
+          <>
+            <MoveBtn wd="46px" onClick={props.handleCartButton}>
+              <BtnTxt>장바구니</BtnTxt>
+            </MoveBtn>
+            <MoveBtn wd="56px" onClick={handleMyPageButton} modal={modal}>
+              <BtnTxt modal={modal}>마이페이지</BtnTxt>
+              {modal === true ? <MyPageDropdown setModal={setModal} /> : null}
+            </MoveBtn>
+          </>
+        )}
       </ButtonWarpper>
     </Warpper>
   );
@@ -49,15 +68,19 @@ const Warpper = styled.section`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 1280px;
+  width: 1920px;
   height: 90px;
+  padding-left: 320px;
+  padding-right: 320px;
 `;
 
 const LeftWarpper = styled.div`
   display: flex;
 `;
 
-const ButtonWarpper = styled.div``;
+const ButtonWarpper = styled.div`
+  display: flex;
+`;
 
 const Logo = styled.img`
   width: 124px;
@@ -74,7 +97,6 @@ const Search = styled.section`
   padding: 9px 22px;
   border: 2px solid #21bf48;
   border-radius: 50px;
-  /* margin-right: 598px; */
 `;
 
 const SearchInput = styled.input`

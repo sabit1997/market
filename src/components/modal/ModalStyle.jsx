@@ -10,7 +10,11 @@ export const ModalWarpper = styled.article`
   align-items: center;
   padding-bottom: 40px;
   border: 1px solid #c4c4c4;
-  position: relative;
+  background-color: #fff;
+  position: absolute;
+  top: 50vh;
+  transform: translateY(-50%);
+  z-index: 10;
 `;
 
 export const CloseButton = styled.button`
