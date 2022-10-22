@@ -3,7 +3,7 @@ import RightArrow from '../../assets/icon-right-arrow.svg';
 
 export const CarouselWarpper = styled.section`
   display: flex;
-  width: 100%;
+  width: 1920px;
   height: 500px;
   position: relative;
 `;

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const ProductWarpper = styled.section`
+  width: 1920px;
   display: flex;
   justify-content: center;
   margin-top: 80px;
@@ -101,6 +102,8 @@ export const TotalQuantityNum = styled.span`
 `;
 
 export const ButtonWarpper = styled.div`
+  width: 1920px;
   display: flex;
   justify-content: center;
+  padding-bottom: 359px;
 `;
