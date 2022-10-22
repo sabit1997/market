@@ -9,11 +9,15 @@ import MyPageDropdown from '../../components/etc/MyPageDropdown';
 import MsIconButton from '../button/MsIconButton';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import Modal from '../modal/Modal';
 
 export default function TopNavBar(props) {
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
+  // 경고창 모달
+  const [alertModal, setAlertModal] = useState(false);
 
+  // 마이페이지 버튼
   function handleMyPageButton() {
     if (localStorage.getItem('token') === null) {
       navigate('/login');
@@ -21,6 +25,16 @@ export default function TopNavBar(props) {
       setModal(false);
     } else {
       setModal(true);
+    }
+  }
+
+  // 장바구니 버튼
+  function handleCartButton() {
+    if (localStorage.getItem('token') === null) {
+      setAlertModal(true);
+    } else {
+      setAlertModal(false);
+      navigate('/cart');
     }
   }
 
@@ -50,7 +64,7 @@ export default function TopNavBar(props) {
           </>
         ) : (
           <>
-            <MoveBtn wd="46px" onClick={props.handleCartButton}>
+            <MoveBtn wd="46px" onClick={handleCartButton}>
               <BtnTxt>장바구니</BtnTxt>
             </MoveBtn>
             <MoveBtn wd="56px" onClick={handleMyPageButton} modal={modal}>
@@ -60,6 +74,9 @@ export default function TopNavBar(props) {
           </>
         )}
       </ButtonWarpper>
+      {alertModal === true ? (
+        <Modal category="notLogin" setAlertModal={setAlertModal} />
+      ) : null}
     </Warpper>
   );
 }
@@ -72,6 +89,7 @@ const Warpper = styled.section`
   height: 90px;
   padding-left: 320px;
   padding-right: 320px;
+  position: relative;
 `;
 
 const LeftWarpper = styled.div`
