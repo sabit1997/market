@@ -37,3 +37,9 @@ export const AlertTxt = styled.p`
   text-align: center;
   margin-bottom: ${(props) => props.marginB};
 `;
+
+export const AlertContentsWarp = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

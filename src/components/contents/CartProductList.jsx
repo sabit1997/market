@@ -2,8 +2,11 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import deleteIcon from '../../assets/icon-delete.svg';
 import Amount from '../etc/Amount';
+import Modal from '../modal/Modal';
 
 function CartProductList({ cartData, cartItem, i, setChecked, checked }) {
+  const [amountModal, setAmountModal] = useState(false);
+
   function shippingValue(fee, method) {
     if (method === 'PARCEL') {
       if (fee === 0) {
@@ -34,6 +37,11 @@ function CartProductList({ cartData, cartItem, i, setChecked, checked }) {
   //   }
   // }
 
+  // 수량 변경 버튼
+  function handleAmount() {
+    setAmountModal(true);
+  }
+
   if (cartItem !== '') {
     return (
       <Warpper>
@@ -52,7 +60,11 @@ function CartProductList({ cartData, cartItem, i, setChecked, checked }) {
             )}
           </Shipping>
         </ProductInfoWarpper>
-        <Amount value={cartData[i].quantity} />
+        <Amount
+          value={cartData[i].quantity}
+          onClick={handleAmount}
+          margin="0 148px 0 0"
+        />
         <OderWarpper>
           <OrderPrice>
             {`${(
@@ -63,6 +75,16 @@ function CartProductList({ cartData, cartItem, i, setChecked, checked }) {
           <OrderBtn>주문하기</OrderBtn>
         </OderWarpper>
         <DeleteBtn />
+        {amountModal === true ? (
+          <Modal
+            category="changeNum"
+            value={cartData[i].quantity}
+            setAmountModal={setAmountModal}
+            cart_item_id={cartData[i].cart_item_id}
+            product_id={cartData[i].product_id}
+            stock={cartItem[i].stock}
+          />
+        ) : null}
       </Warpper>
     );
   }

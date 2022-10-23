@@ -2,31 +2,64 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import minusIcon from '../../assets/icon-minus-line.svg';
 import plusIcon from '../../assets/icon-plus-line.svg';
+import { useLocation } from 'react-router-dom';
 
 export default function Amount(props, { setAmountQuantity }) {
   const [quantity, setQuantity] = useState(1);
   const [overValue, setOverValue] = useState(false);
+  const location = useLocation();
+
   function handleMinusButton() {
-    if (quantity >= 2) {
-      setQuantity(quantity - 1);
-      props.setAmountQuantity(quantity - 1);
-    }
-    if (props.stock + 1 > quantity) {
-      setOverValue(false);
+    switch (location.pathname) {
+      case `/detail/${props.product_id}`:
+        if (quantity >= 2) {
+          setQuantity(quantity - 1);
+          props.setAmountQuantity(quantity - 1);
+        }
+        if (props.stock + 1 > quantity) {
+          setOverValue(false);
+        }
+        break;
+      case '/cart':
+        if (quantity >= 2) {
+          setQuantity(quantity - 1);
+          props.setAmountQuantity(quantity - 1);
+        }
+        if (props.stock + 1 > quantity) {
+          setOverValue(false);
+        }
+        break;
+      default:
+        console.log('default');
     }
   }
   function handlePlusButton() {
-    if (props.stock - 1 === quantity) {
-      setOverValue(true);
-    }
-    if (!overValue) {
-      setQuantity(quantity + 1);
-      props.setAmountQuantity(quantity + 1);
+    switch (location.pathname) {
+      case `/detail/${props.product_id}`:
+        if (props.stock - 1 === quantity) {
+          setOverValue(true);
+        }
+        if (!overValue) {
+          setQuantity(quantity + 1);
+          props.setAmountQuantity(quantity + 1);
+        }
+        break;
+      case '/cart':
+        if (props.stock - 1 === quantity) {
+          setOverValue(true);
+        }
+        if (!overValue) {
+          setQuantity(quantity + 1);
+          props.setAmountQuantity(quantity + 1);
+        }
+        break;
+      default:
+        console.log('break');
     }
   }
 
   return (
-    <Quantity marginT={props.marginT}>
+    <Quantity margin={props.margin} onClick={props.onClick}>
       <QuantityBtn onClick={handleMinusButton} />
       <QuantityNum>{props.value}</QuantityNum>
       <QuantityBtn onClick={handlePlusButton} overValue={overValue} />
@@ -41,8 +74,7 @@ const Quantity = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-right: 148px;
-  margin-top: ${(props) => props.marginT};
+  margin: ${(props) => props.margin};
   border: 1px solid #c4c4c4c4;
   overflow: hidden;
 `;
