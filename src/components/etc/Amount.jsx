@@ -21,11 +21,11 @@ export default function Amount(props, { setAmountQuantity }) {
         }
         break;
       case '/cart':
-        if (quantity >= 2) {
-          setQuantity(quantity - 1);
-          props.setAmountQuantity(quantity - 1);
+        if (props.value >= 2) {
+          setQuantity(props.value - 1);
+          props.setAmountQuantity(props.value - 1);
         }
-        if (props.stock + 1 > quantity) {
+        if (props.stock + 1 > props.value) {
           setOverValue(false);
         }
         break;
@@ -45,12 +45,12 @@ export default function Amount(props, { setAmountQuantity }) {
         }
         break;
       case '/cart':
-        if (props.stock - 1 === quantity) {
+        if (props.stock - 1 === props.value) {
           setOverValue(true);
         }
         if (!overValue) {
-          setQuantity(quantity + 1);
-          props.setAmountQuantity(quantity + 1);
+          setQuantity(props.value + 1);
+          props.setAmountQuantity(props.value + 1);
         }
         break;
       default:
@@ -61,7 +61,7 @@ export default function Amount(props, { setAmountQuantity }) {
   return (
     <Quantity margin={props.margin} onClick={props.onClick}>
       <QuantityBtn onClick={handleMinusButton} />
-      <QuantityNum>{props.value}</QuantityNum>
+      <QuantityNum>{[props.value]}</QuantityNum>
       <QuantityBtn onClick={handlePlusButton} overValue={overValue} />
     </Quantity>
   );
