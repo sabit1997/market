@@ -11,6 +11,7 @@ import { useProductDataContext } from '../../context/ProductDataContext';
 
 export default function BuyerHome() {
   const { productData } = useProductDataContext();
+  const loginType = localStorage.getItem('type');
 
   const productList = productData.map((_, i) => (
     <ProductList
@@ -22,7 +23,11 @@ export default function BuyerHome() {
 
   return (
     <PageWarpper>
-      <TopNavBar />
+      {loginType === 'BUYER' ? (
+        <TopNavBar />
+      ) : loginType === 'SELLER' ? (
+        <TopNavBar value="seller" />
+      ) : null}
       <Carousel />
       <ProductListSection>{productList}</ProductListSection>
       <Footer />
