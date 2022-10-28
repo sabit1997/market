@@ -2,11 +2,11 @@ import styled from 'styled-components';
 import plus from '../../assets/icon-plus-line.svg';
 import minus from '../../assets/icon-minus-line.svg';
 
-export default function PriceGroup(props) {
+export default function PriceGroup({ value, price }) {
   return (
-    <Warpper value={props.value}>
-      <TotalTxt value={props.value}>{props.value}</TotalTxt>
-      <TotalPrice value={props.value}>46,500</TotalPrice>
+    <Warpper value={value}>
+      <TotalTxt value={value}>{value}</TotalTxt>
+      <TotalPrice value={value}>{price}</TotalPrice>
     </Warpper>
   );
 }
