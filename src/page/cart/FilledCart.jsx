@@ -4,19 +4,11 @@ import CartProductList from '../../components/contents/CartProductList';
 import PriceGroup from '../../components/etc/PriceGroup';
 import LButton from '../../components/button/LButton';
 
-export default function Cart({ cartData, productData }) {
+export default function Cart({ cartData, productData, checked, setChecked }) {
   const [cartItem, setCartItem] = useState('');
   const [totalPrice, setTotalPrice] = useState('');
   const [totalShippingFee, setTotalShippingFee] = useState('');
-  const [checked, setChecked] = useState([]);
-
-  // checked 초기 값 설정
-  useEffect(() => {
-    cartData.map((_, i) => setChecked((prev) => [...prev, { [i]: false }]));
-    // 두번씩 값이 들어가는 것 고치기
-  }, [cartData]);
-
-  console.log(checked);
+  const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
     // product_id 값이 같은 값 반환하기
@@ -32,6 +24,15 @@ export default function Cart({ cartData, productData }) {
   }, [cartData, productData]);
   // console.log(cartData);
 
+  // 상품 체크 버튼
+  function handleCheckBtn() {
+    if (checked) {
+      setChecked(false);
+    } else {
+      setChecked(true);
+    }
+  }
+
   // 장바구니 목록 불러오기
   const cartList = cartData.map((_, i) => (
     <CartProductList
@@ -41,6 +42,9 @@ export default function Cart({ cartData, productData }) {
       key={cartData[i].cart_item_id}
       checked={checked}
       setChecked={setChecked}
+      quantity={quantity}
+      setQuantity={setQuantity}
+      onClick={handleCheckBtn}
     />
   ));
 
@@ -48,7 +52,9 @@ export default function Cart({ cartData, productData }) {
   useEffect(() => {
     if (cartItem !== '') {
       const productPrice = cartItem.map(
-        (x, i) => x.price * cartData[i].quantity
+        (x, i) =>
+          x.price *
+          quantity /*여기 수량을 자식한테서 받아와야 함 아니면 새로 데이터 받아오거나*/
       );
       // console.log(productPrice);
 
@@ -60,7 +66,7 @@ export default function Cart({ cartData, productData }) {
       setTotalPrice(totalPrice);
       setTotalShippingFee(totalShippingFee);
     }
-  }, [cartData, cartItem]);
+  }, [cartData, cartItem, quantity]);
 
   return (
     <>

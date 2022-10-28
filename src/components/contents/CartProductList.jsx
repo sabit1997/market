@@ -4,8 +4,21 @@ import deleteIcon from '../../assets/icon-delete.svg';
 import Amount from '../etc/Amount';
 import Modal from '../modal/Modal';
 
-function CartProductList({ cartData, cartItem, i, setChecked, checked }) {
+function CartProductList({
+  cartData,
+  cartItem,
+  i,
+  onClick,
+  setChecked,
+  checked,
+  quantity,
+  setQuantity,
+}) {
   const [amountModal, setAmountModal] = useState(false);
+  // 수량 기본 값 지정
+  useEffect(() => {
+    setQuantity(cartData[i].quantity);
+  }, [cartData, i, setQuantity]);
 
   function shippingValue(fee, method) {
     if (method === 'PARCEL') {
@@ -45,7 +58,7 @@ function CartProductList({ cartData, cartItem, i, setChecked, checked }) {
   if (cartItem !== '') {
     return (
       <Warpper>
-        <CheckButton checked={checked} /*onClick={handleCheckButton}*/ />
+        <CheckButton checked={checked} onClick={onClick} />
         <Product src={cartItem[i].image} />
         <ProductInfoWarpper>
           <Seller>{cartItem[i].store_name}</Seller>
@@ -60,15 +73,11 @@ function CartProductList({ cartData, cartItem, i, setChecked, checked }) {
             )}
           </Shipping>
         </ProductInfoWarpper>
-        <Amount
-          value={cartData[i].quantity}
-          onClick={handleAmount}
-          margin="0 148px 0 0"
-        />
+        <Amount value={quantity} onClick={handleAmount} margin="0 148px 0 0" />
         <OderWarpper>
           <OrderPrice>
             {`${(
-              cartItem[i].price * cartData[i].quantity +
+              cartItem[i].price * quantity +
               cartItem[i].shipping_fee
             )?.toLocaleString()}원`}
           </OrderPrice>
@@ -78,11 +87,12 @@ function CartProductList({ cartData, cartItem, i, setChecked, checked }) {
         {amountModal === true ? (
           <Modal
             category="changeNum"
-            value={cartData[i].quantity}
+            value={quantity}
             setAmountModal={setAmountModal}
             cart_item_id={cartData[i].cart_item_id}
             product_id={cartData[i].product_id}
             stock={cartItem[i].stock}
+            setQuantity={setQuantity}
           />
         ) : null}
       </Warpper>
@@ -120,7 +130,7 @@ const CheckButton = styled.button`
   position: relative;
   &::after {
     content: '';
-    display: ${(props) => (props.checked.i === false ? 'none;' : 'block')};
+    display: ${(props) => (props.checked === false ? 'none;' : 'block')};
     width: 12px;
     height: 12px;
     border-radius: 50%;
