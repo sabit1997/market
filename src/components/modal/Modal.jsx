@@ -14,7 +14,7 @@ import instance from '../../client/instance';
 
 export default function Modal(props) {
   const navigate = useNavigate();
-  const [amountQuantity, setAmountQuantity] = useState(1);
+  const [amountQuantity, setAmountQuantity] = useState(props.value);
   const location = useLocation();
 
   // 모달 창 닫는 동작
@@ -48,7 +48,11 @@ export default function Modal(props) {
         quantity: amountQuantity,
         is_active: isActive(),
       })
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res);
+        props.setAmountModal(false);
+        props.setQuantity(res.data.quantity);
+      })
       .catch((error) => console.log(error));
   }
 
