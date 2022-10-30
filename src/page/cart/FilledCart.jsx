@@ -24,15 +24,6 @@ export default function Cart({ cartData, productData, checked, setChecked }) {
   }, [cartData, productData]);
   // console.log(cartData);
 
-  // 상품 체크 버튼
-  function handleCheckBtn() {
-    if (checked) {
-      setChecked(false);
-    } else {
-      setChecked(true);
-    }
-  }
-
   // 장바구니 목록 불러오기
   const cartList = cartData.map((_, i) => (
     <CartProductList
@@ -44,29 +35,30 @@ export default function Cart({ cartData, productData, checked, setChecked }) {
       setChecked={setChecked}
       quantity={quantity}
       setQuantity={setQuantity}
-      onClick={handleCheckBtn}
     />
   ));
 
   // 가격, 배송비, 콤마
   useEffect(() => {
     if (cartItem !== '') {
-      const productPrice = cartItem.map(
-        (x, i) =>
-          x.price *
-          quantity /*여기 수량을 자식한테서 받아와야 함 아니면 새로 데이터 받아오거나*/
-      );
-      // console.log(productPrice);
+      // const productPrice = cartItem.map((x, i) => x.price * quantity);
+
+      const productPrice = cartItem
+        .map((x, i) => x.price)
+        .filter((_, i) => checked[`product${i}`] === true);
+      console.log(productPrice);
 
       const totalPrice = productPrice.reduce((pre, curr) => pre + curr, 0);
 
       const totalShippingFee = cartItem
         .map((x) => x.shipping_fee)
+        .filter((_, i) => checked[`product${i}`] === true)
         .reduce((pre, curr) => pre + curr, 0);
+
       setTotalPrice(totalPrice);
       setTotalShippingFee(totalShippingFee);
     }
-  }, [cartData, cartItem, quantity]);
+  }, [cartData, cartItem, quantity, checked]);
 
   return (
     <>
