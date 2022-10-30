@@ -96,10 +96,7 @@ function CartProductList({
         <Amount value={quantity} onClick={handleAmount} margin="0 148px 0 0" />
         <OderWarpper>
           <OrderPrice>
-            {`${(
-              cartItem[i].price * quantity +
-              cartItem[i].shipping_fee
-            )?.toLocaleString()}원`}
+            {`${(cartItem[i].price * quantity)?.toLocaleString()}원`}
           </OrderPrice>
           <OrderBtn>주문하기</OrderBtn>
         </OderWarpper>
