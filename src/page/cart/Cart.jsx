@@ -11,6 +11,7 @@ import { useProductDataContext } from '../../context/ProductDataContext';
 export default function Cart() {
   const [cartData, setCartData] = useState([]);
   const [type, setType] = useState(false);
+  const [checked, setChecked] = useState({});
   const { productData } = useProductDataContext();
 
   // 데이터 불러오고 수정
@@ -31,19 +32,21 @@ export default function Cart() {
       });
   }, [cartData.length]);
 
-  console.log(type);
-  console.log(cartData.length);
-
   return (
     <>
       <TopNavBar />
       <CartWarpper>
         <PageTitle>장바구니</PageTitle>
-        <TabTitle />
+        <TabTitle checked={checked} setChecked={setChecked} />
         {type === false ? (
           <EmptyCart />
         ) : (
-          <FilledCart cartData={cartData} productData={productData} />
+          <FilledCart
+            cartData={cartData}
+            productData={productData}
+            checked={checked}
+            setChecked={setChecked}
+          />
         )}
       </CartWarpper>
     </>

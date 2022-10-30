@@ -8,7 +8,6 @@ function CartProductList({
   cartData,
   cartItem,
   i,
-  onClick,
   setChecked,
   checked,
   quantity,
@@ -35,20 +34,33 @@ function CartProductList({
       }
     }
   }
+  // checked 초기값 설정
+  useEffect(() => {
+    let initial = {};
+    for (let i = 0; i < cartData.length; i++) {
+      initial[`product${i}`] = true;
+    }
+    setChecked(initial);
+  }, [cartData.length, setChecked]);
 
-  // function handleCheckButton() {
-  //   if (checked.i === false) {
-  //     setChecked({
-  //       ...checked,
-  //       [i]: true,
-  //     });
-  //   } else if (checked.i === true) {
-  //     setChecked({
-  //       ...checked,
-  //       [i]: false,
-  //     });
-  //   }
-  // }
+  // 상품 체크 버튼
+  function handleCheckBtn(e) {
+    const { name } = e.target;
+    console.log(e.target.name);
+    if (checked[`product${i}`]) {
+      setChecked({
+        ...checked,
+        [name]: false,
+      });
+    } else {
+      setChecked({
+        ...checked,
+        [name]: true,
+      });
+    }
+  }
+
+  console.log(checked);
 
   // 수량 변경 버튼
   function handleAmount() {
@@ -58,7 +70,15 @@ function CartProductList({
   if (cartItem !== '') {
     return (
       <Warpper>
-        <CheckButton checked={checked} onClick={onClick} />
+        <input
+          type="checkbox"
+          name={`product${i}`}
+          value={`product${i}`}
+          className="ir"
+          id={i}
+          onClick={handleCheckBtn}
+        />
+        <CheckButton checked={checked} htmlFor={i} i={i} />
         <Product src={cartItem[i].image} />
         <ProductInfoWarpper>
           <Seller>{cartItem[i].store_name}</Seller>
@@ -119,7 +139,7 @@ const Warpper = styled.section`
   }
 `;
 
-const CheckButton = styled.button`
+const CheckButton = styled.label`
   box-sizing: border-box;
   width: 20px;
   height: 20px;
@@ -130,7 +150,8 @@ const CheckButton = styled.button`
   position: relative;
   &::after {
     content: '';
-    display: ${(props) => (props.checked === false ? 'none;' : 'block')};
+    display: ${(props) =>
+      props.checked[`product${props.i}`] === false ? 'none;' : 'block'};
     width: 12px;
     height: 12px;
     border-radius: 50%;

@@ -1,6 +1,43 @@
+import { useEffect } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 function TabTitle(props) {
+  const [allChecked, setAllChecked] = useState(true);
+
+  // checked 상태에 따라 상단 체크 버튼 변화
+  useEffect(() => {
+    const valuesArr = Object.values(props.checked);
+    const verification = (value) => value === true;
+    if (valuesArr.every(verification)) {
+      setAllChecked(true);
+    } else {
+      setAllChecked(false);
+    }
+    console.log(valuesArr.every(verification));
+  }, [props.checked]);
+
+  // 전체 선택, 전체 해제
+  function handleSellectAllButton() {
+    if (allChecked) {
+      let value = {};
+      for (let i = 0; i < Object.keys(props.checked).length; i++) {
+        value[`product${i}`] = false;
+      }
+      console.log(value);
+      props.setChecked(value);
+    } else {
+      let value = {};
+      for (let i = 0; i < Object.keys(props.checked).length; i++) {
+        value[`product${i}`] = true;
+      }
+      console.log(value);
+      props.setChecked(value);
+    }
+  }
+
+  console.log(props.checked);
+
   return (
     <Warpper marginB={props.marginB} category={props.category}>
       {props.category === 'payment' ? (
@@ -14,8 +51,11 @@ function TabTitle(props) {
         </>
       ) : (
         <>
-          <Label for="inp_radio" />
-          <input type="radio" id="inp_radio" name="inp_radio" className="ir" />
+          <AllCheckBtn
+            type="button"
+            allChecked={allChecked}
+            onClick={handleSellectAllButton}
+          />
           <Txt marginR="379px">상품정보</Txt>
           <Txt marginR="238px">수량</Txt>
           <Txt>상품금액</Txt>
@@ -35,7 +75,7 @@ const Warpper = styled.section`
   margin-bottom: ${(props) => props.marginB};
 `;
 
-const Label = styled.label`
+const AllCheckBtn = styled.button`
   width: 20px;
   height: 20px;
   border: 2px solid #21bf48;
@@ -43,6 +83,19 @@ const Label = styled.label`
   box-sizing: border-box;
   margin-left: 30px;
   margin-right: 314px;
+  position: relative;
+  &::after {
+    content: '';
+    display: ${(props) => (props.allChecked === false ? 'none;' : 'block')};
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #21bf48;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 `;
 
 const Txt = styled.p`
