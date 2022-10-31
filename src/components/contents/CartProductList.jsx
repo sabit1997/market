@@ -78,38 +78,44 @@ function CartProductList({
 
   if (cartItem !== '') {
     return (
-      <Warpper>
-        <input
-          type="checkbox"
-          name={`product${i}`}
-          value={`product${i}`}
-          className="ir"
-          id={i}
-          onClick={handleCheckBtn}
-        />
-        <CheckButton checked={checked} htmlFor={i} i={i} />
-        <Product src={cartItem[i].image} />
-        <ProductInfoWarpper>
-          <Seller>{cartItem[i].store_name}</Seller>
-          <ProductName>{cartItem[i].product_name}</ProductName>
-          <ProductPrice>{`${cartItem[
-            i
-          ].price?.toLocaleString()}원`}</ProductPrice>
-          <Shipping>
-            {shippingValue(
-              cartItem[i].shipping_fee,
-              cartItem[i].shipping_method
-            )}
-          </Shipping>
-        </ProductInfoWarpper>
-        <Amount value={quantity} onClick={handleAmount} margin="0 148px 0 0" />
-        <OderWarpper>
-          <OrderPrice>
-            {`${(cartItem[i].price * quantity)?.toLocaleString()}원`}
-          </OrderPrice>
-          <OrderBtn>주문하기</OrderBtn>
-        </OderWarpper>
-        <DeleteBtn onClick={handleDeleteBtn} />
+      <>
+        <Warpper>
+          <input
+            type="checkbox"
+            name={`product${i}`}
+            value={`product${i}`}
+            className="ir"
+            id={i}
+            onClick={handleCheckBtn}
+          />
+          <CheckButton checked={checked} htmlFor={i} i={i} />
+          <Product src={cartItem[i].image} />
+          <ProductInfoWarpper>
+            <Seller>{cartItem[i].store_name}</Seller>
+            <ProductName>{cartItem[i].product_name}</ProductName>
+            <ProductPrice>{`${cartItem[
+              i
+            ].price?.toLocaleString()}원`}</ProductPrice>
+            <Shipping>
+              {shippingValue(
+                cartItem[i].shipping_fee,
+                cartItem[i].shipping_method
+              )}
+            </Shipping>
+          </ProductInfoWarpper>
+          <Amount
+            value={quantity}
+            onClick={handleAmount}
+            margin="0 148px 0 0"
+          />
+          <OderWarpper>
+            <OrderPrice>
+              {`${(cartItem[i].price * quantity)?.toLocaleString()}원`}
+            </OrderPrice>
+            <OrderBtn>주문하기</OrderBtn>
+          </OderWarpper>
+          <DeleteBtn onClick={handleDeleteBtn} />
+        </Warpper>
         {amountModal === true ? (
           <ChangeNumModal
             value={quantity}
@@ -127,7 +133,7 @@ function CartProductList({
             setCartData={setCartData}
           />
         ) : null}
-      </Warpper>
+      </>
     );
   }
 }
@@ -142,10 +148,9 @@ const Warpper = styled.section`
   border-radius: 10px;
   padding: 20px 0 20px 30px;
   margin-bottom: 10px;
-  position: relative;
   margin-top: 35px;
   margin-bottom: 10px;
-  /* 마지막 컴포넌트만 80px로 바꾸고 싶다... */
+  position: relative;
   &:last-child {
     margin-bottom: 80px;
   }
