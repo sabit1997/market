@@ -143,3 +143,35 @@ export function NotLogin({ setAlertModal }) {
     </ModalWarpper>
   );
 }
+
+export function ExistsModal({ setExistModal }) {
+  const navigate = useNavigate();
+
+  return (
+    <ModalWarpper>
+      <CloseButton />
+      <AlertTxt marginB="30px">
+        이미 장바구니에 있는 상품입니다.
+        <br />
+        장바구니로 이동하시겠습니까?
+      </AlertTxt>
+      <div>
+        <SWhiteButton
+          wd="100px"
+          value="아니오"
+          marginR="10px"
+          onClick={() => {
+            setExistModal(false);
+          }}
+        />
+        <SButton
+          wd="100px"
+          value="예"
+          onClick={() => {
+            navigate('/cart');
+          }}
+        />
+      </div>
+    </ModalWarpper>
+  );
+}
