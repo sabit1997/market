@@ -9,7 +9,7 @@ import MyPageDropdown from '../../components/etc/MyPageDropdown';
 import MsIconButton from '../button/MsIconButton';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import Modal from '../modal/Modal';
+import { NotLogin } from '../modal/Modal';
 
 export default function TopNavBar(props) {
   const navigate = useNavigate();
@@ -74,9 +74,7 @@ export default function TopNavBar(props) {
           </>
         )}
       </ButtonWarpper>
-      {alertModal === true ? (
-        <Modal category="notLogin" setAlertModal={setAlertModal} />
-      ) : null}
+      {alertModal === true ? <NotLogin setAlertModal={setAlertModal} /> : null}
     </Warpper>
   );
 }
