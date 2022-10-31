@@ -89,7 +89,7 @@ export function ChangeNumModal(props) {
 
   return (
     <ModalWarpper>
-      <CloseButton />
+      <CloseButton onClick={handleCloseBtn} />
       <AlertContentsWarp>
         <Amount
           margin="0 0 26px 0"
@@ -120,7 +120,7 @@ export function NotLogin({ setAlertModal }) {
 
   return (
     <ModalWarpper>
-      <CloseButton />
+      <CloseButton onClick={handleCloseBtn} />
       <AlertTxt marginB="30px">
         로그인이 필요한 서비스입니다. <br />
         로그인 하시겠습니까?
