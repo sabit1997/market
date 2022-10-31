@@ -22,7 +22,7 @@ import MDarkButton from '../../components/button/MDarkButton';
 import TabActiveButton from '../../components/button/TabActiveButton';
 import TabDisabledButton from '../../components/button/TabDisabledButton';
 import { useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import instance from '../../client/instance';
 
 export default function ProductDetail() {
@@ -31,7 +31,7 @@ export default function ProductDetail() {
   const [amountQuantity, setAmountQuantity] = useState(1);
   const [cartData, setCartData] = useState([]);
   const [existModal, setExistModal] = useState(false);
-  const location = useLocation();
+  const [check, setCheck] = useState(true);
 
   useEffect(() => {
     client
@@ -73,9 +73,9 @@ export default function ProductDetail() {
         console.log(error);
       });
     if (cartData.filter((data) => data.product_id === product_id) === []) {
-      return true;
+      setCheck(true);
     } else {
-      return false;
+      setCheck(false);
     }
   }
 
@@ -84,7 +84,8 @@ export default function ProductDetail() {
   // 장바구니에 넣기
 
   function handleButton() {
-    if (isCheck()) {
+    isCheck();
+    if (check) {
       instance
         .post('/cart/', {
           product_id: product_id,
@@ -101,10 +102,6 @@ export default function ProductDetail() {
       setExistModal(true);
     }
   }
-
-  console.log(productDetail.stock);
-  console.log(product_id);
-  console.log(location.pathname);
   return (
     <>
       <TopNavBar />
