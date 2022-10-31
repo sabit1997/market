@@ -4,7 +4,13 @@ import CartProductList from '../../components/contents/CartProductList';
 import PriceGroup from '../../components/etc/PriceGroup';
 import LButton from '../../components/button/LButton';
 
-export default function Cart({ cartData, productData, checked, setChecked }) {
+export default function Cart({
+  cartData,
+  productData,
+  checked,
+  setChecked,
+  setCartData,
+}) {
   const [cartItem, setCartItem] = useState('');
   const [totalPrice, setTotalPrice] = useState('');
   const [totalShippingFee, setTotalShippingFee] = useState('');
@@ -28,6 +34,7 @@ export default function Cart({ cartData, productData, checked, setChecked }) {
   const cartList = cartData.map((_, i) => (
     <CartProductList
       cartItem={cartItem}
+      setCartItem={setCartItem}
       cartData={cartData}
       i={i}
       key={cartData[i].cart_item_id}
@@ -35,6 +42,7 @@ export default function Cart({ cartData, productData, checked, setChecked }) {
       setChecked={setChecked}
       quantity={quantity}
       setQuantity={setQuantity}
+      setCartData={setCartData}
     />
   ));
 

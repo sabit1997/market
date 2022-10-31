@@ -9,27 +9,54 @@ import {
 } from './ModalStyle';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import instance from '../../client/instance';
 
-export default function Modal(props) {
-  const navigate = useNavigate();
-  const [amountQuantity, setAmountQuantity] = useState(props.value);
-  const location = useLocation();
-
-  // 모달 창 닫는 동작
+// 상품삭제 모달
+export function DeleteModal({
+  setDeleteModal,
+  cartItemId,
+  setCartData,
+  cartData,
+}) {
   function handleCloseBtn() {
-    switch (location.pathname) {
-      case '/detail:product_id':
-        props.setAlertModal(false);
-        break;
-      case '/cart':
-        props.setAmountModal(false);
-        break;
-      default:
-        console.log('default');
-    }
+    setDeleteModal(false);
   }
+
+  // 상품 삭제
+  function deleteProduct() {
+    instance
+      .delete(`/cart/${cartItemId}/`)
+      .then((res) => {
+        console.log(res);
+        if (res.status === 204) {
+          setCartData(
+            cartData.filter((item) => item.cart_item_id !== cartItemId)
+          );
+        }
+        setDeleteModal(false);
+      })
+      .catch((error) => console.log(error));
+  }
+  return (
+    <ModalWarpper>
+      <CloseButton onClick={handleCloseBtn} />
+      <AlertTxt marginB="40px">상품을 삭제하시겠습니까?</AlertTxt>
+      <div>
+        <SWhiteButton
+          wd="100px"
+          value="취소"
+          marginR="10px"
+          onClick={handleCloseBtn}
+        />
+        <SButton wd="100px" value="확인" onClick={deleteProduct} />
+      </div>
+    </ModalWarpper>
+  );
+}
+
+// 수량 변경 모달
+export function ChangeNumModal(props) {
+  const [amountQuantity, setAmountQuantity] = useState(props.value);
 
   // is_active Boolean 판별 함수
   function isActive() {
@@ -40,7 +67,7 @@ export default function Modal(props) {
     }
   }
 
-  // 수량 수정 기능
+  // 수량 수정
   function handleNumChangeBtn() {
     instance
       .put(`/cart/${props.cart_item_id}/`, {
@@ -56,57 +83,63 @@ export default function Modal(props) {
       .catch((error) => console.log(error));
   }
 
+  function handleCloseBtn() {
+    props.setAmountModal(false);
+  }
+
   return (
-    <ModalWarpper category={props.category}>
-      <CloseButton onClick={handleCloseBtn} />
-      {props.category === 'changeNum' ? (
-        <AlertContentsWarp>
-          <Amount
-            margin="0 0 26px 0"
-            value={amountQuantity}
-            setAmountQuantity={setAmountQuantity}
+    <ModalWarpper>
+      <CloseButton />
+      <AlertContentsWarp>
+        <Amount
+          margin="0 0 26px 0"
+          value={amountQuantity}
+          setAmountQuantity={setAmountQuantity}
+        />
+        <div>
+          <SWhiteButton
+            wd="100px"
+            value="취소"
+            marginR="10px"
+            onClick={handleCloseBtn}
           />
-          <div>
-            <SWhiteButton
-              wd="100px"
-              value="취소"
-              marginR="10px"
-              onClick={handleCloseBtn}
-            />
-            <SButton wd="100px" value="수정" onClick={handleNumChangeBtn} />
-          </div>
-        </AlertContentsWarp>
-      ) : props.category === 'productDel' ? (
-        <>
-          <AlertTxt marginB="40px">상품을 삭제하시겠습니까?</AlertTxt>
-          <div>
-            <SWhiteButton wd="100px" value="취소" marginR="10px" />
-            <SButton wd="100px" value="확인" />
-          </div>
-        </>
-      ) : props.category === 'notLogin' ? (
-        <>
-          <AlertTxt marginB="30px">
-            로그인이 필요한 서비스입니다. <br />
-            로그인 하시겠습니까?
-          </AlertTxt>
-          <div>
-            <SWhiteButton
-              wd="100px"
-              value="아니오"
-              marginR="10px"
-              onClick={handleCloseBtn}
-            />
-            <SButton
-              wd="100px"
-              value="예"
-              onClick={() => {
-                navigate('/login');
-              }}
-            />
-          </div>
-        </>
-      ) : null}
+          <SButton wd="100px" value="수정" onClick={handleNumChangeBtn} />
+        </div>
+      </AlertContentsWarp>
+    </ModalWarpper>
+  );
+}
+
+// 로그인 요청 모달
+export function NotLogin({ setAlertModal }) {
+  const navigate = useNavigate();
+
+  function handleCloseBtn() {
+    setAlertModal(false);
+  }
+
+  return (
+    <ModalWarpper>
+      <CloseButton />
+      <AlertTxt marginB="30px">
+        로그인이 필요한 서비스입니다. <br />
+        로그인 하시겠습니까?
+      </AlertTxt>
+      <div>
+        <SWhiteButton
+          wd="100px"
+          value="아니오"
+          marginR="10px"
+          onClick={handleCloseBtn}
+        />
+        <SButton
+          wd="100px"
+          value="예"
+          onClick={() => {
+            navigate('/login');
+          }}
+        />
+      </div>
     </ModalWarpper>
   );
 }

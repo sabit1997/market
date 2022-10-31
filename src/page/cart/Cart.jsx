@@ -46,6 +46,7 @@ export default function Cart() {
             productData={productData}
             checked={checked}
             setChecked={setChecked}
+            setCartData={setCartData}
           />
         )}
       </CartWarpper>

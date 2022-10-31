@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import deleteIcon from '../../assets/icon-delete.svg';
 import Amount from '../etc/Amount';
-import Modal from '../modal/Modal';
+import { DeleteModal, ChangeNumModal } from '../modal/Modal';
 
 function CartProductList({
   cartData,
@@ -12,8 +12,10 @@ function CartProductList({
   checked,
   quantity,
   setQuantity,
+  setCartData,
 }) {
   const [amountModal, setAmountModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
   // 수량 기본 값 지정
   useEffect(() => {
     setQuantity(cartData[i].quantity);
@@ -60,11 +62,18 @@ function CartProductList({
     }
   }
 
+  console.log(cartItem);
+
   console.log(checked);
 
   // 수량 변경 버튼
   function handleAmount() {
     setAmountModal(true);
+  }
+
+  // 상품 삭제 버튼
+  function handleDeleteBtn() {
+    setDeleteModal(true);
   }
 
   if (cartItem !== '') {
@@ -100,16 +109,22 @@ function CartProductList({
           </OrderPrice>
           <OrderBtn>주문하기</OrderBtn>
         </OderWarpper>
-        <DeleteBtn />
+        <DeleteBtn onClick={handleDeleteBtn} />
         {amountModal === true ? (
-          <Modal
-            category="changeNum"
+          <ChangeNumModal
             value={quantity}
             setAmountModal={setAmountModal}
             cart_item_id={cartData[i].cart_item_id}
             product_id={cartData[i].product_id}
             stock={cartItem[i].stock}
             setQuantity={setQuantity}
+          />
+        ) : deleteModal === true ? (
+          <DeleteModal
+            setDeleteModal={setDeleteModal}
+            cartItemId={cartData[i].cart_item_id}
+            cartData={cartData}
+            setCartData={setCartData}
           />
         ) : null}
       </Warpper>
