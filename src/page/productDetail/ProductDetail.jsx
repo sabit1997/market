@@ -14,6 +14,7 @@ import {
   TotalQuantityNum,
   ButtonWarpper,
 } from '../../components/productDetail/ProductDetail';
+import { ExistsModal } from '../../components/modal/Modal';
 import Amount from '../../components/etc/Amount';
 import LPrice from '../../components/etc/LPrice';
 import MButton from '../../components/button/MButton';
@@ -28,6 +29,8 @@ export default function ProductDetail() {
   const { product_id } = useParams();
   const [productDetail, setProductDetail] = useState('');
   const [amountQuantity, setAmountQuantity] = useState(1);
+  const [cartData, setCartData] = useState([]);
+  const [existModal, setExistModal] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -58,22 +61,45 @@ export default function ProductDetail() {
     }
   }
 
-  // 장바구니에 넣기
-
-  function handleButton() {
+  // 장바구니에 있는지 check
+  function isCheck() {
     instance
-      .post('/cart/', {
-        product_id: product_id,
-        quantity: amountQuantity,
-        check: true,
-        // check 채우는건 cart 불러오고 나서 할 수 있을듯
-      })
+      .get('/cart/')
       .then((res) => {
         console.log(res);
+        setCartData(res.data.results);
       })
       .catch((error) => {
         console.log(error);
       });
+    if (cartData.filter((data) => data.product_id === product_id) === []) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  console.log(cartData.filter((data) => data.product_id === product_id));
+
+  // 장바구니에 넣기
+
+  function handleButton() {
+    if (isCheck()) {
+      instance
+        .post('/cart/', {
+          product_id: product_id,
+          quantity: amountQuantity,
+          check: true,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      setExistModal(true);
+    }
   }
 
   console.log(productDetail.stock);
@@ -129,6 +155,9 @@ export default function ProductDetail() {
             onClick={handleButton}
           />
         </ProductInfo>
+        {existModal === true ? (
+          <ExistsModal setExistModal={setExistModal} />
+        ) : null}
       </ProductWarpper>
       <ButtonWarpper>
         <TabActiveButton value="버튼" />
