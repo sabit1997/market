@@ -53,7 +53,8 @@ export default function Cart({
 
       const productPrice = cartItem
         .map((x, i) => x.price)
-        .filter((_, i) => checked[`product${i}`] === true);
+        .filter((_, i) => checked[`product${i}`] === true)
+        .map((el) => el * quantity);
       console.log(productPrice);
 
       const totalPrice = productPrice.reduce((pre, curr) => pre + curr, 0);
