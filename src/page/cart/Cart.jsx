@@ -1,7 +1,7 @@
 import instance from '../../client/instance';
 import { CartWarpper, PageTitle } from '../../components/cart/CartStyle';
 import TopNavBar from '../../components/navBar/TopNavBar';
-import TabTitle from '../../components/navBar/TabTitle';
+import { CartTabTitle } from '../../components/navBar/TabTitle';
 import EmptyCart from './EmptyCart';
 import FilledCart from './FilledCart';
 import { useEffect } from 'react';
@@ -37,7 +37,7 @@ export default function Cart() {
       <TopNavBar />
       <CartWarpper>
         <PageTitle>장바구니</PageTitle>
-        <TabTitle checked={checked} setChecked={setChecked} />
+        <CartTabTitle checked={checked} setChecked={setChecked} />
         {type === false ? (
           <EmptyCart />
         ) : (

@@ -22,8 +22,9 @@ import {
   PriceCountItem,
   PriceItemTxt,
 } from '../../components/payment/Payment';
+import { CenterWarpper } from '../../components/common/Common';
 import TopNavBar from '../../components/navBar/TopNavBar';
-import TabTitle from '../../components/navBar/TabTitle';
+import { PaymentTabTitle } from '../../components/navBar/TabTitle';
 import ProductInfo from '../../components/contents/ProductInfo';
 import SPrice from '../../components/etc/SPrice';
 import MS16pButton from '../../components/button/MS16pButton';
@@ -32,11 +33,11 @@ import LButton from '../../components/button/LButton';
 
 export default function Payment() {
   return (
-    <>
+    <CenterWarpper>
       <TopNavBar />
       <PageWarpper>
         <PageTitle>주문/결제하기</PageTitle>
-        <TabTitle category="payment" marginB="16px" />
+        <PaymentTabTitle marginB="16px" />
         <ProductInfo />
         <TotalOrderPriceWarpper>
           <TotalOrderPrice>총 주문금액</TotalOrderPrice>
@@ -128,6 +129,6 @@ export default function Payment() {
           </section>
         </BottomWarpper>
       </PageWarpper>
-    </>
+    </CenterWarpper>
   );
 }
