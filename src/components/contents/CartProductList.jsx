@@ -13,13 +13,10 @@ function CartProductList({
   quantity,
   setQuantity,
   setCartData,
+  cartDataQuantity,
 }) {
   const [amountModal, setAmountModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
-  // 수량 기본 값 지정
-  useEffect(() => {
-    setQuantity(cartData[i].quantity);
-  }, [cartData, i, setQuantity]);
 
   function shippingValue(fee, method) {
     if (method === 'PARCEL') {
@@ -62,12 +59,9 @@ function CartProductList({
     }
   }
 
-  console.log(cartItem);
-
-  console.log(checked);
-
   // 수량 변경 버튼
-  function handleAmount() {
+  function handleAmount(event) {
+    event.stopPropagation();
     setAmountModal(true);
   }
 
@@ -75,6 +69,8 @@ function CartProductList({
   function handleDeleteBtn() {
     setDeleteModal(true);
   }
+
+  console.log(cartData);
 
   if (cartItem !== '') {
     return (
@@ -104,13 +100,18 @@ function CartProductList({
             </Shipping>
           </ProductInfoWarpper>
           <Amount
-            value={quantity}
+            value={quantity[i]}
+            cartItem={cartItem}
             onClick={handleAmount}
             margin="0 148px 0 0"
+            cartData={cartData}
+            i={i}
+            quantity={quantity}
+            setQuantity={setQuantity}
           />
           <OderWarpper>
             <OrderPrice>
-              {`${(cartItem[i].price * quantity)?.toLocaleString()}원`}
+              {`${(cartItem[i].price * quantity[i])?.toLocaleString()}원`}
             </OrderPrice>
             <OrderBtn>주문하기</OrderBtn>
           </OderWarpper>
@@ -118,12 +119,15 @@ function CartProductList({
         </Warpper>
         {amountModal === true ? (
           <ChangeNumModal
-            value={quantity}
+            value={quantity[i]}
+            setQuantity={setQuantity}
             setAmountModal={setAmountModal}
             cart_item_id={cartData[i].cart_item_id}
             product_id={cartData[i].product_id}
             stock={cartItem[i].stock}
-            setQuantity={setQuantity}
+            quantity={quantity}
+            cartData={cartData}
+            i={i}
           />
         ) : deleteModal === true ? (
           <DeleteModal

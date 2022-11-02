@@ -3,8 +3,10 @@ import { TotalPriceSection } from '../../components/cart/CartStyle';
 import CartProductList from '../../components/contents/CartProductList';
 import PriceGroup from '../../components/etc/PriceGroup';
 import LButton from '../../components/button/LButton';
+import { useNavigate } from 'react-router-dom';
+import instance from '../../client/instance';
 
-export default function Cart({
+export default function FilledCart({
   cartData,
   productData,
   checked,
@@ -14,7 +16,14 @@ export default function Cart({
   const [cartItem, setCartItem] = useState('');
   const [totalPrice, setTotalPrice] = useState('');
   const [totalShippingFee, setTotalShippingFee] = useState('');
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setQuantity(cartData.map((el) => el.quantity));
+  }, [cartData]);
+
+  console.log(quantity);
 
   useEffect(() => {
     // product_id 값이 같은 값 반환하기
@@ -43,6 +52,7 @@ export default function Cart({
       quantity={quantity}
       setQuantity={setQuantity}
       setCartData={setCartData}
+      cartDataQuantity={cartData[i].quantity}
     />
   ));
 
@@ -52,9 +62,8 @@ export default function Cart({
       // const productPrice = cartItem.map((x, i) => x.price * quantity);
 
       const productPrice = cartItem
-        .map((x, i) => x.price)
-        .filter((_, i) => checked[`product${i}`] === true)
-        .map((el) => el * quantity);
+        .map((x, i) => x.price * quantity[i])
+        .filter((_, i) => checked[`product${i}`] === true);
       console.log(productPrice);
 
       const totalPrice = productPrice.reduce((pre, curr) => pre + curr, 0);
@@ -69,6 +78,21 @@ export default function Cart({
     }
   }, [cartData, cartItem, quantity, checked]);
 
+  function handleOrderBtn() {
+    instance
+      .post('/order/', {
+        total_price: totalPrice + totalShippingFee,
+        order_kind: 'cart_order',
+        receiver: '',
+        receiver_phone_number: '',
+        address: '',
+        address_message: '',
+        payment_method: '',
+      })
+      .then((res) => console.log(res))
+      .catch((error) => console.log(error));
+  }
+
   return (
     <>
       {cartList}
@@ -81,7 +105,7 @@ export default function Cart({
           price={(totalPrice + totalShippingFee)?.toLocaleString()}
         />
       </TotalPriceSection>
-      <LButton value="주문하기" />
+      <LButton value="주문하기" onClick={handleOrderBtn} />
     </>
   );
 }

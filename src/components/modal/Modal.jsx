@@ -8,7 +8,7 @@ import {
   AlertContentsWarp,
 } from './ModalStyle';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import instance from '../../client/instance';
 
 // 상품삭제 모달
@@ -55,36 +55,46 @@ export function DeleteModal({
 }
 
 // 수량 변경 모달
-export function ChangeNumModal(props) {
-  const [amountQuantity, setAmountQuantity] = useState(props.value);
+export function ChangeNumModal({
+  setQuantity,
+  quantity,
+  stcok,
+  cart_item_id,
+  product_id,
+  setAmountModal,
+  cartData,
+  i,
+  value,
+}) {
+  const [changeQuantity, setChangeQuantity] = useState(value);
 
   // is_active Boolean 판별 함수
   function isActive() {
-    if (props.stcok <= amountQuantity) {
+    if (stcok < changeQuantity) {
       return false;
     } else {
       return true;
     }
   }
 
+  console.log(quantity);
   // 수량 수정
   function handleNumChangeBtn() {
     instance
-      .put(`/cart/${props.cart_item_id}/`, {
-        product_id: props.product_id,
-        quantity: amountQuantity,
+      .put(`/cart/${cart_item_id}/`, {
+        product_id: product_id,
+        quantity: changeQuantity,
         is_active: isActive(),
       })
       .then((res) => {
-        console.log(res);
-        props.setAmountModal(false);
-        props.setQuantity(res.data.quantity);
+        quantity.splice(i, 1, res.data.quantity);
+        setQuantity(quantity);
+        setAmountModal(false);
       })
       .catch((error) => console.log(error));
   }
-
   function handleCloseBtn() {
-    props.setAmountModal(false);
+    setAmountModal(false);
   }
 
   return (
@@ -93,8 +103,12 @@ export function ChangeNumModal(props) {
       <AlertContentsWarp>
         <Amount
           margin="0 0 26px 0"
-          value={amountQuantity}
-          setAmountQuantity={setAmountQuantity}
+          value={changeQuantity}
+          setQuantity={setQuantity}
+          quantity={quantity}
+          changeQuantity={changeQuantity}
+          setChangeQuantity={setChangeQuantity}
+          stock={stcok}
         />
         <div>
           <SWhiteButton

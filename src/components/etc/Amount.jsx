@@ -3,29 +3,37 @@ import styled from 'styled-components';
 import minusIcon from '../../assets/icon-minus-line.svg';
 import plusIcon from '../../assets/icon-plus-line.svg';
 import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
-export default function Amount(props, { setAmountQuantity }) {
-  const [quantity, setQuantity] = useState(1);
+export default function Amount({
+  product_id,
+  setAmountQuantity,
+  amountQuantity,
+  setChangeQuantity,
+  changeQuantity,
+  stock,
+  margin,
+  onClick,
+  value,
+}) {
   const [overValue, setOverValue] = useState(false);
   const location = useLocation();
 
   function handleMinusButton() {
     switch (location.pathname) {
-      case `/detail/${props.product_id}`:
-        if (quantity >= 2) {
-          setQuantity(quantity - 1);
-          props.setAmountQuantity(quantity - 1);
+      case `/detail/${product_id}`:
+        if (amountQuantity >= 2) {
+          setAmountQuantity(amountQuantity - 1);
         }
-        if (props.stock + 1 > quantity) {
+        if (stock + 1 > amountQuantity) {
           setOverValue(false);
         }
         break;
       case '/cart':
-        if (props.value >= 2) {
-          setQuantity(props.value - 1);
-          props.setAmountQuantity(props.value - 1);
+        if (changeQuantity >= 2) {
+          setChangeQuantity(changeQuantity - 1);
         }
-        if (props.stock + 1 > props.value) {
+        if (stock + 1 > changeQuantity) {
           setOverValue(false);
         }
         break;
@@ -33,24 +41,23 @@ export default function Amount(props, { setAmountQuantity }) {
         console.log('default');
     }
   }
+
   function handlePlusButton() {
     switch (location.pathname) {
-      case `/detail/${props.product_id}`:
-        if (props.stock - 1 === quantity) {
+      case `/detail/${product_id}`:
+        if (stock - 1 === amountQuantity) {
           setOverValue(true);
         }
         if (!overValue) {
-          setQuantity(quantity + 1);
-          props.setAmountQuantity(quantity + 1);
+          setAmountQuantity(amountQuantity + 1);
         }
         break;
       case '/cart':
-        if (props.stock - 1 === props.value) {
+        if (stock - 1 === changeQuantity) {
           setOverValue(true);
         }
         if (!overValue) {
-          setQuantity(props.value + 1);
-          props.setAmountQuantity(props.value + 1);
+          setChangeQuantity(changeQuantity + 1);
         }
         break;
       default:
@@ -59,9 +66,9 @@ export default function Amount(props, { setAmountQuantity }) {
   }
 
   return (
-    <Quantity margin={props.margin} onClick={props.onClick}>
+    <Quantity margin={margin} onClick={onClick}>
       <QuantityBtn onClick={handleMinusButton} />
-      <QuantityNum>{[props.value]}</QuantityNum>
+      <QuantityNum>{value}</QuantityNum>
       <QuantityBtn onClick={handlePlusButton} overValue={overValue} />
     </Quantity>
   );
