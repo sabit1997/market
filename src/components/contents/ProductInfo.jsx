@@ -1,17 +1,27 @@
 import styled from 'styled-components';
 
-function ProductInfo() {
+function ProductInfo({ orderInfo, quantity, i }) {
+  function shippingFee(value) {
+    if (value === 0) {
+      return '무료배송';
+    } else {
+      return value.toLocaleString() + '원';
+    }
+  }
+
   return (
     <Warpper>
-      <ProductImg src="" />
+      <ProductImg src={orderInfo[i].image} />
       <InfoWarpper>
-        <Seller>백엔드글로벌</Seller>
-        <ProductName>딥러닝 개발자 무릎 담요</ProductName>
-        <ProductNum>수량: 1개</ProductNum>
+        <Seller>{orderInfo[i].seller_store}</Seller>
+        <ProductName>{orderInfo[i].product_name}</ProductName>
+        <ProductNum>수량: {quantity[i]}개</ProductNum>
       </InfoWarpper>
       <Discount>-</Discount>
-      <Shipping>무료배송</Shipping>
-      <OrderPrice>17,500원</OrderPrice>
+      <Shipping>{shippingFee(orderInfo[i].shipping_fee)}</Shipping>
+      <OrderPrice>
+        {(orderInfo[i].price * quantity[i]).toLocaleString()}
+      </OrderPrice>
     </Warpper>
   );
 }
