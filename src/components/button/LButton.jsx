@@ -3,7 +3,9 @@ import styled from 'styled-components';
 export default function LButton(props) {
   return (
     <>
-      <Button margin={props.margin}>{props.value}</Button>
+      <Button margin={props.margin} onClick={props.onClick}>
+        {props.value}
+      </Button>
     </>
   );
 }
