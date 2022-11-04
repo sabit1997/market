@@ -45,6 +45,8 @@ export default function ProductDetail() {
       });
   }, [product_id]);
 
+  console.log(amountQuantity);
+
   function shippingValue(fee, method) {
     if (method === 'PARCEL') {
       if (fee === 0) {
@@ -102,6 +104,8 @@ export default function ProductDetail() {
       setExistModal(true);
     }
   }
+
+  console.log(amountQuantity);
   return (
     <>
       <TopNavBar />
@@ -128,6 +132,7 @@ export default function ProductDetail() {
             amountQuantity={amountQuantity}
             value={amountQuantity}
             product_id={product_id}
+            productDetail={productDetail}
           />
           <PriceWarpper>
             <TotalPriceTxt>총 상품 금액</TotalPriceTxt>
