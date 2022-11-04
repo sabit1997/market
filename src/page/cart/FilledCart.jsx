@@ -4,7 +4,6 @@ import CartProductList from '../../components/contents/CartProductList';
 import PriceGroup from '../../components/etc/PriceGroup';
 import LButton from '../../components/button/LButton';
 import { useNavigate } from 'react-router-dom';
-import instance from '../../client/instance';
 
 export default function FilledCart({
   cartData,
@@ -79,18 +78,15 @@ export default function FilledCart({
   }, [cartData, cartItem, quantity, checked]);
 
   function handleOrderBtn() {
-    instance
-      .post('/order/', {
-        total_price: totalPrice + totalShippingFee,
-        order_kind: 'cart_order',
-        receiver: '',
-        receiver_phone_number: '',
-        address: '',
-        address_message: '',
-        payment_method: '',
-      })
-      .then((res) => console.log(res))
-      .catch((error) => console.log(error));
+    const orderProduct = cartItem.filter(
+      (_, i) => checked[`product${i}`] === true
+    );
+    const quantity = cartData
+      .filter((_, i) => checked[`product${i}`] === true)
+      .map((x) => x.quantity);
+    navigate('/payment', {
+      state: { orderProduct: orderProduct, quantity: quantity },
+    });
   }
 
   return (
