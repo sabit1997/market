@@ -9,6 +9,8 @@ import Payment from './page/payment/Payment';
 import NotFound from './page/NotFound/NotFound';
 import ProductDetail from './page/productDetail/ProductDetail';
 import SellerCenter from './page/sellerCenter/SellerCenter';
+import EditProduct from './page/editProduct/EditProduct';
+import OrderCompleted from './page/OrderCompleted';
 import './App.css';
 
 function App() {
@@ -23,7 +25,9 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/sellercenter" element={<SellerCenter />} />
-        <Route path="notfound" element={<NotFound />} />
+        <Route path="/productedit" element={<EditProduct />} />
+        <Route path="/ordercompleted" element={<OrderCompleted />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </ProductDataProvider>
   );
