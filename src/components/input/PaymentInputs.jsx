@@ -1,3 +1,4 @@
+import { useDaumPostcodePopup } from 'react-daum-postcode';
 import {
   InfoInputItem,
   Label,
@@ -72,6 +73,37 @@ export function ReceiverInput(props) {
 }
 
 export function AddressInput(props) {
+  const scriptUrl =
+    '//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
+  const open = useDaumPostcodePopup(scriptUrl);
+
+  const handleComplete = (data) => {
+    let zoneCode = data.zonecode;
+    let fullAddress = data.address;
+    let extraAddress = '';
+
+    if (data.addressType === 'R') {
+      if (data.bname !== '') {
+        extraAddress += data.bname;
+      }
+      if (data.buildingName !== '') {
+        extraAddress +=
+          extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
+      }
+      fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
+    }
+
+    props.setInputs({
+      ...props.inputs,
+      zip_code: zoneCode,
+      address1: fullAddress,
+    });
+    console.log(fullAddress);
+  };
+
+  const handleClick = () => {
+    open({ onComplete: handleComplete });
+  };
   return (
     <InfoInputItemCol>
       <RowWarpper>
@@ -83,7 +115,12 @@ export function AddressInput(props) {
           value={props.value1}
           onChange={props.onChange}
         />
-        <MS16pButton value="우편번호 조회" wd="154px" hg="40px" />
+        <MS16pButton
+          value="우편번호 조회"
+          wd="154px"
+          hg="40px"
+          onClick={handleClick}
+        />
       </RowWarpper>
       <NormalInput
         wd="800px"
