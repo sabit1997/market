@@ -6,6 +6,7 @@ export const CarouselWarpper = styled.section`
   width: 1920px;
   height: 500px;
   position: relative;
+  overflow: hidden;
 `;
 
 export const CarouselBtn = styled.button`
@@ -27,4 +28,6 @@ export const CarouselBtn = styled.button`
 export const CarouselImg = styled.img`
   width: 100%;
   height: 500px;
+  transform: translateX(${(props) => props.location}%);
+  transition: all ease 2s;
 `;
