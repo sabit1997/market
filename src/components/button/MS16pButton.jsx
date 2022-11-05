@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import client from '../../client/client';
 
 export default function MS16pButton(props) {
   return (
