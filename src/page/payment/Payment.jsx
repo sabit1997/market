@@ -30,10 +30,12 @@ import ProductInfo from '../../components/contents/ProductInfo';
 import SPrice from '../../components/etc/SPrice';
 import CheckText from '../../components/etc/CheckText';
 import LButton from '../../components/button/LButton';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import instance from '../../client/instance';
 
 export default function Payment() {
+  const navigate = useNavigate();
   const paymentWay = [
     '신용/체크카드',
     '무통장 입금',
@@ -43,7 +45,6 @@ export default function Payment() {
   ];
 
   const [checked, setChecked] = useState({});
-
   const [payMethod, setPayMethod] = useState('');
 
   useEffect(() => {
@@ -109,8 +110,38 @@ export default function Payment() {
 
   const totalPrice = orderInfo
     .map((x, i) => x.shipping_fee + x.price * quantity[i])
-    .reduce((pre, curr) => pre + curr, 0)
-    .toLocaleString();
+    .reduce((pre, curr) => pre + curr, 0);
+
+  const orderPrice = orderInfo
+    .map((x, i) => x.price * quantity[i])
+    .reduce((pre, curr) => pre + curr, 0);
+  const totalShippingFee = orderInfo
+    .map((x) => x.shipping_fee)
+    .reduce((pre, curr) => pre + curr, 0);
+
+  // 결제
+  function handlePaymentButton() {
+    instance
+      .post('/order/', {
+        total_price: totalPrice,
+        order_kind: 'cart_order',
+        receiver: receiver,
+        receiver_phone_number: phone_number1 + phone_number2 + phone_number3,
+        address: address1 + address2,
+        address_message: address_message,
+        payment_method: payMethod,
+      })
+      .then((res) => {
+        navigate('/ordercompleted', {
+          state: {
+            orderInfo: orderInfo,
+            quantity: quantity,
+            orderNum: res.data.order_number,
+          },
+        });
+      })
+      .catch((error) => console.log(error));
+  }
 
   return (
     <CenterWarpper>
@@ -128,7 +159,7 @@ export default function Payment() {
         ))}
         <TotalOrderPriceWarpper>
           <TotalOrderPrice>총 주문금액</TotalOrderPrice>
-          <TotalOrderPriceNum>{totalPrice}</TotalOrderPriceNum>
+          <TotalOrderPriceNum>{totalPrice.toLocaleString()}</TotalOrderPriceNum>
         </TotalOrderPriceWarpper>
         <ShippingInfoTxt>배송정보</ShippingInfoTxt>
         <InfoTItle>주문자 정보</InfoTItle>
@@ -157,11 +188,14 @@ export default function Payment() {
             name3="address2"
             value3={address2}
             onChange={onChange}
+            setInputs={setInputs}
+            inputs={inputs}
           />
           <AddressMessageInput
             name="address_message"
             value={address_message}
             onChange={onChange}
+            // onClick={handleClick}
           />
         </InfoInputWarpper>
         <BottomWarpper>
@@ -186,23 +220,29 @@ export default function Payment() {
               <PriceCount>
                 <PriceCountItem>
                   <PriceItemTxt>상품금액</PriceItemTxt>
-                  <SPrice />
+                  <SPrice value={orderPrice.toLocaleString()} />
                 </PriceCountItem>
                 <PriceCountItem>
                   <PriceItemTxt>할인금액</PriceItemTxt>
-                  <SPrice />
+                  <SPrice value="0" />
                 </PriceCountItem>
                 <PriceCountItem>
                   <PriceItemTxt>배송비</PriceItemTxt>
-                  <SPrice />
+                  <SPrice value={totalShippingFee.toLocaleString()} />
                 </PriceCountItem>
                 <PriceCountItem>
                   <PriceItemTxt>결제금액</PriceItemTxt>
-                  <TotalOrderPriceNum>46,500</TotalOrderPriceNum>
+                  <TotalOrderPriceNum>
+                    {(orderPrice + totalShippingFee).toLocaleString()}
+                  </TotalOrderPriceNum>
                 </PriceCountItem>
               </PriceCount>
               <CheckText marginB="30px" />
-              <LButton value="결제하기" margin="0 138px 0 122px" />
+              <LButton
+                value="결제하기"
+                margin="0 138px 0 122px"
+                onClick={handlePaymentButton}
+              />
             </FinalPaymentInfo>
           </section>
         </BottomWarpper>
