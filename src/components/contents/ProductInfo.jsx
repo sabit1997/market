@@ -20,7 +20,7 @@ function ProductInfo({ orderInfo, quantity, i }) {
       <Discount>-</Discount>
       <Shipping>{shippingFee(orderInfo[i].shipping_fee)}</Shipping>
       <OrderPrice>
-        {(orderInfo[i].price * quantity[i]).toLocaleString()}
+        {(orderInfo[i].price * quantity[i]).toLocaleString()}원
       </OrderPrice>
     </Warpper>
   );
@@ -31,7 +31,7 @@ const Warpper = styled.section`
   height: 130px;
   display: flex;
   align-items: center;
-  padding: 8px 0 18px 8px;
+  padding: 8px 0 18px 0;
   position: relative;
   border-bottom: 1px solid #c4c4c4;
   margin-bottom: 16px;
@@ -44,14 +44,14 @@ const ProductImg = styled.img`
   width: 104px;
   height: 104px;
   border-radius: 10px;
+  margin-left: 8px;
   margin-right: 36px;
 `;
 
 const InfoWarpper = styled.div`
-  width: 442px;
+  width: 441px;
   display: flex;
   flex-direction: column;
-  margin-right: 111px;
 `;
 
 const Seller = styled.p`
@@ -63,7 +63,6 @@ const Seller = styled.p`
 `;
 
 const ProductName = styled.h2`
-  width: 442px;
   font-size: 18px;
   font-weight: 400;
   line-height: 1.22;
@@ -78,27 +77,31 @@ const ProductNum = styled.span`
 `;
 
 const Discount = styled.p`
+  width: 232px;
   font-size: 18px;
   font-weight: 400;
   line-height: 1.252222222222222;
   color: #767676;
-  margin-right: 193px;
+  text-align: center;
 `;
 
 const Shipping = styled.span`
+  width: 228px;
   font-size: 18px;
   font-weight: 400;
   line-height: 1.25;
   color: #767676;
-  margin-right: 158px;
   word-break: keep-all;
+  text-align: center;
 `;
 
 const OrderPrice = styled.span`
+  width: 231px;
   font-size: 18px;
   font-weight: 700;
   line-height: 1.25;
   word-break: keep-all;
+  text-align: center;
 `;
 
 export default ProductInfo;
