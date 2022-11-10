@@ -23,7 +23,7 @@ export const LoginSelletor = styled.button`
   border: 1px solid #c4c4c4;
   border-radius: 10px;
   background-color: ${(props) =>
-    props.joinType === 'buyer' ? '#fff' : '#f2f2f2'};
+    props.joinType === 'BUYER' ? '#fff' : '#f2f2f2'};
   font-size: 18px;
   font-weight: 500;
   line-height: 1.222222222222222;
@@ -31,7 +31,7 @@ export const LoginSelletor = styled.button`
   cursor: pointer;
   &:nth-child(2) {
     background-color: ${(props) =>
-      props.joinType === 'buyer' ? '#f2f2f2' : '#fff'};
+      props.joinType === 'BUYER' ? '#f2f2f2' : '#fff'};
   }
 `;
 
@@ -50,7 +50,7 @@ export const InputBox = styled.section`
     height: 15px;
     position: absolute;
     top: -5px;
-    ${(props) => (props.joinType === 'buyer' ? 'left: 0;' : 'right: 0;')}
+    ${(props) => (props.joinType === 'BUYER' ? 'left: 0;' : 'right: 0;')}
     background-color: #fff;
   }
 `;
