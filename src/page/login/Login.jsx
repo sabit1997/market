@@ -19,16 +19,15 @@ export default function Login() {
 
   const [loginType, setLoginType] = useState('BUYER');
 
+  // 로그인 타입 설정
   function handleBuyerBtn() {
     setLoginType('BUYER');
   }
-
   function handleSellerBtn() {
     setLoginType('SELLER');
   }
 
-  console.log(loginType);
-
+  // login input 상태관리
   const [inputs, setInputs] = useState({
     username: '',
     password: '',
@@ -36,6 +35,7 @@ export default function Login() {
 
   const { username, password } = inputs;
 
+  // input 제어
   function onChange(e) {
     const { value, name } = e.target;
     setInputs({
@@ -44,8 +44,7 @@ export default function Login() {
     });
   }
 
-  console.log(inputs);
-
+  // 로그인 기능
   function handleLogin(event) {
     event.preventDefault();
     client
@@ -56,9 +55,9 @@ export default function Login() {
       })
       .then((res) => {
         console.log(res);
-        navigate('/');
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('type', loginType);
+        navigate('/');
       })
       .catch((error) => {
         console.log(error);
