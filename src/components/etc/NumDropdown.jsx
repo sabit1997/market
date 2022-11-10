@@ -3,10 +3,9 @@ import { useState } from 'react';
 import iconDownArrow from '../../assets/icon-down-arrow.svg';
 import iconUpArrow from '../../assets/icon-up-arrow.svg';
 
-export default function NumDropdown() {
+export default function NumDropdown({ prefixNum, setPrefixNum }) {
   const valueArr = ['010', '011', '016', '017', '018', '019'];
   const [click, setClick] = useState(false);
-  const [SelectValue, setSelectValue] = useState('010');
 
   function handleSelectBtn() {
     if (click === false) {
@@ -17,13 +16,13 @@ export default function NumDropdown() {
   }
 
   function handleLi(event) {
-    setSelectValue(event.target.textContent);
+    setPrefixNum(event.target.textContent);
   }
 
   return (
     <Warpper>
       <SelectBtn type="button" onClick={handleSelectBtn} click={click}>
-        {SelectValue}
+        {prefixNum}
         <Ul className={click === true ? null : 'ir'}>
           {valueArr.map(function (_, i) {
             return (

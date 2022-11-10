@@ -7,8 +7,16 @@ import {
   IdInputWarpper,
 } from '../../components/join/JoinStyle';
 import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import logo from '../../assets/Logo-hodu.png';
-import TextInputBox from '../../components/input/TextInputBox';
+import {
+  IdTextInputBox,
+  PasswordTextInputBox,
+  PasswordReconFirmTextInputBox,
+  NameTextInputBox,
+  PhoneNumberTextInputBox,
+  EmailTextInputBox,
+} from '../../components/input/TextInputBox';
 import CheckText from '../../components/etc/CheckText';
 import MS16pButton from '../../components/button/MS16pButton';
 import MButton from '../../components/button/MButton';
@@ -19,7 +27,13 @@ import client from '../../client/client';
 export default function Join() {
   const [checked, setChecked] = useState(Boolean);
   const [joinType, setJoinType] = useState('BUYER');
+  const [doubleCheck, setDoubleCheck] = useState(false);
+  const [prefixNum, setPrefixNum] = useState('010');
   const navigate = useNavigate();
+  const {
+    register,
+    formState: { errors, isValid },
+  } = useForm({ mode: 'onBlur' });
 
   const [inputs, setInputs] = useState({
     userName: '',
@@ -28,12 +42,22 @@ export default function Join() {
     name: '',
     phoneNumber1: '',
     phoneNumber2: '',
+    email1: '',
+    email2: '',
   });
 
-  const { userName, password, password2, name, phoneNumber1, phoneNumber2 } =
-    inputs;
+  const {
+    userName,
+    password,
+    password2,
+    name,
+    phoneNumber1,
+    phoneNumber2,
+    email1,
+    email2,
+  } = inputs;
 
-  function onChange(e) {
+  function handleInput(e) {
     const { value, name } = e.target;
     setInputs({
       ...inputs,
@@ -41,28 +65,56 @@ export default function Join() {
     });
   }
 
+  console.log(inputs);
+
   const changeBuyer = () => {
     setJoinType('BUYER');
   };
 
   const changeSeller = () => {
     setJoinType('SELLER');
-    console.log(joinType);
+  };
+
+  // ID 중복확인
+  const handleButton = () => {
+    client
+      .post(`/accounts/signup/valid/username/`, {
+        username: userName,
+      })
+      .then((res) => {
+        console.log(res);
+        setDoubleCheck(true);
+        setAccountValid(res.data);
+      })
+      .catch((error) => {
+        setAccountValid(error.response.data);
+        setChecked(false);
+      });
   };
 
   const handleJoin = (event) => {
     event.preventDefault();
-    if (joinType === 'buyer') {
+    if (joinType === 'BUYER' && checked && doubleCheck && isValid) {
       client
         .post('/accounts/signup/', {
           username: userName,
           password: password,
           password2: password2,
-          phone_number: `${phoneNumber1}${phoneNumber2}`,
+          phone_number: `${prefixNum}${phoneNumber1}${phoneNumber2}`,
           name: name,
         })
         .then((res) => {
-          console.log(res);
+          client
+            .post('/accounts/login/', {
+              username: userName,
+              password: password,
+              login_type: 'BUYER',
+            })
+            .then((res) => {
+              localStorage.setItem('token', res.data.token);
+              localStorage.setItem('type', 'BUYER');
+            });
+          navigate('/');
         })
         .catch((error) => {
           console.log(error);
@@ -70,16 +122,9 @@ export default function Join() {
     }
   };
 
-  useEffect(() => {
-    console.log(inputs);
-  }, [inputs]);
-
-  console.log(checked);
+  console.log(Object.keys(errors)[0]);
 
   const [accountValid, setAccountValid] = useState('');
-  console.log(accountValid);
-  console.log(Object.keys(accountValid)[0]);
-  console.log(accountValid[0]);
 
   return (
     <>
@@ -94,13 +139,12 @@ export default function Join() {
           </LoginSelletor>
           <InputBox joinType={joinType}>
             <IdInputWarpper>
-              <TextInputBox
-                name="userName"
+              <IdTextInputBox
                 value={userName}
-                title="아이디"
-                type="text"
-                onChange={onChange}
                 accountValid={accountValid}
+                errors={errors}
+                register={register}
+                handleInput={handleInput}
               />
               <MS16pButton
                 value="중복확인"
@@ -109,40 +153,52 @@ export default function Join() {
                 type="button"
                 username={userName}
                 setAccountValid={setAccountValid}
+                onClick={handleButton}
               />
             </IdInputWarpper>
-            <TextInputBox
+            <PasswordTextInputBox
               title="비밀번호"
               value={password}
-              type="password"
-              onChange={onChange}
               password={password}
+              register={register}
+              handleInput={handleInput}
+              errors={errors}
             />
-            <TextInputBox
-              title="비밀번호 재확인"
+            <PasswordReconFirmTextInputBox
               value={password2}
-              type="password"
-              onChange={onChange}
+              register={register}
+              password={password}
               password2={password2}
+              handleInput={handleInput}
+              errors={errors}
             />
-            <TextInputBox
-              title="이름"
+            <NameTextInputBox
               value={name}
-              type="text"
+              register={register}
+              handleInput={handleInput}
+              errors={errors}
               marginB="16px"
-              onChange={onChange}
             />
-            <TextInputBox
-              title="휴대폰번호"
+            <PhoneNumberTextInputBox
               value={phoneNumber1}
               value2={phoneNumber2}
+              register={register}
+              handleInput={handleInput}
+              errors={errors}
+              prefixNum={prefixNum}
+              setPrefixNum={setPrefixNum}
               marginB="16px"
-              onChange={onChange}
             />
-            <TextInputBox title="이메일" />
+            <EmailTextInputBox
+              value={email1}
+              value2={email2}
+              register={register}
+              handleInput={handleInput}
+              errors={errors}
+            />
             {joinType === 'seller' ? (
               <>
-                <IdInputWarpper>
+                {/* <IdInputWarpper>
                   <TextInputBox
                     value="사업자 등록번호"
                     type="number"
@@ -151,7 +207,7 @@ export default function Join() {
                   />
                   <MS16pButton value="인증" wd="122px" margin="80px 0 0 12px" />
                 </IdInputWarpper>
-                <TextInputBox value="스토어 이름" type="text" />
+                <TextInputBox value="스토어 이름" type="text" /> */}
               </>
             ) : null}
           </InputBox>
@@ -162,7 +218,7 @@ export default function Join() {
           setChecked={setChecked}
           checked={checked}
         />
-        {checked ? (
+        {checked && doubleCheck && isValid ? (
           <>
             <MButton value="가입하기" wd="480px" />
           </>
