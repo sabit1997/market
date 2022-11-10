@@ -16,6 +16,8 @@ import {
   NameTextInputBox,
   PhoneNumberTextInputBox,
   EmailTextInputBox,
+  CompanyNumTextInputBox,
+  StoreNameTextInputBox,
 } from '../../components/input/TextInputBox';
 import CheckText from '../../components/etc/CheckText';
 import MS16pButton from '../../components/button/MS16pButton';
@@ -28,6 +30,7 @@ export default function Join() {
   const [checked, setChecked] = useState(Boolean);
   const [joinType, setJoinType] = useState('BUYER');
   const [doubleCheck, setDoubleCheck] = useState(false);
+  const [companyNumCheck, setCompanyNumCheck] = useState(false);
   const [prefixNum, setPrefixNum] = useState('010');
   const navigate = useNavigate();
   const {
@@ -44,6 +47,8 @@ export default function Join() {
     phoneNumber2: '',
     email1: '',
     email2: '',
+    companyNum: '',
+    storeName: '',
   });
 
   const {
@@ -55,6 +60,8 @@ export default function Join() {
     phoneNumber2,
     email1,
     email2,
+    companyNum,
+    storeName,
   } = inputs;
 
   function handleInput(e) {
@@ -92,6 +99,25 @@ export default function Join() {
       });
   };
 
+  // 사업자 등록번호 인증
+
+  function handleAuthButton() {
+    client
+      .post('/accounts/signup/valid/company_registration_number/', {
+        company_registration_number: companyNum,
+      })
+      .then((res) => {
+        console.log(res);
+        setCompanyNumValid(res.data);
+        setCompanyNumCheck(true);
+      })
+      .catch((error) => {
+        setCompanyNumValid(error.response.data);
+        setCompanyNumCheck(false);
+      });
+  }
+
+  // 회원가입
   const handleJoin = (event) => {
     event.preventDefault();
     if (joinType === 'BUYER' && checked && doubleCheck && isValid) {
@@ -119,12 +145,39 @@ export default function Join() {
         .catch((error) => {
           console.log(error);
         });
+    } else if (joinType === 'SELLER' && checked && doubleCheck && isValid) {
+      client
+        .post('/accounts/signup_seller/', {
+          username: userName,
+          password: password,
+          password2: password2,
+          phone_number: `${prefixNum}${phoneNumber1}${phoneNumber2}`,
+          name: name,
+          company_registration_number: companyNum,
+          store_name: storeName,
+        })
+        .then((res) => {
+          console.log(res);
+          client
+            .post('/accounts/login/', {
+              username: userName,
+              password: password,
+              login_type: 'SELLER',
+            })
+            .then((res) => {
+              localStorage.setItem('token', res.data.token);
+              localStorage.setItem('type', 'SELLER');
+            });
+          navigate('/');
+        })
+        .catch((error) => console.log(error));
     }
   };
 
   console.log(Object.keys(errors)[0]);
 
   const [accountValid, setAccountValid] = useState('');
+  const [companyNumValid, setCompanyNumValid] = useState('');
 
   return (
     <>
@@ -196,18 +249,30 @@ export default function Join() {
               handleInput={handleInput}
               errors={errors}
             />
-            {joinType === 'seller' ? (
+            {joinType === 'SELLER' ? (
               <>
-                {/* <IdInputWarpper>
-                  <TextInputBox
-                    value="사업자 등록번호"
-                    type="number"
-                    marginT="50px"
-                    marginB="16px"
+                <IdInputWarpper marginT="50px">
+                  <CompanyNumTextInputBox
+                    value={companyNum}
+                    companyNumValid={companyNumValid}
+                    register={register}
+                    handleInput={handleInput}
+                    errors={errors}
                   />
-                  <MS16pButton value="인증" wd="122px" margin="80px 0 0 12px" />
+                  <MS16pButton
+                    value="인증"
+                    wd="122px"
+                    margin="30px 0 0 12px"
+                    type="button"
+                    onClick={handleAuthButton}
+                  />
                 </IdInputWarpper>
-                <TextInputBox value="스토어 이름" type="text" /> */}
+                <StoreNameTextInputBox
+                  value={storeName}
+                  register={register}
+                  handleInput={handleInput}
+                  errors={errors}
+                />
               </>
             ) : null}
           </InputBox>
@@ -218,7 +283,8 @@ export default function Join() {
           setChecked={setChecked}
           checked={checked}
         />
-        {checked && doubleCheck && isValid ? (
+        {(joinType === 'BUYER' && checked && doubleCheck && isValid) ||
+        (joinType === 'SELLER' && checked && doubleCheck && companyNumCheck) ? (
           <>
             <MButton value="가입하기" wd="480px" />
           </>

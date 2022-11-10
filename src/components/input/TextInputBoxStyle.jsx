@@ -5,6 +5,7 @@ export const Warpper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: ${(props) => props.marginB};
+  margin-top: ${(props) => props.marginT};
 `;
 
 export const InputWarpper = styled.section`

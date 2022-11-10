@@ -259,65 +259,78 @@ export function EmailTextInputBox({
   );
 }
 
-export function CompanyNumTextInputBox() {
+export function CompanyNumTextInputBox({
+  value,
+  register,
+  handleInput,
+  companyNumValid,
+  errors,
+}) {
   return (
-    <Warpper marginB="12px">
-      <Txt htmlFor="id_text_input">사업자 등록번호</Txt>
-      <IdInput
-        type="text"
-        id="id_text_input"
-        wd="100%"
-        // value={value}
-        // border={
-        //   Object.keys(accountValid)[0] === 'FAIL_Message'
-        //     ? '1px solid #EB5757'
-        //     : '1px solid #c4c4c4'
-        // }
-        // {...register('userName', {
-        //   required: '필수 정보입니다.',
-        //   pattern: {
-        //     value: /^[a-zA-Z0-9]{1,19}/,
-        //     message: '20자 이내의 영문 소문자, 대문자, 숫자만 사용 가능합니다.',
-        //   },
-        //   onChange: (e) => {
-        //     handleInput(e);
-        //   },
-        // })}
-      />
-      {/* {errors.userName && (
-        <ValidMessage color="red">{errors.userName.message}</ValidMessage>
-      )}
-      {Object.keys(accountValid)[0] === 'FAIL_Message' && (
-        <ValidMessage color="red">{accountValid['FAIL_Message']}</ValidMessage>
-      )}
-      {
-        (Object.keys(accountValid)[0] = 'Success' && (
-          <ValidMessage color="#21BF48">{accountValid['Success']}</ValidMessage>
-        ))
-      } */}
-    </Warpper>
+    <>
+      <Warpper marginB="12px">
+        <Txt htmlFor="company_num_input">사업자 등록번호</Txt>
+        <IdInput
+          type="number"
+          id="company_num_input"
+          wd="100%"
+          value={value}
+          border={
+            Object.keys(companyNumValid)[0] === 'FAIL_Message'
+              ? '1px solid #EB5757'
+              : '1px solid #c4c4c4'
+          }
+          {...register('companyNum', {
+            required: '필수 정보입니다.',
+            onChange: (e) => {
+              handleInput(e);
+            },
+          })}
+        />
+        {errors.companyNum ? (
+          <ValidMessage color="red">{errors.companyNum.message}</ValidMessage>
+        ) : Object.keys(companyNumValid)[0] === 'FAIL_Message' ? (
+          <ValidMessage color="red">
+            {companyNumValid['FAIL_Message']}
+          </ValidMessage>
+        ) : (
+          (Object.keys(companyNumValid)[0] = 'Success' ? (
+            <ValidMessage color="#21BF48">
+              {companyNumValid['Success']}
+            </ValidMessage>
+          ) : null)
+        )}
+      </Warpper>
+    </>
   );
 }
 
-export function StoreNameTextInputBox() {
+export function StoreNameTextInputBox({
+  value,
+  register,
+  handleInput,
+  errors,
+}) {
   return (
-    <Warpper marginB="16px">
-      <Txt htmlFor="input_text_input">이름</Txt>
-      <Input
-        type="text"
-        id="input_text_input"
-        wd="100%"
-        // value={value}
-        // {...register('name', {
-        //   required: '필수 정보입니다.',
-        //   onChange: (e) => {
-        //     handleInput(e);
-        //   },
-        // })}
-      />
-      {/* {errors.name && (
-        <ValidMessage color="red">{errors.name.message}</ValidMessage>
-      )} */}
-    </Warpper>
+    <>
+      <Warpper marginB="16px">
+        <Txt htmlFor="store_name_input">스토어 이름</Txt>
+        <Input
+          type="text"
+          id="store_name_input"
+          wd="100%"
+          value={value}
+          {...register('storeName', {
+            required: '필수 정보입니다.',
+            onChange: (e) => {
+              handleInput(e);
+            },
+          })}
+        />
+      </Warpper>
+      {errors.storeName && (
+        <ValidMessage color="red">{errors.storeName.message}</ValidMessage>
+      )}
+    </>
   );
 }
