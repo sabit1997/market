@@ -6,6 +6,7 @@ import {
   InputBox,
   MoveTxtWarpper,
   MoveTxt,
+  ErrorMessage,
 } from '../../components/login/LoginStyle';
 import logo from '../../assets/Logo-hodu.png';
 import TextInput from '../../components/input/TextInput';
@@ -13,11 +14,16 @@ import Mbutton from '../../components/button/MButton';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import client from '../../client/client';
+import { useForm } from 'react-hook-form';
 
 export default function Login() {
   const navigate = useNavigate();
-
+  const {
+    register,
+    formState: { errors, isVaild },
+  } = useForm({ mode: 'onBlur' });
   const [loginType, setLoginType] = useState('BUYER');
+  const [errorMessage, setErrorMessage] = useState('');
 
   // 로그인 타입 설정
   function handleBuyerBtn() {
@@ -47,21 +53,27 @@ export default function Login() {
   // 로그인 기능
   function handleLogin(event) {
     event.preventDefault();
-    client
-      .post('/accounts/login/', {
-        username: username,
-        password: password,
-        login_type: loginType,
-      })
-      .then((res) => {
-        console.log(res);
-        localStorage.setItem('token', res.data.token);
-        localStorage.setItem('type', loginType);
-        navigate('/');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if ((username && password) !== '') {
+      client
+        .post('/accounts/login/', {
+          username: username,
+          password: password,
+          login_type: loginType,
+        })
+        .then((res) => {
+          console.log(res);
+          localStorage.setItem('token', res.data.token);
+          localStorage.setItem('type', loginType);
+          navigate('/');
+        })
+        .catch((error) => {
+          setErrorMessage(error.response.data.FAIL_Message);
+          setInputs({
+            ...inputs,
+            password: '',
+          });
+        });
+    }
   }
 
   return (
@@ -92,14 +104,22 @@ export default function Login() {
               value={password}
               onChange={onChange}
             />
+            {errorMessage === '로그인 정보가 없습니다.' ? (
+              <ErrorMessage>
+                아이디 또는 비밀번호가 일치하지 않습니다.
+              </ErrorMessage>
+            ) : errorMessage ===
+              '로그인 정보가 없습니다. 로그인 유형을 학인해주세요.' ? (
+              <ErrorMessage>로그인 유형을 확인해주세요.</ErrorMessage>
+            ) : null}
             <Mbutton value="로그인" wd="100%" />
           </InputBox>
         </LoginBox>
-        <MoveTxtWarpper>
-          <MoveTxt onClick={() => navigate('/join')}>회원가입</MoveTxt>
-          <MoveTxt>비밀번호찾기</MoveTxt>
-        </MoveTxtWarpper>
       </Warpper>
+      <MoveTxtWarpper>
+        <MoveTxt onClick={() => navigate('/join')}>회원가입</MoveTxt>
+        <MoveTxt>비밀번호찾기</MoveTxt>
+      </MoveTxtWarpper>
     </>
   );
 }

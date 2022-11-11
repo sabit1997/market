@@ -39,7 +39,6 @@ export const LoginSelletor = styled.button`
 
 export const InputBox = styled.form`
   width: 550px;
-  height: 292px;
   border-radius: 10px;
   background-color: #fff;
   margin-top: -20px;
@@ -60,7 +59,7 @@ export const InputBox = styled.form`
 export const MoveTxtWarpper = styled.ul`
   display: flex;
   justify-content: center;
-  position: relative;
+  margin-top: 30px;
 `;
 
 export const MoveTxt = styled.li`
@@ -78,4 +77,14 @@ export const MoveTxt = styled.li`
       left: -14px;
     }
   }
+`;
+
+export const ErrorMessage = styled.span`
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.251875;
+  color: #eb5757;
+  margin-top: -10px;
+  margin-bottom: 26px;
 `;
