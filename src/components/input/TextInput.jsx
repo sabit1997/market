@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
-function TextInput(props) {
+function TextInput({ type, placeholder, marginB, name, value, onChange }) {
   return (
     <>
       <IdInput
-        type={props.type}
-        placeholder={props.placeholder}
-        marginB={props.marginB}
-        name={props.name}
-        value={props.value}
-        onChange={props.onChange}
+        type={type}
+        placeholder={placeholder}
+        marginB={marginB}
+        name={name}
+        value={value}
+        onChange={onChange}
       />
     </>
   );
