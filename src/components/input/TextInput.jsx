@@ -1,6 +1,14 @@
 import styled from 'styled-components';
 
-function TextInput({ type, placeholder, marginB, name, value, onChange }) {
+function TextInput({
+  type,
+  placeholder,
+  marginB,
+  name,
+  value,
+  onChange,
+  textInput,
+}) {
   return (
     <>
       <IdInput
@@ -10,6 +18,7 @@ function TextInput({ type, placeholder, marginB, name, value, onChange }) {
         name={name}
         value={value}
         onChange={onChange}
+        ref={textInput}
       />
     </>
   );

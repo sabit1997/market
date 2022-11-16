@@ -12,18 +12,15 @@ import logo from '../../assets/Logo-hodu.png';
 import TextInput from '../../components/input/TextInput';
 import Mbutton from '../../components/button/MButton';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import client from '../../client/client';
-import { useForm } from 'react-hook-form';
 
 export default function Login() {
   const navigate = useNavigate();
-  const {
-    register,
-    formState: { errors, isVaild },
-  } = useForm({ mode: 'onBlur' });
   const [loginType, setLoginType] = useState('BUYER');
   const [errorMessage, setErrorMessage] = useState('');
+  const idInput = useRef();
+  const passwordInput = useRef();
 
   // 로그인 타입 설정
   function handleBuyerBtn() {
@@ -72,7 +69,16 @@ export default function Login() {
             ...inputs,
             password: '',
           });
+          console.log(passwordInput.current);
+          console.log(idInput.current);
+          passwordInput.current.focus();
         });
+    } else if (username === '') {
+      idInput.current.focus();
+      setErrorMessage('로그인 정보가 없습니다.');
+    } else if (password === '') {
+      passwordInput.current.focus();
+      setErrorMessage('로그인 정보가 없습니다.');
     }
   }
 
@@ -95,6 +101,7 @@ export default function Login() {
               name="username"
               value={username}
               onChange={onChange}
+              textInput={idInput}
             />
             <TextInput
               type="password"
@@ -103,6 +110,7 @@ export default function Login() {
               name="password"
               value={password}
               onChange={onChange}
+              textInput={passwordInput}
             />
             {errorMessage === '로그인 정보가 없습니다.' ? (
               <ErrorMessage>
