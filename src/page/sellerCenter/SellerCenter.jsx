@@ -10,8 +10,7 @@ import {
   SaleProducTitle,
   ProductTitleTxt,
 } from './SellerCenterStyle';
-import TabMenuOn from '../../components/button/TabMenuOn';
-import TabMenuOff from '../../components/button/TabMenuOff';
+import TabMenu from '../../components/button/TabMenu';
 import MsIconButton from '../../components/button/MsIconButton';
 import ProductBox from '../../components/contents/ProductBox';
 import plusIcon from '../../assets/icon-plus.svg';
@@ -22,11 +21,26 @@ import instance from '../../client/instance';
 export default function SellerCenter() {
   const navigate = useNavigate();
   const tabMenuTitle = [
-    '판매중인 상품(3)',
-    '주문/배송',
-    '문의/리뷰',
-    '통계',
-    '스토어설정',
+    {
+      text: '판매중인 상품(3)',
+      state: true,
+    },
+    {
+      text: '주문/배송',
+      state: false,
+    },
+    {
+      text: '문의/리뷰',
+      state: false,
+    },
+    {
+      text: '통계',
+      state: false,
+    },
+    {
+      text: '스토어설정',
+      state: false,
+    },
   ];
   const [productBoxData, setProductBoxData] = useState([]);
 
@@ -37,7 +51,7 @@ export default function SellerCenter() {
   }
 
   const TabMenuList = tabMenuTitle.map((x, i) => (
-    <TabMenuOff x={x} key={i} onClick={handleTabMenu} />
+    <TabMenu state={x.state} value={x.text} key={i} type="false" />
   ));
 
   // 판매자 상품 목록
@@ -76,19 +90,12 @@ export default function SellerCenter() {
           value="상품 업로드"
           wd="168px"
           onClick={() => {
-            navigate('/productedit');
+            navigate('/productedit', { state: { productBoxData: null } });
           }}
         />
       </TopSection>
       <Main>
-        <SideBar>
-          {/* <TabMenuOff type="false" value="판매중인 상품(3)" />
-          <TabMenuOff value="주문/배송" />
-          <TabMenuOff value="문의/리뷰" />
-          <TabMenuOff type="false" value="통계" />
-          <TabMenuOff type="false" value="스토어 설정" /> */}
-          {TabMenuList}
-        </SideBar>
+        <SideBar>{TabMenuList}</SideBar>
         <ContentsSection>
           <SaleProducTitle>
             <ProductTitleTxt marginR="473px">상품정보</ProductTitleTxt>
