@@ -10,12 +10,16 @@ import MsIconButton from '../button/MsIconButton';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { NotLogin } from '../modal/Modal';
+import { useProductDataContext } from '../../context/ProductDataContext';
+import client from '../../client/client';
 
 export default function TopNavBar(props) {
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
   // 경고창 모달
   const [alertModal, setAlertModal] = useState(false);
+  const [searchInput, setSearchInput] = useState('');
+  const { productData } = useProductDataContext();
 
   // 마이페이지 버튼
   function handleMyPageButton() {
@@ -38,18 +42,43 @@ export default function TopNavBar(props) {
     }
   }
 
+  function handleSearchInput(e) {
+    setSearchInput(e.target.value);
+  }
+
+  function handleSearchClick() {
+    const resultProducts = productData.filter(
+      (x) => x.product_name.includes(searchInput) === true
+    );
+    navigate('/result', {
+      state: { resultProducts: resultProducts, searchInput: searchInput },
+    });
+    console.log(resultProducts);
+  }
+
+  function handlePressEnter(e) {
+    if (e.key === 'Enter') {
+      handleSearchClick();
+    }
+  }
+
+  console.log(searchInput);
   return (
     <Warpper vlaue={props.value}>
       <LeftWarpper>
         <Logo src={logo} onClick={() => navigate('/')} />
         <Search>
-          <SearchInput placeholder="상품을 검색해보세요!" />
-          <SearchBtn />
+          <SearchInput
+            placeholder="상품을 검색해보세요!"
+            onChange={handleSearchInput}
+            onKeyPress={handlePressEnter}
+          />
+          <SearchBtn onClick={handleSearchClick} />
         </Search>
       </LeftWarpper>
       <ButtonWarpper>
         {/* 판매자 로그인 시 다르게 */}
-        {props.value === 'seller' ? (
+        {props.value === 'SELLER' ? (
           <>
             <MoveBtn wd="56px" onClick={handleMyPageButton} modal={modal}>
               <BtnTxt modal={modal}>마이페이지</BtnTxt>

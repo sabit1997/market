@@ -11,6 +11,7 @@ import ProductDetail from './page/productDetail/ProductDetail';
 import SellerCenter from './page/sellerCenter/SellerCenter';
 import EditProduct from './page/editProduct/EditProduct';
 import OrderCompleted from './page/OrderCompleted';
+import SearchResult from './page/search/SearchResult';
 import './App.css';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
         <Route path="/sellercenter" element={<SellerCenter />} />
         <Route path="/productedit" element={<EditProduct />} />
         <Route path="/ordercompleted" element={<OrderCompleted />} />
+        <Route path="/result" element={<SearchResult />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </ProductDataProvider>
