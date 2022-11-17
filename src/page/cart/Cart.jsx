@@ -7,30 +7,48 @@ import FilledCart from './FilledCart';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useProductDataContext } from '../../context/ProductDataContext';
+import axios from 'axios';
 
 export default function Cart() {
   const [cartData, setCartData] = useState([]);
   const [type, setType] = useState(false);
   const [checked, setChecked] = useState({});
   const { productData } = useProductDataContext();
+  const [next, setNext] = useState('');
 
   // 데이터 불러오고 수정
   useEffect(() => {
-    instance
-      .get('/cart/')
-      .then((res) => {
-        console.log(res);
-        setCartData(res.data.results);
-        if (cartData.length === 0) {
-          setType(false);
-        } else {
-          setType(true);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [cartData.length]);
+    if (next === '') {
+      instance
+        .get('/cart/')
+        .then((res) => {
+          console.log(res);
+          setCartData(res.data.results);
+          setNext(res.data.next);
+          if (cartData === []) {
+            setType(false);
+          } else {
+            setType(true);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (next !== null) {
+      axios
+        .get(next)
+        .then((res) => {
+          console.log(res);
+          setCartData(...cartData, res.data.results);
+          setNext(res.data.next);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [cartData, next]);
+
+  console.log(cartData);
 
   return (
     <>
