@@ -1,9 +1,8 @@
 import { CenterWarpper } from '../../components/common/Common';
-import { Logo, Title, ResultMessage, SearchKeyword } from './SearchResultStyle';
+import { Title, ResultMessage, SearchKeyword } from './SearchResultStyle';
 import { ProductListSection } from '../../components/home/HomeStyle';
 import ProductList from '../../components/contents/ProductList';
-import logoImg from '../../assets/Logo-hodu.png';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import TopNavBar from '../../components/navBar/TopNavBar';
 
 export default function SearchResult() {
