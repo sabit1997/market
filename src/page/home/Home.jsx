@@ -71,7 +71,7 @@ export default function BuyerHome() {
       {loginType === 'BUYER' || loginType === null ? (
         <TopNavBar />
       ) : loginType === 'SELLER' ? (
-        <TopNavBar value="seller" />
+        <TopNavBar value="SELLER" />
       ) : null}
       <Carousel />
       <ProductListSection>{productList}</ProductListSection>
