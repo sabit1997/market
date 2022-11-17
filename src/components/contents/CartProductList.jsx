@@ -85,17 +85,17 @@ function CartProductList({
             onClick={handleCheckBtn}
           />
           <CheckButton checked={checked} htmlFor={i} i={i} />
-          <Product src={cartItem[i].image} />
+          <Product src={cartItem[i]?.image} />
           <ProductInfoWarpper>
-            <Seller>{cartItem[i].store_name}</Seller>
-            <ProductName>{cartItem[i].product_name}</ProductName>
+            <Seller>{cartItem[i]?.store_name}</Seller>
+            <ProductName>{cartItem[i]?.product_name}</ProductName>
             <ProductPrice>{`${cartItem[
               i
-            ].price?.toLocaleString()}원`}</ProductPrice>
+            ]?.price?.toLocaleString()}원`}</ProductPrice>
             <Shipping>
               {shippingValue(
-                cartItem[i].shipping_fee,
-                cartItem[i].shipping_method
+                cartItem[i]?.shipping_fee,
+                cartItem[i]?.shipping_method
               )}
             </Shipping>
           </ProductInfoWarpper>
@@ -111,7 +111,7 @@ function CartProductList({
           />
           <OderWarpper>
             <OrderPrice>
-              {`${(cartItem[i].price * quantity[i])?.toLocaleString()}원`}
+              {`${(cartItem[i]?.price * quantity[i])?.toLocaleString()}원`}
             </OrderPrice>
             <OrderBtn>주문하기</OrderBtn>
           </OderWarpper>
