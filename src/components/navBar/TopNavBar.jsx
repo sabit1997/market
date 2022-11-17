@@ -11,7 +11,6 @@ import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { NotLogin } from '../modal/Modal';
 import { useProductDataContext } from '../../context/ProductDataContext';
-import client from '../../client/client';
 
 export default function TopNavBar(props) {
   const navigate = useNavigate();
