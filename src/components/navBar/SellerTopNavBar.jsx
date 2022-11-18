@@ -1,10 +1,17 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../../assets/Logo-hodu.png';
 
 export default function SellerTopNavBar() {
+  const navigate = useNavigate();
   return (
     <Warpper>
-      <Logo src={logo} />
+      <Logo
+        src={logo}
+        onClick={() => {
+          navigate('/');
+        }}
+      />
       <Txt>판매자 센터</Txt>
     </Warpper>
   );
