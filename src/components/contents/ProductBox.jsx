@@ -27,13 +27,15 @@ function ProductBox({ i, productBoxData, setProductBoxData }) {
       <ProductImg src={productBoxData[i].image} />
       <ProductInfoWarpper>
         <ProductName>{productBoxData[i].product_name}</ProductName>
-        <StockNum>{productBoxData[i].stock}</StockNum>
+        <StockNum>재고: {productBoxData[i].stock}</StockNum>
       </ProductInfoWarpper>
-      <ProductPrice></ProductPrice>
+      <ProductPrice>{productBoxData[i].price.toLocaleString()}원</ProductPrice>
       <Btn
         bg="#21BF48"
         onClick={() => {
-          navigate('/');
+          navigate('/productedit', {
+            state: { productBoxData: productBoxData[i] },
+          });
         }}
       >
         수정
@@ -63,8 +65,7 @@ const ProductImg = styled.img`
 `;
 
 const ProductInfoWarpper = styled.div`
-  width: 500px;
-  margin-right: 267px;
+  width: 657px;
 `;
 
 const ProductName = styled.h2`
@@ -87,7 +88,8 @@ const ProductPrice = styled.p`
   font-size: 18px;
   font-weight: 500;
   line-height: 1.22;
-  margin-right: 217px;
+  text-align: center;
+  width: 390px;
 `;
 
 const Btn = styled.button`
@@ -101,9 +103,9 @@ const Btn = styled.button`
   background-color: ${(props) => props.bg};
   color: ${(props) => (props.bg === '#21BF48' ? '#fff' : '#767676')};
   border: ${(props) => (props.bg === '#fff' ? '1px solid #c4c4c4' : null)};
-  margin-right: 60px;
+  margin: 0 60px;
   &:last-child {
-    margin-right: 0;
+    margin: 0;
   }
 `;
 
