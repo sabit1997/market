@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export function TabMenuOff({ type, value }) {
-  console.log(value);
   return (
     <>
       <OffWarpper type={type}>
