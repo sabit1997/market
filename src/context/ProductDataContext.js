@@ -41,11 +41,6 @@ export function ProductDataProvider({ children }) {
     }
   }, [next, productData]);
 
-  console.log(productData);
-  console.log(next);
-
-  // 다음페이지 값도 다 받아와야함.
-
   return (
     <ProductDatacontext.Provider value={value}>
       {children}
