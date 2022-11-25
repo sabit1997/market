@@ -20,35 +20,35 @@ import instance from '../../client/instance';
 
 export default function SellerCenter() {
   const navigate = useNavigate();
-  const tabMenuTitle = [
+  const [tabMenuTitle, setTabMenuTitle] = useState([
     {
-      text: '판매중인 상품(3)',
+      no: 1,
+      text: '판매중인 상품',
       state: true,
     },
     {
+      no: 2,
       text: '주문/배송',
       state: false,
     },
     {
+      no: 3,
       text: '문의/리뷰',
       state: false,
     },
     {
+      no: 4,
       text: '통계',
       state: false,
     },
     {
+      no: 5,
       text: '스토어설정',
       state: false,
     },
-  ];
+  ]);
+
   const [productBoxData, setProductBoxData] = useState([]);
-
-  // const [tabMenuState, setTabMenuState] = useState(false);
-
-  function handleTabMenu(e) {
-    console.log(e.currentTarget);
-  }
 
   const TabMenuList = tabMenuTitle.map((x, i) => (
     <TabMenu state={x.state} value={x.text} key={i} type="false" />
@@ -66,6 +66,17 @@ export default function SellerCenter() {
         console.log(error);
       });
   }, [productBoxData.length]);
+
+  useEffect(() => {
+    const findIndex = tabMenuTitle.findIndex((el) => el.no === 1);
+    const copiedTabMenuTitle = [...tabMenuTitle];
+    copiedTabMenuTitle[
+      findIndex
+    ].text = `판매중인 상품(${productBoxData.length})`;
+    setTabMenuTitle(copiedTabMenuTitle);
+  }, [productBoxData.length]);
+
+  console.log(tabMenuTitle);
 
   // ProductBoxMap
   const productBoxList = productBoxData.map((_, i) => (
