@@ -22,7 +22,7 @@ import MDarkButton from '../../components/button/MDarkButton';
 import TabActiveButton from '../../components/button/TabActiveButton';
 import TabDisabledButton from '../../components/button/TabDisabledButton';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import instance from '../../client/instance';
 
 export default function ProductDetail() {
@@ -32,6 +32,7 @@ export default function ProductDetail() {
   const [cartData, setCartData] = useState([]);
   const [existModal, setExistModal] = useState(false);
   const [check, setCheck] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     client
@@ -104,6 +105,12 @@ export default function ProductDetail() {
       setExistModal(true);
     }
   }
+  // 바로 구매 버튼 클릭
+  function handlePaymentButton() {
+    navigate('/payment', {
+      state: { orderProduct: [productDetail], quantity: [amountQuantity] },
+    });
+  }
 
   console.log(amountQuantity);
   return (
@@ -147,7 +154,12 @@ export default function ProductDetail() {
               ></LPrice>
             </RightWarpper>
           </PriceWarpper>
-          <MButton wd="416px" value="바로 구매" marginR="14px" />
+          <MButton
+            wd="416px"
+            value="바로 구매"
+            marginR="14px"
+            onClick={handlePaymentButton}
+          />
           <MDarkButton
             wd="200px"
             product_id={product_id}

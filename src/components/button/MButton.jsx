@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export default function MButton(props) {
   return (
     <>
-      <Button wd={props.wd} marginR={props.marginR}>
+      <Button wd={props.wd} marginR={props.marginR} onClick={props.onClick}>
         {props.value}
       </Button>
     </>
