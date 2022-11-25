@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import deleteIcon from '../../assets/icon-delete.svg';
 import Amount from '../etc/Amount';
@@ -17,6 +18,7 @@ function CartProductList({
 }) {
   const [amountModal, setAmountModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
+  const navigate = useNavigate();
 
   function shippingValue(fee, method) {
     if (method === 'PARCEL') {
@@ -70,6 +72,16 @@ function CartProductList({
     setDeleteModal(true);
   }
 
+  // 주문하기 버튼
+  function handlePaymentButton() {
+    navigate('/payment', {
+      state: {
+        orderProduct: [cartItem[i]],
+        quantity: [quantity[i]],
+      },
+    });
+  }
+
   console.log(cartData);
 
   if (cartItem !== '') {
@@ -113,7 +125,7 @@ function CartProductList({
             <OrderPrice>
               {`${(cartItem[i]?.price * quantity[i])?.toLocaleString()}원`}
             </OrderPrice>
-            <OrderBtn>주문하기</OrderBtn>
+            <OrderBtn onClick={handlePaymentButton}>주문하기</OrderBtn>
           </OderWarpper>
           <DeleteBtn onClick={handleDeleteBtn} />
         </Warpper>
