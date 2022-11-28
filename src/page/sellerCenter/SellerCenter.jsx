@@ -76,10 +76,10 @@ export default function SellerCenter() {
     setTabMenuTitle(copiedTabMenuTitle);
   }, [productBoxData.length]);
 
-  console.log(tabMenuTitle);
+  console.log(productBoxData);
 
   // ProductBoxMap
-  const productBoxList = productBoxData.map((_, i) => (
+  const productBoxList = productBoxData?.map((_, i) => (
     <ProductBox
       i={i}
       setProductBoxData={setProductBoxData}
@@ -94,7 +94,9 @@ export default function SellerCenter() {
       <TopSection>
         <RightWarpper>
           <BoldTxt>판매자센터</BoldTxt>
-          <NormalTxt>백엔드글로벌</NormalTxt>
+          <NormalTxt>
+            {productBoxData !== [] ? productBoxData[0].store_name : null}
+          </NormalTxt>
         </RightWarpper>
         <MsIconButton
           src={plusIcon}
@@ -114,7 +116,7 @@ export default function SellerCenter() {
             <ProductTitleTxt marginR="106px">수정</ProductTitleTxt>
             <ProductTitleTxt>삭제</ProductTitleTxt>
           </SaleProducTitle>
-          {productBoxList}
+          {productBoxData !== [] ? productBoxList : null}
         </ContentsSection>
       </Main>
     </>
