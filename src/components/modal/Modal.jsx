@@ -191,3 +191,27 @@ export function ExistsModal({ setExistModal }) {
     </ModalWarpper>
   );
 }
+
+export function ExcessModal({ setExcessModal }) {
+  function handleCloseBtn() {
+    setExcessModal(false);
+  }
+  return (
+    <ModalWarpper>
+      <CloseButton onClick={handleCloseBtn} />
+      <AlertTxt marginB="30px">
+        현재 재고보다 더 많은 수량을
+        <br />
+        담을 수 없습니다.
+      </AlertTxt>
+      <SWhiteButton
+        wd="100px"
+        value="닫기"
+        marginR="10px"
+        onClick={() => {
+          setExcessModal(false);
+        }}
+      />
+    </ModalWarpper>
+  );
+}
