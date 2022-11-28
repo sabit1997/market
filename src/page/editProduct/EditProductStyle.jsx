@@ -65,7 +65,9 @@ export const ImgPreveiw = styled.section`
   height: 454px;
   background-color: #c4c4c4;
   background-image: ${(props) =>
-    props.preview !== '' ? `url(${props.preview})` : null};
+    props.preview !== '' ? `url(${props.preview})` : `url(${props.image})`};
+  background-repeat: no-repeat;
+  background-size: contain;
   position: relative;
 `;
 
@@ -80,12 +82,15 @@ export const ImgUploadButton = styled.label`
   transform: translate(-50%, -50%);
 `;
 
-export const EditerSection = styled.section`
+export const EditerSection = styled.textarea`
   width: 1320px;
   height: 700px;
+  font-size: 16px;
   border-radius: 5px;
   border: 1px solid #c4c4c4;
+  padding: 10px 20px;
   margin-bottom: 50px;
+  resize: none;
 `;
 
 export const ButtonWarpper = styled.div`
