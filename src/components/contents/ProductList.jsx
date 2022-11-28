@@ -12,7 +12,7 @@ function ProductList({ productData }) {
       <ProductImg src={productData.image} />
       <Seller>{productData.store_name}</Seller>
       <ProductName>{productData.product_name}</ProductName>
-      <ProductPrice>{productData.price}</ProductPrice>
+      <ProductPrice>{productData.price.toLocaleString()}</ProductPrice>
     </Warpper>
   );
 }
