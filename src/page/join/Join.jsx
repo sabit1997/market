@@ -290,7 +290,7 @@ export default function Join() {
           </>
         ) : (
           <>
-            <MDisabledButton value="가입하기" />
+            <MDisabledButton value="가입하기" wd="480px" />
           </>
         )}
       </Warpper>
