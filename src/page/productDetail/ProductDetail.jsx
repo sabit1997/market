@@ -32,7 +32,7 @@ export default function ProductDetail() {
   const [amountQuantity, setAmountQuantity] = useState(1);
   const [cartData, setCartData] = useState([]);
   const [existModal, setExistModal] = useState(false);
-  const [check, setCheck] = useState(true);
+  const [check, setCheck] = useState(false);
   const navigate = useNavigate();
   const loginType = localStorage.getItem('type');
 
@@ -77,14 +77,16 @@ export default function ProductDetail() {
       .catch((error) => {
         console.log(error);
       });
-    if (cartData.filter((data) => data.product_id === product_id) === []) {
-      setCheck(true);
-    } else {
+    if (
+      cartData.filter(
+        (data) => data.product_id === productDetail.product_id
+      ) === []
+    ) {
       setCheck(false);
+    } else {
+      setCheck(true);
     }
   }
-
-  console.log(cartData.filter((data) => data.product_id === product_id));
 
   // 장바구니에 넣기
 
