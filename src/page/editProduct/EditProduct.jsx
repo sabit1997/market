@@ -22,8 +22,15 @@ import {
 } from './EditProductStyle';
 import { useRef, useState } from 'react';
 import instance from '../../client/instance';
+import client from '../../client/client';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function EditProduct() {
+  const location = useLocation();
+  const productBoxData = location.state.productBoxData;
+  console.log(productBoxData);
+  const navigate = useNavigate();
   const [firstBtn, setFirstBtn] = useState(true);
   const [secondBtn, setSecondBtn] = useState(false);
   const [shipping, setShipping] = useState('PARCEL');
@@ -32,12 +39,12 @@ export default function EditProduct() {
     price: '',
     shippingFee: '',
     stock: '',
-    image: '',
+    productInfo: '',
   });
   const [image, setImage] = useState('');
   const token = localStorage.getItem('token');
 
-  const { productName, price, shippingFee, stock } = inputs; // 비구조화 할당을 통해 값 추출
+  const { productName, price, shippingFee, stock, productInfo } = inputs; // 비구조화 할당을 통해 값 추출
 
   function handleInput(e) {
     const { value, name } = e.target;
@@ -52,6 +59,21 @@ export default function EditProduct() {
   const [preview, setPreview] = useState('');
   const inpRef = useRef();
   console.log(preview);
+
+  // 수정 시 기존 값 가져오기
+  useEffect(() => {
+    if (productBoxData !== null) {
+      setInputs({
+        productName: productBoxData.product_name,
+        price: productBoxData.price,
+        shippingFee: productBoxData.shipping_fee,
+        stock: productBoxData.stock,
+        productInfo: productBoxData.product_info,
+      });
+      setImage(productBoxData.image);
+      setShipping(productBoxData.shipping_method);
+    }
+  }, [productBoxData]);
 
   // 배송방법 선택 버튼
   function handle1Btn() {
@@ -74,19 +96,18 @@ export default function EditProduct() {
 
   console.log(image);
 
-  // function uploadImage(e) {}
-
   // 상품 등록
   function handleSubmit(e) {
     e.preventDefault();
     if (
-      preview !== '' &&
-      productName !== '' &&
-      price !== '' &&
-      shipping !== '' &&
-      shippingFee !== '' &&
-      stock !== '' &&
-      image !== ''
+      productBoxData === null &&
+      productName &&
+      price &&
+      shipping &&
+      shippingFee &&
+      stock &&
+      image &&
+      productInfo
     ) {
       const formData = new FormData();
       formData.append('product_name', productName);
@@ -94,18 +115,79 @@ export default function EditProduct() {
       formData.append('shipping_method', shipping);
       formData.append('shipping_fee', shippingFee);
       formData.append('stock', stock);
-      formData.append('product_info', 'abcdef');
+      formData.append('product_info', productInfo);
       formData.append('image', image);
-      formData.append('token', token);
-
-      instance
-        .post('https://openmarket.weniv.co.kr/products/', formData, {
+      client
+        .post('/products/', formData, {
           headers: {
+            Authorization: `JWT ${token}`,
             'Content-Type': 'multipart/form-data',
           },
         })
         .then((res) => {
           console.log(res);
+          navigate('/sellercenter');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (
+      productBoxData !== null &&
+      !preview &&
+      productName &&
+      price &&
+      shipping &&
+      shippingFee &&
+      stock &&
+      image &&
+      productInfo
+    ) {
+      instance
+        .patch(`/products/${productBoxData.product_id}/`, {
+          product_name: productName,
+          price: price,
+          shipping_method: shipping,
+          shipping_fee: shippingFee,
+          stock: stock,
+          products_info: productInfo,
+        })
+        .then((res) => {
+          console.log(res);
+          navigate('/sellercenter');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else if (
+      productBoxData !== null &&
+      preview &&
+      productName &&
+      price &&
+      shipping &&
+      shippingFee &&
+      stock &&
+      image &&
+      productInfo
+    ) {
+      const formData = new FormData();
+      formData.append('product_name', productName);
+      formData.append('price', price);
+      formData.append('shipping_method', shipping);
+      formData.append('shipping_fee', shippingFee);
+      formData.append('stock', stock);
+      formData.append('product_info', productInfo);
+      formData.append('image', image);
+
+      client
+        .put(`/products/${productBoxData.product_id}/`, formData, {
+          headers: {
+            Authorization: `JWT ${token}`,
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        .then((res) => {
+          console.log(res);
+          navigate('/sellercenter');
         })
         .catch((error) => {
           console.log(error);
@@ -144,7 +226,7 @@ export default function EditProduct() {
           <TopSection>
             <div>
               <InputTitle>상품 이미지</InputTitle>
-              <ImgPreveiw preview={preview}>
+              <ImgPreveiw preview={preview} image={image}>
                 <input
                   id="imageUploadInput"
                   type="file"
@@ -220,7 +302,11 @@ export default function EditProduct() {
             </div>
           </TopSection>
           <InputTitle>상품 상세</InputTitle>
-          <EditerSection />
+          <EditerSection
+            name="productInfo"
+            value={productInfo}
+            onChange={handleInput}
+          />
           <ButtonWarpper>
             <MWhiteButton wd="200px" value="취소" marginR="14px" />
             <MButton wd="200px" value="저장하기" />
