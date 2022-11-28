@@ -21,6 +21,7 @@ import MButton from '../../components/button/MButton';
 import MDarkButton from '../../components/button/MDarkButton';
 import TabActiveButton from '../../components/button/TabActiveButton';
 import TabDisabledButton from '../../components/button/TabDisabledButton';
+import MDisabledButton from '../../components/button/MDisabledButton';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import instance from '../../client/instance';
@@ -33,6 +34,7 @@ export default function ProductDetail() {
   const [existModal, setExistModal] = useState(false);
   const [check, setCheck] = useState(true);
   const navigate = useNavigate();
+  const loginType = localStorage.getItem('type');
 
   useEffect(() => {
     client
@@ -115,7 +117,7 @@ export default function ProductDetail() {
   console.log(amountQuantity);
   return (
     <>
-      <TopNavBar />
+      <TopNavBar value={loginType} />
       <ProductWarpper>
         <ProductImg src={productDetail.image} />
         <ProductInfo>
@@ -140,6 +142,7 @@ export default function ProductDetail() {
             value={amountQuantity}
             product_id={product_id}
             productDetail={productDetail}
+            loginType={loginType}
           />
           <PriceWarpper>
             <TotalPriceTxt>총 상품 금액</TotalPriceTxt>
@@ -154,20 +157,30 @@ export default function ProductDetail() {
               ></LPrice>
             </RightWarpper>
           </PriceWarpper>
-          <MButton
-            wd="416px"
-            value="바로 구매"
-            marginR="14px"
-            onClick={handlePaymentButton}
-          />
-          <MDarkButton
-            wd="200px"
-            product_id={product_id}
-            productDetail={productDetail}
-            amountQuantity={amountQuantity}
-            value="장바구니"
-            onClick={handleButton}
-          />
+          {loginType === 'SELLER' ? (
+            <>
+              <MDisabledButton wd="416px" value="바로 구매" marginR="14px" />
+              <MDisabledButton wd="200px" value="장바구니" />
+            </>
+          ) : (
+            <>
+              {' '}
+              <MButton
+                wd="416px"
+                value="바로 구매"
+                marginR="14px"
+                onClick={handlePaymentButton}
+              />
+              <MDarkButton
+                wd="200px"
+                product_id={product_id}
+                productDetail={productDetail}
+                amountQuantity={amountQuantity}
+                value="장바구니"
+                onClick={handleButton}
+              />
+            </>
+          )}
         </ProductInfo>
         {existModal === true ? (
           <ExistsModal setExistModal={setExistModal} />
