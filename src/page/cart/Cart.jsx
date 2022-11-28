@@ -11,7 +11,6 @@ import axios from 'axios';
 
 export default function Cart() {
   const [cartData, setCartData] = useState([]);
-  const [type, setType] = useState(false);
   const [checked, setChecked] = useState({});
   const { productData } = useProductDataContext();
   const [next, setNext] = useState('');
@@ -25,11 +24,6 @@ export default function Cart() {
           console.log(res);
           setCartData(res.data.results);
           setNext(res.data.next);
-          if (cartData === []) {
-            setType(false);
-          } else {
-            setType(true);
-          }
         })
         .catch((error) => {
           console.log(error);
@@ -48,15 +42,13 @@ export default function Cart() {
     }
   }, [cartData, next]);
 
-  console.log(cartData);
-
   return (
     <>
       <TopNavBar />
       <CartWarpper>
         <PageTitle>장바구니</PageTitle>
         <CartTabTitle checked={checked} setChecked={setChecked} />
-        {type === false ? (
+        {cartData.length === 0 ? (
           <EmptyCart />
         ) : (
           <FilledCart
