@@ -15,6 +15,7 @@ export default function Amount({
   margin,
   onClick,
   value,
+  loginType,
 }) {
   const [overValue, setOverValue] = useState(false);
   const location = useLocation();
@@ -22,11 +23,13 @@ export default function Amount({
   function handleMinusButton() {
     switch (location.pathname) {
       case `/detail/${product_id}`:
-        if (amountQuantity >= 2) {
-          setAmountQuantity(amountQuantity - 1);
-        }
-        if (stock + 1 > amountQuantity) {
-          setOverValue(false);
+        if (loginType !== 'SELLER') {
+          if (amountQuantity >= 2) {
+            setAmountQuantity(amountQuantity - 1);
+          }
+          if (stock + 1 > amountQuantity) {
+            setOverValue(false);
+          }
         }
         break;
       case '/cart':
@@ -45,11 +48,13 @@ export default function Amount({
   function handlePlusButton() {
     switch (location.pathname) {
       case `/detail/${product_id}`:
-        if (stock - 1 === amountQuantity) {
-          setOverValue(true);
-        }
-        if (!overValue) {
-          setAmountQuantity(amountQuantity + 1);
+        if (loginType !== 'SELLER') {
+          if (stock - 1 === amountQuantity) {
+            setOverValue(true);
+          }
+          if (!overValue) {
+            setAmountQuantity(amountQuantity + 1);
+          }
         }
         break;
       case '/cart':
