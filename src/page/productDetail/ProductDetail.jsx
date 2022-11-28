@@ -14,7 +14,7 @@ import {
   TotalQuantityNum,
   ButtonWarpper,
 } from '../../components/productDetail/ProductDetail';
-import { ExistsModal } from '../../components/modal/Modal';
+import { ExistsModal, ExcessModal } from '../../components/modal/Modal';
 import Amount from '../../components/etc/Amount';
 import LPrice from '../../components/etc/LPrice';
 import MButton from '../../components/button/MButton';
@@ -32,6 +32,7 @@ export default function ProductDetail() {
   const [amountQuantity, setAmountQuantity] = useState(1);
   const [cartData, setCartData] = useState([]);
   const [existModal, setExistModal] = useState(false);
+  const [excessModal, setExcessModal] = useState(false);
   const [check, setCheck] = useState(false);
   const navigate = useNavigate();
   const loginType = localStorage.getItem('type');
@@ -104,6 +105,12 @@ export default function ProductDetail() {
         })
         .catch((error) => {
           console.log(error);
+          if (
+            error.response.data.FAIL_message ===
+            '현재 재고보다 더 많은 수량을 담을 수 없습니다.'
+          ) {
+            setExcessModal(true);
+          }
         });
     } else {
       instance
@@ -117,10 +124,17 @@ export default function ProductDetail() {
         })
         .catch((error) => {
           console.log(error);
+          if (
+            error.response.data.FAIL_message ===
+            '현재 재고보다 더 많은 수량을 담을 수 없습니다.'
+          ) {
+            setExcessModal(true);
+          }
         });
       setExistModal(true);
     }
   }
+
   // 바로 구매 버튼 클릭
   function handlePaymentButton() {
     navigate('/payment', {
@@ -198,6 +212,8 @@ export default function ProductDetail() {
         </ProductInfo>
         {existModal === true ? (
           <ExistsModal setExistModal={setExistModal} />
+        ) : excessModal === true ? (
+          <ExcessModal setExcessModal={setExcessModal} />
         ) : null}
       </ProductWarpper>
       <ButtonWarpper>
