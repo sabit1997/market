@@ -1,8 +1,10 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import client from '../../client/client';
 // import what from '../assets/icon-swiper-1.svg';
 
 export default function MyPageDropdown(props) {
+  const navigate = useNavigate();
   function handleMypageBtn(event) {
     props.setModal(false);
     event.stopPropagation();
@@ -16,6 +18,7 @@ export default function MyPageDropdown(props) {
       .then((res) => {
         console.log(res);
         localStorage.clear();
+        navigate('/');
       })
       .catch((error) => {
         console.log(error);
