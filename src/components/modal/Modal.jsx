@@ -160,10 +160,12 @@ export function NotLogin({ setAlertModal }) {
 
 export function ExistsModal({ setExistModal }) {
   const navigate = useNavigate();
-
+  function handleCloseBtn() {
+    setExistModal(false);
+  }
   return (
     <ModalWarpper>
-      <CloseButton />
+      <CloseButton onClick={handleCloseBtn} />
       <AlertTxt marginB="30px">
         이미 장바구니에 있는 상품입니다.
         <br />
