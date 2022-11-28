@@ -82,9 +82,9 @@ export default function ProductDetail() {
         (data) => data.product_id === productDetail.product_id
       ) === []
     ) {
-      setCheck(false);
-    } else {
       setCheck(true);
+    } else {
+      setCheck(false);
     }
   }
 
@@ -106,6 +106,18 @@ export default function ProductDetail() {
           console.log(error);
         });
     } else {
+      instance
+        .post('/cart/', {
+          product_id: product_id,
+          quantity: amountQuantity,
+          check: true,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
       setExistModal(true);
     }
   }
