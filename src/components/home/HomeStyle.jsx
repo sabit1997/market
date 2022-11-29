@@ -6,6 +6,12 @@ export const ProductListSection = styled.ul`
   grid-template-columns: 1fr 1fr 1fr;
   gap: 70px 78px;
   padding: 80px 0 180px;
+  @media screen and (max-width: 390px) {
+    width: fit-content;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    padding: 20px 0 20px;
+  }
 `;
 
 export const PageLiWarpper = styled.ol`

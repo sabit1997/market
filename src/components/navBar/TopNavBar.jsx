@@ -116,20 +116,42 @@ const Warpper = styled.section`
   padding-left: 320px;
   padding-right: 320px;
   position: relative;
+  @media screen and (max-width: 390px) {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    flex-direction: column;
+    align-items: center;
+    height: fit-content;
+  }
 `;
 
 const LeftWarpper = styled.div`
   display: flex;
+  @media screen and (max-width: 390px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const ButtonWarpper = styled.div`
   display: flex;
+  @media screen and (max-width: 390px) {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
 `;
 
 const Logo = styled.img`
   width: 124px;
   height: 38px;
   margin-right: 30px;
+  @media screen and (max-width: 390px) {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
 `;
 
 const Search = styled.section`
@@ -141,6 +163,11 @@ const Search = styled.section`
   padding: 9px 22px;
   border: 2px solid #21bf48;
   border-radius: 50px;
+  @media screen and (max-width: 390px) {
+    width: 250px;
+    padding: 5px 15px;
+    margin-bottom: 10px;
+  }
 `;
 
 const SearchInput = styled.input`
@@ -153,6 +180,9 @@ const SearchInput = styled.input`
   &::placeholder {
     color: #767676;
   }
+  @media screen and (max-width: 390px) {
+    font-size: 9px;
+  }
 `;
 
 const SearchBtn = styled.button`
@@ -164,6 +194,10 @@ const SearchBtn = styled.button`
   cursor: pointer;
   /* position: absolute; */
   /* left: 0; */
+  @media screen and (max-width: 390px) {
+    width: 14px;
+    height: 14px;
+  }
 `;
 
 const MoveBtn = styled.button`
@@ -177,6 +211,13 @@ const MoveBtn = styled.button`
   background-position: top center;
   position: relative;
   margin-right: 26px;
+  @media screen and (max-width: 390px) {
+    width: ${(props) =>
+      props.wd === '46px' ? '22px' : props.wd === '56px' ? '25px' : null};
+    height: 20px;
+    background-size: contain;
+    margin-right: 10px;
+  }
   &:last-child {
     margin-right: 0;
   }
@@ -191,4 +232,7 @@ const BtnTxt = styled.span`
   position: absolute;
   bottom: 0;
   left: 0;
+  @media screen and (max-width: 390px) {
+    display: none;
+  }
 `;

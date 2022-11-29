@@ -7,6 +7,10 @@ export const CarouselWarpper = styled.section`
   height: 500px;
   position: relative;
   overflow: hidden;
+  @media screen and (max-width: 390px) {
+    width: 100%;
+    height: 200px;
+  }
 `;
 
 export const CarouselBtn = styled.button`
@@ -30,4 +34,7 @@ export const CarouselImg = styled.img`
   height: 500px;
   transform: translateX(${(props) => props.location}%);
   transition: all ease 2s;
+  @media screen and (max-width: 390px) {
+    height: 200px;
+  }
 `;

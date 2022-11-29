@@ -11,10 +11,18 @@ export const FooterWarpper = styled.footer`
   align-items: center;
   background-color: #f2f2f2;
   padding: 60px 0 63px;
+  @media screen and (max-width: 390px) {
+    width: 100%;
+    min-width: 0;
+    padding: 10px;
+  }
 `;
 
 export const FooterNav = styled.ul`
   display: flex;
+  @media screen and (max-width: 390px) {
+    flex-direction: column;
+  }
 `;
 
 export const FooterLi = styled.li`
@@ -23,10 +31,16 @@ export const FooterLi = styled.li`
   line-height: 1.252142857142857;
   margin-right: 32px;
   position: relative;
+  @media screen and (max-width: 390px) {
+    font-size: 9px;
+  }
   &::after {
     content: '|';
     position: absolute;
     right: -16px;
+    @media screen and (max-width: 390px) {
+      display: none;
+    }
   }
   &:nth-child(3) {
     font-weight: 700;
@@ -46,6 +60,9 @@ export const TopWarpper = styled.div`
   align-items: center;
   margin-bottom: 53px;
   position: relative;
+  @media screen and (max-width: 390px) {
+    width: 100%;
+  }
   &::after {
     content: '';
     width: 100%;
@@ -58,6 +75,9 @@ export const TopWarpper = styled.div`
 
 export const Sns = styled.ul`
   display: flex;
+  @media screen and (max-width: 390px) {
+    display: block;
+  }
 `;
 
 export const SnsItem = styled.li`
@@ -65,12 +85,21 @@ export const SnsItem = styled.li`
   height: 32px;
   background-image: url(${insta});
   margin-right: 14px;
+  @media screen and (max-width: 390px) {
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    margin-bottom: 5px;
+  }
   &:nth-child(2) {
     background-image: url(${facebook});
   }
   &:last-child {
     background-image: url(${youtube});
     margin-right: 0;
+    @media screen and (max-width: 390px) {
+      margin-bottom: 0;
+    }
   }
 `;
 
@@ -81,6 +110,10 @@ export const Dl = styled.dl`
   line-height: 1.714285714285714;
   color: #767676;
   position: relative;
+  @media screen and (max-width: 390px) {
+    width: 100%;
+    font-size: 9px;
+  }
 `;
 
 export const Dt = styled.dt`
