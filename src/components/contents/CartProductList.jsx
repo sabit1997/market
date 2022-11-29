@@ -82,8 +82,13 @@ function CartProductList({
     });
   }
 
-  console.log(cartData);
+  // 상품 상세로 이동
+  function moveProductDetail() {
+    navigate(`/detail/${cartItem[i].product_id}`);
+  }
 
+  console.log(cartData);
+  console.log(cartItem);
   if (cartItem !== '') {
     return (
       <>
@@ -97,8 +102,8 @@ function CartProductList({
             onClick={handleCheckBtn}
           />
           <CheckButton checked={checked} htmlFor={i} i={i} />
-          <Product src={cartItem[i]?.image} />
-          <ProductInfoWarpper>
+          <Product src={cartItem[i]?.image} onClick={moveProductDetail} />
+          <ProductInfoWarpper onClick={moveProductDetail}>
             <Seller>{cartItem[i]?.store_name}</Seller>
             <ProductName>{cartItem[i]?.product_name}</ProductName>
             <ProductPrice>{`${cartItem[
