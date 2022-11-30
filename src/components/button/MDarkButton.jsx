@@ -23,4 +23,9 @@ const Button = styled.button`
   background-color: #767676;
   color: #fff;
   border-radius: 5px;
+  @media screen and (max-width: 390px) {
+    width: 95px;
+    height: 35px;
+    font-size: 12px;
+  }
 `;

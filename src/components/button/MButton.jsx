@@ -20,4 +20,10 @@ const Button = styled.button`
   color: #fff;
   border-radius: 5px;
   margin-right: ${(props) => props.marginR};
+  @media screen and (max-width: 390px) {
+    width: 193px;
+    margin-right: 5px;
+    height: 35px;
+    font-size: 12px;
+  }
 `;

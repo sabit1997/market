@@ -89,17 +89,26 @@ const Quantity = styled.div`
   margin: ${(props) => props.margin};
   border: 1px solid #c4c4c4c4;
   overflow: hidden;
+  @media screen and (max-width: 390px) {
+    width: 85px;
+    height: 30px;
+    margin: ${(props) => (props.margin === '52px 0 0' ? '20px 0 0' : null)};
+  }
 `;
 
 const QuantityBtn = styled.button`
   width: 47px;
-  height: 48px;
+  height: 100%;
   background-color: #fff;
   background-image: url(${minusIcon});
   background-repeat: no-repeat;
   background-size: 20px;
   background-position: center;
   border-right: 1px solid #c4c4c4c4;
+  @media screen and (max-width: 390px) {
+    width: 30px;
+    background-size: 12px;
+  }
   cursor: pointer;
   &:last-child {
     background-image: url(${plusIcon});
@@ -114,4 +123,7 @@ const QuantityNum = styled.p`
   font-size: 18px;
   font-weight: 400;
   line-height: 1.25;
+  @media screen and (max-width: 390px) {
+    font-size: 14px;
+  }
 `;

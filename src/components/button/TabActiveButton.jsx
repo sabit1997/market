@@ -17,6 +17,10 @@ const Button = styled.button`
   font-size: 18px;
   font-weight: 700;
   line-height: 1.252222222222222;
+  @media screen and (max-width: 390px) {
+    width: 100%;
+    font-size: 12px;
+  }
   &:after {
     content: '';
     width: 100%;
