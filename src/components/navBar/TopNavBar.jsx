@@ -123,6 +123,7 @@ const Warpper = styled.section`
     flex-direction: column;
     align-items: center;
     height: fit-content;
+    padding-top: 10px;
   }
 `;
 
