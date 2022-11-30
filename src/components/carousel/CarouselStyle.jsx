@@ -3,13 +3,12 @@ import RightArrow from '../../assets/icon-right-arrow.svg';
 
 export const CarouselWarpper = styled.section`
   display: flex;
-  width: 1920px;
-  height: 500px;
+  width: 100%;
+  height: auto;
   position: relative;
   overflow: hidden;
-  @media screen and (max-width: 390px) {
+  @media ${(props) => props.theme.mobile} {
     width: 100%;
-    height: 200px;
   }
 `;
 
@@ -31,10 +30,6 @@ export const CarouselBtn = styled.button`
 
 export const CarouselImg = styled.img`
   width: 100%;
-  height: 500px;
   transform: translateX(${(props) => props.location}%);
   transition: all ease 2s;
-  @media screen and (max-width: 390px) {
-    height: 200px;
-  }
 `;

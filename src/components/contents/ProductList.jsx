@@ -18,27 +18,40 @@ function ProductList({ productData }) {
 }
 
 const Warpper = styled.li`
-  width: 380px;
-  height: 490px;
   background-color: #fff;
-  @media screen and (max-width: 390px) {
+  justify-self: center;
+  padding-bottom: 10px;
+  @media ${(props) => props.theme.mobile} {
     width: 160px;
     height: fit-content;
+  }
+  @media ${(props) => props.theme.desktop} {
+    padding: 5px;
   }
 `;
 
 const ProductImg = styled.img`
-  width: 380px;
-  height: 380px;
+  display: block;
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 1/1;
   border-radius: 10px;
   border: 1px solid #c4c4c4;
-  margin-bottom: 16px;
-  @media screen and (max-width: 390px) {
+  /* margin-bottom: 16px;
+  @media ${(props) => props.theme.desktop} {
+    width: 300px;
+    height: 300px;
+  }
+  @media ${(props) => props.theme.tablet} {
+    width: 200px;
+    height: 200px;
+  }
+  @media ${(props) => props.theme.mobile} {
     width: 160px;
     height: 160px;
     margin-bottom: 0;
     display: block;
-  }
+  } */
 `;
 
 const Seller = styled.span`
@@ -47,7 +60,7 @@ const Seller = styled.span`
   line-height: 1.375;
   color: #767676;
   margin-bottom: 10px;
-  @media screen and (max-width: 390px) {
+  @media ${(props) => props.theme.mobile} {
     font-size: 8px;
   }
 `;
@@ -57,7 +70,7 @@ const ProductName = styled.h2`
   font-weight: 400;
   line-height: 1.22;
   margin-bottom: 10px;
-  @media screen and (max-width: 390px) {
+  @media ${(props) => props.theme.mobile} {
     font-size: 12px;
     margin-bottom: 0;
   }
@@ -68,7 +81,7 @@ const ProductPrice = styled.span`
   font-weight: 700;
   line-height: 1.25;
   position: relative;
-  @media screen and (max-width: 390px) {
+  @media ${(props) => props.theme.mobile} {
     font-size: 12px;
   }
   &::after {
@@ -79,7 +92,7 @@ const ProductPrice = styled.span`
     position: absolute;
     top: 50%;
     transform: translate(0, -50%);
-    @media screen and (max-width: 390px) {
+    @media ${(props) => props.theme.mobile} {
       font-size: 14px;
     }
   }

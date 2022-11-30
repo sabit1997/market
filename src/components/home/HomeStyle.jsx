@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
 export const ProductListSection = styled.ul`
-  width: 1280px;
+  width: 100%;
+  max-width: 1280px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 70px 78px;
+  justify-content: center;
   padding: 80px 0 180px;
-  @media screen and (max-width: 390px) {
+  @media ${(props) => props.theme.mobile} {
     width: fit-content;
     gap: 10px;
     grid-template-columns: 1fr 1fr;

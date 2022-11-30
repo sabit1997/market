@@ -5,22 +5,19 @@ import youtube from '../../assets/icon-yt.svg';
 
 export const FooterWarpper = styled.footer`
   width: 100%;
-  min-width: 1920px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #f2f2f2;
   padding: 60px 0 63px;
-  @media screen and (max-width: 390px) {
-    width: 100%;
-    min-width: 0;
+  @media ${(props) => props.theme.mobile} {
     padding: 10px;
   }
 `;
 
 export const FooterNav = styled.ul`
   display: flex;
-  @media screen and (max-width: 390px) {
+  @media ${(props) => props.theme.mobile} {
     flex-direction: column;
   }
 `;
@@ -31,14 +28,14 @@ export const FooterLi = styled.li`
   line-height: 1.252142857142857;
   margin-right: 32px;
   position: relative;
-  @media screen and (max-width: 390px) {
+  @media ${(props) => props.theme.mobile} {
     font-size: 9px;
   }
   &::after {
     content: '|';
     position: absolute;
     right: -16px;
-    @media screen and (max-width: 390px) {
+    @media ${(props) => props.theme.mobile} {
       display: none;
     }
   }
@@ -54,15 +51,12 @@ export const FooterLi = styled.li`
 `;
 
 export const TopWarpper = styled.div`
-  width: 1280px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 53px;
   position: relative;
-  @media screen and (max-width: 390px) {
-    width: 100%;
-  }
   &::after {
     content: '';
     width: 100%;
@@ -75,7 +69,7 @@ export const TopWarpper = styled.div`
 
 export const Sns = styled.ul`
   display: flex;
-  @media screen and (max-width: 390px) {
+  @media ${(props) => props.theme.mobile} {
     display: block;
   }
 `;
@@ -85,7 +79,7 @@ export const SnsItem = styled.li`
   height: 32px;
   background-image: url(${insta});
   margin-right: 14px;
-  @media screen and (max-width: 390px) {
+  @media ${(props) => props.theme.mobile} {
     width: 20px;
     height: 20px;
     background-size: contain;
@@ -97,20 +91,20 @@ export const SnsItem = styled.li`
   &:last-child {
     background-image: url(${youtube});
     margin-right: 0;
-    @media screen and (max-width: 390px) {
+    @media ${(props) => props.theme.mobile} {
       margin-bottom: 0;
     }
   }
 `;
 
 export const Dl = styled.dl`
-  width: 1280px;
+  width: 100%;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.714285714285714;
   color: #767676;
   position: relative;
-  @media screen and (max-width: 390px) {
+  @media ${(props) => props.theme.mobile} {
     width: 100%;
     font-size: 9px;
   }
