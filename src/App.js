@@ -13,24 +13,27 @@ import EditProduct from './page/editProduct/EditProduct';
 import OrderCompleted from './page/OrderCompleted';
 import SearchResult from './page/search/SearchResult';
 import './App.css';
-
+import { ThemeProvider } from 'styled-components';
+import theme from './styles/theme';
 function App() {
   return (
     <ProductDataProvider>
-      <GlobalStyle />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/join" element={<Join />} />
-        <Route path="/detail/:product_id" element={<ProductDetail />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/payment" element={<Payment />} />
-        <Route path="/sellercenter" element={<SellerCenter />} />
-        <Route path="/productedit" element={<EditProduct />} />
-        <Route path="/ordercompleted" element={<OrderCompleted />} />
-        <Route path="/result" element={<SearchResult />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/join" element={<Join />} />
+          <Route path="/detail/:product_id" element={<ProductDetail />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/sellercenter" element={<SellerCenter />} />
+          <Route path="/productedit" element={<EditProduct />} />
+          <Route path="/ordercompleted" element={<OrderCompleted />} />
+          <Route path="/result" element={<SearchResult />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </ThemeProvider>
     </ProductDataProvider>
   );
 }
