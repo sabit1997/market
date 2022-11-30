@@ -6,9 +6,10 @@ export default function MDarkButton({
   value,
   wd,
   onClick,
+  basis,
 }) {
   return (
-    <Button wd={wd} onClick={onClick}>
+    <Button wd={wd} onClick={onClick} basis={basis}>
       {value}
     </Button>
   );
@@ -23,6 +24,7 @@ const Button = styled.button`
   background-color: #767676;
   color: #fff;
   border-radius: 5px;
+  flex-basis: ${(props) => props.basis};
   @media screen and (max-width: 390px) {
     width: 95px;
     height: 35px;
