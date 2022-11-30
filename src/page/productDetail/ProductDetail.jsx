@@ -25,6 +25,7 @@ import MDisabledButton from '../../components/button/MDisabledButton';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import instance from '../../client/instance';
+import { CenterWarpper } from '../../components/common/Common';
 
 export default function ProductDetail() {
   const { product_id } = useParams();
@@ -33,7 +34,7 @@ export default function ProductDetail() {
   const [cartData, setCartData] = useState([]);
   const [existModal, setExistModal] = useState(false);
   const [excessModal, setExcessModal] = useState(false);
-  const [check, setCheck] = useState(false);
+  const [check, setCheck] = useState(true);
   const navigate = useNavigate();
   const loginType = localStorage.getItem('type');
 
@@ -72,26 +73,34 @@ export default function ProductDetail() {
     instance
       .get('/cart/')
       .then((res) => {
-        console.log(res);
+        console.log(`axios 실행완료 ${res}`);
         setCartData(res.data.results);
+        console.log(cartData);
+        const condition = cartData.filter(
+          (data) => data.product_id === productDetail.product_id
+        ).length;
+        if (condition === 0) {
+          setCheck((check) => {
+            return check;
+          });
+          console.log('트루 됨');
+          console.log(check);
+        } else if (condition > 0) {
+          setCheck((check) => {
+            return !check;
+          });
+          console.log(check);
+          console.log('폴스 됨');
+        }
       })
       .catch((error) => {
         console.log(error);
       });
-    if (
-      cartData.filter(
-        (data) => data.product_id === productDetail.product_id
-      ) === []
-    ) {
-      setCheck(true);
-    } else {
-      setCheck(false);
-    }
   }
 
   // 장바구니에 넣기
-
-  function handleButton() {
+  // setState 바로 변경되지 않음
+  async function handleButton() {
     isCheck();
     if (check) {
       instance
@@ -112,7 +121,7 @@ export default function ProductDetail() {
             setExcessModal(true);
           }
         });
-    } else {
+    } else if (!check) {
       instance
         .post('/cart/', {
           product_id: product_id,
@@ -131,6 +140,7 @@ export default function ProductDetail() {
             setExcessModal(true);
           }
         });
+      console.log('중복');
       setExistModal(true);
     }
   }
@@ -144,7 +154,7 @@ export default function ProductDetail() {
 
   console.log(amountQuantity);
   return (
-    <>
+    <CenterWarpper>
       <TopNavBar value={loginType} />
       <ProductWarpper>
         <ProductImg src={productDetail.image} />
@@ -186,28 +196,27 @@ export default function ProductDetail() {
             </RightWarpper>
           </PriceWarpper>
           {loginType === 'SELLER' ? (
-            <>
-              <MDisabledButton wd="416px" value="바로 구매" marginR="14px" />
-              <MDisabledButton wd="200px" value="장바구니" />
-            </>
+            <ButtonWarpper>
+              <MDisabledButton basis="82.5%" marginR="2.7%" value="바로 구매" />
+              <MDisabledButton basis="39.68%" value="장바구니" />
+            </ButtonWarpper>
           ) : (
-            <>
-              {' '}
+            <ButtonWarpper>
               <MButton
-                wd="416px"
                 value="바로 구매"
-                marginR="14px"
+                basis="82.5%"
+                marginR="2.7%"
                 onClick={handlePaymentButton}
               />
               <MDarkButton
-                wd="200px"
+                basis="39.68%"
                 product_id={product_id}
                 productDetail={productDetail}
                 amountQuantity={amountQuantity}
                 value="장바구니"
                 onClick={handleButton}
               />
-            </>
+            </ButtonWarpper>
           )}
         </ProductInfo>
         {existModal === true ? (
@@ -222,6 +231,6 @@ export default function ProductDetail() {
         <TabDisabledButton value="Q&A" />
         <TabDisabledButton value="반품/교환정보" />
       </ButtonWarpper>
-    </>
+    </CenterWarpper>
   );
 }

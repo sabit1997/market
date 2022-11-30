@@ -27,8 +27,6 @@ const Button = styled.button`
   margin-right: ${(props) => props.marginR};
   flex-basis: ${(props) => props.basis};
   @media screen and (max-width: 390px) {
-    width: 193px;
-    margin-right: 5px;
     height: 35px;
     font-size: 12px;
   }
