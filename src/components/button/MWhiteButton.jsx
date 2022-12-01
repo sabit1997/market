@@ -3,7 +3,12 @@ import styled from 'styled-components';
 export default function MWhiteButton(props) {
   return (
     <>
-      <Button wd={props.wd} marginR={props.marginR} onClick={props.onClick}>
+      <Button
+        wd={props.wd}
+        maxWd={props.maxWd}
+        marginR={props.marginR}
+        onClick={props.onClick}
+      >
         {props.value}
       </Button>
     </>
@@ -12,6 +17,7 @@ export default function MWhiteButton(props) {
 
 const Button = styled.button`
   width: ${(props) => props.wd};
+  max-width: ${(props) => props.maxWd};
   height: 60px;
   font-size: 18px;
   font-weight: 700;
@@ -21,4 +27,8 @@ const Button = styled.button`
   border: 1px solid #c4c4c4;
   border-radius: 5px;
   margin-right: ${(props) => props.marginR};
+  @media ${(props) => props.theme.mobile} {
+    height: 35px;
+    font-size: 12px;
+  }
 `;
