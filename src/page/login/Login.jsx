@@ -85,7 +85,12 @@ export default function Login() {
   return (
     <>
       <Warpper>
-        <Logo src={logo} />
+        <Logo
+          src={logo}
+          onClick={() => {
+            navigate('/');
+          }}
+        />
         <LoginBox>
           <LoginSelletor onClick={handleBuyerBtn} loginType={loginType}>
             구매회원 로그인
