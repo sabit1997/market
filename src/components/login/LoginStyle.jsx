@@ -1,27 +1,44 @@
 import styled from 'styled-components';
 
 export const Warpper = styled.section`
+  width: 100%;
+  max-width: 550px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 100px;
+  padding: 100px 20px 0;
   position: relative;
+  margin: 0 auto;
+  @media screen and (max-width: 390px) {
+    padding: 20px 10px 0;
+  }
 `;
 
 export const Logo = styled.img`
   width: 238px;
   height: 74px;
   margin-bottom: 70px;
+  @media screen and (max-width: 390px) {
+    width: 150px;
+    height: auto;
+    margin-bottom: 40px;
+  }
 `;
 
 export const LoginBox = styled.section`
-  width: 550px;
+  width: 100%;
   height: 352px;
   margin-bottom: 30px;
+  @media screen and (max-width: 390px) {
+    width: 100%;
+    height: fit-content;
+    margin-bottom: 0;
+  }
 `;
 
 export const LoginSelletor = styled.button`
-  width: 275px;
+  width: 50%;
+  max-width: 275px;
   border: 1px solid #c4c4c4;
   border-radius: 10px;
   background-color: ${(props) =>
@@ -30,6 +47,10 @@ export const LoginSelletor = styled.button`
   font-weight: 500;
   line-height: 1.222222222222222;
   padding: 20px 0 38px;
+  @media screen and (max-width: 390px) {
+    padding: 10px 0 30px;
+    font-size: 12px;
+  }
   cursor: pointer;
   &:nth-child(2) {
     background-color: ${(props) =>
@@ -38,16 +59,19 @@ export const LoginSelletor = styled.button`
 `;
 
 export const InputBox = styled.form`
-  width: 550px;
+  width: 100%;
   border-radius: 10px;
   background-color: #fff;
   margin-top: -20px;
   border: 1px solid #c4c4c4;
   position: relative;
   padding: 34px 35px 36px 35px;
+  @media screen and (max-width: 390px) {
+    width: 100%;
+  }
   &::after {
     content: '';
-    width: 273px;
+    width: 49.5%;
     height: 15px;
     position: absolute;
     top: -5px;
@@ -69,6 +93,12 @@ export const MoveTxt = styled.li`
   color: #333333;
   margin-right: 33px;
   position: relative;
+  @media ${(props) => props.theme.tablet} {
+    font-size: 14px;
+  }
+  @media ${(props) => props.theme.mobile} {
+    font-size: 12px;
+  }
   &:last-child {
     margin-right: 0;
     &::before {
