@@ -38,6 +38,9 @@ export default function CheckText(props) {
 const Warpper = styled.div`
   display: flex;
   margin-bottom: ${(props) => props.marginB};
+  @media ${(props) => props.theme.mobile} {
+    margin-top: 15px;
+  }
 `;
 
 const CheckBox = styled.label`
@@ -47,6 +50,13 @@ const CheckBox = styled.label`
   background-image: ${(props) =>
     props.check === true ? `url(${fillCheckBox})` : `url(${checkBox})`};
   margin-right: 10px;
+  flex-shrink: 0;
+  @media ${(props) => props.theme.mobile} {
+    width: 12px;
+    height: 12px;
+    background-size: contain;
+    margin-right: 7px;
+  }
 `;
 
 const Txt = styled.label`
@@ -54,6 +64,9 @@ const Txt = styled.label`
   font-weight: 400;
   line-height: 1.25;
   max-width: 454px;
+  @media ${(props) => props.theme.mobile} {
+    font-size: 12px;
+  }
 `;
 
 const BoldLineTxt = styled.p`
@@ -63,4 +76,7 @@ const BoldLineTxt = styled.p`
   line-height: 1.251875;
   color: #767676;
   text-decoration: underline;
+  @media ${(props) => props.theme.mobile} {
+    font-size: 12px;
+  }
 `;

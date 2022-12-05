@@ -3,7 +3,12 @@ import styled from 'styled-components';
 export default function LButton(props) {
   return (
     <>
-      <Button margin={props.margin} onClick={props.onClick}>
+      <Button
+        margin={props.margin}
+        mobileWd={props.mobileWd}
+        mobileHg={props.mobileHg}
+        onClick={props.onClick}
+      >
         {props.value}
       </Button>
     </>
@@ -12,7 +17,7 @@ export default function LButton(props) {
 
 const Button = styled.button`
   width: 220px;
-  padding: 19px 0;
+  height: 68px;
   font-size: 24px;
   font-weight: 700;
   line-height: 1.25;
@@ -20,4 +25,9 @@ const Button = styled.button`
   background-color: #21bf48;
   border-radius: 5px;
   margin: ${(props) => props.margin};
+  @media ${(props) => props.theme.mobile} {
+    width: ${(props) => props.mobileWd};
+    height: ${(props) => props.mobileHg};
+    font-size: 18px;
+  }
 `;

@@ -15,7 +15,7 @@ export default function SearchResult() {
       <TopNavBar value={loginType} />
       <Title>검색 결과</Title>
       <ResultMessage>
-        <SearchKeyword>{searchInput}</SearchKeyword>에 대한 검색 결과는 총{' '}
+        <SearchKeyword>'{searchInput}'</SearchKeyword>에 대한 검색 결과는 총{' '}
         {resultProducts.length} 개 입니다.
       </ResultMessage>
       <ProductListSection>

@@ -5,6 +5,7 @@ export default function MS16pWhiteButton(props) {
     <>
       <Button
         wd={props.wd}
+        mobileWd={props.mobileWd}
         margin={props.margin}
         type={props.type}
         onClick={props.onClick}
@@ -30,5 +31,10 @@ const Button = styled.button`
   &:hover {
     border: 1px solid #767676;
     color: #000;
+  }
+  @media ${(props) => props.theme.mobile} {
+    font-size: 12px;
+    width: ${(props) => props.mobileWd};
+    height: 37px;
   }
 `;

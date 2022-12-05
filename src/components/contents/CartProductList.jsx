@@ -102,29 +102,32 @@ function CartProductList({
             onClick={handleCheckBtn}
           />
           <CheckButton checked={checked} htmlFor={i} i={i} />
-          <Product src={cartItem[i]?.image} onClick={moveProductDetail} />
-          <ProductInfoWarpper onClick={moveProductDetail}>
-            <Seller>{cartItem[i]?.store_name}</Seller>
-            <ProductName>{cartItem[i]?.product_name}</ProductName>
-            <ProductPrice>{`${cartItem[
-              i
-            ]?.price?.toLocaleString()}원`}</ProductPrice>
-            <Shipping>
-              {shippingValue(
-                cartItem[i]?.shipping_fee,
-                cartItem[i]?.shipping_method
-              )}
-            </Shipping>
-          </ProductInfoWarpper>
+          <ProductWarpper>
+            <Product src={cartItem[i]?.image} onClick={moveProductDetail} />
+            <ProductInfoWarpper onClick={moveProductDetail}>
+              <Seller>{cartItem[i]?.store_name}</Seller>
+              <ProductName>{cartItem[i]?.product_name}</ProductName>
+              <ProductPrice>{`${cartItem[
+                i
+              ]?.price?.toLocaleString()}원`}</ProductPrice>
+              <Shipping>
+                {shippingValue(
+                  cartItem[i]?.shipping_fee,
+                  cartItem[i]?.shipping_method
+                )}
+              </Shipping>
+            </ProductInfoWarpper>
+          </ProductWarpper>
           <Amount
             value={quantity[i]}
             cartItem={cartItem}
             onClick={handleAmount}
-            margin="0 148px 0 0"
+            margin="0 "
             cartData={cartData}
             i={i}
             quantity={quantity}
             setQuantity={setQuantity}
+            justSelf="center"
           />
           <OderWarpper>
             <OrderPrice>
@@ -160,20 +163,22 @@ function CartProductList({
 }
 
 const Warpper = styled.section`
-  display: flex;
+  display: grid;
+  grid-template-columns: 20px 47.73% 19.37% 25.7%;
   align-items: center;
-  width: 1280px;
-  height: 200px;
+  width: 100%;
+  max-width: 1280px;
   background-color: #fff;
   border: 2px solid #e0e0e0;
   border-radius: 10px;
-  padding: 20px 0 20px 30px;
+  padding: 20px 0 20px 1.56%;
   margin-bottom: 10px;
-  margin-top: 35px;
   margin-bottom: 10px;
   position: relative;
-  &:last-child {
-    margin-bottom: 80px;
+  &:nth-child(3) {
+    margin-top: 35px;
+  }
+  @media ${(props) => props.theme.mobile} {
   }
 `;
 
@@ -183,7 +188,7 @@ const CheckButton = styled.label`
   height: 20px;
   border: 2px solid #21bf48;
   border-radius: 50%;
-  margin-right: 40px;
+  margin-right: 2.34%;
   cursor: pointer;
   position: relative;
   &::after {
@@ -198,22 +203,38 @@ const CheckButton = styled.label`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    @media ${(props) => props.theme.mobile} {
+      width: 9px;
+      height: 9px;
+    }
   }
+  @media ${(props) => props.theme.mobile} {
+    width: 15px;
+    height: 15px;
+  }
+`;
+
+const ProductWarpper = styled.div`
+  display: flex;
+  padding-left: 3.125%;
+  align-items: center;
 `;
 
 const Product = styled.img`
   width: 160px;
   height: 160px;
   border-radius: 10px;
-  margin-right: 36px;
+  margin-right: 2.8%;
+  @media ${(props) => props.theme.mobile} {
+    width: 70px;
+    height: 70px;
+  }
 `;
 
 const ProductInfoWarpper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 418px;
-  height: 100%;
-  margin-right: 48px;
+  /* margin-right: 48px; */
 `;
 
 const Seller = styled.p`
@@ -222,6 +243,10 @@ const Seller = styled.p`
   line-height: 1.25;
   color: #767676;
   margin-bottom: 10px;
+  @media ${(props) => props.theme.mobile} {
+    font-size: 9px;
+    margin-bottom: 5px;
+  }
 `;
 
 const ProductName = styled.h2`
@@ -229,6 +254,10 @@ const ProductName = styled.h2`
   font-weight: 400;
   line-height: 1.22;
   margin-bottom: 10px;
+  @media ${(props) => props.theme.mobile} {
+    font-size: 10px;
+    margin-bottom: 5px;
+  }
 `;
 
 const ProductPrice = styled.span`
@@ -236,6 +265,10 @@ const ProductPrice = styled.span`
   font-weight: 700;
   line-height: 1.25;
   margin-bottom: 40px;
+  @media ${(props) => props.theme.mobile} {
+    font-size: 10px;
+    margin-bottom: 5px;
+  }
 `;
 
 const Shipping = styled.span`
@@ -243,6 +276,9 @@ const Shipping = styled.span`
   font-weight: 400;
   line-height: 1.25;
   color: #767676;
+  @media ${(props) => props.theme.mobile} {
+    font-size: 10px;
+  }
 `;
 
 const OderWarpper = styled.div`
@@ -255,6 +291,10 @@ const OrderPrice = styled.p`
   line-height: 1.25;
   color: #eb5757;
   margin-bottom: 26px;
+  @media ${(props) => props.theme.mobile} {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
 `;
 
 const OrderBtn = styled.button`
@@ -266,6 +306,12 @@ const OrderBtn = styled.button`
   background-color: #21bf48;
   color: #fff;
   border-radius: 5px;
+  @media ${(props) => props.theme.mobile} {
+    font-size: 12px;
+    padding: 0;
+    width: 80%;
+    height: 30px;
+  }
 `;
 
 const DeleteBtn = styled.button`
@@ -277,6 +323,12 @@ const DeleteBtn = styled.button`
   position: absolute;
   right: 18px;
   top: 18px;
+  @media ${(props) => props.theme.mobile} {
+    width: 15px;
+    height: 15px;
+    top: 8px;
+    right: 8px;
+  }
 `;
 
 export default CartProductList;

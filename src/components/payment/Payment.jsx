@@ -1,12 +1,18 @@
 import styled from 'styled-components';
 
-export const PageWarpper = styled.section``;
+export const PageWarpper = styled.section`
+  padding: 0 10px;
+`;
 
 export const PageTitle = styled.h2`
   font-size: 36px;
   font-weight: 700;
   line-height: 1.222222222222222;
   margin: 54px 0 52px;
+  @media ${(props) => props.theme.mobile} {
+    font-size: 20px;
+    text-align: center;
+  }
 `;
 
 export const TotalOrderPriceWarpper = styled.div`
@@ -21,6 +27,9 @@ export const TotalOrderPrice = styled.p`
   line-height: 1.252222222222222;
   margin-top: 5px;
   margin-right: 10px;
+  @media ${(props) => props.theme.mobile} {
+    font-size: 12px;
+  }
 `;
 
 export const TotalOrderPriceNum = styled.span`
@@ -31,6 +40,9 @@ export const TotalOrderPriceNum = styled.span`
   &::after {
     content: '원';
   }
+  @media ${(props) => props.theme.mobile} {
+    font-size: 14px;
+  }
 `;
 
 export const ShippingInfoTxt = styled.h3`
@@ -38,6 +50,9 @@ export const ShippingInfoTxt = styled.h3`
   font-weight: 500;
   line-height: 1.252083333333333;
   margin-bottom: 18px;
+  @media ${(props) => props.theme.mobile} {
+    font-size: 16px;
+  }
 `;
 
 export const InfoTItle = styled.p`
@@ -55,6 +70,9 @@ export const InfoTItle = styled.p`
     left: 0;
     bottom: -8px;
   }
+  @media ${(props) => props.theme.mobile} {
+    font-size: 12px;
+  }
 `;
 
 export const InfoInputWarpper = styled.ul``;
@@ -62,18 +80,27 @@ export const InfoInputWarpper = styled.ul``;
 export const BottomWarpper = styled.section`
   display: flex;
   justify-content: space-between;
+  @media ${(props) => props.theme.tablet} {
+    flex-direction: column;
+  }
 `;
 
 export const PaymentWay = styled.ul`
   display: flex;
-  width: 760px;
-  padding: 18px 0 18px 12px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 760px;
+  padding: 18px 15.65% 18px 12px;
   border-top: 2px solid #c4c4c4;
   border-bottom: 2px solid #c4c4c4;
+  @media ${(props) => props.theme.tablet} {
+    margin-bottom: 10px;
+  }
 `;
 
 export const FinalPaymentInfo = styled.div`
-  width: 480px;
+  width: 100%;
+  max-width: 480px;
   border: 2px solid #21bf48;
   border-radius: 10px;
   padding: 34px 24px;
@@ -87,6 +114,9 @@ export const FinalPaymentInfo = styled.div`
     z-index: -1;
     bottom: 0;
     left: 0;
+    @media ${(props) => props.theme.mobile} {
+      height: 120px;
+    }
   }
 `;
 
@@ -121,5 +151,8 @@ export const PriceItemTxt = styled.p`
   line-height: 1.251875;
   &::before {
     content: '- ';
+  }
+  @media ${(props) => props.theme.mobile} {
+    font-size: 12px;
   }
 `;

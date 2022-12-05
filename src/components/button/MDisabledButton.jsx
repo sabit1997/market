@@ -3,7 +3,12 @@ import styled from 'styled-components';
 export default function MDisabledButton(props) {
   return (
     <>
-      <Button wd={props.wd} marginR={props.marginR} basis={props.basis}>
+      <Button
+        wd={props.wd}
+        maxWd={props.maxWd}
+        marginR={props.marginR}
+        basis={props.basis}
+      >
         {props.value}
       </Button>
     </>
@@ -12,6 +17,7 @@ export default function MDisabledButton(props) {
 
 const Button = styled.button`
   width: ${(props) => props.wd};
+  max-width: ${(props) => props.maxWd};
   height: 60px;
   font-size: 18px;
   font-weight: 700;

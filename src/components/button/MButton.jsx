@@ -6,6 +6,7 @@ export default function MButton(props) {
       <Button
         wd={props.wd}
         maxWd={props.maxWd}
+        mobileWd={props.mobileWd}
         marginR={props.marginR}
         basis={props.basis}
         onClick={props.onClick}
@@ -29,6 +30,7 @@ const Button = styled.button`
   margin-right: ${(props) => props.marginR};
   flex-basis: ${(props) => props.basis};
   @media ${(props) => props.theme.mobile} {
+    width: ${(props) => props.mobileWd};
     height: 35px;
     font-size: 12px;
   }

@@ -30,7 +30,8 @@ const ProductName = styled.label`
 
 const InputSection = styled.div`
   position: relative;
-  width: 826px;
+  width: 100%;
+  max-width: 826px;
   border: 1px solid #c4c4c4;
   border-radius: 5px;
   margin-bottom: 16px;
@@ -51,5 +52,5 @@ const InputLimit = styled.span`
   color: #c4c4c4;
   position: absolute;
   top: 19px;
-  left: 771px;
+  right: 6.7%;
 `;

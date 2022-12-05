@@ -7,6 +7,8 @@ export const InfoInputItem = styled.li`
   height: 56px;
   border-bottom: 1px solid #c4c4c4;
   margin-bottom: ${(props) => props.marginB};
+  @media ${(props) => props.theme.mobile} {
+  }
 `;
 
 export const Label = styled.label`
@@ -14,14 +16,25 @@ export const Label = styled.label`
   font-size: 16px;
   font-weight: 400;
   line-height: 1.251875;
+  flex-shrink: 0;
   position: relative;
+  @media ${(props) => props.theme.mobile} {
+    font-size: 12px;
+    width: 60px;
+  }
 `;
 
 export const NormalInput = styled.input`
-  width: ${(props) => props.wd};
+  width: 100%;
+  max-width: ${(props) => props.maxWd};
   height: 40px;
   border: 1px solid #c4c4c4;
   margin: ${(props) => props.margin};
+  @media ${(props) => props.theme.mobile} {
+    width: 250px;
+    height: 25px;
+    font-size: 12px;
+  }
 `;
 
 export const PhoneNumberInput = styled.input`
@@ -30,6 +43,14 @@ export const PhoneNumberInput = styled.input`
   border: 1px solid #c4c4c4;
   &:nth-child(2) {
     width: 80px;
+    @media ${(props) => props.theme.mobile} {
+      width: 60px;
+    }
+  }
+  @media ${(props) => props.theme.mobile} {
+    font-size: 12px;
+    height: 25px;
+    width: 68px;
   }
 `;
 
@@ -38,6 +59,8 @@ export const Dash = styled.span`
   font-weight: 400;
   line-height: 1.251875;
   margin: 0 10px;
+  @media ${(props) => props.theme.mobile} {
+  }
 `;
 
 export const InfoInputItemCol = styled.li`
@@ -54,4 +77,5 @@ export const RowWarpper = styled.div`
   display: flex;
   margin-top: 8px;
   margin-bottom: 8px;
+  border-bottom: 1px solid #c4c4c4;
 `;

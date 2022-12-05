@@ -25,4 +25,9 @@ const Button = styled.button`
     border: 1px solid #767676;
     color: #000;
   }
+  @media ${(props) => props.theme.mobile} {
+    font-size: 12px;
+    width: 40px;
+    height: 20px;
+  }
 `;

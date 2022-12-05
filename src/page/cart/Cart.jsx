@@ -7,6 +7,7 @@ import FilledCart from './FilledCart';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useProductDataContext } from '../../context/ProductDataContext';
+import { CenterWarpper } from '../../components/common/Common';
 import axios from 'axios';
 
 export default function Cart() {
@@ -43,7 +44,7 @@ export default function Cart() {
   }, [cartData, next]);
 
   return (
-    <>
+    <CenterWarpper>
       <TopNavBar />
       <CartWarpper>
         <PageTitle>장바구니</PageTitle>
@@ -60,6 +61,6 @@ export default function Cart() {
           />
         )}
       </CartWarpper>
-    </>
+    </CenterWarpper>
   );
 }

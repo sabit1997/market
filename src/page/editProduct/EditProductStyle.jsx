@@ -1,14 +1,23 @@
+import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
 import styled from 'styled-components';
 import imgUploadButton from '../../assets/icon-img.png';
 
 export const Main = styled.form`
   display: flex;
-  width: 1920px;
-  padding: 44px 100px 136px;
+  width: 100%;
+  max-width: 1920px;
+  padding: 44px 10px 136px;
+  justify-content: center;
+  @media ${(props) => props.theme.tablet} {
+    flex-direction: column;
+  }
 `;
 
 export const SideBar = styled.section`
   margin-right: 80px;
+  @media ${(props) => props.theme.tablet} {
+    margin-right: 0;
+  }
 `;
 
 export const SideBarTilte = styled.h2`
@@ -16,6 +25,9 @@ export const SideBarTilte = styled.h2`
   font-weight: 700;
   line-height: 1.222222222222222;
   margin-bottom: 42px;
+  @media ${(props) => props.theme.mobile} {
+    text-align: center;
+  }
 `;
 
 export const Span = styled.span`
@@ -31,6 +43,10 @@ export const TextBox = styled.div`
   padding: 20px;
   background-color: #ffefe8;
   margin-top: 10px;
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+    height: fit-content;
+  }
 `;
 
 export const Text = styled.p`
@@ -49,6 +65,9 @@ export const TopSection = styled.section`
   display: flex;
   justify-content: space-between;
   margin-bottom: 70px;
+  @media ${(props) => props.theme.tablet} {
+    flex-direction: column;
+  }
 `;
 
 export const InputTitle = styled.p`
@@ -61,8 +80,9 @@ export const InputTitle = styled.p`
 `;
 
 export const ImgPreveiw = styled.section`
-  width: 454px;
-  height: 454px;
+  width: 100%;
+  aspect-ratio: 1/1;
+  max-width: 454px;
   background-color: #c4c4c4;
   background-image: ${(props) =>
     props.preview !== '' ? `url(${props.preview})` : `url(${props.image})`};
@@ -83,7 +103,8 @@ export const ImgUploadButton = styled.label`
 `;
 
 export const EditerSection = styled.textarea`
-  width: 1320px;
+  width: 100%;
+  max-width: 1320px;
   height: 700px;
   font-size: 16px;
   border-radius: 5px;

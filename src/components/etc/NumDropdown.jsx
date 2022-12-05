@@ -58,11 +58,18 @@ const SelectBtn = styled.button`
   background-repeat: no-repeat;
   background-position: right 16px center;
   position: relative;
+  @media ${(props) => props.theme.mobile} {
+    width: 100%;
+    height: 37px;
+    font-size: 12px;
+    background-size: 15px;
+    padding: 0 50px 0 35px;
+  }
 `;
 
 const Ul = styled.ul`
-  width: 152px;
-  height: 150px;
+  width: 100%;
+  /* height: 150px; */
   border: 1px solid #c4c4c4;
   background-color: #fff;
   border-radius: 5px;
@@ -71,6 +78,10 @@ const Ul = styled.ul`
   position: absolute;
   top: 60px;
   left: 0;
+  @media ${(props) => props.theme.mobile} {
+    width: 100%;
+    height: 100px;
+  }
 `;
 
 const Li = styled.li`
@@ -82,5 +93,8 @@ const Li = styled.li`
   color: #000;
   &:hover {
     background: #e0e0e0;
+  }
+  @media ${(props) => props.theme.mobile} {
+    font-size: 12px;
   }
 `;

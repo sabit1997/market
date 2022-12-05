@@ -3,7 +3,12 @@ import styled from 'styled-components';
 export default function SButton(props) {
   return (
     <>
-      <Button wd={props.wd} onClick={props.onClick}>
+      <Button
+        wd={props.wd}
+        mobileWd={props.mobileWd}
+        mobileHg={props.mobileHg}
+        onClick={props.onClick}
+      >
         {props.value}
       </Button>
     </>
@@ -19,4 +24,9 @@ const Button = styled.button`
   font-size: 16px;
   font-weight: 500;
   line-height: 1.251875;
+  @media ${(props) => props.theme.mobile} {
+    font-size: 12px;
+    width: ${(props) => props.mobileWd};
+    height: ${(props) => props.mobileHg};
+  }
 `;

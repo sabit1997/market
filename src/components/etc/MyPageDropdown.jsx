@@ -45,6 +45,12 @@ const Warpper = styled.ul`
   transform: translateX(-50%);
   background-color: #fff;
   z-index: 10;
+  @media ${(props) => props.theme.mobile} {
+    width: 80px;
+    height: fit-content;
+    top: 33px;
+    left: -50%;
+  }
 `;
 
 const Li = styled.li`
@@ -64,5 +70,8 @@ const Li = styled.li`
     border-radius: 5px;
     color: #000;
     font-weight: 500;
+  }
+  @media ${(props) => props.theme.mobile} {
+    font-size: 12px;
   }
 `;

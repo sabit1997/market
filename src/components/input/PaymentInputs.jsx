@@ -8,14 +8,14 @@ import {
   InfoInputItemCol,
   RowWarpper,
 } from './PaymentInputsStyle';
-import MS16pButton from '../button/MS16pButton';
+import SButton from '../button/SButton';
 
 export function NameInput(props) {
   return (
     <InfoInputItem>
       <Label htmlFor={props.name}>이름</Label>
       <NormalInput
-        wd="334px"
+        maxWd="334px"
         name={props.name}
         value={props.value}
         onChange={props.onChange}
@@ -53,7 +53,7 @@ export function EmailInput() {
   return (
     <InfoInputItem marginB="40px">
       <Label>이메일</Label>
-      <NormalInput wd="334px" />
+      <NormalInput maxWd="334px" />
     </InfoInputItem>
   );
 }
@@ -63,7 +63,7 @@ export function ReceiverInput(props) {
     <InfoInputItem>
       <Label htmlFor={props.name}>수령인</Label>
       <NormalInput
-        wd="334px"
+        maxWd="334px"
         name={props.name}
         value={props.value}
         onChange={props.onChange}
@@ -105,38 +105,40 @@ export function AddressInput(props) {
     open({ onComplete: handleComplete });
   };
   return (
-    <InfoInputItemCol>
-      <RowWarpper>
-        <Label htmlFor={props.name1}>배송주소</Label>
+    <RowWarpper>
+      <Label htmlFor={props.name1}>배송주소</Label>
+      <div>
         <NormalInput
-          wd="170px"
-          margin="0 10px 0 0"
+          maxWd="170px"
+          margin="0 10px 8px 0"
           name={props.name1}
           value={props.value1}
           onChange={props.onChange}
         />
-        <MS16pButton
+        <SButton
           value="우편번호 조회"
           wd="154px"
           hg="40px"
+          mobileWd="80px"
+          mobileHg="25px"
           onClick={handleClick}
         />
-      </RowWarpper>
-      <NormalInput
-        wd="800px"
-        margin="0 0 8px 170px"
-        name={props.name2}
-        value={props.value2}
-        onChange={props.onChange}
-      />
-      <NormalInput
-        wd="800px"
-        margin="0 0 8px 170px"
-        name={props.name3}
-        value={props.value3}
-        onChange={props.onChange}
-      />
-    </InfoInputItemCol>
+        <NormalInput
+          maxWd="800px"
+          margin="0 0 8px 0"
+          name={props.name2}
+          value={props.value2}
+          onChange={props.onChange}
+        />
+        <NormalInput
+          wd="800px"
+          margin="0 0 8px 0px"
+          name={props.name3}
+          value={props.value3}
+          onChange={props.onChange}
+        />
+      </div>
+    </RowWarpper>
   );
 }
 

@@ -11,6 +11,7 @@ export default function MsIconButton(props) {
 
 const Button = styled.button`
   width: ${(props) => props.wd};
+  max-width: ${(props) => props.maxWd};
   height: 54px;
   font-size: 18px;
   font-weight: 500;
@@ -21,10 +22,19 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media ${(props) => props.theme.mobile} {
+    width: 100px;
+    height: 30px;
+    font-size: 12px;
+  }
 `;
 
 const Img = styled.img`
   width: 30px;
   height: 30px;
   margin-right: 8px;
+  @media ${(props) => props.theme.mobile} {
+    width: 15px;
+    height: 15px;
+  }
 `;

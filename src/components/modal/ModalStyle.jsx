@@ -16,6 +16,11 @@ export const ModalWarpper = styled.article`
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
+  @media ${(props) => props.theme.mobile} {
+    width: 200px;
+    height: 100px;
+    padding-bottom: 8px;
+  }
 `;
 
 export const CloseButton = styled.button`
@@ -28,6 +33,13 @@ export const CloseButton = styled.button`
   position: absolute;
   top: 18px;
   right: 18px;
+  @media ${(props) => props.theme.mobile} {
+    width: 10px;
+    height: 10px;
+    background-size: contain;
+    top: 5px;
+    right: 5px;
+  }
 `;
 
 export const AlertTxt = styled.p`
@@ -36,6 +48,9 @@ export const AlertTxt = styled.p`
   line-height: 1.251875;
   text-align: center;
   margin-bottom: ${(props) => props.marginB};
+  @media ${(props) => props.theme.mobile} {
+    font-size: 9px;
+  }
 `;
 
 export const AlertContentsWarp = styled.div`

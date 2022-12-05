@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { TotalPriceSection } from '../../components/cart/CartStyle';
+import { TotalPriceSection, Icon } from '../../components/cart/CartStyle';
 import CartProductList from '../../components/contents/CartProductList';
 import PriceGroup from '../../components/etc/PriceGroup';
 import LButton from '../../components/button/LButton';
@@ -94,14 +94,21 @@ export default function FilledCart({
       {cartList}
       <TotalPriceSection>
         <PriceGroup value="총 상품금액" price={totalPrice?.toLocaleString()} />
+        <Icon />
         <PriceGroup value="상품 할인" price="0" />
+        <Icon />
         <PriceGroup value="배송비" price={totalShippingFee?.toLocaleString()} />
         <PriceGroup
           value="결제 예정 금액"
           price={(totalPrice + totalShippingFee)?.toLocaleString()}
         />
       </TotalPriceSection>
-      <LButton value="주문하기" onClick={handleOrderBtn} />
+      <LButton
+        value="주문하기"
+        onClick={handleOrderBtn}
+        mobileWd="100%"
+        mobileHg="40px"
+      />
     </>
   );
 }

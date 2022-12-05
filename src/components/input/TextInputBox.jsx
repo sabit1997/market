@@ -174,7 +174,8 @@ export function PhoneNumberTextInputBox({
           type="number"
           id="phonenumber_text_input"
           value={value}
-          wd="152px"
+          wd="33.33%"
+          maxWd="152px"
           {...register('phoneNumber1', {
             required: true,
             maxLength: 4,
@@ -186,7 +187,8 @@ export function PhoneNumberTextInputBox({
         <Input
           type="number"
           value={value2}
-          wd="152px"
+          wd="33.33%"
+          maxWd="152px"
           maxLength="4"
           {...register('phoneNumber2', {
             required: true,
@@ -216,7 +218,7 @@ export function EmailTextInputBox({
       <Txt htmlFor="email_text_input">이메일</Txt>
       <InputWarpper>
         <Input
-          wd="220px"
+          wd="47%"
           type="text"
           id="email_text_input"
           value={value}
@@ -233,7 +235,7 @@ export function EmailTextInputBox({
         />
         <AtSign>@</AtSign>
         <Input
-          wd="220px"
+          wd="47%"
           type="text"
           value={value2}
           {...register('email2', {

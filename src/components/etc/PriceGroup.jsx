@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import plus from '../../assets/icon-plus-line.svg';
-import minus from '../../assets/icon-minus-line.svg';
 
 export default function PriceGroup({ value, price }) {
   return (
@@ -15,32 +13,6 @@ const Warpper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  position: relative;
-  &::after {
-    content: '';
-    width: ${(props) =>
-      props.value === '상품 할인'
-        ? '34px'
-        : props.value === '총 상품금액'
-        ? '34px'
-        : '0'};
-    height: 34px;
-    border-radius: 50%;
-    background-color: #fff;
-    background-image: ${(props) =>
-      props.value === '총 상품금액'
-        ? `url(${minus})`
-        : props.value === '상품 할인'
-        ? `url(${plus})`
-        : null};
-    background-repeat: no-repeat;
-    background-size: 18.89px;
-    background-position: center;
-    position: absolute;
-    right: -104px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
 `;
 
 const TotalTxt = styled.p`
@@ -49,6 +21,9 @@ const TotalTxt = styled.p`
   line-height: 1.251875;
   margin-bottom: ${(props) =>
     props.value === '결제 예정 금액' ? '5px' : '12px'};
+  @media ${(props) => props.theme.mobile} {
+    font-size: 12px;
+  }
 `;
 
 const TotalPrice = styled.p`
@@ -67,5 +42,11 @@ const TotalPrice = styled.p`
     line-height: ${(props) =>
       props.value === '결제 예정 금액' ? '1.252222222222222' : '1.251875'};
     margin-left: 2px;
+    @media ${(props) => props.theme.mobile} {
+      font-size: 14px;
+    }
+  }
+  @media ${(props) => props.theme.mobile} {
+    font-size: 14px;
   }
 `;

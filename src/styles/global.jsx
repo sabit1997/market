@@ -5,7 +5,7 @@ const GlobalStyle = createGlobalStyle`
 ${reset};
 
 * {
-    font-family: 'SpoqaHanSansNeo-M';
+  font-family: 'SpoqaHanSansNeo-M';
   padding: 0;
   margin: 0;
   box-sizing: border-box;

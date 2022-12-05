@@ -1,10 +1,13 @@
 import styled from 'styled-components';
 
 export const Warpper = styled.form`
+  max-width: 550px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 100px;
+  margin: 0 auto;
+  padding: 0 10px;
 `;
 
 export const Logo = styled.img`

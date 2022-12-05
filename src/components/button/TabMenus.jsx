@@ -34,6 +34,12 @@ const OffWarpper = styled.section`
   &:hover {
     background-color: #effff3;
   }
+  @media ${(props) => props.theme.tablet} {
+    width: 120px;
+  }
+  @media ${(props) => props.theme.mobile} {
+    width: 100px;
+  }
 `;
 
 const OnWarpper = styled.section`
@@ -46,6 +52,13 @@ const OnWarpper = styled.section`
   color: #fff;
   padding: 0 15px 0 20px;
   background-color: #21bf48;
+  @media ${(props) => props.theme.tablet} {
+    width: 120px;
+    height: 40px;
+  }
+  @media ${(props) => props.theme.mobile} {
+    width: 120px;
+  }
 `;
 
 const Txt = styled.p`
@@ -53,6 +66,9 @@ const Txt = styled.p`
   font-weight: 500;
   line-height: 1.251875;
   text-align: center;
+  @media ${(props) => props.theme.tablet} {
+    font-size: 12px;
+  }
 `;
 
 const NoticeTxt = styled.span`
@@ -66,4 +82,7 @@ const NoticeTxt = styled.span`
   color: #fff;
   border-radius: 50px;
   text-align: center;
+  @media ${(props) => props.theme.tablet} {
+    font-size: 12px;
+  }
 `;

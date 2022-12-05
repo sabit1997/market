@@ -15,4 +15,7 @@ const PriceTxt = styled.p`
     line-height: 1.252142857142857;
     margin-left: 4px;
   }
+  @media ${(props) => props.theme.mobile} {
+    font-size: 14px;
+  }
 `;

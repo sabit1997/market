@@ -1,3 +1,4 @@
+import { CenterWarpper } from '../../components/common/Common';
 import SellerTopNavBar from '../../components/navBar/SellerTopNavBar';
 import {
   TopSection,
@@ -89,13 +90,13 @@ export default function SellerCenter() {
   ));
 
   return (
-    <>
+    <CenterWarpper>
       <SellerTopNavBar />
       <TopSection>
         <RightWarpper>
           <BoldTxt>판매자센터</BoldTxt>
           <NormalTxt>
-            {productBoxData !== [] ? productBoxData[0].store_name : null}
+            {productBoxData !== [] ? productBoxData[0]?.store_name : null}
           </NormalTxt>
         </RightWarpper>
         <MsIconButton
@@ -111,14 +112,18 @@ export default function SellerCenter() {
         <SideBar>{TabMenuList}</SideBar>
         <ContentsSection>
           <SaleProducTitle>
-            <ProductTitleTxt marginR="473px">상품정보</ProductTitleTxt>
-            <ProductTitleTxt marginR="240px">판매가격</ProductTitleTxt>
-            <ProductTitleTxt marginR="106px">수정</ProductTitleTxt>
-            <ProductTitleTxt>삭제</ProductTitleTxt>
+            <ProductTitleTxt wd="49.93%">상품정보</ProductTitleTxt>
+            <ProductTitleTxt wd="30.62%">판매가격</ProductTitleTxt>
+            <ProductTitleTxt wd="5.55%" minWd="34px" mg="1.38%">
+              수정
+            </ProductTitleTxt>
+            <ProductTitleTxt wd="5.55%" minWd="34px" mg="1.38%">
+              삭제
+            </ProductTitleTxt>
           </SaleProducTitle>
           {productBoxData !== [] ? productBoxList : null}
         </ContentsSection>
       </Main>
-    </>
+    </CenterWarpper>
   );
 }

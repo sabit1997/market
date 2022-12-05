@@ -43,9 +43,13 @@ const Li = styled.li`
   font-weight: 400;
   line-height: 1.251875;
   margin-right: 20px;
+  word-break: keep-all;
   cursor: pointer;
   &:last-child {
     margin-right: 0;
+  }
+  @media ${(props) => props.theme.mobile} {
+    font-size: 12px;
   }
 `;
 

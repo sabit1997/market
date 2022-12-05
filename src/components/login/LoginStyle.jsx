@@ -27,7 +27,7 @@ export const Logo = styled.img`
 
 export const LoginBox = styled.section`
   width: 100%;
-  height: 352px;
+  height: auto;
   margin-bottom: 30px;
   @media screen and (max-width: 390px) {
     width: 100%;

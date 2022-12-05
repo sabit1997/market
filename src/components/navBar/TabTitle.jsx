@@ -45,9 +45,9 @@ export function CartTabTitle(props) {
         allChecked={allChecked}
         onClick={handleSellectAllButton}
       />
-      <Txt marginR="379px">상품정보</Txt>
-      <Txt marginR="238px">수량</Txt>
-      <Txt>상품금액</Txt>
+      <Txt wd="47.73%">상품정보</Txt>
+      <Txt wd="19.37%">수량</Txt>
+      <Txt wd="25.70%">상품금액</Txt>
     </Warpper>
   );
 }
@@ -55,12 +55,10 @@ export function CartTabTitle(props) {
 export function PaymentTabTitle(props) {
   return (
     <Warpper marginB={props.marginB}>
-      <Txt marginR="360px" marginL="261px">
-        상품정보
-      </Txt>
-      <Txt marginR="188px">할인</Txt>
-      <Txt marginR="171px">배송비</Txt>
-      <Txt>주문금액</Txt>
+      <Txt wd="46.01%">상품정보</Txt>
+      <Txt wd="18.12%">할인</Txt>
+      <Txt wd="17.81%">배송비</Txt>
+      <Txt wd="18.04%">주문금액</Txt>
     </Warpper>
   );
 }

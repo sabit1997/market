@@ -20,9 +20,13 @@ export default function SellerTopNavBar() {
 const Warpper = styled.section`
   display: flex;
   align-items: center;
-  width: 1920px;
-  padding: 26px 0 26px 100px;
+  width: 100%;
+  height: 90px;
+  padding-left: 6.94%;
   box-shadow: 0px 4px 5px 0px #0000001a;
+  @media ${(props) => props.theme.tablet} {
+    padding-left: 10px;
+  }
 `;
 
 const Logo = styled.img`

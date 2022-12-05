@@ -240,7 +240,9 @@ export default function Payment() {
               <CheckText marginB="30px" />
               <LButton
                 value="결제하기"
-                margin="0 138px 0 122px"
+                mobileWd="120px"
+                mobileHg="30px"
+                margin="0 0 0 25.41%"
                 onClick={handlePaymentButton}
               />
             </FinalPaymentInfo>

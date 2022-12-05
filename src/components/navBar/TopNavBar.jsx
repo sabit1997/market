@@ -85,7 +85,8 @@ export default function TopNavBar(props) {
             </MoveBtn>
             <MsIconButton
               value="판매자센터"
-              wd="168px"
+              wd="100%"
+              maxWd="168px"
               src={shoppingBag}
               onClick={() => navigate('/sellercenter')}
             />
@@ -115,20 +116,22 @@ const Warpper = styled.section`
   width: 100%;
   height: 90px;
   position: relative;
-  @media ${(props) => props.theme.mobile} {
+  @media ${(props) => props.theme.mobile && props.theme.tablet} {
     width: 100%;
+    height: auto;
     padding-left: 0;
     padding-right: 0;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     height: fit-content;
-    padding-top: 10px;
+    padding-top: 40px;
   }
 `;
 
 const LeftWarpper = styled.div`
   display: flex;
-  @media ${(props) => props.theme.mobile} {
+  @media ${(props) => props.theme.mobile && props.theme.tablet} {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -137,7 +140,8 @@ const LeftWarpper = styled.div`
 
 const ButtonWarpper = styled.div`
   display: flex;
-  @media ${(props) => props.theme.mobile} {
+  align-items: center;
+  @media ${(props) => props.theme.mobile && props.theme.tablet} {
     position: absolute;
     top: 5px;
     right: 5px;
@@ -148,6 +152,9 @@ const Logo = styled.img`
   width: 124px;
   height: 38px;
   margin-right: 30px;
+  @media ${(props) => props.theme.tablet} {
+    margin: 0 0 15px 0;
+  }
   @media ${(props) => props.theme.mobile} {
     margin-right: 0;
     margin-bottom: 10px;
@@ -163,6 +170,9 @@ const Search = styled.section`
   padding: 9px 22px;
   border: 2px solid #21bf48;
   border-radius: 50px;
+  @media ${(props) => props.theme.tablet} {
+    margin-bottom: 15px;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 250px;
     padding: 5px 15px;
@@ -211,6 +221,13 @@ const MoveBtn = styled.button`
   background-position: top center;
   position: relative;
   margin-right: 26px;
+  @media ${(props) => props.theme.tablet} {
+    width: ${(props) =>
+      props.wd === '46px' ? '30px' : props.wd === '56px' ? '28px' : null};
+    height: 45px;
+    background-size: contain;
+    margin-right: 10px;
+  }
   @media ${(props) => props.theme.mobile} {
     width: ${(props) =>
       props.wd === '46px' ? '22px' : props.wd === '56px' ? '25px' : null};
@@ -218,6 +235,7 @@ const MoveBtn = styled.button`
     background-size: contain;
     margin-right: 10px;
   }
+
   &:last-child {
     margin-right: 0;
   }
@@ -232,7 +250,7 @@ const BtnTxt = styled.span`
   position: absolute;
   bottom: 0;
   left: 0;
-  @media ${(props) => props.theme.mobile} {
+  @media ${(props) => props.theme.mobile && props.theme.tablet} {
     display: none;
   }
 `;

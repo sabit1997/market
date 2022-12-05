@@ -5,6 +5,7 @@ export default function MWhiteButton(props) {
     <>
       <Button
         wd={props.wd}
+        mobileWd={props.mobileWd}
         maxWd={props.maxWd}
         marginR={props.marginR}
         onClick={props.onClick}
@@ -28,6 +29,7 @@ const Button = styled.button`
   border-radius: 5px;
   margin-right: ${(props) => props.marginR};
   @media ${(props) => props.theme.mobile} {
+    width: ${(props) => props.mobileWd};
     height: 35px;
     font-size: 12px;
   }

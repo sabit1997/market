@@ -1,11 +1,9 @@
+import { Warpper, Logo, IdInputWarpper } from '../../components/join/JoinStyle';
 import {
-  Warpper,
-  Logo,
   LoginBox,
   LoginSelletor,
   InputBox,
-  IdInputWarpper,
-} from '../../components/join/JoinStyle';
+} from '../../components/login/LoginStyle';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import logo from '../../assets/Logo-hodu.png';
@@ -184,13 +182,13 @@ export default function Join() {
       <Warpper onSubmit={handleJoin}>
         <Logo src={logo} onClick={() => navigate('/')} />
         <LoginBox>
-          <LoginSelletor joinType={joinType} onClick={changeBuyer}>
+          <LoginSelletor loginType={joinType} onClick={changeBuyer}>
             구매회원가입
           </LoginSelletor>
-          <LoginSelletor joinType={joinType} onClick={changeSeller}>
+          <LoginSelletor loginType={joinType} onClick={changeSeller}>
             판매회원가입
           </LoginSelletor>
-          <InputBox joinType={joinType}>
+          <InputBox loginType={joinType}>
             <IdInputWarpper>
               <IdTextInputBox
                 value={userName}
@@ -201,8 +199,10 @@ export default function Join() {
               />
               <MS16pButton
                 value="중복확인"
-                wd="122px"
+                maxWd="122px"
+                wd="26.63%"
                 margin="30px 0 0 12px"
+                mobileMargin="25px 0 0 12px"
                 type="button"
                 username={userName}
                 setAccountValid={setAccountValid}
@@ -286,11 +286,11 @@ export default function Join() {
         {(joinType === 'BUYER' && checked && doubleCheck && isValid) ||
         (joinType === 'SELLER' && checked && doubleCheck && companyNumCheck) ? (
           <>
-            <MButton value="가입하기" wd="480px" />
+            <MButton value="가입하기" wd="100%" maxWd="480px" />
           </>
         ) : (
           <>
-            <MDisabledButton value="가입하기" wd="480px" />
+            <MDisabledButton value="가입하기" wd="100%" />
           </>
         )}
       </Warpper>

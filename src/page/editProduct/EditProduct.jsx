@@ -256,6 +256,7 @@ export default function EditProduct() {
               {firstBtn === true ? (
                 <MS16pButton
                   wd="220px"
+                  mobileWd="120px"
                   margin="0 10px 16px 0"
                   value="택배, 소포, 등기"
                   type="button"
@@ -264,6 +265,7 @@ export default function EditProduct() {
               ) : (
                 <MS16pWhiteButton
                   wd="220px"
+                  mobileWd="120px"
                   margin="0 10px 16px 0"
                   value="택배, 소포, 등기"
                   type="button"
@@ -273,6 +275,7 @@ export default function EditProduct() {
               {secondBtn === true ? (
                 <MS16pButton
                   wd="220px"
+                  mobileWd="120px"
                   value="직접배송(화물배달)"
                   type="button"
                   onClick={handle2Btn}
@@ -280,6 +283,7 @@ export default function EditProduct() {
               ) : (
                 <MS16pWhiteButton
                   wd="220px"
+                  mobileWd="120px"
                   value="직접배송(화물배달)"
                   type="button"
                   onClick={handle2Btn}
@@ -308,8 +312,13 @@ export default function EditProduct() {
             onChange={handleInput}
           />
           <ButtonWarpper>
-            <MWhiteButton wd="200px" value="취소" marginR="14px" />
-            <MButton wd="200px" value="저장하기" />
+            <MWhiteButton
+              wd="200px"
+              mobileWd="100px"
+              value="취소"
+              marginR="14px"
+            />
+            <MButton wd="200px" mobileWd="100px" value="저장하기" />
           </ButtonWarpper>
         </EditSection>
       </Main>

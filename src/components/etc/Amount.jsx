@@ -16,6 +16,7 @@ export default function Amount({
   onClick,
   value,
   loginType,
+  justSelf,
 }) {
   const [overValue, setOverValue] = useState(false);
   const location = useLocation();
@@ -71,7 +72,7 @@ export default function Amount({
   }
 
   return (
-    <Quantity margin={margin} onClick={onClick}>
+    <Quantity margin={margin} justSelf={justSelf} onClick={onClick}>
       <QuantityBtn onClick={handleMinusButton} />
       <QuantityNum>{value}</QuantityNum>
       <QuantityBtn onClick={handlePlusButton} overValue={overValue} />
@@ -80,7 +81,8 @@ export default function Amount({
 }
 
 const Quantity = styled.div`
-  width: 150px;
+  max-width: 150px;
+  width: 80%;
   height: 50px;
   border-radius: 5px;
   display: flex;
@@ -89,15 +91,16 @@ const Quantity = styled.div`
   margin: ${(props) => props.margin};
   border: 1px solid #c4c4c4c4;
   overflow: hidden;
+  justify-self: ${(props) => props.justSelf};
   @media screen and (max-width: 390px) {
-    width: 85px;
+    max-width: 85px;
     height: 30px;
     margin: ${(props) => (props.margin === '52px 0 0' ? '20px 0 0' : null)};
   }
 `;
 
 const QuantityBtn = styled.button`
-  width: 47px;
+  width: 33.33%;
   height: 100%;
   background-color: #fff;
   background-image: url(${minusIcon});
@@ -106,7 +109,6 @@ const QuantityBtn = styled.button`
   background-position: center;
   border-right: 1px solid #c4c4c4c4;
   @media screen and (max-width: 390px) {
-    width: 30px;
     background-size: 12px;
   }
   cursor: pointer;

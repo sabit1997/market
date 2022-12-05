@@ -40,7 +40,7 @@ export function DeleteModal({
   return (
     <ModalWarpper>
       <CloseButton onClick={handleCloseBtn} />
-      <AlertTxt marginB="40px">상품을 삭제하시겠습니까?</AlertTxt>
+      <AlertTxt marginB="20%">상품을 삭제하시겠습니까?</AlertTxt>
       <div>
         <SWhiteButton
           wd="100px"
@@ -48,7 +48,13 @@ export function DeleteModal({
           marginR="10px"
           onClick={handleCloseBtn}
         />
-        <SButton wd="100px" value="확인" onClick={deleteProduct} />
+        <SButton
+          wd="100px"
+          value="확인"
+          mobileWd="40px"
+          mobileHg="20px"
+          onClick={deleteProduct}
+        />
       </div>
     </ModalWarpper>
   );
@@ -102,7 +108,7 @@ export function ChangeNumModal({
       <CloseButton onClick={handleCloseBtn} />
       <AlertContentsWarp>
         <Amount
-          margin="0 0 26px 0"
+          margin="0 0 13% 0"
           value={changeQuantity}
           setQuantity={setQuantity}
           quantity={quantity}
@@ -117,7 +123,13 @@ export function ChangeNumModal({
             marginR="10px"
             onClick={handleCloseBtn}
           />
-          <SButton wd="100px" value="수정" onClick={handleNumChangeBtn} />
+          <SButton
+            wd="100px"
+            mobileWd="40px"
+            mobileHg="20px"
+            value="수정"
+            onClick={handleNumChangeBtn}
+          />
         </div>
       </AlertContentsWarp>
     </ModalWarpper>
@@ -149,6 +161,8 @@ export function NotLogin({ setAlertModal }) {
         <SButton
           wd="100px"
           value="예"
+          mobileWd="40px"
+          mobileHg="20px"
           onClick={() => {
             navigate('/login');
           }}
@@ -183,6 +197,8 @@ export function ExistsModal({ setExistModal }) {
         <SButton
           wd="100px"
           value="예"
+          mobileWd="40px"
+          mobileHg="20px"
           onClick={() => {
             navigate('/cart');
           }}
