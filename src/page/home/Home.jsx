@@ -8,6 +8,7 @@ import {
 } from '../../components/home/HomeStyle';
 import Footer from '../../components/footer/Footer';
 import Carousel from '../../components/carousel/Carousel';
+import Loading from '../../components/etc/Loading';
 import { useEffect, useState } from 'react';
 import client from '../../client/client';
 import axios from 'axios';
@@ -18,16 +19,19 @@ export default function BuyerHome() {
   const [productData, setProductData] = useState([]);
   const [next, setNext] = useState('');
   const [page, setPage] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   // 상품 목록 페이지 가져오기
   useEffect(() => {
     if (next === '') {
+      setLoading(true);
       client
         .get('/products/')
         .then((res) => {
           console.log(res);
           setNext(res.data.next);
           setProductData([res.data.results]);
+          setLoading(false);
         })
         .catch((error) => console.log(error));
     } else if (next !== null) {
@@ -38,6 +42,7 @@ export default function BuyerHome() {
           const results = res.data.results;
           setProductData([...productData, results]);
           setNext(res.data.next);
+          setLoading(false);
         })
         .catch((error) => console.log(error));
     }
@@ -68,6 +73,7 @@ export default function BuyerHome() {
 
   return (
     <PageWarpper>
+      {loading ? <Loading /> : null}
       {loginType === 'BUYER' || loginType === null ? (
         <TopNavBar />
       ) : loginType === 'SELLER' ? (

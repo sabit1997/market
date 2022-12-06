@@ -26,6 +26,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import instance from '../../client/instance';
 import { CenterWarpper } from '../../components/common/Common';
+import Loading from '../../components/etc/Loading';
 
 export default function ProductDetail() {
   const { product_id } = useParams();
@@ -35,13 +36,16 @@ export default function ProductDetail() {
   const [excessModal, setExcessModal] = useState(false);
   const navigate = useNavigate();
   const loginType = localStorage.getItem('type');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     client
       .get(`/products/${product_id}/`)
       .then((res) => {
         console.log(res);
         setProductDetail(res.data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -131,6 +135,7 @@ export default function ProductDetail() {
   console.log(amountQuantity);
   return (
     <CenterWarpper>
+      {loading ? <Loading /> : null}
       <TopNavBar value={loginType} />
       <ProductWarpper>
         <ProductImg src={productDetail.image} />
