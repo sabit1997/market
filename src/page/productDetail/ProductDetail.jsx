@@ -14,7 +14,11 @@ import {
   TotalQuantityNum,
   ButtonWarpper,
 } from '../../components/productDetail/ProductDetail';
-import { ExistsModal, ExcessModal } from '../../components/modal/Modal';
+import {
+  ExistsModal,
+  ExcessModal,
+  NotLogin,
+} from '../../components/modal/Modal';
 import Amount from '../../components/etc/Amount';
 import LPrice from '../../components/etc/LPrice';
 import MButton from '../../components/button/MButton';
@@ -34,9 +38,11 @@ export default function ProductDetail() {
   const [amountQuantity, setAmountQuantity] = useState(1);
   const [existModal, setExistModal] = useState(false);
   const [excessModal, setExcessModal] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
   const navigate = useNavigate();
   const loginType = localStorage.getItem('type');
   const [loading, setLoading] = useState(false);
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
     setLoading(true);
@@ -87,7 +93,7 @@ export default function ProductDetail() {
 
   async function handleButton() {
     const condition = await isCheck();
-    if (condition) {
+    if (condition && token !== null) {
       try {
         instance.post('/cart/', {
           product_id: product_id,
@@ -104,7 +110,7 @@ export default function ProductDetail() {
           setExcessModal(true);
         }
       }
-    } else {
+    } else if (!condition && token !== null) {
       try {
         instance.post('/cart/', {
           product_id: product_id,
@@ -122,14 +128,20 @@ export default function ProductDetail() {
           setExcessModal(true);
         }
       }
+    } else {
+      setLoginModal(true);
     }
   }
 
   // 바로 구매 버튼 클릭
   function handlePaymentButton() {
-    navigate('/payment', {
-      state: { orderProduct: [productDetail], quantity: [amountQuantity] },
-    });
+    if (token !== null) {
+      navigate('/payment', {
+        state: { orderProduct: [productDetail], quantity: [amountQuantity] },
+      });
+    } else {
+      setLoginModal(true);
+    }
   }
 
   console.log(amountQuantity);
@@ -211,6 +223,8 @@ export default function ProductDetail() {
         <ExistsModal setExistModal={setExistModal} />
       ) : excessModal === true ? (
         <ExcessModal setExcessModal={setExcessModal} />
+      ) : loginModal ? (
+        <NotLogin setAlertModal={setLoginModal} />
       ) : null}
     </CenterWarpper>
   );
