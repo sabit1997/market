@@ -31,10 +31,8 @@ export default function ProductDetail() {
   const { product_id } = useParams();
   const [productDetail, setProductDetail] = useState('');
   const [amountQuantity, setAmountQuantity] = useState(1);
-  const [cartData, setCartData] = useState([]);
   const [existModal, setExistModal] = useState(false);
   const [excessModal, setExcessModal] = useState(false);
-  const [check, setCheck] = useState(true);
   const navigate = useNavigate();
   const loginType = localStorage.getItem('type');
 
@@ -69,79 +67,57 @@ export default function ProductDetail() {
   }
 
   // 장바구니에 있는지 check
-  function isCheck() {
-    instance
-      .get('/cart/')
-      .then((res) => {
-        console.log(`axios 실행완료 ${res}`);
-        setCartData(res.data.results);
-        console.log(cartData);
-        const condition = cartData.filter(
-          (data) => data.product_id === productDetail.product_id
-        ).length;
-        if (condition === 0) {
-          setCheck((check) => {
-            return check;
-          });
-          console.log('트루 됨');
-          console.log(check);
-        } else if (condition > 0) {
-          setCheck((check) => {
-            return !check;
-          });
-          console.log(check);
-          console.log('폴스 됨');
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  async function isCheck() {
+    const res = await instance.get('/cart/');
+    const result = res.data.results.filter(
+      (data) => data.product_id === productDetail.product_id
+    ).length;
+    if (result === 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   // 장바구니에 넣기
-  // setState 바로 변경되지 않음
+
   async function handleButton() {
-    isCheck();
-    if (check) {
-      instance
-        .post('/cart/', {
+    const condition = await isCheck();
+    if (condition) {
+      try {
+        instance.post('/cart/', {
           product_id: product_id,
           quantity: amountQuantity,
           check: true,
-        })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((error) => {
-          console.log(error);
-          if (
-            error.response.data.FAIL_message ===
-            '현재 재고보다 더 많은 수량을 담을 수 없습니다.'
-          ) {
-            setExcessModal(true);
-          }
         });
-    } else if (!check) {
-      instance
-        .post('/cart/', {
+        console.log(condition);
+        console.log('트루');
+      } catch (error) {
+        if (
+          error.response.data.FAIL_message ===
+          '현재 재고보다 더 많은 수량을 담을 수 없습니다.'
+        ) {
+          setExcessModal(true);
+        }
+      }
+    } else {
+      try {
+        instance.post('/cart/', {
           product_id: product_id,
           quantity: amountQuantity,
           check: true,
-        })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((error) => {
-          console.log(error);
-          if (
-            error.response.data.FAIL_message ===
-            '현재 재고보다 더 많은 수량을 담을 수 없습니다.'
-          ) {
-            setExcessModal(true);
-          }
         });
-      console.log('중복');
-      setExistModal(true);
+        console.log('폴스');
+        console.log(condition);
+        setExistModal(true);
+      } catch (error) {
+        if (
+          error.response.data.FAIL_message ===
+          '현재 재고보다 더 많은 수량을 담을 수 없습니다.'
+        ) {
+          setExcessModal(true);
+        }
+      }
     }
   }
 
