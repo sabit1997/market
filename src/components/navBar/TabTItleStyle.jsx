@@ -36,8 +36,8 @@ export const AllCheckBtn = styled.button`
     }
   }
   @media ${(props) => props.theme.mobile} {
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
   }
 `;
 

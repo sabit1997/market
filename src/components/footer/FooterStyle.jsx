@@ -17,6 +17,7 @@ export const FooterWarpper = styled.footer`
 
 export const FooterNav = styled.ul`
   display: flex;
+  flex-wrap: wrap;
   @media ${(props) => props.theme.mobile} {
     flex-direction: column;
   }
@@ -51,7 +52,8 @@ export const FooterLi = styled.li`
 `;
 
 export const TopWarpper = styled.div`
-  width: 100%;
+  width: 66.66%;
+  max-width: 1280px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -98,12 +100,14 @@ export const SnsItem = styled.li`
 `;
 
 export const Dl = styled.dl`
-  width: 100%;
+  width: 66.66%;
+  max-width: 1280px;
   font-size: 14px;
   font-weight: 400;
   line-height: 1.714285714285714;
   color: #767676;
   position: relative;
+  word-break: keep-all;
   @media ${(props) => props.theme.mobile} {
     width: 100%;
     font-size: 9px;
@@ -111,14 +115,21 @@ export const Dl = styled.dl`
 `;
 
 export const Dt = styled.dt`
+  &:nth-child(5) {
+    margin-right: 2px;
+    float: left;
+  }
+  &:nth-child(7) {
+    margin-right: 2px;
+    float: left;
+  }
   &::after {
     content: ' : ';
   }
 `;
 
 export const Dd = styled.dd`
-  &:first-child {
+  &:nth-child(2) {
     font-weight: 700;
-    /* 적용안됨 */
   }
 `;

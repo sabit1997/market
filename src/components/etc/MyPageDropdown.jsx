@@ -45,11 +45,14 @@ const Warpper = styled.ul`
   transform: translateX(-50%);
   background-color: #fff;
   z-index: 10;
+  @media ${(props) => props.theme.tablet} {
+    left: -75%;
+  }
   @media ${(props) => props.theme.mobile} {
     width: 80px;
     height: fit-content;
     top: 33px;
-    left: -50%;
+    left: 0;
   }
 `;
 

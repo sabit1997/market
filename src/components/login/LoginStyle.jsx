@@ -117,4 +117,7 @@ export const ErrorMessage = styled.span`
   color: #eb5757;
   margin-top: -10px;
   margin-bottom: 26px;
+  @media ${(props) => props.theme.mobile} {
+    font-size: 12px;
+  }
 `;

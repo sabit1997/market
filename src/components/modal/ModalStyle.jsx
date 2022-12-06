@@ -11,7 +11,7 @@ export const ModalWarpper = styled.article`
   padding-bottom: 40px;
   border: 1px solid #c4c4c4;
   background-color: #fff;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

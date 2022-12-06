@@ -29,9 +29,11 @@ export const TotalPriceSection = styled.section`
   justify-content: space-around;
   align-items: center;
   border-radius: 10px;
-  margin-top: 70px;
-  margin-bottom: 40px;
+  margin: 70px 0 40px;
   position: relative;
+  @media ${(props) => props.theme.mobile} {
+    margin: 20px 0 10px;
+  }
 `;
 
 export const Icon = styled.div`

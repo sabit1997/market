@@ -144,7 +144,7 @@ const ButtonWarpper = styled.div`
   @media ${(props) => props.theme.mobile && props.theme.tablet} {
     position: absolute;
     top: 5px;
-    right: 5px;
+    right: 15px;
   }
 `;
 

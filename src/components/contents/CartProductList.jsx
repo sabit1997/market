@@ -173,12 +173,12 @@ const Warpper = styled.section`
   border-radius: 10px;
   padding: 20px 0 20px 1.56%;
   margin-bottom: 10px;
-  margin-bottom: 10px;
   position: relative;
   &:nth-child(3) {
     margin-top: 35px;
-  }
-  @media ${(props) => props.theme.mobile} {
+    @media ${(props) => props.theme.mobile} {
+      margin-top: 10px;
+    }
   }
 `;
 
@@ -209,8 +209,8 @@ const CheckButton = styled.label`
     }
   }
   @media ${(props) => props.theme.mobile} {
-    width: 15px;
-    height: 15px;
+    width: 16px;
+    height: 16px;
   }
 `;
 

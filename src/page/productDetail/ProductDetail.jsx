@@ -200,11 +200,6 @@ export default function ProductDetail() {
             </ButtonWarpper>
           )}
         </ProductInfo>
-        {existModal === true ? (
-          <ExistsModal setExistModal={setExistModal} />
-        ) : excessModal === true ? (
-          <ExcessModal setExcessModal={setExcessModal} />
-        ) : null}
       </ProductWarpper>
       <ButtonWarpper>
         <TabActiveButton value="버튼" />
@@ -212,6 +207,11 @@ export default function ProductDetail() {
         <TabDisabledButton value="Q&A" />
         <TabDisabledButton value="반품/교환정보" />
       </ButtonWarpper>
+      {existModal === true ? (
+        <ExistsModal setExistModal={setExistModal} />
+      ) : excessModal === true ? (
+        <ExcessModal setExcessModal={setExcessModal} />
+      ) : null}
     </CenterWarpper>
   );
 }
