@@ -18,6 +18,7 @@ import {
   ExistsModal,
   ExcessModal,
   NotLogin,
+  SuccessCart,
 } from '../../components/modal/Modal';
 import Amount from '../../components/etc/Amount';
 import LPrice from '../../components/etc/LPrice';
@@ -39,10 +40,10 @@ export default function ProductDetail() {
   const [existModal, setExistModal] = useState(false);
   const [excessModal, setExcessModal] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
+  const [successCart, setSuccessCart] = useState(false);
   const navigate = useNavigate();
   const loginType = localStorage.getItem('type');
   const [loading, setLoading] = useState(false);
-  const token = localStorage.getItem('token');
 
   useEffect(() => {
     setLoading(true);
@@ -57,6 +58,16 @@ export default function ProductDetail() {
         console.log(error);
       });
   }, [product_id]);
+
+  console.log(localStorage.getItem('token'));
+
+  async function getToken() {
+    if (localStorage.getItem('token') === null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   console.log(amountQuantity);
 
@@ -92,50 +103,57 @@ export default function ProductDetail() {
   // 장바구니에 넣기
 
   async function handleButton() {
+    const token = await getToken();
     const condition = await isCheck();
-    if (condition && token !== null) {
-      try {
-        instance.post('/cart/', {
-          product_id: product_id,
-          quantity: amountQuantity,
-          check: true,
-        });
-        console.log(condition);
-        console.log('트루');
-      } catch (error) {
-        if (
-          error.response.data.FAIL_message ===
-          '현재 재고보다 더 많은 수량을 담을 수 없습니다.'
-        ) {
-          setExcessModal(true);
-        }
-      }
-    } else if (!condition && token !== null) {
-      try {
-        instance.post('/cart/', {
-          product_id: product_id,
-          quantity: amountQuantity,
-          check: true,
-        });
-        console.log('폴스');
-        console.log(condition);
-        setExistModal(true);
-      } catch (error) {
-        if (
-          error.response.data.FAIL_message ===
-          '현재 재고보다 더 많은 수량을 담을 수 없습니다.'
-        ) {
-          setExcessModal(true);
-        }
-      }
-    } else {
+    console.log(token);
+    if (!token) {
       setLoginModal(true);
+    } else {
+      if (condition) {
+        try {
+          instance.post('/cart/', {
+            product_id: product_id,
+            quantity: amountQuantity,
+            check: true,
+          });
+          console.log(condition);
+          console.log('트루');
+          setSuccessCart(true);
+        } catch (error) {
+          if (
+            error.response.data.FAIL_message ===
+            '현재 재고보다 더 많은 수량을 담을 수 없습니다.'
+          ) {
+            setExcessModal(true);
+          }
+        }
+      } else if (!condition) {
+        try {
+          instance.post('/cart/', {
+            product_id: product_id,
+            quantity: amountQuantity,
+            check: true,
+          });
+          console.log('폴스');
+          console.log(condition);
+          setExistModal(true);
+        } catch (error) {
+          if (
+            error.response.data.FAIL_message ===
+            '현재 재고보다 더 많은 수량을 담을 수 없습니다.'
+          ) {
+            setExcessModal(true);
+          }
+        }
+      }
     }
   }
 
   // 바로 구매 버튼 클릭
-  function handlePaymentButton() {
-    if (token !== null) {
+  async function handlePaymentButton() {
+    const token = await getToken();
+    console.log(token);
+    if (token) {
       navigate('/payment', {
         state: { orderProduct: [productDetail], quantity: [amountQuantity] },
       });
@@ -225,6 +243,8 @@ export default function ProductDetail() {
         <ExcessModal setExcessModal={setExcessModal} />
       ) : loginModal ? (
         <NotLogin setAlertModal={setLoginModal} />
+      ) : successCart ? (
+        <SuccessCart setSuccessCart={setSuccessCart} />
       ) : null}
     </CenterWarpper>
   );

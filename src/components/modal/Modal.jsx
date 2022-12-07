@@ -7,7 +7,7 @@ import {
   AlertTxt,
   AlertContentsWarp,
 } from './ModalStyle';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import instance from '../../client/instance';
 
@@ -17,25 +17,46 @@ export function DeleteModal({
   cartItemId,
   setCartData,
   cartData,
+  productBoxData,
+  i,
+  setProductBoxData,
 }) {
+  const location = useLocation();
   function handleCloseBtn() {
     setDeleteModal(false);
   }
 
   // 상품 삭제
   function deleteProduct() {
-    instance
-      .delete(`/cart/${cartItemId}/`)
-      .then((res) => {
-        console.log(res);
-        if (res.status === 204) {
-          setCartData(
-            cartData.filter((item) => item.cart_item_id !== cartItemId)
-          );
-        }
-        setDeleteModal(false);
-      })
-      .catch((error) => console.log(error));
+    if (location.pathname === '/cart ') {
+      instance
+        .delete(`/cart/${cartItemId}/`)
+        .then((res) => {
+          console.log(res);
+          if (res.status === 204) {
+            setCartData(
+              cartData.filter((item) => item.cart_item_id !== cartItemId)
+            );
+          }
+          setDeleteModal(false);
+        })
+        .catch((error) => console.log(error));
+    } else if (location.pathname === '/sellercenter') {
+      instance
+        .delete(`/products/${productBoxData[i].product_id}/`)
+        .then((res) => {
+          if (res.status === 204) {
+            setProductBoxData(
+              productBoxData.filter(
+                (el) => el.product_id !== productBoxData[i].product_id
+              )
+            );
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
   return (
     <ModalWarpper>
@@ -172,6 +193,7 @@ export function NotLogin({ setAlertModal }) {
   );
 }
 
+// 이미 존재하고 있는 상품 모달
 export function ExistsModal({ setExistModal }) {
   const navigate = useNavigate();
   function handleCloseBtn() {
@@ -208,6 +230,7 @@ export function ExistsModal({ setExistModal }) {
   );
 }
 
+// 재고 초과 모달
 export function ExcessModal({ setExcessModal }) {
   function handleCloseBtn() {
     setExcessModal(false);
@@ -224,10 +247,42 @@ export function ExcessModal({ setExcessModal }) {
         wd="100px"
         value="닫기"
         marginR="10px"
-        onClick={() => {
-          setExcessModal(false);
-        }}
+        onClick={handleCloseBtn}
       />
+    </ModalWarpper>
+  );
+}
+
+export function SuccessCart({ setSuccessCart }) {
+  const navigate = useNavigate();
+  function handleCloseBtn() {
+    setSuccessCart(false);
+  }
+  return (
+    <ModalWarpper>
+      <CloseButton onClick={handleCloseBtn} />
+      <AlertTxt marginB="30px">
+        장바구니에 담겼습니다.
+        <br />
+        이동하시겠습니까?
+      </AlertTxt>
+      <div>
+        <SWhiteButton
+          wd="100px"
+          value="닫기"
+          marginR="10px"
+          onClick={handleCloseBtn}
+        />
+        <SButton
+          wd="100px"
+          value="예"
+          mobileWd="40px"
+          mobileHg="20px"
+          onClick={() => {
+            navigate('/cart');
+          }}
+        />
+      </div>
     </ModalWarpper>
   );
 }
