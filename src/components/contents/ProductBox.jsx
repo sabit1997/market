@@ -1,25 +1,14 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import instance from '../../client/instance';
+import { DeleteModal } from '../modal/Modal';
 
 function ProductBox({ i, productBoxData, setProductBoxData }) {
   const navigate = useNavigate();
+  const [deleteModal, setDeleteModal] = useState(false);
   // 상품 삭제
   function handleDelteBtn() {
-    instance
-      .delete(`/products/${productBoxData[i].product_id}/`)
-      .then((res) => {
-        if (res.status === 204) {
-          setProductBoxData(
-            productBoxData.filter(
-              (el) => el.product_id !== productBoxData[i].product_id
-            )
-          );
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    setDeleteModal(true);
   }
 
   return (
@@ -45,6 +34,14 @@ function ProductBox({ i, productBoxData, setProductBoxData }) {
       <Btn bg="#fff" onClick={handleDelteBtn}>
         삭제
       </Btn>
+      {deleteModal ? (
+        <DeleteModal
+          productBoxData={productBoxData}
+          setProductBoxData={setProductBoxData}
+          i={i}
+          setDeleteModal={setDeleteModal}
+        />
+      ) : null}
     </Warpper>
   );
 }
