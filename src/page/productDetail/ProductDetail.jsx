@@ -13,7 +13,7 @@ import {
   TotalQuantity,
   TotalQuantityNum,
   ButtonWarpper,
-} from '../../components/productDetail/ProductDetail';
+} from './ProductDetailStyle';
 import {
   ExistsModal,
   ExcessModal,
