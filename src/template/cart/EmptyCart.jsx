@@ -1,4 +1,4 @@
-import { EmptyTxt } from '../../components/cart/CartStyle';
+import { EmptyTxt } from './CartStyle';
 
 export default function EmptyCart() {
   return (

@@ -13,7 +13,7 @@ import {
   PriceCount,
   PriceCountItem,
   PriceItemTxt,
-} from '../../components/payment/Payment';
+} from './PaymentStyle';
 import {
   NameInput,
   PhoneNumInput,
@@ -22,7 +22,7 @@ import {
   AddressInput,
   AddressMessageInput,
 } from '../../components/input/PaymentInputs';
-import PaymentWayItem from '../../components/payment/PaymentWayItem';
+import PaymentWayItem from './PaymentWayItem';
 import { CenterWarpper } from '../../components/common/Common';
 import TopNavBar from '../../components/navBar/TopNavBar';
 import { PaymentTabTitle } from '../../components/navBar/TabTitle';
@@ -30,119 +30,29 @@ import ProductInfo from '../../components/contents/ProductInfo';
 import SPrice from '../../components/etc/SPrice';
 import CheckText from '../../components/etc/CheckText';
 import LButton from '../../components/button/LButton';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import instance from '../../client/instance';
 
-export default function Payment() {
-  const navigate = useNavigate();
-  const paymentWay = [
-    '신용/체크카드',
-    '무통장 입금',
-    '휴대폰 결제',
-    '네이버페이',
-    '카카오페이',
-  ];
-
-  const [checked, setChecked] = useState({});
-  const [payMethod, setPayMethod] = useState('');
-
-  useEffect(() => {
-    const method = paymentWay.filter((_, i) => checked[`pay${i}`] === true);
-    switch (method[0]) {
-      case '신용/체크카드':
-        setPayMethod('CARD');
-        break;
-      case '무통장 입금':
-        setPayMethod('DEPOSIT');
-        break;
-      case '휴대폰 결제':
-        setPayMethod('PHONE_PAYMENT');
-        break;
-      case '네이버페이':
-        setPayMethod('NAVERPAY');
-        break;
-      case '카카오페이':
-        setPayMethod('KAKAOPAY ');
-        break;
-      default:
-        break;
-    }
-  }, [checked, paymentWay]);
-
-  const [inputs, setInputs] = useState({
-    receiver: '',
-    phone_number1: '',
-    phone_number2: '',
-    phone_number3: '',
-    zip_code: '',
-    address1: '',
-    address2: '',
-    address_message: '',
-  });
-
-  const {
-    receiver,
-    phone_number1,
-    phone_number2,
-    phone_number3,
-    zip_code,
-    address1,
-    address2,
-    address_message,
-  } = inputs;
-
-  function onChange(e) {
-    const { value, name } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
-  }
-
-  console.log(inputs);
-
-  const location = useLocation();
-  const orderInfo = location.state.orderProduct;
-  const quantity = location.state.quantity;
-  console.log(orderInfo);
-  console.log(quantity);
-
-  const totalPrice = orderInfo
-    .map((x, i) => x.shipping_fee + x.price * quantity[i])
-    .reduce((pre, curr) => pre + curr, 0);
-
-  const orderPrice = orderInfo
-    .map((x, i) => x.price * quantity[i])
-    .reduce((pre, curr) => pre + curr, 0);
-  const totalShippingFee = orderInfo
-    .map((x) => x.shipping_fee)
-    .reduce((pre, curr) => pre + curr, 0);
-
-  // 결제
-  function handlePaymentButton() {
-    instance
-      .post('/order/', {
-        total_price: totalPrice,
-        order_kind: 'cart_order',
-        receiver: receiver,
-        receiver_phone_number: phone_number1 + phone_number2 + phone_number3,
-        address: address1 + address2,
-        address_message: address_message,
-        payment_method: payMethod,
-      })
-      .then((res) => {
-        navigate('/ordercompleted', {
-          state: {
-            orderInfo: orderInfo,
-            quantity: quantity,
-            orderNum: res.data.order_number,
-          },
-        });
-      })
-      .catch((error) => console.log(error));
-  }
-
+export default function Payment({
+  orderInfo,
+  quantity,
+  totalPrice,
+  receiver,
+  onChange,
+  phone_number1,
+  phone_number2,
+  phone_number3,
+  zip_code,
+  address1,
+  address2,
+  setInputs,
+  inputs,
+  address_message,
+  checked,
+  setChecked,
+  paymentWay,
+  orderPrice,
+  totalShippingFee,
+  handlePaymentButton,
+}) {
   return (
     <CenterWarpper>
       <TopNavBar />

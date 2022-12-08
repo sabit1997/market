@@ -1,17 +1,17 @@
 import { Routes, Route } from 'react-router-dom';
 import { ProductDataProvider } from './context/ProductDataContext';
 import GlobalStyle from './styles/global';
-import Home from './page/home/Home';
-import Login from './page/login/Login';
-import Join from './page/join/Join';
-import Cart from './page/cart/Cart';
-import Payment from './page/payment/Payment';
-import NotFound from './page/NotFound/NotFound';
-import ProductDetail from './page/productDetail/ProductDetail';
-import SellerCenter from './page/sellerCenter/SellerCenter';
-import EditProduct from './page/editProduct/EditProduct';
-import OrderCompleted from './page/OrderCompleted';
-import SearchResult from './page/search/SearchResult';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import JoinPage from './pages/JoinPage';
+import CartPage from './pages/CartPage';
+import PaymentPage from './pages/PaymentPage';
+import NotFound from './template/NotFound/NotFound';
+import ProductDetailPage from './pages/ProductDetailPage';
+import SellerCenterPage from './pages/SellerCenterPage';
+import EditProductPage from './pages/EditProductPage';
+import OrderCompletedPage from './pages/OrderCompletedPage';
+import SearchResult from './template/search/SearchResult';
 import './App.css';
 import { ThemeProvider } from 'styled-components';
 import theme from './styles/theme';
@@ -21,15 +21,15 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/join" element={<Join />} />
-          <Route path="/detail/:product_id" element={<ProductDetail />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/sellercenter" element={<SellerCenter />} />
-          <Route path="/productedit" element={<EditProduct />} />
-          <Route path="/ordercompleted" element={<OrderCompleted />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/join" element={<JoinPage />} />
+          <Route path="/detail/:product_id" element={<ProductDetailPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/sellercenter" element={<SellerCenterPage />} />
+          <Route path="/productedit" element={<EditProductPage />} />
+          <Route path="/ordercompleted" element={<OrderCompletedPage />} />
           <Route path="/result" element={<SearchResult />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
