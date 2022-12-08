@@ -1,70 +1,163 @@
-# Getting Started with Create React App
+<h1 align= 'center'>🛒오픈마켓🛒</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 1. 프로젝트 개요
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+기간 : 2022.08 ~ 2022.12.8
 
-### `npm start`
+> 오픈마켓 서비스는 판매자와 구매자를 구별하여 판매자가 상품을 등록, 판매하며 구매자는 구매하는 서비스입니다.<br>
+> 상품을 판매하려고 한다면 판매자로 로그인하여 상품 정보를 등록 및 수정할 수 있습니다. 판매자가 상품을 구매하는 것은 불가능합니다. 오픈마켓에 등록되어 있는 상품을 구매하고자 한다면 상품의 세부사항을 확인한 뒤, 장바구니에 넣어, 상품을 구매할 수 있습니다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+배포 사이트 : [https://market-delta-murex.vercel.app/](https://market-delta-murex.vercel.app/)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 2. 기술
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- React
+- styled-component
+- react-hook-form
+- 버전
 
-### `npm run build`
+  ```json
+  "react": "^18.2.0",
+  "react-hook-form": "^7.37.0",
+  "react-router-dom": "^6.3.0",
+  "axios": "^0.27.2",
+  "styled-components": "^5.3.5",
+  "react-daum-postcode": "^3.1.1",
+  ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 3. 개발 환경
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- git
+- github
+- figma
 
-### `npm run eject`
+## 4. 주요 기능
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 계정
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- 회원가입
+- 로그인/로그아웃
+- 유효성 검사
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 상품 검색
 
-## Learn More
+### 상품 상세
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- 바로 구매
+- 장바구니에 넣기
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 장바구니
 
-### Code Splitting
+- 전체 선택/해제
+- 수량 변경
+- 상품 삭제
+- 전체, 개별 주문
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 결제
 
-### Analyzing the Bundle Size
+- 우편 번호 검색
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 판매자 센터
 
-### Making a Progressive Web App
+- 상품 등록
+- 상품 수정
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 기타
 
-### Advanced Configuration
+- 모달
+- 캐러셀
+- 로딩 화면
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
+### 실제 작동 예시
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<center>
 
-### `npm run build` fails to minify
+|                                                      회원가입                                                       |                                                      로그인                                                       |
+| :-----------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------: |
+| ![회원가입](https://user-images.githubusercontent.com/100986977/206175026-d6b809b8-a63c-421f-b0f0-23f30a9bdeea.gif) | ![로그인](https://user-images.githubusercontent.com/100986977/206177063-31ccac11-fc7c-4cb7-b81e-9e85b73182e2.gif) |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+|                                                      로그아웃                                                       |                                                      유효성 검사                                                      |
+| :-----------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------: |
+| ![로그아웃](https://user-images.githubusercontent.com/100986977/206175037-497da138-0ad0-4c8c-8889-ccb8c916e363.gif) | ![유효성검사](https://user-images.githubusercontent.com/100986977/206174889-ed13bf33-3b3c-43eb-9fcb-59180783d049.gif) |
+
+|                                                      상품 검색                                                       |                                                      바로 구매                                                       |
+| :------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------: |
+| ![상품 검색](https://user-images.githubusercontent.com/100986977/206175041-cf923e04-8b15-4d3e-b5d6-337bd96f3401.gif) | ![바로 구매](https://user-images.githubusercontent.com/100986977/206174929-6f8acc9c-38ad-4b39-adb9-9754565edc53.gif) |
+
+|                                                      장바구니에 넣기                                                       |                                                      전체 선택/해제                                                       |
+| :------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------: |
+| ![장바구니에 넣기](https://user-images.githubusercontent.com/100986977/206187645-4419a9c4-152e-4b84-a212-0811c6fe70b3.gif) | ![전체 선택 해제](https://user-images.githubusercontent.com/100986977/206174947-b5c990ac-d4b0-4c2a-a237-876a681e4664.gif) |
+
+|                                                      수량 변경                                                       |                                                      상품 삭제(장바구니)                                                      |
+| :------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------: |
+| ![수량 변경](https://user-images.githubusercontent.com/100986977/206174951-529b4477-d296-4606-82e7-26cc50a0551a.gif) | ![장바구니 상품 삭제](https://user-images.githubusercontent.com/100986977/206177076-1369cb45-79ba-4e7c-ac54-f9dfad53a283.gif) |
+
+|                                                      전체/개별 주문                                                       |                                                      우편 번호 검색                                                       |
+| :-----------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------: |
+| ![전체 개별 주문](https://user-images.githubusercontent.com/100986977/206174961-d5c3b66a-fc3a-4472-8e91-dff08ac4bde2.gif) | ![우편 번호 검색](https://user-images.githubusercontent.com/100986977/206174966-c0b520bd-67ef-4457-8afa-a11ba3d09d3a.gif) |
+
+|                                                      상품 등록                                                      |                                                      상품 수정                                                       |
+| :-----------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------: |
+| ![상품등록](https://user-images.githubusercontent.com/100986977/206174979-99d1f0ec-1cbd-4a3d-8aa9-782d009c4664.gif) | ![상품 수정](https://user-images.githubusercontent.com/100986977/206175013-d2b1197c-ecb9-42fc-9b69-73114be2b215.gif) |
+
+|                                                     상품 삭제(판매자 센터)                                                      |
+| :-----------------------------------------------------------------------------------------------------------------------------: |
+| ![판매자센터 상품 삭제](https://user-images.githubusercontent.com/100986977/206180789-3617f4f9-54fb-4274-a87c-84214ba4ede1.gif) |
+
+</center>
+
+## 5. 프로젝트 실행
+
+```
+npm install
+
+npm start
+```
+
+## 6. 파일 구조
+
+```
+📦 open-market
+├─ 📂public
+└─ 📂src
+   ├─ App.css
+   ├─ App.js
+   ├─ App.test.js
+   ├─ 📂assets
+   ├─ 📂client
+   ├─ 📂components
+   │  ├─ 📂button
+   │  ├─ 📂carousel
+   │  ├─ 📂common
+   │  ├─ 📂contents
+   │  ├─ 📂etc
+   │  ├─ 📂footer
+   │  ├─ 📂input
+   │  ├─ 📂modal
+   │  └─ 📂navBar
+   ├─ 📂context
+   ├─ 📂pages
+   ├─ 📂styles
+   └─ 📂template
+      ├─ 📂NotFound
+      ├─ 📂cart
+      ├─ 📂editProduct
+      ├─ 📂home
+      ├─ 📂join
+      ├─ 📂login
+      ├─ 📂orderCompleted
+      ├─ 📂payment
+      ├─ 📂productDetail
+      ├─ 📂search
+      └─ 📂sellerCenter
+```
