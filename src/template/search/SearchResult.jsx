@@ -1,6 +1,6 @@
 import { CenterWarpper } from '../../components/common/Common';
 import { Title, ResultMessage, SearchKeyword } from './SearchResultStyle';
-import { ProductListSection } from '../../components/home/HomeStyle';
+import { ProductListSection } from '../home/HomeStyle';
 import ProductList from '../../components/contents/ProductList';
 import { useLocation } from 'react-router-dom';
 import TopNavBar from '../../components/navBar/TopNavBar';

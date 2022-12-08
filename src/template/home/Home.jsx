@@ -5,7 +5,7 @@ import {
   ProductListSection,
   PageLiWarpper,
   PageWarpperItem,
-} from '../../components/home/HomeStyle';
+} from './HomeStyle';
 import Footer from '../../components/footer/Footer';
 import Carousel from '../../components/carousel/Carousel';
 import Loading from '../../components/etc/Loading';
