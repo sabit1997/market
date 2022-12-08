@@ -2,8 +2,6 @@
 
 ## 1. 프로젝트 개요
 
----
-
 기간 : 2022.08 ~ 2022.12.8
 
 > 오픈마켓 서비스는 판매자와 구매자를 구별하여 판매자가 상품을 등록, 판매하며 구매자는 구매하는 서비스입니다.<br>
@@ -12,8 +10,6 @@
 배포 사이트 : [https://market-delta-murex.vercel.app/](https://market-delta-murex.vercel.app/)
 
 ## 2. 기술
-
----
 
 - React
 - styled-component
@@ -31,15 +27,11 @@
 
 ## 3. 개발 환경
 
----
-
 - git
 - github
 - figma
 
 ## 4. 주요 기능
-
----
 
 ### 계정
 
