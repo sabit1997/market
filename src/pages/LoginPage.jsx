@@ -46,7 +46,6 @@ export default function LoginPage() {
           login_type: loginType,
         })
         .then((res) => {
-          console.log(res);
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('type', loginType);
           navigate('/');
@@ -57,8 +56,6 @@ export default function LoginPage() {
             ...inputs,
             password: '',
           });
-          console.log(passwordInput.current);
-          console.log(idInput.current);
           passwordInput.current.focus();
         });
     } else if (username === '') {

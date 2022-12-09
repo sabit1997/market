@@ -10,7 +10,6 @@ export default function CheckText(props) {
     setCheck(!check);
     props.setChecked(!check);
   }
-  console.log(check);
   return (
     <Warpper marginB={props.marginB}>
       <input

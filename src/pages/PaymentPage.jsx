@@ -69,13 +69,9 @@ export default function PaymentPage() {
     });
   }
 
-  console.log(inputs);
-
   const location = useLocation();
   const orderInfo = location.state.orderProduct;
   const quantity = location.state.quantity;
-  console.log(orderInfo);
-  console.log(quantity);
 
   const totalPrice = orderInfo
     .map((x, i) => x.shipping_fee + x.price * quantity[i])

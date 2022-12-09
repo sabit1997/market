@@ -20,7 +20,7 @@ export default function NumDropdown({ prefixNum, setPrefixNum }) {
   }
 
   return (
-    <Warpper>
+    <article>
       <SelectBtn type="button" onClick={handleSelectBtn} click={click}>
         {prefixNum}
         <Ul className={click === true ? null : 'ir'}>
@@ -33,14 +33,9 @@ export default function NumDropdown({ prefixNum, setPrefixNum }) {
           })}
         </Ul>
       </SelectBtn>
-    </Warpper>
+    </article>
   );
 }
-
-const Warpper = styled.section`
-  /* display: flex;
-  align-items: center; */
-`;
 
 const SelectBtn = styled.button`
   width: 152px;
@@ -69,7 +64,6 @@ const SelectBtn = styled.button`
 
 const Ul = styled.ul`
   width: 100%;
-  /* height: 150px; */
   border: 1px solid #c4c4c4;
   background-color: #fff;
   border-radius: 5px;

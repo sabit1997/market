@@ -50,8 +50,6 @@ export default function JoinPage() {
     });
   }
 
-  console.log(inputs);
-
   const changeBuyer = () => {
     setJoinType('BUYER');
   };
@@ -67,7 +65,6 @@ export default function JoinPage() {
         username: userName,
       })
       .then((res) => {
-        console.log(res);
         setDoubleCheck(true);
         setAccountValid(res.data);
       })
@@ -85,7 +82,6 @@ export default function JoinPage() {
         company_registration_number: companyNum,
       })
       .then((res) => {
-        console.log(res);
         setCompanyNumValid(res.data);
         setCompanyNumCheck(true);
       })
@@ -134,8 +130,7 @@ export default function JoinPage() {
           company_registration_number: companyNum,
           store_name: storeName,
         })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           client
             .post('/accounts/login/', {
               username: userName,
@@ -151,8 +146,6 @@ export default function JoinPage() {
         .catch((error) => console.log(error));
     }
   };
-
-  console.log(Object.keys(errors)[0]);
 
   const [accountValid, setAccountValid] = useState('');
   const [companyNumValid, setCompanyNumValid] = useState('');

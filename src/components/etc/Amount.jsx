@@ -41,8 +41,6 @@ export default function Amount({
           setOverValue(false);
         }
         break;
-      default:
-        console.log('default');
     }
   }
 
@@ -66,8 +64,6 @@ export default function Amount({
           setChangeQuantity(changeQuantity + 1);
         }
         break;
-      default:
-        console.log('break');
     }
   }
 

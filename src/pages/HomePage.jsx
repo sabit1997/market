@@ -17,7 +17,6 @@ export default function HomePage() {
       client
         .get('/products/')
         .then((res) => {
-          console.log(res);
           setNext(res.data.next);
           setProductData([res.data.results]);
           setLoading(false);
@@ -27,7 +26,6 @@ export default function HomePage() {
       axios
         .get(next)
         .then((res) => {
-          console.log(res);
           const results = res.data.results;
           setProductData([...productData, results]);
           setNext(res.data.next);
@@ -36,9 +34,6 @@ export default function HomePage() {
         .catch((error) => console.log(error));
     }
   }, [next, productData]);
-  console.log(productData);
-
-  console.log(productData[page]);
 
   // 페이지 클릭
   function handlePageClick(e) {

@@ -105,7 +105,6 @@ export default function Payment({
             name="address_message"
             value={address_message}
             onChange={onChange}
-            // onClick={handleClick}
           />
         </InfoInputWarpper>
         <BottomWarpper>

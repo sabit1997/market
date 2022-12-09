@@ -14,7 +14,6 @@ function CartProductList({
   quantity,
   setQuantity,
   setCartData,
-  cartDataQuantity,
 }) {
   const [amountModal, setAmountModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
@@ -47,7 +46,7 @@ function CartProductList({
   // 상품 체크 버튼
   function handleCheckBtn(e) {
     const { name } = e.target;
-    console.log(e.target.name);
+    // console.log(e.target.name);
     if (checked[`product${i}`]) {
       setChecked({
         ...checked,
@@ -87,8 +86,6 @@ function CartProductList({
     navigate(`/detail/${cartItem[i].product_id}`);
   }
 
-  console.log(cartData);
-  console.log(cartItem);
   if (cartItem !== '') {
     return (
       <>

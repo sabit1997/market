@@ -1,4 +1,3 @@
-import { postcodeScriptUrl } from 'react-daum-postcode/lib/loadPostcode';
 import styled from 'styled-components';
 import imgUploadButton from '../../assets/icon-img.png';
 

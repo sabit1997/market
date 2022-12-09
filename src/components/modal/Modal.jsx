@@ -8,7 +8,7 @@ import {
   AlertContentsWarp,
 } from './ModalStyle';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import instance from '../../client/instance';
 
 // 상품삭제 모달
@@ -32,7 +32,6 @@ export function DeleteModal({
       instance
         .delete(`/cart/${cartItemId}/`)
         .then((res) => {
-          console.log(res);
           if (res.status === 204) {
             setCartData(
               cartData.filter((item) => item.cart_item_id !== cartItemId)
@@ -104,7 +103,6 @@ export function ChangeNumModal({
     }
   }
 
-  console.log(quantity);
   // 수량 수정
   function handleNumChangeBtn() {
     instance

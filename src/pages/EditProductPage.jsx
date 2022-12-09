@@ -8,7 +8,6 @@ import EditProduct from '../template/editProduct/EditProduct';
 export default function EditProductPage() {
   const location = useLocation();
   const productBoxData = location.state.productBoxData;
-  console.log(productBoxData);
   const navigate = useNavigate();
   const [firstBtn, setFirstBtn] = useState(true);
   const [secondBtn, setSecondBtn] = useState(false);
@@ -23,7 +22,7 @@ export default function EditProductPage() {
   const [image, setImage] = useState('');
   const token = localStorage.getItem('token');
 
-  const { productName, price, shippingFee, stock, productInfo } = inputs; // 비구조화 할당을 통해 값 추출
+  const { productName, price, shippingFee, stock, productInfo } = inputs;
 
   function handleInput(e) {
     const { value, name } = e.target;
@@ -33,11 +32,8 @@ export default function EditProductPage() {
     });
   }
 
-  console.log(inputs);
-
   const [preview, setPreview] = useState('');
   const inpRef = useRef();
-  console.log(preview);
 
   // 수정 시 기존 값 가져오기
   useEffect(() => {
@@ -73,8 +69,6 @@ export default function EditProductPage() {
     setImage(e.target.files[0]);
   }
 
-  console.log(image);
-
   // 상품 등록
   function handleSubmit(e) {
     e.preventDefault();
@@ -103,8 +97,7 @@ export default function EditProductPage() {
             'Content-Type': 'multipart/form-data',
           },
         })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           navigate('/sellercenter');
         })
         .catch((error) => {
@@ -131,7 +124,6 @@ export default function EditProductPage() {
           products_info: productInfo,
         })
         .then((res) => {
-          console.log(res);
           navigate('/sellercenter');
         })
         .catch((error) => {
@@ -165,7 +157,6 @@ export default function EditProductPage() {
           },
         })
         .then((res) => {
-          console.log(res);
           navigate('/sellercenter');
         })
         .catch((error) => {

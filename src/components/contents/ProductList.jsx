@@ -37,21 +37,6 @@ const ProductImg = styled.img`
   aspect-ratio: 1/1;
   border-radius: 10px;
   border: 1px solid #c4c4c4;
-  /* margin-bottom: 16px;
-  @media ${(props) => props.theme.desktop} {
-    width: 300px;
-    height: 300px;
-  }
-  @media ${(props) => props.theme.tablet} {
-    width: 200px;
-    height: 200px;
-  }
-  @media ${(props) => props.theme.mobile} {
-    width: 160px;
-    height: 160px;
-    margin-bottom: 0;
-    display: block;
-  } */
 `;
 
 const Seller = styled.span`

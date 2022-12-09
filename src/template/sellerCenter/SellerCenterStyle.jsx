@@ -84,7 +84,6 @@ export const ContentsSection = styled.section`
   }
 `;
 
-// SaleProductTitle 관련된 컴포넌트들 나중에 분리
 export const SaleProducTitle = styled.div`
   display: flex;
   align-items: center;

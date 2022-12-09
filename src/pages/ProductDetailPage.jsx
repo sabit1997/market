@@ -21,7 +21,6 @@ export default function ProductDetailPage() {
     client
       .get(`/products/${product_id}/`)
       .then((res) => {
-        console.log(res);
         setProductDetail(res.data);
         setLoading(false);
       })
@@ -30,8 +29,6 @@ export default function ProductDetailPage() {
       });
   }, [product_id]);
 
-  console.log(localStorage.getItem('token'));
-
   async function getToken() {
     if (localStorage.getItem('token') === null) {
       return false;
@@ -39,8 +36,6 @@ export default function ProductDetailPage() {
       return true;
     }
   }
-
-  console.log(amountQuantity);
 
   function shippingValue(fee, method) {
     if (method === 'PARCEL') {
@@ -76,7 +71,6 @@ export default function ProductDetailPage() {
   async function handleButton() {
     const token = await getToken();
     const condition = await isCheck();
-    console.log(token);
     if (!token) {
       setLoginModal(true);
     } else {
@@ -87,8 +81,6 @@ export default function ProductDetailPage() {
             quantity: amountQuantity,
             check: true,
           });
-          console.log(condition);
-          console.log('트루');
           setSuccessCart(true);
         } catch (error) {
           if (
@@ -105,8 +97,6 @@ export default function ProductDetailPage() {
             quantity: amountQuantity,
             check: true,
           });
-          console.log('폴스');
-          console.log(condition);
           setExistModal(true);
         } catch (error) {
           if (
@@ -123,7 +113,6 @@ export default function ProductDetailPage() {
   // 바로 구매 버튼 클릭
   async function handlePaymentButton() {
     const token = await getToken();
-    console.log(token);
     if (token) {
       navigate('/payment', {
         state: { orderProduct: [productDetail], quantity: [amountQuantity] },
@@ -133,7 +122,6 @@ export default function ProductDetailPage() {
     }
   }
 
-  console.log(amountQuantity);
   return (
     <ProductDetail
       loading={loading}

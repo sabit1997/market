@@ -5,7 +5,6 @@ import {
   NormalInput,
   PhoneNumberInput,
   Dash,
-  InfoInputItemCol,
   RowWarpper,
 } from './PaymentInputsStyle';
 import SButton from '../button/SButton';
@@ -98,7 +97,6 @@ export function AddressInput(props) {
       zip_code: zoneCode,
       address1: fullAddress,
     });
-    console.log(fullAddress);
   };
 
   const handleClick = () => {

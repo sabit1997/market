@@ -14,7 +14,6 @@ export function CartTabTitle(props) {
     } else {
       setAllChecked(false);
     }
-    console.log(valuesArr.every(verification));
   }, [props.checked]);
 
   // 전체 선택, 전체 해제
@@ -24,19 +23,15 @@ export function CartTabTitle(props) {
       for (let i = 0; i < Object.keys(props.checked).length; i++) {
         value[`product${i}`] = false;
       }
-      console.log(value);
       props.setChecked(value);
     } else {
       let value = {};
       for (let i = 0; i < Object.keys(props.checked).length; i++) {
         value[`product${i}`] = true;
       }
-      console.log(value);
       props.setChecked(value);
     }
   }
-
-  console.log(props.checked);
 
   return (
     <Warpper marginB={props.marginB} category={props.category}>

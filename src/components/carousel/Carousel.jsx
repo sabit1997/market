@@ -16,8 +16,6 @@ export default function Carousel() {
     }
   }
 
-  console.log(location);
-
   function handleLeftClick() {
     if (location === 0) {
       setLocation(-200);

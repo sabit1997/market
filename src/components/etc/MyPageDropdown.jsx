@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import client from '../../client/client';
-// import what from '../assets/icon-swiper-1.svg';
 
 export default function MyPageDropdown(props) {
   const navigate = useNavigate();
@@ -15,8 +14,7 @@ export default function MyPageDropdown(props) {
     event.stopPropagation();
     client
       .post('/accounts/logout/', {})
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         localStorage.clear();
         navigate('/');
       })

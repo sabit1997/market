@@ -8,8 +8,6 @@ export default function PaymentWayItem({
   setChecked,
   paymentWay,
 }) {
-  console.log(checked);
-
   useEffect(() => {
     let initial = {};
     for (let i = 0; i < paymentWay.length; i++) {

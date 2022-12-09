@@ -1,13 +1,6 @@
 import styled from 'styled-components';
 
-export default function MDarkButton({
-  product_id,
-  amountQuantity,
-  value,
-  wd,
-  onClick,
-  basis,
-}) {
+export default function MDarkButton({ value, wd, onClick, basis }) {
   return (
     <Button wd={wd} onClick={onClick} basis={basis}>
       {value}

@@ -55,12 +55,9 @@ export default function FilledCart({
   // 가격, 배송비, 콤마
   useEffect(() => {
     if (cartItem !== '') {
-      // const productPrice = cartItem.map((x, i) => x.price * quantity);
-
       const productPrice = cartItem
         .map((x, i) => x.price * quantity[i])
         .filter((_, i) => checked[`product${i}`] === true);
-      // console.log(productPrice);
 
       const totalPrice = productPrice.reduce((pre, curr) => pre + curr, 0);
 

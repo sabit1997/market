@@ -73,7 +73,6 @@ export default function TopNavBar(props) {
         </Search>
       </LeftWarpper>
       <ButtonWarpper>
-        {/* 판매자 로그인 시 다르게 */}
         {props.value === 'SELLER' ? (
           <>
             <MoveBtn wd="56px" onClick={handleMyPageButton} modal={modal}>
@@ -159,7 +158,6 @@ const Logo = styled.img`
 `;
 
 const Search = styled.section`
-  /* position: relative; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -199,8 +197,6 @@ const SearchBtn = styled.button`
   background-size: contain;
   background-color: transparent;
   cursor: pointer;
-  /* position: absolute; */
-  /* left: 0; */
   @media ${(props) => props.theme.mobile} {
     width: 14px;
     height: 14px;

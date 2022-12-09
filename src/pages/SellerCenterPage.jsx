@@ -40,7 +40,6 @@ export default function SellerCenterPage() {
     instance
       .get('/seller/')
       .then((res) => {
-        console.log(res);
         setProductBoxData(res.data.results);
       })
       .catch((error) => {
@@ -56,8 +55,6 @@ export default function SellerCenterPage() {
     ].text = `판매중인 상품(${productBoxData.length})`;
     setTabMenuTitle(copiedTabMenuTitle);
   }, [productBoxData.length]);
-
-  console.log(productBoxData);
 
   return (
     <SellerCenter
