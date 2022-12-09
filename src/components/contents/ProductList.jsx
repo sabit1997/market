@@ -18,6 +18,7 @@ function ProductList({ productData }) {
 }
 
 const Warpper = styled.li`
+  width: 100%;
   background-color: #fff;
   justify-self: center;
   padding-bottom: 10px;
