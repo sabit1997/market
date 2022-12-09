@@ -5,6 +5,7 @@ import MS16pButton from '../../components/button/MS16pButton';
 import MS16pWhiteButton from '../../components/button/MS16pWhiteButton';
 import MButton from '../../components/button/MButton';
 import MWhiteButton from '../../components/button/MWhiteButton';
+import { CenterWarpper } from '../../components/common/Common';
 import {
   Main,
   SideBar,
@@ -16,6 +17,8 @@ import {
   ImgUploadButton,
   EditerSection,
   ButtonWarpper,
+  ImgWarpper,
+  TextInputWarpper,
 } from './EditProductStyle';
 import PrecautionsTextBox from './PrecautionsTextBox';
 
@@ -37,7 +40,7 @@ export default function EditProduct({
   secondBtn,
 }) {
   return (
-    <>
+    <CenterWarpper>
       <SellerTopNavBar />
       <Main onSubmit={handleSubmit}>
         <SideBar>
@@ -46,7 +49,7 @@ export default function EditProduct({
         </SideBar>
         <EditSection>
           <TopSection>
-            <div>
+            <ImgWarpper>
               <InputTitle>상품 이미지</InputTitle>
               <ImgPreveiw preview={preview} image={image}>
                 <input
@@ -59,8 +62,8 @@ export default function EditProduct({
                 />
                 <ImgUploadButton htmlFor="imageUploadInput" />
               </ImgPreveiw>
-            </div>
-            <div>
+            </ImgWarpper>
+            <TextInputWarpper>
               <TextInputLimitBox
                 name="productName"
                 value={productName}
@@ -125,7 +128,7 @@ export default function EditProduct({
                 value={stock}
                 onChange={handleInput}
               />
-            </div>
+            </TextInputWarpper>
           </TopSection>
           <InputTitle>상품 상세</InputTitle>
           <EditerSection
@@ -144,6 +147,6 @@ export default function EditProduct({
           </ButtonWarpper>
         </EditSection>
       </Main>
-    </>
+    </CenterWarpper>
   );
 }

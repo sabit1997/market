@@ -123,7 +123,7 @@ export default function EditProductPage() {
           stock: stock,
           products_info: productInfo,
         })
-        .then((res) => {
+        .then(() => {
           navigate('/sellercenter');
         })
         .catch((error) => {

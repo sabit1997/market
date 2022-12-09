@@ -4,11 +4,12 @@ import imgUploadButton from '../../assets/icon-img.png';
 export const Main = styled.form`
   display: flex;
   width: 100%;
-  max-width: 1920px;
-  padding: 44px 10px 136px;
+  max-width: 1720px;
+  margin: 44px 5.2% 246px;
   justify-content: center;
   @media ${(props) => props.theme.tablet} {
     flex-direction: column;
+    padding: 0 5.2%;
   }
 `;
 
@@ -53,12 +54,16 @@ export const Text = styled.p`
   font-weight: 400;
   line-height: 1.252142857142857;
   margin-bottom: 17.53px;
+  white-space: pre-line;
   &:last-child {
     margin-bottom: 0;
   }
 `;
 
-export const EditSection = styled.section``;
+export const EditSection = styled.section`
+  width: 100%;
+  max-width: 1320px;
+`;
 
 export const TopSection = styled.section`
   display: flex;
@@ -78,16 +83,34 @@ export const InputTitle = styled.p`
   margin-bottom: 10px;
 `;
 
+export const ImgWarpper = styled.div`
+  width: 34.39%;
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+  }
+`;
+
+export const TextInputWarpper = styled.div`
+  width: 62.57%;
+  @media ${(props) => props.theme.tablet} {
+    width: 100%;
+  }
+`;
+
 export const ImgPreveiw = styled.section`
   width: 100%;
-  aspect-ratio: 1/1;
   max-width: 454px;
+  aspect-ratio: 1/1;
   background-color: #c4c4c4;
   background-image: ${(props) =>
     props.preview !== '' ? `url(${props.preview})` : `url(${props.image})`};
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   position: relative;
+  margin-right: 40px;
+  @media ${(props) => props.theme.tablet} {
+    margin: 10px auto;
+  }
 `;
 
 export const ImgUploadButton = styled.label`
