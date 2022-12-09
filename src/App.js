@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom';
-import { ProductDataProvider } from './context/ProductDataContext';
 import GlobalStyle from './styles/global';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
@@ -17,24 +16,22 @@ import { ThemeProvider } from 'styled-components';
 import theme from './styles/theme';
 function App() {
   return (
-    <ProductDataProvider>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/join" element={<JoinPage />} />
-          <Route path="/detail/:product_id" element={<ProductDetailPage />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/payment" element={<PaymentPage />} />
-          <Route path="/sellercenter" element={<SellerCenterPage />} />
-          <Route path="/productedit" element={<EditProductPage />} />
-          <Route path="/ordercompleted" element={<OrderCompletedPage />} />
-          <Route path="/result" element={<SearchResult />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </ThemeProvider>
-    </ProductDataProvider>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/join" element={<JoinPage />} />
+        <Route path="/detail/:product_id" element={<ProductDetailPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/payment" element={<PaymentPage />} />
+        <Route path="/sellercenter" element={<SellerCenterPage />} />
+        <Route path="/productedit" element={<EditProductPage />} />
+        <Route path="/ordercompleted" element={<OrderCompletedPage />} />
+        <Route path="/result" element={<SearchResult />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </ThemeProvider>
   );
 }
 

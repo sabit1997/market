@@ -10,7 +10,6 @@ import MsIconButton from '../button/MsIconButton';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { NotLogin } from '../modal/Modal';
-import { useProductDataContext } from '../../context/ProductDataContext';
 
 export default function TopNavBar(props) {
   const navigate = useNavigate();
@@ -18,7 +17,6 @@ export default function TopNavBar(props) {
   // 경고창 모달
   const [alertModal, setAlertModal] = useState(false);
   const [searchInput, setSearchInput] = useState('');
-  const { productData } = useProductDataContext();
 
   // 마이페이지 버튼
   function handleMyPageButton() {
@@ -46,13 +44,13 @@ export default function TopNavBar(props) {
   }
 
   function handleSearchClick() {
-    const resultProducts = productData.filter(
+    const mergedProductData = [].concat.apply([], props.productData);
+    const resultProducts = mergedProductData.filter(
       (x) => x.product_name.includes(searchInput) === true
     );
     navigate('/result', {
       state: { resultProducts: resultProducts, searchInput: searchInput },
     });
-    console.log(resultProducts);
   }
 
   function handlePressEnter(e) {
@@ -61,7 +59,6 @@ export default function TopNavBar(props) {
     }
   }
 
-  console.log(searchInput);
   return (
     <Warpper vlaue={props.value}>
       <LeftWarpper>

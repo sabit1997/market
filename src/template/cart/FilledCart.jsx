@@ -4,10 +4,10 @@ import CartProductList from '../../components/contents/CartProductList';
 import PriceGroup from '../../components/etc/PriceGroup';
 import LButton from '../../components/button/LButton';
 import { useNavigate } from 'react-router-dom';
+import client from '../../client/client';
 
 export default function FilledCart({
   cartData,
-  productData,
   checked,
   setChecked,
   setCartData,
@@ -17,26 +17,23 @@ export default function FilledCart({
   const [totalShippingFee, setTotalShippingFee] = useState('');
   const [quantity, setQuantity] = useState([]);
   const navigate = useNavigate();
-
   useEffect(() => {
     setQuantity(cartData.map((el) => el.quantity));
   }, [cartData]);
 
-  console.log(quantity);
+  function getCartDetail(ids) {
+    const result = Promise.all(
+      ids.map((id) => {
+        return client.get(`/products/${id}`).then((res) => res.data);
+      })
+    );
+    return result;
+  }
 
   useEffect(() => {
-    // product_id 값이 같은 값 반환하기
-    const compare = cartData.map((_, i) =>
-      productData.filter((x) => x.product_id === cartData[i].product_id)
-    );
-    // 배열 합치기
-    const merged = [].concat.apply([], compare);
-    console.log(merged);
-    if (compare !== undefined) {
-      setCartItem(merged);
-    }
-  }, [cartData, productData]);
-  // console.log(cartData);
+    const cartProductId = cartData.map((cart) => cart.product_id);
+    getCartDetail(cartProductId).then((detail) => setCartItem(detail));
+  }, [cartData]);
 
   // 장바구니 목록 불러오기
   const cartList = cartData.map((_, i) => (
@@ -63,7 +60,7 @@ export default function FilledCart({
       const productPrice = cartItem
         .map((x, i) => x.price * quantity[i])
         .filter((_, i) => checked[`product${i}`] === true);
-      console.log(productPrice);
+      // console.log(productPrice);
 
       const totalPrice = productPrice.reduce((pre, curr) => pre + curr, 0);
 

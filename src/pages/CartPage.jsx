@@ -1,14 +1,12 @@
 import instance from '../client/instance';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useProductDataContext } from '../context/ProductDataContext';
 import { Cart } from '../template/cart/Cart';
 import axios from 'axios';
 
 export default function CartPage() {
   const [cartData, setCartData] = useState([]);
   const [checked, setChecked] = useState({});
-  const { productData } = useProductDataContext();
   const [next, setNext] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -46,7 +44,6 @@ export default function CartPage() {
     <Cart
       checked={checked}
       setChecked={setChecked}
-      productData={productData}
       loading={loading}
       cartData={cartData}
       setCartData={setCartData}

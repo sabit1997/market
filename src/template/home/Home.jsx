@@ -35,7 +35,7 @@ export default function Home({
     <PageWarpper>
       {loading ? <Loading /> : null}
       {loginType === 'BUYER' || loginType === null ? (
-        <TopNavBar />
+        <TopNavBar productData={productData} />
       ) : loginType === 'SELLER' ? (
         <TopNavBar value="SELLER" />
       ) : null}
