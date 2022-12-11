@@ -15,6 +15,7 @@ export default function PaymentPage() {
 
   const [checked, setChecked] = useState({});
   const [payMethod, setPayMethod] = useState('');
+  const [agreeChecked, setAgreeChecked] = useState(false);
 
   useEffect(() => {
     const method = paymentWay.filter((_, i) => checked[`pay${i}`] === true);
@@ -72,6 +73,8 @@ export default function PaymentPage() {
   const location = useLocation();
   const orderInfo = location.state.orderProduct;
   const quantity = location.state.quantity;
+  const orderKind = location.state.orderKind;
+  const productId = location.state.productId;
 
   const totalPrice = orderInfo
     .map((x, i) => x.shipping_fee + x.price * quantity[i])
@@ -86,27 +89,58 @@ export default function PaymentPage() {
 
   // 결제
   function handlePaymentButton() {
-    instance
-      .post('/order/', {
-        total_price: totalPrice,
-        order_kind: 'cart_order',
-        receiver: receiver,
-        receiver_phone_number: phone_number1 + phone_number2 + phone_number3,
-        address: address1 + address2,
-        address_message: address_message,
-        payment_method: payMethod,
-      })
-      .then((res) => {
-        navigate('/ordercompleted', {
-          state: {
-            orderInfo: orderInfo,
-            quantity: quantity,
-            orderNum: res.data.order_number,
-          },
-        });
-      })
-      .catch((error) => console.log(error));
+    if (agreeChecked) {
+      if (orderKind === 'cart_order') {
+        instance
+          .post('/order/', {
+            total_price: totalPrice,
+            order_kind: orderKind,
+            receiver: receiver,
+            receiver_phone_number:
+              phone_number1 + phone_number2 + phone_number3,
+            address: address1 + address2,
+            address_message: address_message,
+            payment_method: payMethod,
+          })
+          .then((res) => {
+            navigate('/ordercompleted', {
+              state: {
+                orderInfo: orderInfo,
+                quantity: quantity,
+                orderNum: res.data.order_number,
+              },
+            });
+          })
+          .catch((error) => console.log(error));
+      } else if (orderKind === 'cart_one_order' || 'direct_order') {
+        instance
+          .post('/order/', {
+            product_id: productId,
+            quantity: quantity[0],
+            total_price: totalPrice,
+            order_kind: orderKind,
+            receiver: receiver,
+            receiver_phone_number:
+              phone_number1 + phone_number2 + phone_number3,
+            address: address1 + address2,
+            address_message: address_message,
+            payment_method: payMethod,
+          })
+          .then((res) => {
+            navigate('/ordercompleted', {
+              state: {
+                orderInfo: orderInfo,
+                quantity: quantity,
+                orderNum: res.data.order_number,
+              },
+            });
+          })
+          .catch((error) => console.log(error));
+      }
+    }
   }
+
+  console.log(agreeChecked);
 
   return (
     <Payment
@@ -130,6 +164,7 @@ export default function PaymentPage() {
       orderPrice={orderPrice}
       totalShippingFee={totalShippingFee}
       handlePaymentButton={handlePaymentButton}
+      setAgreeChecked={setAgreeChecked}
     />
   );
 }

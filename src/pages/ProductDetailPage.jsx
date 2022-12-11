@@ -115,7 +115,12 @@ export default function ProductDetailPage() {
     const token = await getToken();
     if (token) {
       navigate('/payment', {
-        state: { orderProduct: [productDetail], quantity: [amountQuantity] },
+        state: {
+          orderProduct: [productDetail],
+          quantity: [amountQuantity],
+          orderKind: 'direct_order',
+          productId: product_id,
+        },
       });
     } else {
       setLoginModal(true);

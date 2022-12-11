@@ -77,6 +77,8 @@ function CartProductList({
       state: {
         orderProduct: [cartItem[i]],
         quantity: [quantity[i]],
+        orderKind: 'cart_one_order',
+        productId: cartData.product_id,
       },
     });
   }

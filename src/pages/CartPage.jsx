@@ -74,9 +74,15 @@ export default function CartPage() {
       .filter((_, i) => checked[`product${i}`] === true)
       .map((x) => x.quantity);
     navigate('/payment', {
-      state: { orderProduct: orderProduct, quantity: quantity },
+      state: {
+        orderProduct: orderProduct,
+        quantity: quantity,
+        orderKind: 'cart_order',
+        productId: null,
+      },
     });
   }
+
   return (
     <Cart
       checked={checked}

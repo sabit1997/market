@@ -52,6 +52,7 @@ export default function Payment({
   orderPrice,
   totalShippingFee,
   handlePaymentButton,
+  setAgreeChecked,
 }) {
   return (
     <CenterWarpper>
@@ -146,7 +147,7 @@ export default function Payment({
                   </TotalOrderPriceNum>
                 </PriceCountItem>
               </PriceCount>
-              <CheckText marginB="30px" />
+              <CheckText marginB="30px" setChecked={setAgreeChecked} />
               <LButton
                 value="결제하기"
                 mobileWd="120px"
