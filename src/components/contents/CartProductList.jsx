@@ -24,13 +24,13 @@ function CartProductList({
       if (fee === 0) {
         return '소포배송 / 무료배송';
       } else if (fee !== 0) {
-        return `소포배송 / ${fee?.toLocaleString()}원`;
+        return `소포배송 / ${fee.toLocaleString()}원`;
       }
     } else if (method === 'DELIVERY') {
       if (fee === 0) {
         return '택배배송 / 무료배송';
       } else if (fee !== 0) {
-        return `택배배송 / ${fee?.toLocaleString()}원`;
+        return `택배배송 / ${fee.toLocaleString()}원`;
       }
     }
   }
@@ -86,77 +86,75 @@ function CartProductList({
     navigate(`/detail/${cartItem[i].product_id}`);
   }
 
-  if (cartItem !== '') {
-    return (
-      <>
-        <Warpper>
-          <input
-            type="checkbox"
-            name={`product${i}`}
-            value={`product${i}`}
-            className="ir"
-            id={i}
-            onClick={handleCheckBtn}
-          />
-          <CheckButton checked={checked} htmlFor={i} i={i} />
-          <ProductWarpper>
-            <Product src={cartItem[i]?.image} onClick={moveProductDetail} />
-            <ProductInfoWarpper onClick={moveProductDetail}>
-              <Seller>{cartItem[i]?.store_name}</Seller>
-              <ProductName>{cartItem[i]?.product_name}</ProductName>
-              <ProductPrice>{`${cartItem[
-                i
-              ]?.price?.toLocaleString()}원`}</ProductPrice>
-              <Shipping>
-                {shippingValue(
-                  cartItem[i]?.shipping_fee,
-                  cartItem[i]?.shipping_method
-                )}
-              </Shipping>
-            </ProductInfoWarpper>
-          </ProductWarpper>
-          <Amount
-            value={quantity[i]}
-            cartItem={cartItem}
-            onClick={handleAmount}
-            margin="0 "
-            cartData={cartData}
-            i={i}
-            quantity={quantity}
-            setQuantity={setQuantity}
-            justSelf="center"
-          />
-          <OderWarpper>
-            <OrderPrice>
-              {`${(cartItem[i]?.price * quantity[i])?.toLocaleString()}원`}
-            </OrderPrice>
-            <OrderBtn onClick={handlePaymentButton}>주문하기</OrderBtn>
-          </OderWarpper>
-          <DeleteBtn onClick={handleDeleteBtn} />
-        </Warpper>
-        {amountModal === true ? (
-          <ChangeNumModal
-            value={quantity[i]}
-            setQuantity={setQuantity}
-            setAmountModal={setAmountModal}
-            cart_item_id={cartData[i].cart_item_id}
-            product_id={cartData[i].product_id}
-            stock={cartItem[i].stock}
-            quantity={quantity}
-            cartData={cartData}
-            i={i}
-          />
-        ) : deleteModal === true ? (
-          <DeleteModal
-            setDeleteModal={setDeleteModal}
-            cartItemId={cartData[i].cart_item_id}
-            cartData={cartData}
-            setCartData={setCartData}
-          />
-        ) : null}
-      </>
-    );
-  }
+  return (
+    <>
+      <Warpper>
+        <input
+          type="checkbox"
+          name={`product${i}`}
+          value={`product${i}`}
+          className="ir"
+          id={i}
+          onClick={handleCheckBtn}
+        />
+        <CheckButton checked={checked} htmlFor={i} i={i} />
+        <ProductWarpper>
+          <Product src={cartItem[i].image} onClick={moveProductDetail} />
+          <ProductInfoWarpper onClick={moveProductDetail}>
+            <Seller>{cartItem[i].store_name}</Seller>
+            <ProductName>{cartItem[i].product_name}</ProductName>
+            <ProductPrice>{`${cartItem[
+              i
+            ].price.toLocaleString()}원`}</ProductPrice>
+            <Shipping>
+              {shippingValue(
+                cartItem[i].shipping_fee,
+                cartItem[i].shipping_method
+              )}
+            </Shipping>
+          </ProductInfoWarpper>
+        </ProductWarpper>
+        <Amount
+          value={quantity[i]}
+          cartItem={cartItem}
+          onClick={handleAmount}
+          margin="0 "
+          cartData={cartData}
+          i={i}
+          quantity={quantity}
+          setQuantity={setQuantity}
+          justSelf="center"
+        />
+        <OderWarpper>
+          <OrderPrice>
+            {`${(cartItem[i].price * quantity[i]).toLocaleString()}원`}
+          </OrderPrice>
+          <OrderBtn onClick={handlePaymentButton}>주문하기</OrderBtn>
+        </OderWarpper>
+        <DeleteBtn onClick={handleDeleteBtn} />
+      </Warpper>
+      {amountModal === true ? (
+        <ChangeNumModal
+          value={quantity[i]}
+          setQuantity={setQuantity}
+          setAmountModal={setAmountModal}
+          cart_item_id={cartData[i].cart_item_id}
+          product_id={cartData[i].product_id}
+          stock={cartItem[i].stock}
+          quantity={quantity}
+          cartData={cartData}
+          i={i}
+        />
+      ) : deleteModal === true ? (
+        <DeleteModal
+          setDeleteModal={setDeleteModal}
+          cartItemId={cartData[i].cart_item_id}
+          cartData={cartData}
+          setCartData={setCartData}
+        />
+      ) : null}
+    </>
+  );
 }
 
 const Warpper = styled.section`

@@ -3,37 +3,20 @@ import { TotalPriceSection, Icon } from './CartStyle';
 import CartProductList from '../../components/contents/CartProductList';
 import PriceGroup from '../../components/etc/PriceGroup';
 import LButton from '../../components/button/LButton';
-import { useNavigate } from 'react-router-dom';
-import client from '../../client/client';
 
 export default function FilledCart({
   cartData,
   checked,
   setChecked,
   setCartData,
+  handleOrderBtn,
+  quantity,
+  setQuantity,
+  cartItem,
+  setCartItem,
 }) {
-  const [cartItem, setCartItem] = useState('');
   const [totalPrice, setTotalPrice] = useState('');
   const [totalShippingFee, setTotalShippingFee] = useState('');
-  const [quantity, setQuantity] = useState([]);
-  const navigate = useNavigate();
-  useEffect(() => {
-    setQuantity(cartData.map((el) => el.quantity));
-  }, [cartData]);
-
-  function getCartDetail(ids) {
-    const result = Promise.all(
-      ids.map((id) => {
-        return client.get(`/products/${id}`).then((res) => res.data);
-      })
-    );
-    return result;
-  }
-
-  useEffect(() => {
-    const cartProductId = cartData.map((cart) => cart.product_id);
-    getCartDetail(cartProductId).then((detail) => setCartItem(detail));
-  }, [cartData]);
 
   // 장바구니 목록 불러오기
   const cartList = cartData.map((_, i) => (
@@ -70,18 +53,6 @@ export default function FilledCart({
       setTotalShippingFee(totalShippingFee);
     }
   }, [cartData, cartItem, quantity, checked]);
-
-  function handleOrderBtn() {
-    const orderProduct = cartItem.filter(
-      (_, i) => checked[`product${i}`] === true
-    );
-    const quantity = cartData
-      .filter((_, i) => checked[`product${i}`] === true)
-      .map((x) => x.quantity);
-    navigate('/payment', {
-      state: { orderProduct: orderProduct, quantity: quantity },
-    });
-  }
 
   return (
     <>

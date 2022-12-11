@@ -13,6 +13,11 @@ export function Cart({
   loading,
   cartData,
   setCartData,
+  handleOrderBtn,
+  quantity,
+  setQuantity,
+  cartItem,
+  setCartItem,
 }) {
   return (
     <CenterWarpper>
@@ -21,7 +26,7 @@ export function Cart({
       <CartWarpper>
         <PageTitle>장바구니</PageTitle>
         <CartTabTitle checked={checked} setChecked={setChecked} />
-        {cartData.length === 0 ? (
+        {cartItem.length === 0 ? (
           <EmptyCart />
         ) : (
           <FilledCart
@@ -30,6 +35,11 @@ export function Cart({
             checked={checked}
             setChecked={setChecked}
             setCartData={setCartData}
+            handleOrderBtn={handleOrderBtn}
+            quantity={quantity}
+            setQuantity={setQuantity}
+            cartItem={cartItem}
+            setCartItem={setCartItem}
           />
         )}
       </CartWarpper>
