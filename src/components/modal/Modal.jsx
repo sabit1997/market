@@ -28,7 +28,7 @@ export function DeleteModal({
 
   // 상품 삭제
   function deleteProduct() {
-    if (location.pathname === '/cart ') {
+    if (location.pathname === '/cart') {
       instance
         .delete(`/cart/${cartItemId}/`)
         .then((res) => {
@@ -88,7 +88,6 @@ export function ChangeNumModal({
   cart_item_id,
   product_id,
   setAmountModal,
-  cartData,
   i,
   value,
 }) {
