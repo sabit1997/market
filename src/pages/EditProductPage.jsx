@@ -4,6 +4,7 @@ import client from '../client/client';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import EditProduct from '../template/editProduct/EditProduct';
+import useInputs from '../hooks/useInputs';
 
 export default function EditProductPage() {
   const location = useLocation();
@@ -12,39 +13,39 @@ export default function EditProductPage() {
   const [firstBtn, setFirstBtn] = useState(true);
   const [secondBtn, setSecondBtn] = useState(false);
   const [shipping, setShipping] = useState('PARCEL');
-  const [inputs, setInputs] = useState({
+  const [
+    { productName, price, shippingFee, stock, productInfo },
+    handleInput,
+    handleInputs,
+  ] = useInputs({
     productName: '',
     price: '',
     shippingFee: '',
     stock: '',
     productInfo: '',
   });
+
   const [image, setImage] = useState('');
   const token = localStorage.getItem('token');
-
-  const { productName, price, shippingFee, stock, productInfo } = inputs;
-
-  function handleInput(e) {
-    const { value, name } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
-  }
 
   const [preview, setPreview] = useState('');
   const inpRef = useRef();
 
   // 수정 시 기존 값 가져오기
+
   useEffect(() => {
-    if (productBoxData !== null) {
-      setInputs({
+    if (productBoxData !== null)
+      handleInputs({
         productName: productBoxData.product_name,
         price: productBoxData.price,
         shippingFee: productBoxData.shipping_fee,
         stock: productBoxData.stock,
         productInfo: productBoxData.product_info,
       });
+  }, [productBoxData]);
+
+  useEffect(() => {
+    if (productBoxData !== null) {
       setImage(productBoxData.image);
       setShipping(productBoxData.shipping_method);
     }

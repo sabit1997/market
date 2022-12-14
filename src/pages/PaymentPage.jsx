@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import instance from '../client/instance';
 import Payment from '../template/payment/Payment';
+import useInputs from '../hooks/useInputs';
 
 export default function PaymentPage() {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ export default function PaymentPage() {
     }
   }, [checked, paymentWay]);
 
-  const [inputs, setInputs] = useState({
+  const [inputs, onChange, handleInputs] = useInputs({
     receiver: '',
     phone_number1: '',
     phone_number2: '',
@@ -61,14 +62,6 @@ export default function PaymentPage() {
     address2,
     address_message,
   } = inputs;
-
-  function onChange(e) {
-    const { value, name } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
-  }
 
   const location = useLocation();
   const orderInfo = location.state.orderProduct;
@@ -155,7 +148,7 @@ export default function PaymentPage() {
       zip_code={zip_code}
       address1={address1}
       address2={address2}
-      setInputs={setInputs}
+      handleInputs={handleInputs}
       inputs={inputs}
       address_message={address_message}
       checked={checked}

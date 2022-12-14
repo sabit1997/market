@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useRef, useState } from 'react';
 import client from '../client/client';
 import Login from '../template/login/Login';
+import useInputs from '../hooks/useInputs';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -18,22 +19,12 @@ export default function LoginPage() {
     setLoginType('SELLER');
   }
 
-  // login input 상태관리
-  const [inputs, setInputs] = useState({
+  const [inputs, onChange, handleInputs] = useInputs({
     username: '',
     password: '',
   });
 
   const { username, password } = inputs;
-
-  // input 제어
-  function onChange(e) {
-    const { value, name } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
-  }
 
   // 로그인 기능
   function handleLogin(event) {
@@ -52,7 +43,7 @@ export default function LoginPage() {
         })
         .catch((error) => {
           setErrorMessage(error.response.data.FAIL_Message);
-          setInputs({
+          handleInputs({
             ...inputs,
             password: '',
           });

@@ -43,7 +43,7 @@ export default function Payment({
   zip_code,
   address1,
   address2,
-  setInputs,
+  handleInputs,
   inputs,
   address_message,
   checked,
@@ -99,7 +99,7 @@ export default function Payment({
             name3="address2"
             value3={address2}
             onChange={onChange}
-            setInputs={setInputs}
+            handleInputs={handleInputs}
             inputs={inputs}
           />
           <AddressMessageInput

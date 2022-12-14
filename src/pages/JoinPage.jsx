@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import useInputs from '../hooks/useInputs';
 import client from '../client/client';
 import Join from '../template/join/Join';
 
@@ -16,7 +17,21 @@ export default function JoinPage() {
     formState: { errors, isValid },
   } = useForm({ mode: 'onBlur' });
 
-  const [inputs, setInputs] = useState({
+  const [
+    {
+      userName,
+      password,
+      password2,
+      name,
+      phoneNumber1,
+      phoneNumber2,
+      email1,
+      email2,
+      companyNum,
+      storeName,
+    },
+    onChange,
+  ] = useInputs({
     userName: '',
     password: '',
     password2: '',
@@ -28,27 +43,6 @@ export default function JoinPage() {
     companyNum: '',
     storeName: '',
   });
-
-  const {
-    userName,
-    password,
-    password2,
-    name,
-    phoneNumber1,
-    phoneNumber2,
-    email1,
-    email2,
-    companyNum,
-    storeName,
-  } = inputs;
-
-  function handleInput(e) {
-    const { value, name } = e.target;
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
-  }
 
   const changeBuyer = () => {
     setJoinType('BUYER');
@@ -161,7 +155,7 @@ export default function JoinPage() {
       accountValid={accountValid}
       errors={errors}
       register={register}
-      handleInput={handleInput}
+      handleInput={onChange}
       setAccountValid={setAccountValid}
       handleButton={handleButton}
       password={password}

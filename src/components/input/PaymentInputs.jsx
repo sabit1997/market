@@ -92,7 +92,7 @@ export function AddressInput(props) {
       fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
     }
 
-    props.setInputs({
+    props.handleInputs({
       ...props.inputs,
       zip_code: zoneCode,
       address1: fullAddress,
