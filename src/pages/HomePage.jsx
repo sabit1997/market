@@ -32,6 +32,8 @@ export default function HomePage() {
           setLoading(false);
         })
         .catch((error) => console.log(error));
+    } else {
+      setLoading(false);
     }
   }, [next, productData]);
 
