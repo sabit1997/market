@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import instance from '../client/instance';
 import SellerCenter from '../template/sellerCenter/SellerCenter';
 
@@ -45,16 +45,16 @@ export default function SellerCenterPage() {
       .catch((error) => {
         console.log(error);
       });
-  }, [productBoxData.length]);
+  }, []);
 
-  useEffect(() => {
+  useCallback(() => {
     const findIndex = tabMenuTitle.findIndex((el) => el.no === 1);
     const copiedTabMenuTitle = [...tabMenuTitle];
     copiedTabMenuTitle[
       findIndex
     ].text = `판매중인 상품(${productBoxData.length})`;
     setTabMenuTitle(copiedTabMenuTitle);
-  }, [productBoxData.length]);
+  }, [productBoxData.length, tabMenuTitle]);
 
   return (
     <SellerCenter
