@@ -30,6 +30,7 @@ import ProductInfo from '../../components/contents/ProductInfo';
 import SPrice from '../../components/etc/SPrice';
 import CheckText from '../../components/etc/CheckText';
 import LButton from '../../components/button/LButton';
+import LDisabledButton from '../../components/button/LDisabledButton';
 
 export default function Payment({
   orderInfo,
@@ -53,6 +54,10 @@ export default function Payment({
   totalShippingFee,
   handlePaymentButton,
   setAgreeChecked,
+  register,
+  errors,
+  isValid,
+  agreeChecked,
 }) {
   return (
     <CenterWarpper>
@@ -148,13 +153,22 @@ export default function Payment({
                 </PriceCountItem>
               </PriceCount>
               <CheckText marginB="30px" setChecked={setAgreeChecked} />
-              <LButton
-                value="결제하기"
-                mobileWd="120px"
-                mobileHg="30px"
-                margin="0 0 0 25.41%"
-                onClick={handlePaymentButton}
-              />
+              {isValid && agreeChecked ? (
+                <LButton
+                  value="결제하기"
+                  mobileWd="120px"
+                  mobileHg="30px"
+                  margin="0 0 0 25.41%"
+                  onClick={handlePaymentButton}
+                />
+              ) : (
+                <LDisabledButton
+                  value="결제하기"
+                  mobileWd="120px"
+                  mobileHg="30px"
+                  margin="0 0 0 25.41%"
+                />
+              )}
             </FinalPaymentInfo>
           </section>
         </BottomWarpper>
