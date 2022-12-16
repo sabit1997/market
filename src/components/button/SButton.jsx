@@ -8,6 +8,7 @@ export default function SButton(props) {
         mobileWd={props.mobileWd}
         mobileHg={props.mobileHg}
         onClick={props.onClick}
+        type={props.type}
       >
         {props.value}
       </Button>
