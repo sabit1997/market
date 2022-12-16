@@ -23,26 +23,62 @@ export function NameInput(props) {
   );
 }
 
-export function PhoneNumInput(props) {
+export function PhoneNumInput({
+  value1,
+  value2,
+  value3,
+  register,
+  onChange,
+  activation,
+}) {
   return (
-    <InfoInputItem>
-      <Label htmlFor={props.name1}>휴대폰</Label>
+    <InfoInputItem activation={activation}>
+      <Label htmlFor="phone_number1">휴대폰</Label>
       <PhoneNumberInput
-        name={props.name1}
-        value={props.value1}
-        onChange={props.onChange}
+        value={value1}
+        id="phone_number1"
+        {...(activation === 'true'
+          ? {
+              ...register('phone_number1', {
+                required: '필수 정보입니다.',
+                maxLength: 3,
+
+                onChange: (e) => {
+                  onChange(e);
+                },
+              }),
+            }
+          : null)}
       />
       <Dash>-</Dash>
       <PhoneNumberInput
-        name={props.name2}
-        value={props.value2}
-        onChange={props.onChange}
+        value={value2}
+        {...(activation === 'true'
+          ? {
+              ...register('phone_number2', {
+                required: '필수 정보입니다.',
+                maxLength: 4,
+                onChange: (e) => {
+                  onChange(e);
+                },
+              }),
+            }
+          : null)}
       />
       <Dash>-</Dash>
       <PhoneNumberInput
-        name={props.name3}
-        value={props.value3}
-        onChange={props.onChange}
+        value={value3}
+        {...(activation === 'true'
+          ? {
+              ...register('phone_number3', {
+                required: '필수 정보입니다.',
+                maxLength: 4,
+                onChange: (e) => {
+                  onChange(e);
+                },
+              }),
+            }
+          : null)}
       />
     </InfoInputItem>
   );
@@ -57,21 +93,34 @@ export function EmailInput() {
   );
 }
 
-export function ReceiverInput(props) {
+export function ReceiverInput({ value, register, onChange }) {
   return (
     <InfoInputItem>
-      <Label htmlFor={props.name}>수령인</Label>
+      <Label htmlFor="receiver">수령인</Label>
       <NormalInput
+        id="receiver"
         maxWd="334px"
-        name={props.name}
-        value={props.value}
-        onChange={props.onChange}
+        value={value}
+        {...register('receiver', {
+          required: '필수 정보입니다.',
+          onChange: (e) => {
+            onChange(e);
+          },
+        })}
       />
     </InfoInputItem>
   );
 }
 
-export function AddressInput(props) {
+export function AddressInput({
+  value1,
+  value2,
+  value3,
+  register,
+  onChange,
+  handleInputs,
+  inputs,
+}) {
   const scriptUrl =
     '//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
   const open = useDaumPostcodePopup(scriptUrl);
@@ -92,8 +141,8 @@ export function AddressInput(props) {
       fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
     }
 
-    props.handleInputs({
-      ...props.inputs,
+    handleInputs({
+      ...inputs,
       zip_code: zoneCode,
       address1: fullAddress,
     });
@@ -104,14 +153,18 @@ export function AddressInput(props) {
   };
   return (
     <RowWarpper>
-      <Label htmlFor={props.name1}>배송주소</Label>
+      <Label htmlFor="zip_code">배송주소</Label>
       <div>
         <NormalInput
+          id="zip_code"
           maxWd="170px"
           margin="0 10px 8px 0"
-          name={props.name1}
-          value={props.value1}
-          onChange={props.onChange}
+          value={value1}
+          readOnly
+          {...register('zip_code', {
+            required: '필수 정보입니다.',
+          })}
+          onClick={handleClick}
         />
         <SButton
           value="우편번호 조회"
@@ -119,36 +172,46 @@ export function AddressInput(props) {
           hg="40px"
           mobileWd="80px"
           mobileHg="25px"
+          type="button"
           onClick={handleClick}
         />
         <NormalInput
           maxWd="800px"
           margin="0 0 8px 0"
-          name={props.name2}
-          value={props.value2}
-          onChange={props.onChange}
+          value={value2}
+          readOnly
+          {...register('address1', {
+            required: '필수 정보입니다.',
+          })}
         />
         <NormalInput
           wd="800px"
           margin="0 0 8px 0px"
-          name={props.name3}
-          value={props.value3}
-          onChange={props.onChange}
+          value={value3}
+          {...register('address2', {
+            onChange: (e) => {
+              onChange(e);
+            },
+          })}
         />
       </div>
     </RowWarpper>
   );
 }
 
-export function AddressMessageInput(props) {
+export function AddressMessageInput({ value, register, onChange }) {
   return (
     <InfoInputItem marginB="70px">
-      <Label htmlFor={props.name}>배송 메시지</Label>
+      <Label htmlFor="address_message">배송 메시지</Label>
       <NormalInput
+        id="address_message"
         wd="800px"
-        name={props.name}
-        value={props.value}
-        onChange={props.onChange}
+        value={value}
+        {...register('address_message', {
+          onChange: (e) => {
+            onChange(e);
+          },
+        })}
       />
     </InfoInputItem>
   );

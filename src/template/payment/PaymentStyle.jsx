@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const PageWarpper = styled.section`
+export const PageWarpper = styled.form`
   padding: 0 10px;
 `;
 
@@ -75,7 +75,7 @@ export const InfoTItle = styled.p`
   }
 `;
 
-export const InfoInputWarpper = styled.ul``;
+export const InfoInputWarpper = styled.section``;
 
 export const BottomWarpper = styled.section`
   display: flex;

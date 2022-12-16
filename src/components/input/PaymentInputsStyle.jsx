@@ -24,7 +24,7 @@ export const Label = styled.label`
   }
 `;
 
-export const NormalInput = styled.input`
+export const NormalInput = styled.input.attrs({ type: 'text' })`
   width: 100%;
   max-width: ${(props) => props.maxWd};
   height: 40px;
@@ -37,7 +37,7 @@ export const NormalInput = styled.input`
   }
 `;
 
-export const PhoneNumberInput = styled.input`
+export const PhoneNumberInput = styled.input.attrs({ type: 'number' })`
   width: 100px;
   height: 40px;
   border: 1px solid #c4c4c4;

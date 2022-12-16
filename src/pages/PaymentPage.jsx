@@ -3,21 +3,30 @@ import { useEffect, useState } from 'react';
 import instance from '../client/instance';
 import Payment from '../template/payment/Payment';
 import useInputs from '../hooks/useInputs';
+import { useForm } from 'react-hook-form';
 
 export default function PaymentPage() {
+  const {
+    register,
+    formState: { errors, isValid },
+  } = useForm({ mode: 'onChange' });
   const navigate = useNavigate();
-  const paymentWay = [
+  const [paymentWay] = useState([
     '신용/체크카드',
     '무통장 입금',
     '휴대폰 결제',
     '네이버페이',
     '카카오페이',
-  ];
-
+  ]);
   const [checked, setChecked] = useState({});
-  const [payMethod, setPayMethod] = useState('');
+  const [payMethod, setPayMethod] = useState(null);
   const [agreeChecked, setAgreeChecked] = useState(false);
-
+  const location = useLocation();
+  const orderInfo = location.state.orderProduct;
+  const quantity = location.state.quantity;
+  const orderKind = location.state.orderKind;
+  const productId = location.state.productId;
+  console.log(orderInfo);
   useEffect(() => {
     const method = paymentWay.filter((_, i) => checked[`pay${i}`] === true);
     switch (method[0]) {
@@ -40,6 +49,7 @@ export default function PaymentPage() {
         break;
     }
   }, [checked, paymentWay]);
+  console.log(payMethod);
 
   const [inputs, onChange, handleInputs] = useInputs({
     receiver: '',
@@ -63,12 +73,6 @@ export default function PaymentPage() {
     address_message,
   } = inputs;
 
-  const location = useLocation();
-  const orderInfo = location.state.orderProduct;
-  const quantity = location.state.quantity;
-  const orderKind = location.state.orderKind;
-  const productId = location.state.productId;
-
   const totalPrice = orderInfo
     .map((x, i) => x.shipping_fee + x.price * quantity[i])
     .reduce((pre, curr) => pre + curr, 0);
@@ -81,8 +85,9 @@ export default function PaymentPage() {
     .reduce((pre, curr) => pre + curr, 0);
 
   // 결제
-  function handlePaymentButton() {
-    if (agreeChecked) {
+  function handlePaymentButton(e) {
+    e.preventDefault();
+    if (agreeChecked && isValid && payMethod !== null) {
       if (orderKind === 'cart_order') {
         instance
           .post('/order/', {
@@ -133,8 +138,6 @@ export default function PaymentPage() {
     }
   }
 
-  console.log(agreeChecked);
-
   return (
     <Payment
       orderInfo={orderInfo}
@@ -158,6 +161,11 @@ export default function PaymentPage() {
       totalShippingFee={totalShippingFee}
       handlePaymentButton={handlePaymentButton}
       setAgreeChecked={setAgreeChecked}
+      agreeChecked={agreeChecked}
+      register={register}
+      errors={errors}
+      isValid={isValid}
+      payMethod={payMethod}
     />
   );
 }

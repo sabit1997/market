@@ -58,11 +58,15 @@ export default function Payment({
   errors,
   isValid,
   agreeChecked,
+  payMethod,
 }) {
+  console.log(agreeChecked);
+  console.log(isValid);
+  console.log(errors);
   return (
     <CenterWarpper>
       <TopNavBar />
-      <PageWarpper>
+      <PageWarpper onSubmit={handlePaymentButton}>
         <PageTitle>주문/결제하기</PageTitle>
         <PaymentTabTitle marginB="16px" />
         {orderInfo.map((_, i) => (
@@ -86,30 +90,31 @@ export default function Payment({
         </InfoInputWarpper>
         <InfoTItle>배송지 정보</InfoTItle>
         <InfoInputWarpper>
-          <ReceiverInput name="receiver" value={receiver} onChange={onChange} />
-          <PhoneNumInput
-            name1="phone_number1"
-            value1={phone_number1}
-            name2="phone_number2"
-            value2={phone_number2}
-            name3="phone_number3"
-            value3={phone_number3}
+          <ReceiverInput
+            value={receiver}
+            register={register}
             onChange={onChange}
           />
+          <PhoneNumInput
+            value1={phone_number1}
+            value2={phone_number2}
+            value3={phone_number3}
+            register={register}
+            onChange={onChange}
+            activation="true"
+          />
           <AddressInput
-            name1="zip_code"
             value1={zip_code}
-            name2="address1"
             value2={address1}
-            name3="address2"
             value3={address2}
+            register={register}
             onChange={onChange}
             handleInputs={handleInputs}
             inputs={inputs}
           />
           <AddressMessageInput
-            name="address_message"
             value={address_message}
+            register={register}
             onChange={onChange}
           />
         </InfoInputWarpper>
@@ -153,13 +158,12 @@ export default function Payment({
                 </PriceCountItem>
               </PriceCount>
               <CheckText marginB="30px" setChecked={setAgreeChecked} />
-              {isValid && agreeChecked ? (
+              {isValid && agreeChecked && payMethod !== null ? (
                 <LButton
                   value="결제하기"
                   mobileWd="120px"
                   mobileHg="30px"
                   margin="0 0 0 25.41%"
-                  onClick={handlePaymentButton}
                 />
               ) : (
                 <LDisabledButton
