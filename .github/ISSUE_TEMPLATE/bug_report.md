@@ -11,7 +11,7 @@ assignees: sabit1997
 설명
 
 # Todo
--[ ] 할 일 목록
+- [ ] 할 일 목록
 
 # ETC
 기타 유의사항
