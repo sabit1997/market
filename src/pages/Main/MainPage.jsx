@@ -1,8 +1,14 @@
 import { useEffect, useState } from 'react';
-import client from '../client/client';
-import Home from '../template/home/Home';
+import client from '../../client/client';
+import TopNavBar from '../../components/navBar/TopNavBar';
+import ProductList from '../../components/contents/ProductList';
+import { PageWarpper } from '../../components/common/Common';
+import * as S from './MainStyle';
+import Footer from '../../components/footer/Footer';
+import Carousel from '../../components/carousel/Carousel';
+import Loading from '../../components/etc/Loading';
 
-export default function HomePage() {
+export default function MainPage() {
   const loginType = localStorage.getItem('type');
   const [productData, setProductData] = useState([]);
   const [totalPage, setTotalPage] = useState(0);
@@ -52,14 +58,31 @@ export default function HomePage() {
     fetchProductData();
   }, []);
 
+  const pageList = Array.from({ length: totalPage }, (_, i) => (
+    <S.PageWarpperItem
+      key={i}
+      onClick={() => onClickPageButton(i + 1)}
+      color={currentPage === i ? '#21BF48' : '#000'}
+    >
+      {i + 1}
+    </S.PageWarpperItem>
+  ));
+
+  const productList = productData?.map((x) => (
+    <ProductList key={x.product_id} productData={x} />
+  ));
+
   return (
-    <Home
-      productData={productData}
-      onClickPageButton={onClickPageButton}
-      totalPage={totalPage}
-      currentPage={currentPage}
-      loading={loading}
-      loginType={loginType}
-    />
+    <PageWarpper>
+      {loading && <Loading />}
+      {(loginType === 'BUYER' || loginType === null) && (
+        <TopNavBar productData={productData} />
+      )}
+      {loginType === 'SELLER' && <TopNavBar value="SELLER" />}
+      <Carousel />
+      <S.ProductListSection>{productList}</S.ProductListSection>
+      <S.PageLiWarpper>{pageList}</S.PageLiWarpper>
+      <Footer />
+    </PageWarpper>
   );
 }

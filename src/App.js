@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
 import GlobalStyle from './styles/global';
-import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import JoinPage from './pages/JoinPage';
 import CartPage from './pages/CartPage';
@@ -14,12 +13,13 @@ import SearchResult from './template/search/SearchResult';
 import './App.css';
 import { ThemeProvider } from 'styled-components';
 import theme from './styles/theme';
+import MainPage from './pages/Main/MainPage';
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<MainPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/join" element={<JoinPage />} />
         <Route path="/detail/:product_id" element={<ProductDetailPage />} />
