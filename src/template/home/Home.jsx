@@ -12,33 +12,32 @@ import Loading from '../../components/etc/Loading';
 
 export default function Home({
   productData,
-  handlePageClick,
-  page,
+  onClickPageButton,
+  totalPage,
+  currentPage,
   loading,
   loginType,
 }) {
-  // 페이지 나타내기
-  const pageList = productData?.map((_, i) => (
+  const pageList = Array.from({ length: totalPage }, (_, i) => (
     <PageWarpperItem
       key={i}
-      onClick={handlePageClick}
-      color={page === i ? '#21BF48' : '#000'}
+      onClick={() => onClickPageButton(i + 1)}
+      color={currentPage === i ? '#21BF48' : '#000'}
     >
       {i + 1}
     </PageWarpperItem>
   ));
 
-  const productList = productData[page]?.map((x) => (
+  const productList = productData?.map((x) => (
     <ProductList key={x.product_id} productData={x} />
   ));
   return (
     <PageWarpper>
-      {loading ? <Loading /> : null}
-      {loginType === 'BUYER' || loginType === null ? (
+      {loading && <Loading />}
+      {(loginType === 'BUYER' || loginType === null) && (
         <TopNavBar productData={productData} />
-      ) : loginType === 'SELLER' ? (
-        <TopNavBar value="SELLER" />
-      ) : null}
+      )}
+      {loginType === 'SELLER' && <TopNavBar value="SELLER" />}
       <Carousel />
       <ProductListSection>{productList}</ProductListSection>
       <PageLiWarpper>{pageList}</PageLiWarpper>
