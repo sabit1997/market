@@ -23,7 +23,7 @@ import {
   ButtonWarpper,
   ImgWarpper,
   TextInputWarpper,
-} from './EditProductStyle';
+} from './EditProductPageStyle';
 import PrecautionsTextBox from './PrecautionsTextBox';
 import useInputs from '../../hooks/useInputs';
 

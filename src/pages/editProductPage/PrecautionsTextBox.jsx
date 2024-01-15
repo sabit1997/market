@@ -1,4 +1,4 @@
-import { Span, TextBox, Text } from './EditProductStyle';
+import { Span, TextBox, Text } from './EditProductPageStyle';
 
 export default function PrecautionsTextBox() {
   return (

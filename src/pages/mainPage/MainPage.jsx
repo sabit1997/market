@@ -3,7 +3,7 @@ import client from '../../client/client';
 import TopNavBar from '../../components/navBar/TopNavBar';
 import ProductList from '../../components/contents/ProductList';
 import { PageWarpper } from '../../components/common/Common';
-import * as S from './MainStyle';
+import * as S from './MainPageStyle';
 import Footer from '../../components/footer/Footer';
 import Carousel from '../../components/carousel/Carousel';
 import Loading from '../../components/etc/Loading';
