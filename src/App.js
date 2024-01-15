@@ -4,7 +4,7 @@ import LoginPage from './pages/loginPage/LoginPage';
 import JoinPage from './pages/joinPage/JoinPage';
 import CartPage from './pages/cartPage/CartPage';
 import PaymentPage from './pages/PaymentPage';
-import NotFound from './template/NotFound/NotFound';
+import NotFound from './pages/notFoundPage/NotFoundPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import SellerCenterPage from './pages/SellerCenterPage';
 import EditProductPage from './pages/editProductPage/EditProductPage';
