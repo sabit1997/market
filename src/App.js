@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import GlobalStyle from './styles/global';
-import LoginPage from './pages/LoginPage';
+import LoginPage from './pages/loginPage/LoginPage';
 import JoinPage from './pages/joinPage/JoinPage';
 import CartPage from './pages/cartPage/CartPage';
 import PaymentPage from './pages/PaymentPage';
