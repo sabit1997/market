@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { TotalPriceSection, Icon } from './CartStyle';
+import { TotalPriceSection, Icon } from './CartPageStyle';
 import CartProductList from '../../components/contents/CartProductList';
 import PriceGroup from '../../components/etc/PriceGroup';
 import LButton from '../../components/button/LButton';

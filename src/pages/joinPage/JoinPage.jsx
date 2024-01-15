@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import useInputs from '../../hooks/useInputs';
 import client from '../../client/client';
-import { Warpper, Logo, IdInputWarpper } from './JoinStyle';
+import { Warpper, Logo, IdInputWarpper } from './JoinPageStyle';
 import {
   LoginBox,
   LoginSelletor,

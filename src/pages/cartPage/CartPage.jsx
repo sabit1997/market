@@ -2,7 +2,7 @@ import instance from '../../client/instance';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CartWarpper, PageTitle } from './CartStyle';
+import { CartWarpper, PageTitle } from './CartPageStyle';
 import TopNavBar from '../../components/navBar/TopNavBar';
 import { CartTabTitle } from '../../components/navBar/TabTitle';
 import EmptyCart from './EmptyCart';
