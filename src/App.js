@@ -7,7 +7,7 @@ import PaymentPage from './pages/PaymentPage';
 import NotFound from './template/NotFound/NotFound';
 import ProductDetailPage from './pages/ProductDetailPage';
 import SellerCenterPage from './pages/SellerCenterPage';
-import EditProductPage from './pages/EditProductPage';
+import EditProductPage from './pages/EditProduct/EditProductPage';
 import OrderCompletedPage from './pages/OrderCompletedPage';
 import SearchResult from './template/search/SearchResult';
 import './App.css';
