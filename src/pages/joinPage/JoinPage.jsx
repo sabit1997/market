@@ -4,11 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import useInputs from '../../hooks/useInputs';
 import client from '../../client/client';
 import { Warpper, Logo, IdInputWarpper } from './JoinPageStyle';
-import {
-  LoginBox,
-  LoginSelletor,
-  InputBox,
-} from '../../template/login/LoginStyle';
+import { LoginBox, LoginSelletor, InputBox } from '../loginPage/LoginPageStyle';
 import {
   IdTextInputBox,
   PasswordTextInputBox,
