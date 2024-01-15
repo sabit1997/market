@@ -8,7 +8,7 @@ import NotFound from './pages/notFoundPage/NotFoundPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import SellerCenterPage from './pages/SellerCenterPage';
 import EditProductPage from './pages/editProductPage/EditProductPage';
-import OrderCompletedPage from './pages/OrderCompletedPage';
+import OrderCompletedPage from './pages/orderCompletedPage/OrderCompletedPage';
 import SearchResult from './template/search/SearchResult';
 import './App.css';
 import { ThemeProvider } from 'styled-components';
