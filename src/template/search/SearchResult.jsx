@@ -3,7 +3,7 @@ import { Title, ResultMessage, SearchKeyword } from './SearchResultStyle';
 import ProductList from '../../components/contents/ProductList';
 import { useLocation } from 'react-router-dom';
 import TopNavBar from '../../components/navBar/TopNavBar';
-import { ProductListSection } from '../../pages/Main/MainStyle';
+import { ProductListSection } from '../../pages/mainPage/MainStyle';
 
 export default function SearchResult() {
   const location = useLocation();
