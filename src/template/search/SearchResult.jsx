@@ -1,9 +1,9 @@
 import { CenterWarpper } from '../../components/common/Common';
 import { Title, ResultMessage, SearchKeyword } from './SearchResultStyle';
-import { ProductListSection } from '../home/HomeStyle';
 import ProductList from '../../components/contents/ProductList';
 import { useLocation } from 'react-router-dom';
 import TopNavBar from '../../components/navBar/TopNavBar';
+import { ProductListSection } from '../../pages/Main/MainStyle';
 
 export default function SearchResult() {
   const location = useLocation();
