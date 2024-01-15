@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import GlobalStyle from './styles/global';
 import LoginPage from './pages/LoginPage';
 import JoinPage from './pages/JoinPage';
-import CartPage from './pages/CartPage';
+import CartPage from './pages/Cart/CartPage';
 import PaymentPage from './pages/PaymentPage';
 import NotFound from './template/NotFound/NotFound';
 import ProductDetailPage from './pages/ProductDetailPage';
