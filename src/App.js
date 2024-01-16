@@ -9,7 +9,7 @@ import ProductDetailPage from './pages/productDetailPage/ProductDetailPage';
 import SellerCenterPage from './pages/sellerCenterPage/SellerCenterPage';
 import EditProductPage from './pages/editProductPage/EditProductPage';
 import OrderCompletedPage from './pages/orderCompletedPage/OrderCompletedPage';
-import SearchResult from './template/search/SearchResult';
+import SearchResult from './pages/searchResultPage/SearchResultPage';
 import './App.css';
 import { ThemeProvider } from 'styled-components';
 import theme from './styles/theme';
