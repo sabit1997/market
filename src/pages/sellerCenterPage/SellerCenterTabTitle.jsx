@@ -2,7 +2,7 @@ import {
   ContentsSection,
   SaleProducTitle,
   ProductTitleTxt,
-} from './SellerCenterStyle';
+} from './SellerCenterPageStyle';
 import ProductBox from '../../components/contents/ProductBox';
 
 export default function SellerCenterTabTitle({
