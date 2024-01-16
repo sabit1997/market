@@ -1,5 +1,5 @@
 import img404 from '../../assets/icon-404.png';
-import { PageWarpper, NotFoundImg, NotFoundTxt } from './NotFoundStyle';
+import { PageWarpper, NotFoundImg, NotFoundTxt } from './NotFoundPageStyle';
 import MButton from '../../components/button/MButton';
 import MWhiteButton from '../../components/button/MWhiteButton';
 import { useNavigate } from 'react-router-dom';

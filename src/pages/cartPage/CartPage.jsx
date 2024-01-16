@@ -1,10 +1,16 @@
-import instance from '../client/instance';
+import instance from '../../client/instance';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Cart } from '../template/cart/Cart';
+import { CartWarpper, PageTitle } from './CartPageStyle';
+import TopNavBar from '../../components/navBar/TopNavBar';
+import { CartTabTitle } from '../../components/navBar/TabTitle';
+import EmptyCart from './EmptyCart';
+import FilledCart from './FilledCart';
+import { CenterWarpper } from '../../components/common/Common';
+import Loading from '../../components/etc/Loading';
 import axios from 'axios';
-import client from '../client/client';
+import client from '../../client/client';
 
 export default function CartPage() {
   const [cartData, setCartData] = useState([]);
@@ -84,17 +90,28 @@ export default function CartPage() {
   }
 
   return (
-    <Cart
-      checked={checked}
-      setChecked={setChecked}
-      loading={loading}
-      cartData={cartData}
-      setCartData={setCartData}
-      handleOrderBtn={handleOrderBtn}
-      quantity={quantity}
-      setQuantity={setQuantity}
-      cartItem={cartItem}
-      setCartItem={setCartItem}
-    />
+    <CenterWarpper>
+      {loading ? <Loading /> : null}
+      <TopNavBar />
+      <CartWarpper>
+        <PageTitle>장바구니</PageTitle>
+        <CartTabTitle checked={checked} setChecked={setChecked} />
+        {cartItem.length === 0 ? (
+          <EmptyCart />
+        ) : (
+          <FilledCart
+            cartData={cartData}
+            checked={checked}
+            setChecked={setChecked}
+            setCartData={setCartData}
+            handleOrderBtn={handleOrderBtn}
+            quantity={quantity}
+            setQuantity={setQuantity}
+            cartItem={cartItem}
+            setCartItem={setCartItem}
+          />
+        )}
+      </CartWarpper>
+    </CenterWarpper>
   );
 }
