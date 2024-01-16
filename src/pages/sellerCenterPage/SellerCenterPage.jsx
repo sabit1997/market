@@ -3,14 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import instance from '../../client/instance';
 import { CenterWarpper } from '../../components/common/Common';
 import SellerTopNavBar from '../../components/navBar/SellerTopNavBar';
-import {
-  TopSection,
-  RightWarpper,
-  BoldTxt,
-  NormalTxt,
-  Main,
-  SideBar,
-} from './SellerCenterPageStyle';
+import * as S from './SellerCenterPageStyle';
 import TabMenu from '../../components/button/TabMenu';
 import MsIconButton from '../../components/button/MsIconButton';
 import plusIcon from '../../assets/icon-plus.svg';
@@ -76,13 +69,13 @@ export default function SellerCenterPage() {
   return (
     <CenterWarpper>
       <SellerTopNavBar />
-      <TopSection>
-        <RightWarpper>
-          <BoldTxt>판매자센터</BoldTxt>
-          <NormalTxt>
+      <S.TopSection>
+        <S.RightWarpper>
+          <S.BoldTxt>판매자센터</S.BoldTxt>
+          <S.NormalTxt>
             {productBoxData.length !== 0 ? productBoxData[0]?.store_name : null}
-          </NormalTxt>
-        </RightWarpper>
+          </S.NormalTxt>
+        </S.RightWarpper>
         <MsIconButton
           src={plusIcon}
           value="상품 업로드"
@@ -91,14 +84,14 @@ export default function SellerCenterPage() {
             navigate('/productedit', { state: { productBoxData: null } });
           }}
         />
-      </TopSection>
-      <Main>
-        <SideBar>{TabMenuList}</SideBar>
+      </S.TopSection>
+      <S.Main>
+        <S.SideBar>{TabMenuList}</S.SideBar>
         <SellerCenterTabTitle
           setProductBoxData={setProductBoxData}
           productBoxData={productBoxData}
         />
-      </Main>
+      </S.Main>
     </CenterWarpper>
   );
 }

@@ -1,16 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useRef, useState } from 'react';
 import client from '../../client/client';
-import {
-  Warpper,
-  Logo,
-  LoginBox,
-  LoginSelletor,
-  InputBox,
-  MoveTxtWarpper,
-  MoveTxt,
-  ErrorMessage,
-} from './LoginPageStyle';
+import * as S from './LoginPageStyle';
 import logo from '../../assets/Logo-hodu.png';
 import TextInput from '../../components/input/TextInput';
 import MButton from '../../components/button/MButton';
@@ -72,21 +63,21 @@ export default function LoginPage() {
 
   return (
     <>
-      <Warpper>
-        <Logo
+      <S.Warpper>
+        <S.Logo
           src={logo}
           onClick={() => {
             navigate('/');
           }}
         />
-        <LoginBox>
-          <LoginSelletor onClick={handleBuyerBtn} loginType={loginType}>
+        <S.LoginBox>
+          <S.LoginSelletor onClick={handleBuyerBtn} loginType={loginType}>
             구매회원 로그인
-          </LoginSelletor>
-          <LoginSelletor onClick={handleSellerBtn} loginType={loginType}>
+          </S.LoginSelletor>
+          <S.LoginSelletor onClick={handleSellerBtn} loginType={loginType}>
             판매회원 로그인
-          </LoginSelletor>
-          <InputBox loginType={loginType} onSubmit={handleLogin}>
+          </S.LoginSelletor>
+          <S.InputBox loginType={loginType} onSubmit={handleLogin}>
             <TextInput
               type="text"
               placeholder="아이디"
@@ -106,21 +97,21 @@ export default function LoginPage() {
               textInput={passwordInput}
             />
             {errorMessage === '로그인 정보가 없습니다.' ? (
-              <ErrorMessage>
+              <S.ErrorMessage>
                 아이디 또는 비밀번호가 일치하지 않습니다.
-              </ErrorMessage>
+              </S.ErrorMessage>
             ) : errorMessage ===
               '로그인 정보가 없습니다. 로그인 유형을 학인해주세요.' ? (
-              <ErrorMessage>로그인 유형을 확인해주세요.</ErrorMessage>
+              <S.ErrorMessage>로그인 유형을 확인해주세요.</S.ErrorMessage>
             ) : null}
             <MButton value="로그인" wd="100%" />
-          </InputBox>
-        </LoginBox>
-      </Warpper>
-      <MoveTxtWarpper>
-        <MoveTxt onClick={() => navigate('/join')}>회원가입</MoveTxt>
-        <MoveTxt>비밀번호찾기</MoveTxt>
-      </MoveTxtWarpper>
+          </S.InputBox>
+        </S.LoginBox>
+      </S.Warpper>
+      <S.MoveTxtWarpper>
+        <S.MoveTxt onClick={() => navigate('/join')}>회원가입</S.MoveTxt>
+        <S.MoveTxt>비밀번호찾기</S.MoveTxt>
+      </S.MoveTxtWarpper>
     </>
   );
 }

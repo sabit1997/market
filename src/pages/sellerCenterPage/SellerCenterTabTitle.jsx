@@ -1,8 +1,4 @@
-import {
-  ContentsSection,
-  SaleProducTitle,
-  ProductTitleTxt,
-} from './SellerCenterPageStyle';
+import * as S from './SellerCenterPageStyle';
 import ProductBox from '../../components/contents/ProductBox';
 
 export default function SellerCenterTabTitle({
@@ -18,18 +14,18 @@ export default function SellerCenterTabTitle({
     />
   ));
   return (
-    <ContentsSection>
-      <SaleProducTitle>
-        <ProductTitleTxt wd="49.93%">상품정보</ProductTitleTxt>
-        <ProductTitleTxt wd="30.62%">판매가격</ProductTitleTxt>
-        <ProductTitleTxt wd="5.55%" minWd="34px" mg="1.38%">
+    <S.ContentsSection>
+      <S.SaleProducTitle>
+        <S.ProductTitleTxt wd="49.93%">상품정보</S.ProductTitleTxt>
+        <S.ProductTitleTxt wd="30.62%">판매가격</S.ProductTitleTxt>
+        <S.ProductTitleTxt wd="5.55%" minWd="34px" mg="1.38%">
           수정
-        </ProductTitleTxt>
-        <ProductTitleTxt wd="5.55%" minWd="34px" mg="1.38%">
+        </S.ProductTitleTxt>
+        <S.ProductTitleTxt wd="5.55%" minWd="34px" mg="1.38%">
           삭제
-        </ProductTitleTxt>
-      </SaleProducTitle>
-      {productBoxData !== [] ? productBoxList : null}
-    </ContentsSection>
+        </S.ProductTitleTxt>
+      </S.SaleProducTitle>
+      {productBoxData.length !== 0 ? productBoxList : null}
+    </S.ContentsSection>
   );
 }

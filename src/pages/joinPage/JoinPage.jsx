@@ -3,18 +3,9 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import useInputs from '../../hooks/useInputs';
 import client from '../../client/client';
-import { Warpper, Logo, IdInputWarpper } from './JoinPageStyle';
-import { LoginBox, LoginSelletor, InputBox } from '../loginPage/LoginPageStyle';
-import {
-  IdTextInputBox,
-  PasswordTextInputBox,
-  PasswordReconFirmTextInputBox,
-  NameTextInputBox,
-  PhoneNumberTextInputBox,
-  EmailTextInputBox,
-  CompanyNumTextInputBox,
-  StoreNameTextInputBox,
-} from '../../components/input/TextInputBox';
+import * as S from './JoinPageStyle';
+import * as L from '../loginPage/LoginPageStyle';
+import * as I from '../../components/input/TextInputBox';
 import logo from '../../assets/Logo-hodu.png';
 import CheckText from '../../components/etc/CheckText';
 import MS16pButton from '../../components/button/MS16pButton';
@@ -161,18 +152,18 @@ export default function JoinPage() {
   const [companyNumValid, setCompanyNumValid] = useState('');
 
   return (
-    <Warpper onSubmit={handleJoin}>
-      <Logo src={logo} onClick={() => navigate('/')} />
-      <LoginBox>
-        <LoginSelletor loginType={joinType} onClick={changeBuyer}>
+    <S.Warpper onSubmit={handleJoin}>
+      <S.Logo src={logo} onClick={() => navigate('/')} />
+      <L.LoginBox>
+        <L.LoginSelletor loginType={joinType} onClick={changeBuyer}>
           구매회원가입
-        </LoginSelletor>
-        <LoginSelletor loginType={joinType} onClick={changeSeller}>
+        </L.LoginSelletor>
+        <L.LoginSelletor loginType={joinType} onClick={changeSeller}>
           판매회원가입
-        </LoginSelletor>
-        <InputBox loginType={joinType}>
-          <IdInputWarpper>
-            <IdTextInputBox
+        </L.LoginSelletor>
+        <L.InputBox loginType={joinType}>
+          <S.IdInputWarpper>
+            <I.IdTextInputBox
               value={userName}
               accountValid={accountValid}
               errors={errors}
@@ -190,8 +181,8 @@ export default function JoinPage() {
               setAccountValid={setAccountValid}
               onClick={handleButton}
             />
-          </IdInputWarpper>
-          <PasswordTextInputBox
+          </S.IdInputWarpper>
+          <I.PasswordTextInputBox
             title="비밀번호"
             value={password}
             password={password}
@@ -199,7 +190,7 @@ export default function JoinPage() {
             handleInput={onChange}
             errors={errors}
           />
-          <PasswordReconFirmTextInputBox
+          <I.PasswordReconFirmTextInputBox
             value={password2}
             register={register}
             password={password}
@@ -207,14 +198,14 @@ export default function JoinPage() {
             handleInput={onChange}
             errors={errors}
           />
-          <NameTextInputBox
+          <I.NameTextInputBox
             value={name}
             register={register}
             handleInput={onChange}
             errors={errors}
             marginB="16px"
           />
-          <PhoneNumberTextInputBox
+          <I.PhoneNumberTextInputBox
             value={phoneNumber1}
             value2={phoneNumber2}
             register={register}
@@ -224,7 +215,7 @@ export default function JoinPage() {
             setPrefixNum={setPrefixNum}
             marginB="16px"
           />
-          <EmailTextInputBox
+          <I.EmailTextInputBox
             value={email1}
             value2={email2}
             register={register}
@@ -233,8 +224,8 @@ export default function JoinPage() {
           />
           {joinType === 'SELLER' ? (
             <>
-              <IdInputWarpper marginT="50px">
-                <CompanyNumTextInputBox
+              <S.IdInputWarpper marginT="50px">
+                <I.CompanyNumTextInputBox
                   value={companyNum}
                   companyNumValid={companyNumValid}
                   register={register}
@@ -248,8 +239,8 @@ export default function JoinPage() {
                   type="button"
                   onClick={handleAuthButton}
                 />
-              </IdInputWarpper>
-              <StoreNameTextInputBox
+              </S.IdInputWarpper>
+              <I.StoreNameTextInputBox
                 value={storeName}
                 register={register}
                 handleInput={onChange}
@@ -257,8 +248,8 @@ export default function JoinPage() {
               />
             </>
           ) : null}
-        </InputBox>
-      </LoginBox>
+        </L.InputBox>
+      </L.LoginBox>
       <CheckText
         value="회원가입"
         marginB="34px"
@@ -275,6 +266,6 @@ export default function JoinPage() {
           <MDisabledButton value="가입하기" wd="100%" />
         </>
       )}
-    </Warpper>
+    </S.Warpper>
   );
 }
