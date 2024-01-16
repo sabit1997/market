@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 import { PageWarpper } from '../../components/common/Common';
-import { TitleTxt, Img, Txt, RedTxt } from './OderCompletedPageStyle';
+import * as S from './OrderCompletedPageStyle';
 import { PaymentTabTitle } from '../../components/navBar/TabTitle';
 import ProductInfo from '../../components/contents/ProductInfo';
 import LButton from '../../components/button/LButton';
@@ -18,12 +18,12 @@ export default function OrderCompletedPage() {
 
   return (
     <PageWarpper>
-      <TitleTxt>주문이 완료되었습니다.</TitleTxt>
-      <Img src={shoppingBag} />
-      <Txt>
+      <S.TitleTxt>주문이 완료되었습니다.</S.TitleTxt>
+      <S.Img src={shoppingBag} />
+      <S.Txt>
         {date.toLocaleDateString('ko-kr')} 주문하신 상품의 주문번호는{' '}
-        <RedTxt>{orderNum}</RedTxt> 입니다.
-      </Txt>
+        <S.RedTxt>{orderNum}</S.RedTxt> 입니다.
+      </S.Txt>
       <PaymentTabTitle />
       {orderInfo.map((_, i) => (
         <ProductInfo

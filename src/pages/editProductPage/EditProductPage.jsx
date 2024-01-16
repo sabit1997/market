@@ -10,20 +10,7 @@ import MS16pWhiteButton from '../../components/button/MS16pWhiteButton';
 import MButton from '../../components/button/MButton';
 import MWhiteButton from '../../components/button/MWhiteButton';
 import { CenterWarpper } from '../../components/common/Common';
-import {
-  Main,
-  SideBar,
-  SideBarTilte,
-  EditSection,
-  TopSection,
-  InputTitle,
-  ImgPreveiw,
-  ImgUploadButton,
-  EditerSection,
-  ButtonWarpper,
-  ImgWarpper,
-  TextInputWarpper,
-} from './EditProductPageStyle';
+import * as S from './EditProductPageStyle';
 import PrecautionsTextBox from './PrecautionsTextBox';
 import useInputs from '../../hooks/useInputs';
 
@@ -190,16 +177,16 @@ export default function EditProductPage() {
   return (
     <CenterWarpper>
       <SellerTopNavBar />
-      <Main onSubmit={handleSubmit}>
-        <SideBar>
-          <SideBarTilte>상품 등록</SideBarTilte>
+      <S.Main onSubmit={handleSubmit}>
+        <S.SideBar>
+          <S.SideBarTilte>상품 등록</S.SideBarTilte>
           <PrecautionsTextBox />
-        </SideBar>
-        <EditSection>
-          <TopSection>
-            <ImgWarpper>
-              <InputTitle>상품 이미지</InputTitle>
-              <ImgPreveiw preview={preview} image={image}>
+        </S.SideBar>
+        <S.EditSection>
+          <S.TopSection>
+            <S.ImgWarpper>
+              <S.InputTitle>상품 이미지</S.InputTitle>
+              <S.ImgPreveiw preview={preview} image={image}>
                 <input
                   id="imageUploadInput"
                   type="file"
@@ -208,10 +195,10 @@ export default function EditProductPage() {
                   onChange={handleImgPreview}
                   className="ir"
                 />
-                <ImgUploadButton htmlFor="imageUploadInput" />
-              </ImgPreveiw>
-            </ImgWarpper>
-            <TextInputWarpper>
+                <S.ImgUploadButton htmlFor="imageUploadInput" />
+              </S.ImgPreveiw>
+            </S.ImgWarpper>
+            <S.TextInputWarpper>
               <TextInputLimitBox
                 name="productName"
                 value={productName}
@@ -225,7 +212,7 @@ export default function EditProductPage() {
                 value={price}
                 onChange={handleInput}
               />
-              <InputTitle>배송방법</InputTitle>
+              <S.InputTitle>배송방법</S.InputTitle>
               {firstBtn === true ? (
                 <MS16pButton
                   wd="220px"
@@ -276,15 +263,15 @@ export default function EditProductPage() {
                 value={stock}
                 onChange={handleInput}
               />
-            </TextInputWarpper>
-          </TopSection>
-          <InputTitle>상품 상세</InputTitle>
-          <EditerSection
+            </S.TextInputWarpper>
+          </S.TopSection>
+          <S.InputTitle>상품 상세</S.InputTitle>
+          <S.EditerSection
             name="productInfo"
             value={productInfo}
             onChange={handleInput}
           />
-          <ButtonWarpper>
+          <S.ButtonWarpper>
             <MWhiteButton
               wd="200px"
               mobileWd="100px"
@@ -292,9 +279,9 @@ export default function EditProductPage() {
               marginR="14px"
             />
             <MButton wd="200px" mobileWd="100px" value="저장하기" />
-          </ButtonWarpper>
-        </EditSection>
-      </Main>
+          </S.ButtonWarpper>
+        </S.EditSection>
+      </S.Main>
     </CenterWarpper>
   );
 }

@@ -1,16 +1,15 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import instance from '../../client/instance';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import client from '../../client/client';
 import { useNavigate } from 'react-router-dom';
-import { CartWarpper, PageTitle } from './CartPageStyle';
+import * as S from './CartPageStyle';
 import TopNavBar from '../../components/navBar/TopNavBar';
 import { CartTabTitle } from '../../components/navBar/TabTitle';
 import EmptyCart from './EmptyCart';
 import FilledCart from './FilledCart';
 import { CenterWarpper } from '../../components/common/Common';
 import Loading from '../../components/etc/Loading';
-import axios from 'axios';
-import client from '../../client/client';
 
 export default function CartPage() {
   const [cartData, setCartData] = useState([]);
@@ -93,8 +92,8 @@ export default function CartPage() {
     <CenterWarpper>
       {loading ? <Loading /> : null}
       <TopNavBar />
-      <CartWarpper>
-        <PageTitle>장바구니</PageTitle>
+      <S.CartWarpper>
+        <S.PageTitle>장바구니</S.PageTitle>
         <CartTabTitle checked={checked} setChecked={setChecked} />
         {cartItem.length === 0 ? (
           <EmptyCart />
@@ -111,7 +110,7 @@ export default function CartPage() {
             setCartItem={setCartItem}
           />
         )}
-      </CartWarpper>
+      </S.CartWarpper>
     </CenterWarpper>
   );
 }
