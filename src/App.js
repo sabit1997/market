@@ -6,7 +6,7 @@ import CartPage from './pages/cartPage/CartPage';
 import PaymentPage from './pages/paymentPage/PaymentPage';
 import NotFound from './pages/notFoundPage/NotFoundPage';
 import ProductDetailPage from './pages/productDetailPage/ProductDetailPage';
-import SellerCenterPage from './pages/SellerCenterPage';
+import SellerCenterPage from './pages/sellerCenterPage/SellerCenterPage';
 import EditProductPage from './pages/editProductPage/EditProductPage';
 import OrderCompletedPage from './pages/orderCompletedPage/OrderCompletedPage';
 import SearchResult from './template/search/SearchResult';
