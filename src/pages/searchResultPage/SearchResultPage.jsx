@@ -1,5 +1,5 @@
 import { CenterWarpper } from '../../components/common/Common';
-import { Title, ResultMessage, SearchKeyword } from './SearchResultPageStyle';
+import * as S from './SearchResultPageStyle';
 import ProductList from '../../components/contents/ProductList';
 import { useLocation } from 'react-router-dom';
 import TopNavBar from '../../components/navBar/TopNavBar';
@@ -13,11 +13,11 @@ export default function SearchResult() {
   return (
     <CenterWarpper>
       <TopNavBar value={loginType} />
-      <Title>검색 결과</Title>
-      <ResultMessage>
-        <SearchKeyword>'{searchInput}'</SearchKeyword>에 대한 검색 결과는 총{' '}
+      <S.Title>검색 결과</S.Title>
+      <S.ResultMessage>
+        <S.SearchKeyword>'{searchInput}'</S.SearchKeyword>에 대한 검색 결과는 총{' '}
         {resultProducts.length} 개 입니다.
-      </ResultMessage>
+      </S.ResultMessage>
       <ProductListSection>
         {resultProducts.map((x) => (
           <ProductList key={x.product_id} productData={x} />

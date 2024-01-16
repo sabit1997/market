@@ -3,26 +3,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import instance from '../../client/instance';
 import TopNavBar from '../../components/navBar/TopNavBar';
-import {
-  ProductWarpper,
-  ProductImg,
-  ProductInfo,
-  Seller,
-  ProductName,
-  Shipping,
-  PriceWarpper,
-  TotalPriceTxt,
-  RightWarpper,
-  TotalQuantity,
-  TotalQuantityNum,
-  ButtonWarpper,
-} from './ProductDetailPageStyle';
-import {
-  ExistsModal,
-  ExcessModal,
-  NotLogin,
-  SuccessCart,
-} from '../../components/modal/Modal';
+import * as S from './ProductDetailPageStyle';
+import * as M from '../../components/modal/Modal';
 import Amount from '../../components/etc/Amount';
 import LPrice from '../../components/etc/LPrice';
 import MButton from '../../components/button/MButton';
@@ -160,22 +142,22 @@ export default function ProductDetailPage() {
     <CenterWarpper>
       {loading ? <Loading /> : null}
       <TopNavBar value={loginType} />
-      <ProductWarpper>
-        <ProductImg src={productDetail.image} />
-        <ProductInfo>
-          <Seller>{productDetail.store_name}</Seller>
-          <ProductName>{productDetail.product_name}</ProductName>
+      <S.ProductWarpper>
+        <S.ProductImg src={productDetail.image} />
+        <S.ProductInfo>
+          <S.Seller>{productDetail.store_name}</S.Seller>
+          <S.ProductName>{productDetail.product_name}</S.ProductName>
           <LPrice
             cl="#000"
             value={productDetail.price?.toLocaleString()}
             marginB="138px"
           ></LPrice>
-          <Shipping>
+          <S.Shipping>
             {shippingValue(
               productDetail.shipping_fee,
               productDetail.shipping_method
             )}
-          </Shipping>
+          </S.Shipping>
           <Amount
             margin="52px 0 0"
             stock={productDetail.stock}
@@ -186,26 +168,26 @@ export default function ProductDetailPage() {
             productDetail={productDetail}
             loginType={loginType}
           />
-          <PriceWarpper>
-            <TotalPriceTxt>총 상품 금액</TotalPriceTxt>
-            <RightWarpper>
-              <TotalQuantity>
+          <S.PriceWarpper>
+            <S.TotalPriceTxt>총 상품 금액</S.TotalPriceTxt>
+            <S.RightWarpper>
+              <S.TotalQuantity>
                 총 수량{' '}
-                <TotalQuantityNum>{productDetail.stock}</TotalQuantityNum>개
-              </TotalQuantity>
+                <S.TotalQuantityNum>{productDetail.stock}</S.TotalQuantityNum>개
+              </S.TotalQuantity>
               <LPrice
                 cl="#21BF48"
                 value={(productDetail.price * amountQuantity)?.toLocaleString()}
               ></LPrice>
-            </RightWarpper>
-          </PriceWarpper>
+            </S.RightWarpper>
+          </S.PriceWarpper>
           {loginType === 'SELLER' ? (
-            <ButtonWarpper>
+            <S.ButtonWarpper>
               <MDisabledButton basis="82.5%" marginR="2.7%" value="바로 구매" />
               <MDisabledButton basis="39.68%" value="장바구니" />
-            </ButtonWarpper>
+            </S.ButtonWarpper>
           ) : (
-            <ButtonWarpper>
+            <S.ButtonWarpper>
               <MButton
                 value="바로 구매"
                 basis="82.5%"
@@ -220,24 +202,24 @@ export default function ProductDetailPage() {
                 value="장바구니"
                 onClick={handleButton}
               />
-            </ButtonWarpper>
+            </S.ButtonWarpper>
           )}
-        </ProductInfo>
-      </ProductWarpper>
-      <ButtonWarpper>
+        </S.ProductInfo>
+      </S.ProductWarpper>
+      <S.ButtonWarpper>
         <TabActiveButton value="버튼" />
         <TabDisabledButton value="리뷰" />
         <TabDisabledButton value="Q&A" />
         <TabDisabledButton value="반품/교환정보" />
-      </ButtonWarpper>
+      </S.ButtonWarpper>
       {existModal === true ? (
-        <ExistsModal setExistModal={setExistModal} />
+        <M.ExistsModal setExistModal={setExistModal} />
       ) : excessModal === true ? (
-        <ExcessModal setExcessModal={setExcessModal} />
+        <M.ExcessModal setExcessModal={setExcessModal} />
       ) : loginModal ? (
-        <NotLogin setAlertModal={setLoginModal} />
+        <M.NotLogin setAlertModal={setLoginModal} />
       ) : successCart ? (
-        <SuccessCart setSuccessCart={setSuccessCart} />
+        <M.SuccessCart setSuccessCart={setSuccessCart} />
       ) : null}
     </CenterWarpper>
   );
