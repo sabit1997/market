@@ -1,19 +1,19 @@
 import { Routes, Route } from 'react-router-dom';
 import GlobalStyle from './styles/global';
-import LoginPage from './pages/LoginPage';
-import JoinPage from './pages/JoinPage';
-import CartPage from './pages/CartPage';
-import PaymentPage from './pages/PaymentPage';
-import NotFound from './template/NotFound/NotFound';
-import ProductDetailPage from './pages/ProductDetailPage';
-import SellerCenterPage from './pages/SellerCenterPage';
-import EditProductPage from './pages/EditProductPage';
-import OrderCompletedPage from './pages/OrderCompletedPage';
-import SearchResult from './template/search/SearchResult';
+import LoginPage from './pages/loginPage/LoginPage';
+import JoinPage from './pages/joinPage/JoinPage';
+import CartPage from './pages/cartPage/CartPage';
+import PaymentPage from './pages/paymentPage/PaymentPage';
+import NotFound from './pages/notFoundPage/NotFoundPage';
+import ProductDetailPage from './pages/productDetailPage/ProductDetailPage';
+import SellerCenterPage from './pages/sellerCenterPage/SellerCenterPage';
+import EditProductPage from './pages/editProductPage/EditProductPage';
+import OrderCompletedPage from './pages/orderCompletedPage/OrderCompletedPage';
+import SearchResult from './pages/searchResultPage/SearchResultPage';
 import './App.css';
 import { ThemeProvider } from 'styled-components';
 import theme from './styles/theme';
-import MainPage from './pages/Main/MainPage';
+import MainPage from './pages/mainPage/MainPage';
 function App() {
   return (
     <ThemeProvider theme={theme}>

@@ -1,4 +1,4 @@
-import { EmptyTxt } from './CartStyle';
+import { EmptyTxt } from './CartPageStyle';
 
 export default function EmptyCart() {
   return (

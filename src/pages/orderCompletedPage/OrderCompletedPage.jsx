@@ -1,17 +1,21 @@
+import { useLocation, useNavigate } from 'react-router-dom';
 import { PageWarpper } from '../../components/common/Common';
-import { TitleTxt, Img, Txt, RedTxt } from './OderCompletedStyle';
+import { TitleTxt, Img, Txt, RedTxt } from './OderCompletedPageStyle';
 import { PaymentTabTitle } from '../../components/navBar/TabTitle';
 import ProductInfo from '../../components/contents/ProductInfo';
 import LButton from '../../components/button/LButton';
 import shoppingBag from '../../assets/shopping_bag.png';
 
-export default function OrderCompleted({
-  date,
-  orderNum,
-  orderInfo,
-  quantity,
-  navigate,
-}) {
+export default function OrderCompletedPage() {
+  const location = useLocation();
+  const orderInfo = location.state.orderInfo;
+  const quantity = location.state.quantity;
+  const orderNum = location.state.orderNum;
+
+  const navigate = useNavigate();
+
+  const date = new Date();
+
   return (
     <PageWarpper>
       <TitleTxt>주문이 완료되었습니다.</TitleTxt>
