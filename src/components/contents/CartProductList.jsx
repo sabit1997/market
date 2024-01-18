@@ -23,13 +23,13 @@ function CartProductList({
     if (method === 'PARCEL') {
       if (fee === 0) {
         return '소포배송 / 무료배송';
-      } else if (fee !== 0) {
+      } else {
         return `소포배송 / ${fee.toLocaleString()}원`;
       }
     } else if (method === 'DELIVERY') {
       if (fee === 0) {
         return '택배배송 / 무료배송';
-      } else if (fee !== 0) {
+      } else {
         return `택배배송 / ${fee.toLocaleString()}원`;
       }
     }
