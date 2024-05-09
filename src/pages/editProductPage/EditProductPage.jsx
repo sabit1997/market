@@ -50,7 +50,7 @@ export default function EditProductPage() {
         stock: productBoxData.stock,
         productInfo: productBoxData.product_info,
       });
-  }, [handleInputs, productBoxData]);
+  }, [productBoxData, handleInputs]);
 
   useEffect(() => {
     if (productBoxData !== null) {
@@ -78,27 +78,58 @@ export default function EditProductPage() {
     setImage(e.target.files[0]);
   }
 
+  // 필요한 모든 input이 작성되었는지 확인
+  function checkRequiredInputs(inputs) {
+    for (const key in inputs) {
+      if (!inputs[key]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  // 수정 여부
+  function isEdit(originalPost) {
+    if (!!originalPost) {
+      return true;
+    }
+    return false;
+  }
+
+  function createFormData(data) {
+    const formData = new FormData();
+    for (const key in data) {
+      formData.append(key, data[key]);
+    }
+    return formData;
+  }
+
   // 상품 등록
   function handleSubmit(e) {
     e.preventDefault();
-    if (
-      productBoxData === null &&
-      productName &&
-      price &&
-      shipping &&
-      shippingFee &&
-      stock &&
-      image &&
-      productInfo
-    ) {
-      const formData = new FormData();
-      formData.append('product_name', productName);
-      formData.append('price', price);
-      formData.append('shipping_method', shipping);
-      formData.append('shipping_fee', shippingFee);
-      formData.append('stock', stock);
-      formData.append('product_info', productInfo);
-      formData.append('image', image);
+
+    const allInputs = {
+      productName,
+      price,
+      shipping,
+      shippingFee,
+      stock,
+      image,
+      productInfo,
+    };
+
+    const data = {
+      product_name: productName,
+      price: price,
+      shipping_method: shipping,
+      shipping_fee: shippingFee,
+      stock: stock,
+      product_info: productInfo,
+      image: image,
+    };
+    if (!isEdit(productBoxData) && checkRequiredInputs(allInputs)) {
+      const formData = createFormData(data);
+
       client
         .post('/products/', formData, {
           headers: {
@@ -108,21 +139,31 @@ export default function EditProductPage() {
         })
         .then(() => {
           navigate('/sellercenter');
+          console.log();
         })
         .catch((error) => {
           console.log(error);
         });
     } else if (
-      productBoxData !== null &&
-      !preview &&
-      productName &&
-      price &&
-      shipping &&
-      shippingFee &&
-      stock &&
-      image &&
-      productInfo
+      isEdit(productBoxData) &&
+      checkRequiredInputs({ ...allInputs, preview })
     ) {
+      const formData = createFormData(data);
+
+      client
+        .put(`/products/${productBoxData.product_id}/`, formData, {
+          headers: {
+            Authorization: `JWT ${token}`,
+            'Content-Type': 'multipart/form-data',
+          },
+        })
+        .then((res) => {
+          navigate('/sellercenter');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
       instance
         .patch(`/products/${productBoxData.product_id}/`, {
           product_name: productName,
@@ -133,39 +174,6 @@ export default function EditProductPage() {
           products_info: productInfo,
         })
         .then(() => {
-          navigate('/sellercenter');
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } else if (
-      productBoxData !== null &&
-      preview &&
-      productName &&
-      price &&
-      shipping &&
-      shippingFee &&
-      stock &&
-      image &&
-      productInfo
-    ) {
-      const formData = new FormData();
-      formData.append('product_name', productName);
-      formData.append('price', price);
-      formData.append('shipping_method', shipping);
-      formData.append('shipping_fee', shippingFee);
-      formData.append('stock', stock);
-      formData.append('product_info', productInfo);
-      formData.append('image', image);
-
-      client
-        .put(`/products/${productBoxData.product_id}/`, formData, {
-          headers: {
-            Authorization: `JWT ${token}`,
-            'Content-Type': 'multipart/form-data',
-          },
-        })
-        .then((res) => {
           navigate('/sellercenter');
         })
         .catch((error) => {
