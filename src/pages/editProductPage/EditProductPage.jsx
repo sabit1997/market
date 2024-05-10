@@ -90,10 +90,7 @@ export default function EditProductPage() {
 
   // 수정 여부
   function isEdit(originalPost) {
-    if (!!originalPost) {
-      return true;
-    }
-    return false;
+    return !!originalPost;
   }
 
   function createFormData(data) {
