@@ -20,7 +20,9 @@ export default function EditProductPage() {
   const navigate = useNavigate();
   const [firstBtn, setFirstBtn] = useState(true);
   const [secondBtn, setSecondBtn] = useState(false);
-  const [shipping, setShipping] = useState('PARCEL');
+  const [shipping, setShipping] = useState(
+    productBoxData?.shipping_method || 'PARCEL'
+  );
   const [
     { productName, price, shippingFee, stock, productInfo },
     handleInput,
@@ -33,7 +35,7 @@ export default function EditProductPage() {
     productInfo: '',
   });
 
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState(productBoxData?.image || '');
   const token = localStorage.getItem('token');
 
   const [preview, setPreview] = useState('');
