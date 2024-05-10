@@ -18,8 +18,6 @@ export default function EditProductPage() {
   const location = useLocation();
   const productBoxData = location.state.productBoxData;
   const navigate = useNavigate();
-  const [firstBtn, setFirstBtn] = useState(true);
-  const [secondBtn, setSecondBtn] = useState(false);
   const [shipping, setShipping] = useState(
     productBoxData?.shipping_method || 'PARCEL'
   );
@@ -38,15 +36,11 @@ export default function EditProductPage() {
   const [preview, setPreview] = useState('');
   const inpRef = useRef();
 
-  function handle1Btn() {
-    setFirstBtn(true);
-    setSecondBtn(false);
+  function handleParcelButton() {
     setShipping('PARCEL');
   }
 
-  function handle2Btn() {
-    setFirstBtn(false);
-    setSecondBtn(true);
+  function handleDeliveryButton() {
     setShipping('DELIVERY');
   }
 
@@ -187,14 +181,14 @@ export default function EditProductPage() {
                 onChange={handleInput}
               />
               <S.InputTitle>배송방법</S.InputTitle>
-              {firstBtn === true ? (
+              {shipping === 'PARCEL' ? (
                 <MS16pButton
                   wd="220px"
                   mobileWd="120px"
                   margin="0 10px 16px 0"
                   value="택배, 소포, 등기"
                   type="button"
-                  onClick={handle1Btn}
+                  onClick={handleParcelButton}
                 />
               ) : (
                 <MS16pWhiteButton
@@ -203,16 +197,16 @@ export default function EditProductPage() {
                   margin="0 10px 16px 0"
                   value="택배, 소포, 등기"
                   type="button"
-                  onClick={handle1Btn}
+                  onClick={handleParcelButton}
                 />
               )}
-              {secondBtn === true ? (
+              {shipping === 'DELIVERY' ? (
                 <MS16pButton
                   wd="220px"
                   mobileWd="120px"
                   value="직접배송(화물배달)"
                   type="button"
-                  onClick={handle2Btn}
+                  onClick={handleDeliveryButton}
                 />
               ) : (
                 <MS16pWhiteButton
@@ -220,7 +214,7 @@ export default function EditProductPage() {
                   mobileWd="120px"
                   value="직접배송(화물배달)"
                   type="button"
-                  onClick={handle2Btn}
+                  onClick={handleDeliveryButton}
                 />
               )}
               <NumberInputBox
