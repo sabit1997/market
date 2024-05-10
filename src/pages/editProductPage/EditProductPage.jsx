@@ -23,43 +23,20 @@ export default function EditProductPage() {
   const [shipping, setShipping] = useState(
     productBoxData?.shipping_method || 'PARCEL'
   );
-  const [
-    { productName, price, shippingFee, stock, productInfo },
-    handleInput,
-    handleInputs,
-  ] = useInputs({
-    productName: '',
-    price: '',
-    shippingFee: '',
-    stock: '',
-    productInfo: '',
-  });
+  const [{ productName, price, shippingFee, stock, productInfo }, handleInput] =
+    useInputs({
+      productName: productBoxData?.product_name || '',
+      price: productBoxData?.price || '',
+      shippingFee: productBoxData?.shipping_fee || '',
+      stock: productBoxData?.stock || '',
+      productInfo: productBoxData?.product_info || '',
+    });
 
   const [image, setImage] = useState(productBoxData?.image || '');
   const token = localStorage.getItem('token');
 
   const [preview, setPreview] = useState('');
   const inpRef = useRef();
-
-  // 수정 시 기존 값 가져오기
-
-  useEffect(() => {
-    if (productBoxData !== null)
-      handleInputs({
-        productName: productBoxData.product_name,
-        price: productBoxData.price,
-        shippingFee: productBoxData.shipping_fee,
-        stock: productBoxData.stock,
-        productInfo: productBoxData.product_info,
-      });
-  }, [productBoxData, handleInputs]);
-
-  useEffect(() => {
-    if (productBoxData !== null) {
-      setImage(productBoxData.image);
-      setShipping(productBoxData.shipping_method);
-    }
-  }, [productBoxData]);
 
   // 배송방법 선택 버튼
   function handle1Btn() {
