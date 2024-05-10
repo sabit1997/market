@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import instance from '../../client/instance';
 import client from '../../client/client';
@@ -18,67 +18,37 @@ export default function EditProductPage() {
   const location = useLocation();
   const productBoxData = location.state.productBoxData;
   const navigate = useNavigate();
-  const [firstBtn, setFirstBtn] = useState(true);
-  const [secondBtn, setSecondBtn] = useState(false);
-  const [shipping, setShipping] = useState('PARCEL');
-  const [
-    { productName, price, shippingFee, stock, productInfo },
-    handleInput,
-    handleInputs,
-  ] = useInputs({
-    productName: '',
-    price: '',
-    shippingFee: '',
-    stock: '',
-    productInfo: '',
-  });
+  const [shipping, setShipping] = useState(
+    productBoxData?.shipping_method || 'PARCEL'
+  );
+  const [{ productName, price, shippingFee, stock, productInfo }, handleInput] =
+    useInputs({
+      productName: productBoxData?.product_name || '',
+      price: productBoxData?.price || '',
+      shippingFee: productBoxData?.shipping_fee || '',
+      stock: productBoxData?.stock || '',
+      productInfo: productBoxData?.product_info || '',
+    });
 
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState(productBoxData?.image || '');
   const token = localStorage.getItem('token');
 
   const [preview, setPreview] = useState('');
   const inpRef = useRef();
 
-  // 수정 시 기존 값 가져오기
-
-  useEffect(() => {
-    if (productBoxData !== null)
-      handleInputs({
-        productName: productBoxData.product_name,
-        price: productBoxData.price,
-        shippingFee: productBoxData.shipping_fee,
-        stock: productBoxData.stock,
-        productInfo: productBoxData.product_info,
-      });
-  }, [productBoxData, handleInputs]);
-
-  useEffect(() => {
-    if (productBoxData !== null) {
-      setImage(productBoxData.image);
-      setShipping(productBoxData.shipping_method);
-    }
-  }, [productBoxData]);
-
-  // 배송방법 선택 버튼
-  function handle1Btn() {
-    setFirstBtn(true);
-    setSecondBtn(false);
+  function handleParcelButton() {
     setShipping('PARCEL');
   }
 
-  function handle2Btn() {
-    setFirstBtn(false);
-    setSecondBtn(true);
+  function handleDeliveryButton() {
     setShipping('DELIVERY');
   }
 
-  // 이미지 미리보기
   function handleImgPreview(e) {
     setPreview(URL.createObjectURL(e.target.files[0]));
     setImage(e.target.files[0]);
   }
 
-  // 필요한 모든 input이 작성되었는지 확인
   function checkRequiredInputs(inputs) {
     for (const key in inputs) {
       if (!inputs[key]) {
@@ -88,12 +58,8 @@ export default function EditProductPage() {
     return true;
   }
 
-  // 수정 여부
   function isEdit(originalPost) {
-    if (!!originalPost) {
-      return true;
-    }
-    return false;
+    return !!originalPost;
   }
 
   function createFormData(data) {
@@ -104,11 +70,10 @@ export default function EditProductPage() {
     return formData;
   }
 
-  // 상품 등록
   function handleSubmit(e) {
     e.preventDefault();
 
-    const allInputs = {
+    const requiredInputs = {
       productName,
       price,
       shipping,
@@ -125,10 +90,12 @@ export default function EditProductPage() {
       shipping_fee: shippingFee,
       stock: stock,
       product_info: productInfo,
-      image: image,
     };
-    if (!isEdit(productBoxData) && checkRequiredInputs(allInputs)) {
-      const formData = createFormData(data);
+
+    const dataWithImage = { ...data, image: image };
+
+    if (!isEdit(productBoxData) && checkRequiredInputs(requiredInputs)) {
+      const formData = createFormData(dataWithImage);
 
       client
         .post('/products/', formData, {
@@ -146,9 +113,9 @@ export default function EditProductPage() {
         });
     } else if (
       isEdit(productBoxData) &&
-      checkRequiredInputs({ ...allInputs, preview })
+      checkRequiredInputs({ ...requiredInputs, preview })
     ) {
-      const formData = createFormData(data);
+      const formData = createFormData(dataWithImage);
 
       client
         .put(`/products/${productBoxData.product_id}/`, formData, {
@@ -157,7 +124,7 @@ export default function EditProductPage() {
             'Content-Type': 'multipart/form-data',
           },
         })
-        .then((res) => {
+        .then(() => {
           navigate('/sellercenter');
         })
         .catch((error) => {
@@ -165,14 +132,7 @@ export default function EditProductPage() {
         });
     } else {
       instance
-        .patch(`/products/${productBoxData.product_id}/`, {
-          product_name: productName,
-          price: price,
-          shipping_method: shipping,
-          shipping_fee: shippingFee,
-          stock: stock,
-          products_info: productInfo,
-        })
+        .patch(`/products/${productBoxData.product_id}/`, { data })
         .then(() => {
           navigate('/sellercenter');
         })
@@ -221,14 +181,14 @@ export default function EditProductPage() {
                 onChange={handleInput}
               />
               <S.InputTitle>배송방법</S.InputTitle>
-              {firstBtn === true ? (
+              {shipping === 'PARCEL' ? (
                 <MS16pButton
                   wd="220px"
                   mobileWd="120px"
                   margin="0 10px 16px 0"
                   value="택배, 소포, 등기"
                   type="button"
-                  onClick={handle1Btn}
+                  onClick={handleParcelButton}
                 />
               ) : (
                 <MS16pWhiteButton
@@ -237,16 +197,16 @@ export default function EditProductPage() {
                   margin="0 10px 16px 0"
                   value="택배, 소포, 등기"
                   type="button"
-                  onClick={handle1Btn}
+                  onClick={handleParcelButton}
                 />
               )}
-              {secondBtn === true ? (
+              {shipping === 'DELIVERY' ? (
                 <MS16pButton
                   wd="220px"
                   mobileWd="120px"
                   value="직접배송(화물배달)"
                   type="button"
-                  onClick={handle2Btn}
+                  onClick={handleDeliveryButton}
                 />
               ) : (
                 <MS16pWhiteButton
@@ -254,7 +214,7 @@ export default function EditProductPage() {
                   mobileWd="120px"
                   value="직접배송(화물배달)"
                   type="button"
-                  onClick={handle2Btn}
+                  onClick={handleDeliveryButton}
                 />
               )}
               <NumberInputBox
