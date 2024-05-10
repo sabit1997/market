@@ -105,7 +105,7 @@ export default function EditProductPage() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    const allInputs = {
+    const requiredInputs = {
       productName,
       price,
       shipping,
@@ -124,7 +124,8 @@ export default function EditProductPage() {
       product_info: productInfo,
       image: image,
     };
-    if (!isEdit(productBoxData) && checkRequiredInputs(allInputs)) {
+
+    if (!isEdit(productBoxData) && checkRequiredInputs(requiredInputs)) {
       const formData = createFormData(data);
 
       client
@@ -143,7 +144,7 @@ export default function EditProductPage() {
         });
     } else if (
       isEdit(productBoxData) &&
-      checkRequiredInputs({ ...allInputs, preview })
+      checkRequiredInputs({ ...requiredInputs, preview })
     ) {
       const formData = createFormData(data);
 
