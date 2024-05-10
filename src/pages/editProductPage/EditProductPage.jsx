@@ -96,11 +96,12 @@ export default function EditProductPage() {
       shipping_fee: shippingFee,
       stock: stock,
       product_info: productInfo,
-      image: image,
     };
 
+    const dataWithImage = { ...data, image: image };
+
     if (!isEdit(productBoxData) && checkRequiredInputs(requiredInputs)) {
-      const formData = createFormData(data);
+      const formData = createFormData(dataWithImage);
 
       client
         .post('/products/', formData, {
@@ -120,7 +121,7 @@ export default function EditProductPage() {
       isEdit(productBoxData) &&
       checkRequiredInputs({ ...requiredInputs, preview })
     ) {
-      const formData = createFormData(data);
+      const formData = createFormData(dataWithImage);
 
       client
         .put(`/products/${productBoxData.product_id}/`, formData, {
@@ -137,14 +138,7 @@ export default function EditProductPage() {
         });
     } else {
       instance
-        .patch(`/products/${productBoxData.product_id}/`, {
-          product_name: productName,
-          price: price,
-          shipping_method: shipping,
-          shipping_fee: shippingFee,
-          stock: stock,
-          products_info: productInfo,
-        })
+        .patch(`/products/${productBoxData.product_id}/`, { data })
         .then(() => {
           navigate('/sellercenter');
         })
