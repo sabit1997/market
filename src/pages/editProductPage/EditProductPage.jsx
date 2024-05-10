@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import instance from '../../client/instance';
 import client from '../../client/client';
@@ -38,7 +38,6 @@ export default function EditProductPage() {
   const [preview, setPreview] = useState('');
   const inpRef = useRef();
 
-  // 배송방법 선택 버튼
   function handle1Btn() {
     setFirstBtn(true);
     setSecondBtn(false);
@@ -51,13 +50,11 @@ export default function EditProductPage() {
     setShipping('DELIVERY');
   }
 
-  // 이미지 미리보기
   function handleImgPreview(e) {
     setPreview(URL.createObjectURL(e.target.files[0]));
     setImage(e.target.files[0]);
   }
 
-  // 필요한 모든 input이 작성되었는지 확인
   function checkRequiredInputs(inputs) {
     for (const key in inputs) {
       if (!inputs[key]) {
@@ -67,7 +64,6 @@ export default function EditProductPage() {
     return true;
   }
 
-  // 수정 여부
   function isEdit(originalPost) {
     return !!originalPost;
   }
@@ -80,7 +76,6 @@ export default function EditProductPage() {
     return formData;
   }
 
-  // 상품 등록
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -134,7 +129,7 @@ export default function EditProductPage() {
             'Content-Type': 'multipart/form-data',
           },
         })
-        .then((res) => {
+        .then(() => {
           navigate('/sellercenter');
         })
         .catch((error) => {
