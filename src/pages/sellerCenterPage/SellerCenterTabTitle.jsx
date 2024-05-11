@@ -1,5 +1,6 @@
-import * as S from './SellerCenterPageStyle';
 import ProductBox from '../../components/contents/ProductBox';
+
+import * as S from './SellerCenterPageStyle';
 
 export default function SellerCenterTabTitle({
   setProductBoxData,

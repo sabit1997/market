@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import insta from '../../assets/icon-insta.svg';
+
 import facebook from '../../assets/icon-fb.svg';
+import insta from '../../assets/icon-insta.svg';
 import youtube from '../../assets/icon-yt.svg';
 
 export const FooterWarpper = styled.footer`

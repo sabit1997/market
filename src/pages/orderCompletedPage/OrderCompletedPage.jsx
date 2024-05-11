@@ -1,10 +1,12 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { PageWarpper } from '../../components/common/Common';
-import * as S from './OrderCompletedPageStyle';
-import { PaymentTabTitle } from '../../components/navBar/TabTitle';
-import ProductInfo from '../../components/contents/ProductInfo';
-import LButton from '../../components/button/LButton';
+
 import shoppingBag from '../../assets/shopping_bag.png';
+import LButton from '../../components/button/LButton';
+import { PageWarpper } from '../../components/common/Common';
+import ProductInfo from '../../components/contents/ProductInfo';
+import { PaymentTabTitle } from '../../components/navBar/TabTitle';
+
+import * as S from './OrderCompletedPageStyle';
 
 export default function OrderCompletedPage() {
   const location = useLocation();

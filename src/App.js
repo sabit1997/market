@@ -1,19 +1,21 @@
 import { Routes, Route } from 'react-router-dom';
-import GlobalStyle from './styles/global';
-import LoginPage from './pages/loginPage/LoginPage';
-import JoinPage from './pages/joinPage/JoinPage';
-import CartPage from './pages/cartPage/CartPage';
-import PaymentPage from './pages/paymentPage/PaymentPage';
-import NotFound from './pages/notFoundPage/NotFoundPage';
-import ProductDetailPage from './pages/productDetailPage/ProductDetailPage';
-import SellerCenterPage from './pages/sellerCenterPage/SellerCenterPage';
-import EditProductPage from './pages/editProductPage/EditProductPage';
-import OrderCompletedPage from './pages/orderCompletedPage/OrderCompletedPage';
-import SearchResult from './pages/searchResultPage/SearchResultPage';
-import './App.css';
 import { ThemeProvider } from 'styled-components';
-import theme from './styles/theme';
+
+import CartPage from './pages/cartPage/CartPage';
+import EditProductPage from './pages/editProductPage/EditProductPage';
+import JoinPage from './pages/joinPage/JoinPage';
+import LoginPage from './pages/loginPage/LoginPage';
 import MainPage from './pages/mainPage/MainPage';
+import NotFound from './pages/notFoundPage/NotFoundPage';
+import OrderCompletedPage from './pages/orderCompletedPage/OrderCompletedPage';
+import PaymentPage from './pages/paymentPage/PaymentPage';
+import ProductDetailPage from './pages/productDetailPage/ProductDetailPage';
+import SearchResult from './pages/searchResultPage/SearchResultPage';
+import SellerCenterPage from './pages/sellerCenterPage/SellerCenterPage';
+import GlobalStyle from './styles/global';
+import './App.css';
+import theme from './styles/theme';
+
 function App() {
   return (
     <ThemeProvider theme={theme}>

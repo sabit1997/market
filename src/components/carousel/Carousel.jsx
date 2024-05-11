@@ -1,8 +1,10 @@
-import { CarouselWarpper, CarouselImg, CarouselBtn } from './CarouselStyle';
+import { useState } from 'react';
+
 import carouselImg1 from '../../assets/carouselImgs/CarouselImg1.png';
 import carouselImg2 from '../../assets/carouselImgs/CarouselImg2.png';
 import carouselImg3 from '../../assets/carouselImgs/CarouselImg3.png';
-import { useState } from 'react';
+
+import { CarouselWarpper, CarouselImg, CarouselBtn } from './CarouselStyle';
 
 export default function Carousel() {
   const CarouselImgArr = [carouselImg1, carouselImg2, carouselImg3];

@@ -1,16 +1,18 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import useInputs from '../../hooks/useInputs';
-import client from '../../client/client';
-import * as S from './JoinPageStyle';
-import * as L from '../loginPage/LoginPageStyle';
-import * as I from '../../components/input/TextInputBox';
+
 import logo from '../../assets/Logo-hodu.png';
-import CheckText from '../../components/etc/CheckText';
-import MS16pButton from '../../components/button/MS16pButton';
+import client from '../../client/client';
 import MButton from '../../components/button/MButton';
 import MDisabledButton from '../../components/button/MDisabledButton';
+import MS16pButton from '../../components/button/MS16pButton';
+import CheckText from '../../components/etc/CheckText';
+import * as I from '../../components/input/TextInputBox';
+import useInputs from '../../hooks/useInputs';
+import * as L from '../loginPage/LoginPageStyle';
+
+import * as S from './JoinPageStyle';
 
 export default function JoinPage() {
   const [checked, setChecked] = useState(Boolean);
@@ -104,7 +106,7 @@ export default function JoinPage() {
           phone_number: `${prefixNum}${phoneNumber1}${phoneNumber2}`,
           name: name,
         })
-        .then((res) => {
+        .then(() => {
           client
             .post('/accounts/login/', {
               username: userName,

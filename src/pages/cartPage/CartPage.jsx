@@ -1,15 +1,17 @@
-import { useEffect, useState } from 'react';
 import axios from 'axios';
-import instance from '../../client/instance';
-import client from '../../client/client';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import * as S from './CartPageStyle';
-import TopNavBar from '../../components/navBar/TopNavBar';
-import { CartTabTitle } from '../../components/navBar/TabTitle';
-import EmptyCart from './EmptyCart';
-import FilledCart from './FilledCart';
+
+import client from '../../client/client';
+import instance from '../../client/instance';
 import { CenterWarpper } from '../../components/common/Common';
 import Loading from '../../components/etc/Loading';
+import { CartTabTitle } from '../../components/navBar/TabTitle';
+import TopNavBar from '../../components/navBar/TopNavBar';
+
+import * as S from './CartPageStyle';
+import EmptyCart from './EmptyCart';
+import FilledCart from './FilledCart';
 
 export default function CartPage() {
   const [cartData, setCartData] = useState([]);

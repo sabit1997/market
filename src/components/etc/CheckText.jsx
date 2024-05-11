@@ -1,5 +1,6 @@
-import styled from 'styled-components';
 import { useState } from 'react';
+import styled from 'styled-components';
+
 import checkBox from '../../assets/check-box.svg';
 import fillCheckBox from '../../assets/check-fill-box.svg';
 

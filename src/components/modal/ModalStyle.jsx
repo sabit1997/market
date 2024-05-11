@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import close from '../../assets/icon-delete.svg';
 
 export const ModalWarpper = styled.article`

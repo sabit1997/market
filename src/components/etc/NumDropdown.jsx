@@ -1,5 +1,6 @@
-import styled from 'styled-components';
 import { useState } from 'react';
+import styled from 'styled-components';
+
 import iconDownArrow from '../../assets/icon-down-arrow.svg';
 import iconUpArrow from '../../assets/icon-up-arrow.svg';
 

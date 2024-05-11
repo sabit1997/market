@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
+
 import client from '../../client/client';
-import TopNavBar from '../../components/navBar/TopNavBar';
-import ProductList from '../../components/contents/ProductList';
-import { PageWarpper } from '../../components/common/Common';
-import * as S from './MainPageStyle';
-import Footer from '../../components/footer/Footer';
 import Carousel from '../../components/carousel/Carousel';
+import { PageWarpper } from '../../components/common/Common';
+import ProductList from '../../components/contents/ProductList';
 import Loading from '../../components/etc/Loading';
+import Footer from '../../components/footer/Footer';
+import TopNavBar from '../../components/navBar/TopNavBar';
+
+import * as S from './MainPageStyle';
 
 export default function MainPage() {
   const loginType = localStorage.getItem('type');
