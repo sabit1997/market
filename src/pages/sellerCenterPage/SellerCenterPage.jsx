@@ -56,9 +56,8 @@ export default function SellerCenterPage() {
   useCallback(() => {
     const findIndex = tabMenuTitle.findIndex((el) => el.no === 1);
     const copiedTabMenuTitle = [...tabMenuTitle];
-    copiedTabMenuTitle[
-      findIndex
-    ].text = `판매중인 상품(${productBoxData.length})`;
+    copiedTabMenuTitle[findIndex].text =
+      `판매중인 상품(${productBoxData.length})`;
     setTabMenuTitle(copiedTabMenuTitle);
   }, [productBoxData.length, tabMenuTitle]);
 

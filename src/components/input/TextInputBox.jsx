@@ -253,8 +253,8 @@ export function EmailTextInputBox({
         {errors.email1
           ? errors.email1.message
           : errors.email2
-          ? errors.email2.message
-          : null}
+            ? errors.email2.message
+            : null}
       </ValidMessage>
     </>
   );
