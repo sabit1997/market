@@ -1,18 +1,20 @@
 import { useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import instance from '../../client/instance';
+
 import client from '../../client/client';
-import SellerTopNavBar from '../../components/navBar/SellerTopNavBar';
-import TextInputLimitBox from '../../components/input/TextInputLimitBox';
-import NumberInputBox from '../../components/input/NumberInputBox';
+import instance from '../../client/instance';
+import MButton from '../../components/button/MButton';
 import MS16pButton from '../../components/button/MS16pButton';
 import MS16pWhiteButton from '../../components/button/MS16pWhiteButton';
-import MButton from '../../components/button/MButton';
 import MWhiteButton from '../../components/button/MWhiteButton';
 import { CenterWarpper } from '../../components/common/Common';
+import NumberInputBox from '../../components/input/NumberInputBox';
+import TextInputLimitBox from '../../components/input/TextInputLimitBox';
+import SellerTopNavBar from '../../components/navBar/SellerTopNavBar';
+import useInputs from '../../hooks/useInputs';
+
 import * as S from './EditProductPageStyle';
 import PrecautionsTextBox from './PrecautionsTextBox';
-import useInputs from '../../hooks/useInputs';
 
 export default function EditProductPage() {
   const location = useLocation();

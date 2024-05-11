@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import plus from '../../assets/icon-plus-line.svg';
+
 import minus from '../../assets/icon-minus-line.svg';
+import plus from '../../assets/icon-plus-line.svg';
 
 export const CartWarpper = styled.section`
   width: 100%;

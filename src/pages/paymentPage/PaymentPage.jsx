@@ -1,24 +1,26 @@
-import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 import instance from '../../client/instance';
-import * as S from './PaymentPageStyle';
-import * as I from '../../components/input/PaymentInputs';
-import PaymentWayItem from './PaymentWayItem';
-import { CenterWarpper } from '../../components/common/Common';
-import TopNavBar from '../../components/navBar/TopNavBar';
-import { PaymentTabTitle } from '../../components/navBar/TabTitle';
-import ProductInfo from '../../components/contents/ProductInfo';
-import SPrice from '../../components/etc/SPrice';
-import CheckText from '../../components/etc/CheckText';
 import LButton from '../../components/button/LButton';
 import LDisabledButton from '../../components/button/LDisabledButton';
+import { CenterWarpper } from '../../components/common/Common';
+import ProductInfo from '../../components/contents/ProductInfo';
+import CheckText from '../../components/etc/CheckText';
+import SPrice from '../../components/etc/SPrice';
+import * as I from '../../components/input/PaymentInputs';
+import { PaymentTabTitle } from '../../components/navBar/TabTitle';
+import TopNavBar from '../../components/navBar/TopNavBar';
 import useInputs from '../../hooks/useInputs';
-import { useForm } from 'react-hook-form';
+
+import * as S from './PaymentPageStyle';
+import PaymentWayItem from './PaymentWayItem';
 
 export default function PaymentPage() {
   const {
     register,
-    formState: { errors, isValid },
+    formState: { isValid },
   } = useForm({ mode: 'onChange' });
   const navigate = useNavigate();
   const [paymentWay] = useState([

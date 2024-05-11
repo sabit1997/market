@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+
 import logo from '../../assets/Logo-hodu.png';
 
 export default function SellerTopNavBar() {

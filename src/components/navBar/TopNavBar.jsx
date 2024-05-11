@@ -1,14 +1,15 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+
+import shoppingBag from '../../assets/icon-shopping-bag.svg';
+import cart from '../../assets/icon-shopping-cart.svg';
+import myInfoActive from '../../assets/icon-user-2.svg';
+import myInfo from '../../assets/icon-user.svg';
 import logo from '../../assets/Logo-hodu.png';
 import searchBtn from '../../assets/search.png';
-import cart from '../../assets/icon-shopping-cart.svg';
-import myInfo from '../../assets/icon-user.svg';
-import myInfoActive from '../../assets/icon-user-2.svg';
-import shoppingBag from '../../assets/icon-shopping-bag.svg';
 import MyPageDropdown from '../../components/etc/MyPageDropdown';
 import MsIconButton from '../button/MsIconButton';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import { NotLogin } from '../modal/Modal';
 
 export default function TopNavBar(props) {

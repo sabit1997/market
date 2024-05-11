@@ -1,4 +1,7 @@
 import { useDaumPostcodePopup } from 'react-daum-postcode';
+
+import SButton from '../button/SButton';
+
 import {
   InfoInputItem,
   Label,
@@ -7,7 +10,6 @@ import {
   Dash,
   RowWarpper,
 } from './PaymentInputsStyle';
-import SButton from '../button/SButton';
 
 export function NameInput(props) {
   return (

@@ -1,9 +1,9 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+
 import minusIcon from '../../assets/icon-minus-line.svg';
 import plusIcon from '../../assets/icon-plus-line.svg';
-import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
 
 export default function Amount({
   product_id,

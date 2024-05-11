@@ -1,4 +1,7 @@
+import checkOff from '../../assets/icon-check-off.svg';
+import checkOn from '../../assets/icon-check-on.svg';
 import NumDropdown from '../etc/NumDropdown';
+
 import {
   Warpper,
   InputWarpper,
@@ -11,8 +14,6 @@ import {
   AtSign,
   ValidMessage,
 } from './TextInputBoxStyle';
-import checkOff from '../../assets/icon-check-off.svg';
-import checkOn from '../../assets/icon-check-on.svg';
 
 export function IdTextInputBox({
   value,

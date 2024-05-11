@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import imgUploadButton from '../../assets/icon-img.png';
 
 export const Main = styled.form`

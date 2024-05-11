@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+
 import deleteIcon from '../../assets/icon-delete.svg';
 import Amount from '../etc/Amount';
 import { DeleteModal, ChangeNumModal } from '../modal/Modal';

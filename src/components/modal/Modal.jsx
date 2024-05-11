@@ -1,15 +1,17 @@
-import SWhiteButton from '../button/SWhiteButton';
+import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+import instance from '../../client/instance';
 import SButton from '../button/SButton';
+import SWhiteButton from '../button/SWhiteButton';
 import Amount from '../etc/Amount';
+
 import {
   ModalWarpper,
   CloseButton,
   AlertTxt,
   AlertContentsWarp,
 } from './ModalStyle';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import instance from '../../client/instance';
 
 // 상품삭제 모달
 export function DeleteModal({

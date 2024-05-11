@@ -1,8 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import * as S from './NotFoundPageStyle';
+
+import img404 from '../../assets/icon-404.png';
 import MButton from '../../components/button/MButton';
 import MWhiteButton from '../../components/button/MWhiteButton';
-import img404 from '../../assets/icon-404.png';
+
+import * as S from './NotFoundPageStyle';
 
 export default function NotFound() {
   const navigate = useNavigate();

@@ -1,19 +1,21 @@
-import client from '../../client/client';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+
+import client from '../../client/client';
 import instance from '../../client/instance';
-import TopNavBar from '../../components/navBar/TopNavBar';
-import * as S from './ProductDetailPageStyle';
-import * as M from '../../components/modal/Modal';
-import Amount from '../../components/etc/Amount';
-import LPrice from '../../components/etc/LPrice';
 import MButton from '../../components/button/MButton';
 import MDarkButton from '../../components/button/MDarkButton';
+import MDisabledButton from '../../components/button/MDisabledButton';
 import TabActiveButton from '../../components/button/TabActiveButton';
 import TabDisabledButton from '../../components/button/TabDisabledButton';
-import MDisabledButton from '../../components/button/MDisabledButton';
 import { CenterWarpper } from '../../components/common/Common';
+import Amount from '../../components/etc/Amount';
 import Loading from '../../components/etc/Loading';
+import LPrice from '../../components/etc/LPrice';
+import * as M from '../../components/modal/Modal';
+import TopNavBar from '../../components/navBar/TopNavBar';
+
+import * as S from './ProductDetailPageStyle';
 
 export default function ProductDetailPage() {
   const { product_id } = useParams();

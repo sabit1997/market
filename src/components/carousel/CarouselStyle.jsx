@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import RightArrow from '../../assets/icon-right-arrow.svg';
 
 export const CarouselWarpper = styled.section`
