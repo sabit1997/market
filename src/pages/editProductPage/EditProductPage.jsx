@@ -100,7 +100,7 @@ export default function EditProductPage() {
       client
         .post('/products/', formData, {
           headers: {
-            Authorization: `JWT ${token}`,
+            'Authorization': `JWT ${token}`,
             'Content-Type': 'multipart/form-data',
           },
         })
@@ -120,7 +120,7 @@ export default function EditProductPage() {
       client
         .put(`/products/${productBoxData.product_id}/`, formData, {
           headers: {
-            Authorization: `JWT ${token}`,
+            'Authorization': `JWT ${token}`,
             'Content-Type': 'multipart/form-data',
           },
         })
