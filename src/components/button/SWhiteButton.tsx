@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 export default function SWhiteButton(props) {
@@ -10,7 +11,7 @@ export default function SWhiteButton(props) {
   );
 }
 
-const Button = styled.button`
+const Button = styled.button<{ wd: string; marginR: string }>`
   width: ${(props) => props.wd};
   height: 40px;
   border: 1px solid #c4c4c4;
