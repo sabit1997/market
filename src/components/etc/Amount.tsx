@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -76,7 +77,7 @@ export default function Amount({
   );
 }
 
-const Quantity = styled.div`
+const Quantity = styled.div<{ margin: string; justSelf: string }>`
   max-width: 150px;
   width: 80%;
   height: 50px;
@@ -95,6 +96,10 @@ const Quantity = styled.div`
   }
 `;
 
+interface QuantityBtnProps {
+  readonly overValue?: boolean;
+}
+
 const QuantityBtn = styled.button`
   width: 33.33%;
   height: 100%;
@@ -112,7 +117,7 @@ const QuantityBtn = styled.button`
     background-image: url(${plusIcon});
     border-right: none;
     border-left: 1px solid #c4c4c4c4;
-    background-color: ${(props) =>
+    background-color: ${(props: QuantityBtnProps) =>
       props.overValue === true ? '#E0E0E0' : '#fff'};
   }
 `;
