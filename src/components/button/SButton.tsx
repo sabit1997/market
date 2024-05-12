@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 export default function SButton(props) {
@@ -16,7 +17,11 @@ export default function SButton(props) {
   );
 }
 
-const Button = styled.button`
+const Button = styled.button<{
+  wd: string;
+  mobileWd: string;
+  mobileHg: string;
+}>`
   width: ${(props) => props.wd};
   height: 40px;
   border-radius: 5px;
