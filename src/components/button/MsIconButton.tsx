@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 export default function MsIconButton(props) {
@@ -9,7 +10,7 @@ export default function MsIconButton(props) {
   );
 }
 
-const Button = styled.button`
+const Button = styled.button<{ wd: string; maxWd?: string }>`
   width: ${(props) => props.wd};
   max-width: ${(props) => props.maxWd};
   height: 54px;
