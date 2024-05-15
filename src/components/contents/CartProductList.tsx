@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -37,7 +38,7 @@ function CartProductList({
   }
   // checked 초기값 설정
   useEffect(() => {
-    let initial = {};
+    const initial = {};
     for (let i = 0; i < cartData.length; i++) {
       initial[`product${i}`] = true;
     }
@@ -122,10 +123,10 @@ function CartProductList({
           cartItem={cartItem}
           onClick={handleAmount}
           margin="0 "
-          cartData={cartData}
-          i={i}
-          quantity={quantity}
-          setQuantity={setQuantity}
+          // cartData={cartData}
+          // i={i}
+          // quantity={quantity}
+          // setQuantity={setQuantity}
           justSelf="center"
         />
         <OderWarpper>
@@ -145,7 +146,7 @@ function CartProductList({
           product_id={cartData[i].product_id}
           stock={cartItem[i].stock}
           quantity={quantity}
-          cartData={cartData}
+          // cartData={cartData}
           i={i}
         />
       ) : deleteModal === true ? (
@@ -180,7 +181,11 @@ const Warpper = styled.section`
   }
 `;
 
-const CheckButton = styled.label`
+type checkedType = {
+  [key: string]: boolean;
+};
+
+const CheckButton = styled.label<{ checked: checkedType; i: number }>`
   box-sizing: border-box;
   width: 20px;
   height: 20px;

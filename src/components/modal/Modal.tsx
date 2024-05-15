@@ -14,6 +14,16 @@ import {
   AlertContentsWarp,
 } from './ModalStyle';
 
+interface deleteModalProps {
+  setDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
+  cartItemId: number;
+  setCartData: React.Dispatch<React.SetStateAction<any>>;
+  cartData: any;
+  productBoxData?: any;
+  i?: number;
+  setProductBoxData?: React.Dispatch<React.SetStateAction<any>>;
+}
+
 // 상품삭제 모달
 export function DeleteModal({
   setDeleteModal,
@@ -23,7 +33,7 @@ export function DeleteModal({
   productBoxData,
   i,
   setProductBoxData,
-}) {
+}: deleteModalProps) {
   const location = useLocation();
   function handleCloseBtn() {
     setDeleteModal(false);
@@ -87,7 +97,7 @@ export function DeleteModal({
 export function ChangeNumModal({
   setQuantity,
   quantity,
-  stcok,
+  stock,
   cart_item_id,
   product_id,
   setAmountModal,
@@ -98,7 +108,7 @@ export function ChangeNumModal({
 
   // is_active Boolean 판별 함수
   function isActive() {
-    if (stcok < changeQuantity) {
+    if (stock < changeQuantity) {
       return false;
     } else {
       return true;
