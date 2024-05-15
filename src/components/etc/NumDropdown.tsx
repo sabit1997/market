@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import iconDownArrow from '../../assets/icon-down-arrow.svg';
@@ -27,7 +28,7 @@ export default function NumDropdown({ prefixNum, setPrefixNum }) {
         <Ul className={click === true ? null : 'ir'}>
           {valueArr.map(function (_, i) {
             return (
-              <Li value={valueArr[i]} onClick={handleLi} i={i} key={i}>
+              <Li value={valueArr[i]} onClick={handleLi} key={i}>
                 {valueArr[i]}
               </Li>
             );
@@ -38,7 +39,7 @@ export default function NumDropdown({ prefixNum, setPrefixNum }) {
   );
 }
 
-const SelectBtn = styled.button`
+const SelectBtn = styled.button<{ click: boolean }>`
   width: 152px;
   height: 54px;
   padding: 0 73px 0 50px;
