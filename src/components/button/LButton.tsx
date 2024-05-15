@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 export default function LButton(props) {
@@ -15,7 +16,11 @@ export default function LButton(props) {
   );
 }
 
-const Button = styled.button`
+const Button = styled.button<{
+  margin: string;
+  mobileWd: string;
+  mobileHg: string;
+}>`
   width: 220px;
   height: 68px;
   font-size: 24px;
