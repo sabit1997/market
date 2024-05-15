@@ -16,9 +16,9 @@ import {
 
 interface deleteModalProps {
   setDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
-  cartItemId: number;
-  setCartData: React.Dispatch<React.SetStateAction<any>>;
-  cartData: any;
+  cartItemId?: number;
+  setCartData?: React.Dispatch<React.SetStateAction<any>>;
+  cartData?: any;
   productBoxData?: any;
   i?: number;
   setProductBoxData?: React.Dispatch<React.SetStateAction<any>>;
