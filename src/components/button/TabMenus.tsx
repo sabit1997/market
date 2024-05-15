@@ -1,10 +1,11 @@
+import React from 'react';
 import styled from 'styled-components';
 
 export function TabMenuOff({ type, value }) {
   return (
     <>
-      <OffWarpper type={type}>
-        <Txt type={type}>{value}</Txt>
+      <OffWarpper>
+        <Txt>{value}</Txt>
         {type === 'false' ? null : <NoticeTxt>1</NoticeTxt>}
       </OffWarpper>
     </>
