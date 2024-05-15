@@ -94,7 +94,11 @@ export const SaleProducTitle = styled.div`
   padding-left: 5.55%;
 `;
 
-export const ProductTitleTxt = styled.p`
+export const ProductTitleTxt = styled.p<{
+  wd: string;
+  minWd: string;
+  mg: string;
+}>`
   width: ${(props) => props.wd};
   min-width: ${(props) => props.minWd};
   font-size: 18px;

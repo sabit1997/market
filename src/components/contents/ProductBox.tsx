@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -119,7 +120,7 @@ const ProductPrice = styled.p`
   }
 `;
 
-const Btn = styled.button`
+const Btn = styled.button<{ bg: string }>`
   width: 5.55%;
   max-width: 80px;
   min-width: 34px;
