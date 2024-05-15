@@ -1,3 +1,5 @@
+import React from 'react';
+
 import ProductBox from '../../components/contents/ProductBox';
 
 import * as S from './SellerCenterPageStyle';
