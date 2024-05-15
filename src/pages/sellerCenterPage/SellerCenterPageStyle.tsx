@@ -96,8 +96,8 @@ export const SaleProducTitle = styled.div`
 
 export const ProductTitleTxt = styled.p<{
   wd: string;
-  minWd: string;
-  mg: string;
+  minWd?: string;
+  mg?: string;
 }>`
   width: ${(props) => props.wd};
   min-width: ${(props) => props.minWd};
