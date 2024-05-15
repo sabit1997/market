@@ -98,7 +98,7 @@ export const TextInputWarpper = styled.div`
   }
 `;
 
-export const ImgPreveiw = styled.section`
+export const ImgPreveiw = styled.section<{ preview: string; image: string }>`
   width: 100%;
   max-width: 454px;
   aspect-ratio: 1/1;
