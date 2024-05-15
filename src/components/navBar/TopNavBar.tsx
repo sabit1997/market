@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -8,8 +9,8 @@ import myInfoActive from '../../assets/icon-user-2.svg';
 import myInfo from '../../assets/icon-user.svg';
 import logo from '../../assets/Logo-hodu.png';
 import searchBtn from '../../assets/search.png';
-import MyPageDropdown from '../../components/etc/MyPageDropdown';
 import MsIconButton from '../button/MsIconButton';
+import MyPageDropdown from '../etc/MyPageDropdown';
 import { NotLogin } from '../modal/Modal';
 
 export default function TopNavBar(props) {
@@ -45,7 +46,7 @@ export default function TopNavBar(props) {
   }
 
   function handleSearchClick() {
-    const mergedProductData = [].concat.apply([], props.productData);
+    const mergedProductData = [].concat(...props.productData);
     const resultProducts = mergedProductData.filter(
       (x) => x.product_name.includes(searchInput) === true
     );
@@ -61,7 +62,7 @@ export default function TopNavBar(props) {
   }
 
   return (
-    <Warpper vlaue={props.value}>
+    <Warpper>
       <LeftWarpper>
         <Logo src={logo} onClick={() => navigate('/')} />
         <Search>
@@ -204,7 +205,7 @@ const SearchBtn = styled.button`
   }
 `;
 
-const MoveBtn = styled.button`
+const MoveBtn = styled.button<{ wd: string; modal?: boolean }>`
   width: ${(props) => props.wd};
   height: 50px;
   background-image: ${(props) =>
@@ -235,7 +236,7 @@ const MoveBtn = styled.button`
   }
 `;
 
-const BtnTxt = styled.span`
+const BtnTxt = styled.span<{ modal?: boolean }>`
   font-size: 12px;
   line-height: 1.1666;
   vertical-align: bottom;
