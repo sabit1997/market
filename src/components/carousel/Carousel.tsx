@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import React from 'react';
 
 import carouselImg1 from '../../assets/carouselImgs/CarouselImg1.png';
 import carouselImg2 from '../../assets/carouselImgs/CarouselImg2.png';
