@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 export default function MDarkButton({ value, wd, onClick, basis }) {
@@ -8,7 +9,7 @@ export default function MDarkButton({ value, wd, onClick, basis }) {
   );
 }
 
-const Button = styled.button`
+const Button = styled.button<{ wd: string; basis: string }>`
   width: ${(props) => props.wd};
   height: 60px;
   font-size: 18px;
