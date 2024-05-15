@@ -1,8 +1,9 @@
+import React from 'react';
 import styled from 'styled-components';
 
 export default function PriceGroup({ value, price }) {
   return (
-    <Warpper value={value}>
+    <Warpper>
       <TotalTxt value={value}>{value}</TotalTxt>
       <TotalPrice value={value}>{price}</TotalPrice>
     </Warpper>
@@ -15,7 +16,7 @@ const Warpper = styled.div`
   align-items: flex-end;
 `;
 
-const TotalTxt = styled.p`
+const TotalTxt = styled.p<{ value: string }>`
   font-size: 16px;
   font-weight: ${(props) => (props.value === '결제 예정 금액' ? '700' : '400')};
   line-height: 1.251875;
@@ -26,7 +27,7 @@ const TotalTxt = styled.p`
   }
 `;
 
-const TotalPrice = styled.p`
+const TotalPrice = styled.p<{ value: string }>`
   font-size: ${(props) => (props.value === '결제 예정 금액' ? '36px' : '24px')};
   font-weight: 700;
   line-height: ${(props) =>
