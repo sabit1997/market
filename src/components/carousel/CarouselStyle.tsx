@@ -29,7 +29,7 @@ export const CarouselBtn = styled.button`
   }
 `;
 
-export const CarouselImg = styled.img`
+export const CarouselImg = styled.img<{ location: number }>`
   width: 100%;
   transform: translateX(${(props) => props.location}%);
   transition: all ease 2s;
