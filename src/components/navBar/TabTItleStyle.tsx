@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Warpper = styled.section`
+export const Warpper = styled.section<{ marginB: string }>`
   display: flex;
   align-items: center;
   width: 100%;
@@ -12,7 +12,7 @@ export const Warpper = styled.section`
   margin-bottom: ${(props) => props.marginB};
 `;
 
-export const AllCheckBtn = styled.button`
+export const AllCheckBtn = styled.button<{ allChecked: boolean }>`
   width: 20px;
   height: 20px;
   border: 2px solid #21bf48;
@@ -41,7 +41,7 @@ export const AllCheckBtn = styled.button`
   }
 `;
 
-export const Txt = styled.p`
+export const Txt = styled.p<{ wd: string }>`
   width: ${(props) => props.wd};
   font-size: 18px;
   font-weight: 400;
