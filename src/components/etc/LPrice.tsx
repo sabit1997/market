@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 export default function LPrice(props) {
@@ -8,7 +9,7 @@ export default function LPrice(props) {
   );
 }
 
-const Price = styled.p`
+const Price = styled.p<{ marginB: string; cl: string }>`
   font-size: 36px;
   font-weight: 700;
   line-height: 1.251944444444444;
