@@ -5,6 +5,20 @@ import styled from 'styled-components';
 
 import minusIcon from '../../assets/icon-minus-line.svg';
 import plusIcon from '../../assets/icon-plus-line.svg';
+// TODO: 타입 리펙토링
+interface AmountProps {
+  product_id?: string;
+  setAmountQuantity: React.Dispatch<React.SetStateAction<number>>;
+  amountQuantity?: number;
+  setChangeQuantity: React.Dispatch<React.SetStateAction<number>>;
+  changeQuantity: number;
+  stock: number;
+  margin?: string;
+  onClick?: any;
+  value: number;
+  loginType?: 'SELLER' | 'BUYER';
+  justSelf?: string;
+}
 
 export default function Amount({
   product_id,
@@ -18,7 +32,7 @@ export default function Amount({
   value,
   loginType,
   justSelf,
-}) {
+}: AmountProps) {
   const [overValue, setOverValue] = useState(false);
   const location = useLocation();
 
