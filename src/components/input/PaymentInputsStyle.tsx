@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const InfoInputItem = styled.li`
+export const InfoInputItem = styled.li<{ marginB: string }>`
   display: flex;
   align-items: center;
   width: 100%;
@@ -24,7 +24,10 @@ export const Label = styled.label`
   }
 `;
 
-export const NormalInput = styled.input.attrs({ type: 'text' })`
+export const NormalInput = styled.input.attrs({ type: 'text' })<{
+  maxWd: string;
+  margin: string;
+}>`
   width: 100%;
   max-width: ${(props) => props.maxWd};
   height: 40px;
@@ -63,7 +66,7 @@ export const Dash = styled.span`
   }
 `;
 
-export const InfoInputItemCol = styled.li`
+export const InfoInputItemCol = styled.li<{ marginB: string }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
