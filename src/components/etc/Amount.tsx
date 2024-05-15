@@ -5,19 +5,21 @@ import styled from 'styled-components';
 
 import minusIcon from '../../assets/icon-minus-line.svg';
 import plusIcon from '../../assets/icon-plus-line.svg';
+
 // TODO: 타입 리펙토링
 interface AmountProps {
   product_id?: string;
-  setAmountQuantity: React.Dispatch<React.SetStateAction<number>>;
+  setAmountQuantity?: React.Dispatch<React.SetStateAction<number>>;
   amountQuantity?: number;
-  setChangeQuantity: React.Dispatch<React.SetStateAction<number>>;
-  changeQuantity: number;
-  stock: number;
+  setChangeQuantity?: React.Dispatch<React.SetStateAction<number>>;
+  changeQuantity?: number;
+  stock?: number;
   margin?: string;
   onClick?: any;
   value: number;
   loginType?: 'SELLER' | 'BUYER';
   justSelf?: string;
+  cartItem?: any[];
 }
 
 export default function Amount({
