@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import React from 'react';
 
 import LButton from '../../components/button/LButton';
 import CartProductList from '../../components/contents/CartProductList';
@@ -15,7 +16,6 @@ export default function FilledCart({
   quantity,
   setQuantity,
   cartItem,
-  setCartItem,
 }) {
   const [totalPrice, setTotalPrice] = useState('');
   const [totalShippingFee, setTotalShippingFee] = useState('');
@@ -24,7 +24,6 @@ export default function FilledCart({
   const cartList = cartData.map((_, i) => (
     <CartProductList
       cartItem={cartItem}
-      setCartItem={setCartItem}
       cartData={cartData}
       i={i}
       key={cartData[i].cart_item_id}
@@ -33,7 +32,6 @@ export default function FilledCart({
       quantity={quantity}
       setQuantity={setQuantity}
       setCartData={setCartData}
-      cartDataQuantity={cartData[i].quantity}
     />
   ));
 
