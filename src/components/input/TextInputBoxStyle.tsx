@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Warpper = styled.div`
+export const Warpper = styled.div<{ marginB: string; marginT: string }>`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -8,14 +8,14 @@ export const Warpper = styled.div`
   margin-top: ${(props) => props.marginT};
 `;
 
-export const InputWarpper = styled.section`
+export const InputWarpper = styled.section<{ marginB: string }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: ${(props) => props.marginB};
 `;
 
-export const Txt = styled.label`
+export const Txt = styled.label<{ marginT: string }>`
   font-size: 16px;
   font-weight: 400;
   line-height: 1.25;
@@ -28,7 +28,7 @@ export const Txt = styled.label`
   }
 `;
 
-export const IdInput = styled.input`
+export const IdInput = styled.input<{ wd: string; border: string }>`
   width: ${(props) => props.wd};
   height: 54px;
   padding: 17px 0 17px 16px;
@@ -57,7 +57,7 @@ export const ValidMessage = styled.span`
   }
 `;
 
-export const Input = styled.input`
+export const Input = styled.input<{ wd: string; maxWd: string }>`
   width: ${(props) => props.wd};
   max-width: ${(props) => props.maxWd};
   padding: 17px 0 17px 16px;
