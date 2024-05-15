@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import instance from '../../client/instance';
@@ -93,7 +94,7 @@ export function ChangeNumModal({
   i,
   value,
 }) {
-  const [changeQuantity, setChangeQuantity] = useState(value);
+  const [changeQuantity, setChangeQuantity] = useState<number>(value);
 
   // is_active Boolean 판별 함수
   function isActive() {
@@ -130,11 +131,10 @@ export function ChangeNumModal({
         <Amount
           margin="0 0 13% 0"
           value={changeQuantity}
-          setQuantity={setQuantity}
-          quantity={quantity}
+          setAmountQuantity={setQuantity}
+          stock={quantity}
           changeQuantity={changeQuantity}
           setChangeQuantity={setChangeQuantity}
-          stock={stcok}
         />
         <div>
           <SWhiteButton
