@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 function TextInput({
@@ -24,7 +25,7 @@ function TextInput({
   );
 }
 
-const IdInput = styled.input`
+const IdInput = styled.input<{ marginB: string }>`
   width: 100%;
   max-width: 480px;
   padding: 20px 0;
