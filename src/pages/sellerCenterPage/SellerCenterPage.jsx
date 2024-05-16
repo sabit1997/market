@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import plusIcon from '../../assets/icon-plus.svg';
 import instance from '../../client/instance';
 import MsIconButton from '../../components/button/MsIconButton';
-import TabMenu from '../../components/button/TabMenu';
+import TabMenu from '../../components/button/TabMenu.tsx';
 import { CenterWarpper } from '../../components/common/Common';
-import SellerTopNavBar from '../../components/navBar/SellerTopNavBar';
+import SellerTopNavBar from '../../components/navBar/SellerTopNavBar.tsx';
 
 import * as S from './SellerCenterPageStyle';
 import SellerCenterTabTitle from './SellerCenterTabTitle';

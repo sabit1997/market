@@ -10,7 +10,7 @@ import MWhiteButton from '../../components/button/MWhiteButton';
 import { CenterWarpper } from '../../components/common/Common';
 import NumberInputBox from '../../components/input/NumberInputBox';
 import TextInputLimitBox from '../../components/input/TextInputLimitBox';
-import SellerTopNavBar from '../../components/navBar/SellerTopNavBar';
+import SellerTopNavBar from '../../components/navBar/SellerTopNavBar.tsx';
 import useInputs from '../../hooks/useInputs';
 
 import * as S from './EditProductPageStyle';
