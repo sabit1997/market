@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 export default function MButton(props) {
@@ -17,7 +18,13 @@ export default function MButton(props) {
   );
 }
 
-const Button = styled.button`
+const Button = styled.button<{
+  maxWd: string;
+  wd: string;
+  marginR: string;
+  basis: string;
+  mobileWd: string;
+}>`
   max-width: ${(props) => props.maxWd};
   width: ${(props) => props.wd};
   height: 60px;
