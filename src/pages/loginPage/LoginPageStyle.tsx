@@ -36,7 +36,7 @@ export const LoginBox = styled.section`
   }
 `;
 
-export const LoginSelletor = styled.button`
+export const LoginSelletor = styled.button<{ loginType: 'BUYER' | 'SELLER' }>`
   width: 50%;
   max-width: 275px;
   border: 1px solid #c4c4c4;
@@ -58,7 +58,7 @@ export const LoginSelletor = styled.button`
   }
 `;
 
-export const InputBox = styled.form`
+export const InputBox = styled.form<{ loginType: 'BUYER' | 'SELLER' }>`
   width: 100%;
   border-radius: 10px;
   background-color: #fff;
