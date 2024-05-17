@@ -1,9 +1,16 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
+import React from 'react';
 
 import { Warpper, AllCheckBtn, Txt } from './TabTItleStyle';
 
-export function CartTabTitle(props) {
+interface CartTabTitleProps {
+  checked: boolean;
+  setChecked: React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>;
+  marginB: string;
+}
+
+export function CartTabTitle(props: CartTabTitleProps) {
   const [allChecked, setAllChecked] = useState(true);
 
   // checked 상태에 따라 상단 체크 버튼 변화
@@ -20,13 +27,13 @@ export function CartTabTitle(props) {
   // 전체 선택, 전체 해제
   function handleSellectAllButton() {
     if (allChecked) {
-      let value = {};
+      const value = {};
       for (let i = 0; i < Object.keys(props.checked).length; i++) {
         value[`product${i}`] = false;
       }
       props.setChecked(value);
     } else {
-      let value = {};
+      const value = {};
       for (let i = 0; i < Object.keys(props.checked).length; i++) {
         value[`product${i}`] = true;
       }
@@ -35,7 +42,7 @@ export function CartTabTitle(props) {
   }
 
   return (
-    <Warpper marginB={props.marginB} category={props.category}>
+    <Warpper marginB={props.marginB}>
       <AllCheckBtn
         type="button"
         allChecked={allChecked}
