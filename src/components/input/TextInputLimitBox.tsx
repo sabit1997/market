@@ -1,6 +1,14 @@
+import React from 'react';
 import styled from 'styled-components';
 
-export default function TextInputLimitBox(props) {
+interface TextInputLimitBoxProps {
+  name: string;
+  value: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  productName: string;
+}
+
+export default function TextInputLimitBox(props: TextInputLimitBoxProps) {
   return (
     <>
       <ProductName htmlFor="name_input">상품명</ProductName>
@@ -11,7 +19,6 @@ export default function TextInputLimitBox(props) {
           name={props.name}
           value={props.value}
           onChange={props.onChange}
-          maxLength="50"
         />
         <InputLimit>{props.productName.length}/50</InputLimit>
       </InputSection>
