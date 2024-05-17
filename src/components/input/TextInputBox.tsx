@@ -1,3 +1,5 @@
+import React from 'react';
+
 import checkOff from '../../assets/icon-check-off.svg';
 import checkOn from '../../assets/icon-check-on.svg';
 import NumDropdown from '../etc/NumDropdown';
@@ -50,11 +52,9 @@ export function IdTextInputBox({
         <ValidMessage color="red">{errors.userName.message}</ValidMessage>
       ) : Object.keys(accountValid)[0] === 'FAIL_Message' ? (
         <ValidMessage color="red">{accountValid['FAIL_Message']}</ValidMessage>
-      ) : (
-        (Object.keys(accountValid)[0] = 'Success' ? (
-          <ValidMessage color="#21BF48">{accountValid['Success']}</ValidMessage>
-        ) : null)
-      )}
+      ) : Object.keys(accountValid)[0] === 'Success' ? (
+        <ValidMessage color="#21BF48">{accountValid['Success']}</ValidMessage>
+      ) : null}
     </Warpper>
   );
 }
@@ -295,13 +295,11 @@ export function CompanyNumTextInputBox({
           <ValidMessage color="red">
             {companyNumValid['FAIL_Message']}
           </ValidMessage>
-        ) : (
-          (Object.keys(companyNumValid)[0] = 'Success' ? (
-            <ValidMessage color="#21BF48">
-              {companyNumValid['Success']}
-            </ValidMessage>
-          ) : null)
-        )}
+        ) : Object.keys(companyNumValid)[0] === 'Success' ? (
+          <ValidMessage color="#21BF48">
+            {companyNumValid['Success']}
+          </ValidMessage>
+        ) : null}
       </Warpper>
     </>
   );
