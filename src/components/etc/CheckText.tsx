@@ -1,10 +1,17 @@
 import { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import checkBox from '../../assets/check-box.svg';
 import fillCheckBox from '../../assets/check-fill-box.svg';
 
-export default function CheckText(props) {
+interface CheckTextProps {
+  marginB: string;
+  value: string;
+  setChecked: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function CheckText(props: CheckTextProps) {
   const [check, setCheck] = useState(false);
 
   function handleChecked() {
@@ -20,7 +27,7 @@ export default function CheckText(props) {
         className="ir"
       />
       <CheckBox htmlFor="agree_input" check={check} onClick={handleChecked} />
-      <Txt htmlFor="agree_input" value={props.value} onClick={handleChecked}>
+      <Txt htmlFor="agree_input" onClick={handleChecked}>
         {props.value === '회원가입' ? (
           <>
             호두샵의 <BoldLineTxt>이용약관</BoldLineTxt> 및{' '}
@@ -35,7 +42,7 @@ export default function CheckText(props) {
   );
 }
 
-const Warpper = styled.div`
+const Warpper = styled.div<{ marginB: string }>`
   display: flex;
   margin-bottom: ${(props) => props.marginB};
   @media ${(props) => props.theme.mobile} {
@@ -43,7 +50,7 @@ const Warpper = styled.div`
   }
 `;
 
-const CheckBox = styled.label`
+const CheckBox = styled.label<{ check: boolean }>`
   display: block;
   width: 16px;
   height: 16px;
