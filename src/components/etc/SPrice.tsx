@@ -1,7 +1,8 @@
+import React from 'react';
 import styled from 'styled-components';
 
-export default function SPrice(props) {
-  return <PriceTxt>{props.value}</PriceTxt>;
+export default function SPrice(value: string) {
+  return <PriceTxt>{value}</PriceTxt>;
 }
 
 const PriceTxt = styled.p`
