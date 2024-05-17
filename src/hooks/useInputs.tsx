@@ -1,10 +1,14 @@
 import { useState, useCallback } from 'react';
 
-export default function useInputs(initalForm) {
+interface UseInputsProps {
+  [key: string]: string;
+}
+
+export default function useInputs(initalForm: UseInputsProps) {
   const [inputs, setInputs] = useState(initalForm);
 
   const onChange = useCallback(
-    (e) => {
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       const { value, name } = e.target;
       setInputs({
         ...inputs,
@@ -14,7 +18,7 @@ export default function useInputs(initalForm) {
     [inputs]
   );
 
-  const handleInputs = useCallback((value) => {
+  const handleInputs = useCallback((value: UseInputsProps) => {
     setInputs(value);
   }, []);
 
