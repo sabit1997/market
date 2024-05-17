@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Warpper = styled.div<{ marginB: string; marginT: string }>`
+export const Warpper = styled.div<{ marginB?: string; marginT?: string }>`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -8,14 +8,14 @@ export const Warpper = styled.div<{ marginB: string; marginT: string }>`
   margin-top: ${(props) => props.marginT};
 `;
 
-export const InputWarpper = styled.section<{ marginB: string }>`
+export const InputWarpper = styled.section<{ marginB?: string }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: ${(props) => props.marginB};
 `;
 
-export const Txt = styled.label<{ marginT: string }>`
+export const Txt = styled.label<{ marginT?: string }>`
   font-size: 16px;
   font-weight: 400;
   line-height: 1.25;
