@@ -1,3 +1,4 @@
+import React from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 
 import SButton from '../button/SButton';
@@ -34,7 +35,7 @@ export function PhoneNumInput({
   activation,
 }) {
   return (
-    <InfoInputItem activation={activation}>
+    <InfoInputItem>
       <Label htmlFor="phone_number1">휴대폰</Label>
       <PhoneNumberInput
         value={value1}
@@ -128,7 +129,7 @@ export function AddressInput({
   const open = useDaumPostcodePopup(scriptUrl);
 
   const handleComplete = (data) => {
-    let zoneCode = data.zonecode;
+    const zoneCode = data.zonecode;
     let fullAddress = data.address;
     let extraAddress = '';
 
