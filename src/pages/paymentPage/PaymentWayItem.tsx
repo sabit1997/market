@@ -1,3 +1,4 @@
+import React from 'react';
 import { useEffect } from 'react';
 import styled from 'styled-components';
 
@@ -9,7 +10,7 @@ export default function PaymentWayItem({
   paymentWay,
 }) {
   useEffect(() => {
-    let initial = {};
+    const initial = {};
     for (let i = 0; i < paymentWay.length; i++) {
       initial[`pay${i}`] = false;
     }
@@ -51,7 +52,10 @@ const Li = styled.li`
   }
 `;
 
-const CheckBtn = styled.button`
+const CheckBtn = styled.button<{
+  checked: { [key: string]: boolean };
+  i: number;
+}>`
   width: 20px;
   height: 20px;
   background-color: #fff;
