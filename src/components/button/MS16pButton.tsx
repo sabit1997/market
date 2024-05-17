@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 export default function MS16pButton(props) {
@@ -11,6 +12,7 @@ export default function MS16pButton(props) {
         mobileMargin={props.mobileMargin}
         type={props.type}
         onClick={props.onClick}
+        pd={props.pd}
       >
         {props.value}
       </Button>
@@ -18,7 +20,14 @@ export default function MS16pButton(props) {
   );
 }
 
-const Button = styled.button`
+const Button = styled.button<{
+  wd: string;
+  maxWd?: string;
+  margin?: string;
+  pd?: string;
+  mobileWd?: string;
+  mobileMargin?: string;
+}>`
   width: ${(props) => props.wd};
   max-width: ${(props) => props.maxWd};
   height: 54px;
