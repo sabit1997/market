@@ -1,7 +1,15 @@
+import React from 'react';
 import styled from 'styled-components';
 
-function ProductInfo({ orderInfo, quantity, i }) {
-  function shippingFee(value) {
+interface ProductInfoProps {
+  // TODO: orderInfoType 수정
+  orderInfo: any;
+  quantity: number;
+  i: number;
+}
+
+function ProductInfo({ orderInfo, quantity, i }: ProductInfoProps) {
+  function shippingFee(value: number) {
     if (value === 0) {
       return '무료배송';
     } else {
