@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const InfoInputItem = styled.li<{ marginB: string }>`
+export const InfoInputItem = styled.li<{ marginB?: string }>`
   display: flex;
   align-items: center;
   width: 100%;
@@ -26,7 +26,7 @@ export const Label = styled.label`
 
 export const NormalInput = styled.input.attrs({ type: 'text' })<{
   maxWd: string;
-  margin: string;
+  margin?: string;
 }>`
   width: 100%;
   max-width: ${(props) => props.maxWd};
