@@ -1,6 +1,15 @@
+import React from 'react';
 import styled from 'styled-components';
 
-export default function NumberInputBox(props) {
+interface NumberInputBoxProps {
+  title: string;
+  name: string;
+  value: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  unit: string;
+}
+
+export default function NumberInputBox(props: NumberInputBoxProps) {
   return (
     <>
       <H2 htmlFor="price_input">{props.title}</H2>
