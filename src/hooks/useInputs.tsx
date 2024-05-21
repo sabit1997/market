@@ -4,7 +4,13 @@ interface UseInputsProps {
   [key: string]: string;
 }
 
-export default function useInputs(initalForm: UseInputsProps) {
+type UseInputsReturn = [
+  UseInputsProps,
+  (e: React.ChangeEvent<HTMLInputElement>) => void,
+  (value: UseInputsProps) => void,
+];
+
+export default function useInputs(initalForm: UseInputsProps): UseInputsReturn {
   const [inputs, setInputs] = useState(initalForm);
 
   const onChange = useCallback(
