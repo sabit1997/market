@@ -5,9 +5,9 @@ import React from 'react';
 import { Warpper, AllCheckBtn, Txt } from './TabTItleStyle';
 
 interface CartTabTitleProps {
-  checked: boolean;
+  checked: { [key: string]: boolean };
   setChecked: React.Dispatch<React.SetStateAction<{ [key: string]: boolean }>>;
-  marginB: string;
+  marginB?: string;
 }
 
 export function CartTabTitle(props: CartTabTitleProps) {
