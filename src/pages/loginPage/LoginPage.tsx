@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import logo from '../../assets/Logo-hodu.png';
@@ -11,10 +12,10 @@ import * as S from './LoginPageStyle';
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const [loginType, setLoginType] = useState('BUYER');
+  const [loginType, setLoginType] = useState<'BUYER' | 'SELLER'>('BUYER');
   const [errorMessage, setErrorMessage] = useState('');
-  const idInput = useRef();
-  const passwordInput = useRef();
+  const idInput = useRef<HTMLInputElement | null>(null);
+  const passwordInput = useRef<HTMLInputElement | null>(null);
 
   // 로그인 타입 설정
   function handleBuyerBtn() {
