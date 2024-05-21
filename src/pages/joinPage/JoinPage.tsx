@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,7 +17,7 @@ import * as S from './JoinPageStyle';
 
 export default function JoinPage() {
   const [checked, setChecked] = useState(Boolean);
-  const [joinType, setJoinType] = useState('BUYER');
+  const [joinType, setJoinType] = useState<'BUYER' | 'SELLER'>('BUYER');
   const [doubleCheck, setDoubleCheck] = useState(false);
   const [companyNumCheck, setCompanyNumCheck] = useState(false);
   const [prefixNum, setPrefixNum] = useState('010');
@@ -120,7 +121,7 @@ export default function JoinPage() {
           navigate('/');
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
     } else if (joinType === 'SELLER' && checked && doubleCheck && isValid) {
       client
@@ -146,7 +147,7 @@ export default function JoinPage() {
             });
           navigate('/');
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.error(error));
     }
   };
 
@@ -185,7 +186,7 @@ export default function JoinPage() {
             />
           </S.IdInputWarpper>
           <I.PasswordTextInputBox
-            title="비밀번호"
+            // title="비밀번호"
             value={password}
             password={password}
             register={register}
@@ -205,7 +206,7 @@ export default function JoinPage() {
             register={register}
             handleInput={onChange}
             errors={errors}
-            marginB="16px"
+            // marginB="16px"
           />
           <I.PhoneNumberTextInputBox
             value={phoneNumber1}
@@ -215,7 +216,7 @@ export default function JoinPage() {
             errors={errors}
             prefixNum={prefixNum}
             setPrefixNum={setPrefixNum}
-            marginB="16px"
+            // marginB="16px"
           />
           <I.EmailTextInputBox
             value={email1}
@@ -256,7 +257,7 @@ export default function JoinPage() {
         value="회원가입"
         marginB="34px"
         setChecked={setChecked}
-        checked={checked}
+        // checked={checked}
       />
       {(joinType === 'BUYER' && checked && doubleCheck && isValid) ||
       (joinType === 'SELLER' && checked && doubleCheck && companyNumCheck) ? (

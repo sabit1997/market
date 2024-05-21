@@ -21,7 +21,7 @@ export const LoginBox = styled.section`
   margin-bottom: 30px;
 `;
 
-export const LoginSelletor = styled.button`
+export const LoginSelletor = styled.button<{ joinType: 'BUYER' | 'SELLER' }>`
   width: 275px;
   border: 1px solid #c4c4c4;
   border-radius: 10px;
@@ -38,7 +38,7 @@ export const LoginSelletor = styled.button`
   }
 `;
 
-export const InputBox = styled.section`
+export const InputBox = styled.section<{ joinType: 'BUYER' | 'SELLER' }>`
   width: 550px;
   border-radius: 10px;
   background-color: #fff;
@@ -58,7 +58,7 @@ export const InputBox = styled.section`
   }
 `;
 
-export const IdInputWarpper = styled.div`
+export const IdInputWarpper = styled.div<{ marginT?: string }>`
   width: 100%;
   display: flex;
   justify-content: space-between;
