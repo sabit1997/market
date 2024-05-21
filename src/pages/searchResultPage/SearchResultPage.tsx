@@ -1,3 +1,4 @@
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { CenterWarpper } from '../../components/common/Common';
@@ -21,8 +22,8 @@ export default function SearchResult() {
         {resultProducts.length} 개 입니다.
       </S.ResultMessage>
       <ProductListSection>
-        {resultProducts.map((x) => (
-          <ProductList key={x.product_id} productData={x} />
+        {resultProducts.map((product) => (
+          <ProductList key={product.product_id} productData={product} />
         ))}
       </ProductListSection>
     </CenterWarpper>
