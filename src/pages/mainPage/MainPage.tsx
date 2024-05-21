@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import React from 'react';
 
 import client from '../../client/client';
 import Carousel from '../../components/carousel/Carousel';
@@ -7,12 +8,15 @@ import ProductList from '../../components/contents/ProductList';
 import Loading from '../../components/etc/Loading';
 import Footer from '../../components/footer/Footer';
 import TopNavBar from '../../components/navBar/TopNavBar';
+import { ProductDetailData } from '../productDetailPage/ProductDetailPage';
 
 import * as S from './MainPageStyle';
 
 export default function MainPage() {
   const loginType = localStorage.getItem('type');
-  const [productData, setProductData] = useState([]);
+  const [productData, setProductData] = useState<ProductDetailData[] | null>(
+    null
+  );
   const [totalPage, setTotalPage] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -30,7 +34,7 @@ export default function MainPage() {
     }
   };
 
-  const calcPage = (total, num) => {
+  const calcPage = (total: number, num: number) => {
     return Math.ceil(total / num);
   };
 
@@ -40,7 +44,7 @@ export default function MainPage() {
       const res = await client.get(`/products/?page=${page}`);
       setProductData(res.data.results);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     } finally {
       setLoading(false);
     }
