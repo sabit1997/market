@@ -1,7 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function MDarkButton({ value, wd, onClick, basis }) {
+interface MDartButtonProps {
+  value: string;
+  wd?: string;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  basis: string;
+}
+
+export default function MDarkButton({
+  value,
+  wd,
+  onClick,
+  basis,
+}: MDartButtonProps) {
   return (
     <Button wd={wd} onClick={onClick} basis={basis}>
       {value}

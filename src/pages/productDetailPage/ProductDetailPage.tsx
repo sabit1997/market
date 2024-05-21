@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import client from '../../client/client';
@@ -17,16 +18,33 @@ import TopNavBar from '../../components/navBar/TopNavBar';
 
 import * as S from './ProductDetailPageStyle';
 
+interface ProductDetailData {
+  created_at: string;
+  image: string;
+  price: number;
+  product_id: number;
+  product_info: string;
+  product_name: string;
+  seller: number;
+  shipping_fee: number;
+  shipping_method: 'PARCEL' | 'DELIVERY';
+  stock: number;
+  store_name: string;
+  updated_at: string;
+}
+
 export default function ProductDetailPage() {
   const { product_id } = useParams();
-  const [productDetail, setProductDetail] = useState('');
+  const [productDetail, setProductDetail] = useState<ProductDetailData | null>(
+    null
+  );
   const [amountQuantity, setAmountQuantity] = useState(1);
   const [existModal, setExistModal] = useState(false);
   const [excessModal, setExcessModal] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
   const [successCart, setSuccessCart] = useState(false);
   const navigate = useNavigate();
-  const loginType = localStorage.getItem('type');
+  const loginType = localStorage.getItem('type') as 'BUYER' | 'SELLER';
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -38,7 +56,7 @@ export default function ProductDetailPage() {
         setLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   }, [product_id]);
 
@@ -50,7 +68,7 @@ export default function ProductDetailPage() {
     }
   }
 
-  function shippingValue(fee, method) {
+  function shippingValue(fee: number, method: 'PARCEL' | 'DELIVERY') {
     if (method === 'PARCEL') {
       if (fee === 0) {
         return '소포배송 / 무료배송';
@@ -70,7 +88,7 @@ export default function ProductDetailPage() {
   async function isCheck() {
     const res = await instance.get('/cart/');
     const result = res.data.results.filter(
-      (data) => data.product_id === productDetail.product_id
+      (data) => data.product_id === productDetail?.product_id
     ).length;
     if (result === 0) {
       return true;
@@ -145,29 +163,29 @@ export default function ProductDetailPage() {
       {loading ? <Loading /> : null}
       <TopNavBar value={loginType} />
       <S.ProductWarpper>
-        <S.ProductImg src={productDetail.image} />
+        <S.ProductImg src={productDetail?.image} />
         <S.ProductInfo>
-          <S.Seller>{productDetail.store_name}</S.Seller>
-          <S.ProductName>{productDetail.product_name}</S.ProductName>
+          <S.Seller>{productDetail?.store_name}</S.Seller>
+          <S.ProductName>{productDetail?.product_name}</S.ProductName>
           <LPrice
             cl="#000"
-            value={productDetail.price?.toLocaleString()}
+            value={productDetail?.price?.toLocaleString()}
             marginB="138px"
           ></LPrice>
           <S.Shipping>
             {shippingValue(
-              productDetail.shipping_fee,
-              productDetail.shipping_method
+              productDetail?.shipping_fee,
+              productDetail?.shipping_method
             )}
           </S.Shipping>
           <Amount
             margin="52px 0 0"
-            stock={productDetail.stock}
+            stock={productDetail?.stock}
             setAmountQuantity={setAmountQuantity}
             amountQuantity={amountQuantity}
             value={amountQuantity}
             product_id={product_id}
-            productDetail={productDetail}
+            // productDetail={productDetail}
             loginType={loginType}
           />
           <S.PriceWarpper>
@@ -175,11 +193,14 @@ export default function ProductDetailPage() {
             <S.RightWarpper>
               <S.TotalQuantity>
                 총 수량{' '}
-                <S.TotalQuantityNum>{productDetail.stock}</S.TotalQuantityNum>개
+                <S.TotalQuantityNum>{productDetail?.stock}</S.TotalQuantityNum>
+                개
               </S.TotalQuantity>
               <LPrice
                 cl="#21BF48"
-                value={(productDetail.price * amountQuantity)?.toLocaleString()}
+                value={(
+                  productDetail?.price * amountQuantity
+                )?.toLocaleString()}
               ></LPrice>
             </S.RightWarpper>
           </S.PriceWarpper>
@@ -198,9 +219,9 @@ export default function ProductDetailPage() {
               />
               <MDarkButton
                 basis="39.68%"
-                product_id={product_id}
-                productDetail={productDetail}
-                amountQuantity={amountQuantity}
+                // product_id={product_id}
+                // productDetail={productDetail}
+                // amountQuantity={amountQuantity}
                 value="장바구니"
                 onClick={handleButton}
               />
