@@ -18,7 +18,7 @@ import TopNavBar from '../../components/navBar/TopNavBar';
 
 import * as S from './ProductDetailPageStyle';
 
-interface ProductDetailData {
+export interface ProductDetailData {
   created_at: string;
   image: string;
   price: number;
