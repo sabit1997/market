@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import plusIcon from '../../assets/icon-plus.svg';
 import instance from '../../client/instance';
 import MsIconButton from '../../components/button/MsIconButton';
-import TabMenu from '../../components/button/TabMenu.tsx';
+import TabMenu from '../../components/button/TabMenu';
 import { CenterWarpper } from '../../components/common/Common';
-import SellerTopNavBar from '../../components/navBar/SellerTopNavBar.tsx';
+import SellerTopNavBar from '../../components/navBar/SellerTopNavBar';
 
 import * as S from './SellerCenterPageStyle';
 import SellerCenterTabTitle from './SellerCenterTabTitle';
@@ -51,7 +52,7 @@ export default function SellerCenterPage() {
         setProductBoxData(res.data.results);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   }, []);
 
