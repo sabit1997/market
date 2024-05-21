@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import client from '../../client/client';
@@ -42,15 +42,15 @@ export default function CartPage() {
           setNext(() => res.data.next);
           setCartData(() => res.data.results);
         } catch (error) {
-          console.log(error);
+          console.error(error);
         }
       } else if (next !== null) {
         try {
           const res = await axios.get(next);
-          setCartData((prev) => prev, res.data.results);
+          setCartData((prev) => [prev, res.data.results]);
           setNext(res.data.next);
         } catch (error) {
-          console.log(error);
+          console.error(error);
         }
       }
       return cartData;
@@ -109,7 +109,7 @@ export default function CartPage() {
             quantity={quantity}
             setQuantity={setQuantity}
             cartItem={cartItem}
-            setCartItem={setCartItem}
+            // setCartItem={setCartItem}
           />
         )}
       </S.CartWarpper>
