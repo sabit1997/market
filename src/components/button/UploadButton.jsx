@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import uploadIcon from '../../assets/icon-plus.svg';
 
 export default function UploadButton() {
