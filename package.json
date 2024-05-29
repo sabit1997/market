@@ -22,8 +22,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "tsc --noEmit && eslint src/**/*.js{,x} src/*.js src/**/*.ts --cache --max-warnings=50",
-    "lint:fix": "eslint src/**/*.js{,x} src/*.js src/**/*.ts --fix",
+    "lint": "tsc --noEmit && eslint src/**/*.ts{,x} --cache --max-warnings=50",
+    "lint:fix": "eslint src/**/*.ts{,x} --fix",
     "format": "prettier --cache --write ."
   },
   "eslintConfig": {
