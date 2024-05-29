@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import client from '../../client/client';
@@ -10,15 +11,47 @@ import MWhiteButton from '../../components/button/MWhiteButton';
 import { CenterWarpper } from '../../components/common/Common';
 import NumberInputBox from '../../components/input/NumberInputBox';
 import TextInputLimitBox from '../../components/input/TextInputLimitBox';
-import SellerTopNavBar from '../../components/navBar/SellerTopNavBar.tsx';
+import SellerTopNavBar from '../../components/navBar/SellerTopNavBar';
 import useInputs from '../../hooks/useInputs';
 
 import * as S from './EditProductPageStyle';
 import PrecautionsTextBox from './PrecautionsTextBox';
 
+interface ProductBoxData {
+  product_name: string;
+  price: string;
+  shipping_fee: string;
+  stock: string;
+  product_info: string;
+  image: string;
+  product_id: string;
+  shipping_method: 'PARCEL' | 'DELIVERY';
+}
+
+interface CheckRequiredInputsParams {
+  productName: string;
+  price: string;
+  shipping: 'PARCEL' | 'DELIVERY';
+  shippingFee: string;
+  stock: string;
+  image: string | File;
+  productInfo: string;
+  preview?: string;
+}
+
+interface Data {
+  product_name: string;
+  price: string;
+  shipping_method: 'PARCEL' | 'DELIVERY';
+  shipping_fee: string;
+  stock: string;
+  product_info: string;
+  image?: string | File;
+}
+
 export default function EditProductPage() {
   const location = useLocation();
-  const productBoxData = location.state.productBoxData;
+  const productBoxData: ProductBoxData = location.state.productBoxData;
   const navigate = useNavigate();
   const [shipping, setShipping] = useState(
     productBoxData?.shipping_method || 'PARCEL'
@@ -32,7 +65,9 @@ export default function EditProductPage() {
       productInfo: productBoxData?.product_info || '',
     });
 
-  const [image, setImage] = useState(productBoxData?.image || '');
+  const [image, setImage] = useState<string | File>(
+    productBoxData?.image || ''
+  );
   const token = localStorage.getItem('token');
 
   const [preview, setPreview] = useState('');
@@ -46,12 +81,12 @@ export default function EditProductPage() {
     setShipping('DELIVERY');
   }
 
-  function handleImgPreview(e) {
+  function handleImgPreview(e: React.ChangeEvent<HTMLInputElement>) {
     setPreview(URL.createObjectURL(e.target.files[0]));
     setImage(e.target.files[0]);
   }
 
-  function checkRequiredInputs(inputs) {
+  function checkRequiredInputs(inputs: CheckRequiredInputsParams) {
     for (const key in inputs) {
       if (!inputs[key]) {
         return false;
@@ -60,11 +95,11 @@ export default function EditProductPage() {
     return true;
   }
 
-  function isEdit(originalPost) {
+  function isEdit(originalPost: ProductBoxData) {
     return !!originalPost;
   }
 
-  function createFormData(data) {
+  function createFormData(data: Data) {
     const formData = new FormData();
     for (const key in data) {
       formData.append(key, data[key]);
@@ -72,7 +107,7 @@ export default function EditProductPage() {
     return formData;
   }
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const requiredInputs = {
@@ -156,7 +191,10 @@ export default function EditProductPage() {
           <S.TopSection>
             <S.ImgWarpper>
               <S.InputTitle>상품 이미지</S.InputTitle>
-              <S.ImgPreveiw preview={preview} image={image}>
+              <S.ImgPreveiw
+                preview={preview}
+                image={typeof image === 'string' ? image : undefined}
+              >
                 <input
                   id="imageUploadInput"
                   type="file"
@@ -239,7 +277,7 @@ export default function EditProductPage() {
           <S.EditerSection
             name="productInfo"
             value={productInfo}
-            onChange={handleInput}
+            // onChange={handleInput}
           />
           <S.ButtonWarpper>
             <MWhiteButton
@@ -247,6 +285,9 @@ export default function EditProductPage() {
               mobileWd="100px"
               value="취소"
               marginR="14px"
+              onClick={() => {
+                navigate('/sellercenter');
+              }}
             />
             <MButton wd="200px" mobileWd="100px" value="저장하기" />
           </S.ButtonWarpper>
