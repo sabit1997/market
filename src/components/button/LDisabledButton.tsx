@@ -8,7 +8,7 @@ interface ButtonStyle {
 }
 
 interface LDisabledButtonProps extends ButtonStyle {
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   value: string;
 }
 
