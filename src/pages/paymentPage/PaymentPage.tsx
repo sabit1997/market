@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -38,7 +39,7 @@ export default function PaymentPage() {
   const quantity = location.state.quantity;
   const orderKind = location.state.orderKind;
   const productId = location.state.productId;
-  console.log(orderInfo);
+
   useEffect(() => {
     const method = paymentWay.filter((_, i) => checked[`pay${i}`] === true);
     switch (method[0]) {
@@ -61,7 +62,6 @@ export default function PaymentPage() {
         break;
     }
   }, [checked, paymentWay]);
-  console.log(payMethod);
 
   const [inputs, onChange, handleInputs] = useInputs({
     receiver: '',
@@ -89,7 +89,7 @@ export default function PaymentPage() {
     .map((x, i) => x.shipping_fee + x.price * quantity[i])
     .reduce((pre, curr) => pre + curr, 0);
 
-  const orderPrice = orderInfo
+  const orderPrice: number = orderInfo
     .map((x, i) => x.price * quantity[i])
     .reduce((pre, curr) => pre + curr, 0);
   const totalShippingFee = orderInfo

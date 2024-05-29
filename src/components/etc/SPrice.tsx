@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function SPrice(value: string) {
+interface SPriceProps {
+  value: string;
+}
+
+export default function SPrice({ value }: SPriceProps) {
   return <PriceTxt>{value}</PriceTxt>;
 }
 

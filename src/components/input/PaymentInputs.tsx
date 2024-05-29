@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
+import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 import SButton from '../button/SButton';
 
@@ -11,6 +12,16 @@ import {
   Dash,
   RowWarpper,
 } from './PaymentInputsStyle';
+
+interface PhoneNumInputProps {
+  // TODO: 타입 수정
+  value1?: string;
+  value2?: string;
+  value3?: string;
+  register?: UseFormRegister<FieldValues>;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  activation?: string;
+}
 
 export function NameInput(props) {
   return (
@@ -33,7 +44,7 @@ export function PhoneNumInput({
   register,
   onChange,
   activation,
-}) {
+}: PhoneNumInputProps) {
   return (
     <InfoInputItem>
       <Label htmlFor="phone_number1">휴대폰</Label>

@@ -7,7 +7,7 @@ import fillCheckBox from '../../assets/check-fill-box.svg';
 
 interface CheckTextProps {
   marginB: string;
-  value: string;
+  value?: string;
   setChecked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
