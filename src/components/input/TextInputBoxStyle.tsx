@@ -57,7 +57,7 @@ export const ValidMessage = styled.span`
   }
 `;
 
-export const Input = styled.input<{ wd: string; maxWd: string }>`
+export const Input = styled.input<{ wd: string; maxWd?: string }>`
   width: ${(props) => props.wd};
   max-width: ${(props) => props.maxWd};
   padding: 17px 0 17px 16px;

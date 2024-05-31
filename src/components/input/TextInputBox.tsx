@@ -2,6 +2,17 @@ import React from 'react';
 
 import checkOff from '../../assets/icon-check-off.svg';
 import checkOn from '../../assets/icon-check-on.svg';
+import {
+  CompanyNumTextInputBoxProps,
+  EmailTextInputBoxProps,
+  IdTextInputBoxProps,
+  NameTextInputBoxProps,
+  PasswordReconFirmTextInputBoxProps,
+  PasswordTextInputBoxProps,
+  PhoneNumberTextInputBoxProps,
+  StoreNameTextInputBoxProps,
+} from '../../types/inputBoxTypes';
+import getErrorMessage from '../../util/getErrorMessage';
 import NumDropdown from '../etc/NumDropdown';
 
 import {
@@ -23,7 +34,8 @@ export function IdTextInputBox({
   register,
   handleInput,
   errors,
-}) {
+}: IdTextInputBoxProps) {
+  console.log(accountValid);
   return (
     <Warpper marginB="12px">
       <Txt htmlFor="id_text_input">아이디</Txt>
@@ -49,11 +61,13 @@ export function IdTextInputBox({
         })}
       />
       {errors.userName ? (
-        <ValidMessage color="red">{errors.userName.message}</ValidMessage>
-      ) : Object.keys(accountValid)[0] === 'FAIL_Message' ? (
-        <ValidMessage color="red">{accountValid['FAIL_Message']}</ValidMessage>
-      ) : Object.keys(accountValid)[0] === 'Success' ? (
-        <ValidMessage color="#21BF48">{accountValid['Success']}</ValidMessage>
+        <ValidMessage color="red">
+          {getErrorMessage(errors.userName.message)}
+        </ValidMessage>
+      ) : accountValid && 'FAIL_Message' in accountValid ? (
+        <ValidMessage color="red">{accountValid.FAIL_Message}</ValidMessage>
+      ) : accountValid && 'Success' in accountValid ? (
+        <ValidMessage color="#21BF48">{accountValid.Success}</ValidMessage>
       ) : null}
     </Warpper>
   );
@@ -65,7 +79,7 @@ export function PasswordTextInputBox({
   register,
   handleInput,
   errors,
-}) {
+}: PasswordTextInputBoxProps) {
   return (
     <Warpper marginB="12px">
       <Txt htmlFor="password_text_input">비밀번호</Txt>
@@ -74,7 +88,7 @@ export function PasswordTextInputBox({
           type="password"
           id="password_text_input"
           value={value}
-          marginB="12px"
+          // marginB="12px"
           {...register('password', {
             required: '필수 정보입니다.',
             pattern: {
@@ -89,7 +103,9 @@ export function PasswordTextInputBox({
         <PasswordCheck src={password !== '' ? checkOn : checkOff} />
       </PasswordInputWarpper>
       {errors.password && (
-        <ValidMessage color="red">{errors.password.message}</ValidMessage>
+        <ValidMessage color="red">
+          {getErrorMessage(errors.password.message)}
+        </ValidMessage>
       )}
     </Warpper>
   );
@@ -102,7 +118,7 @@ export function PasswordReconFirmTextInputBox({
   register,
   handleInput,
   errors,
-}) {
+}: PasswordReconFirmTextInputBoxProps) {
   return (
     <Warpper marginB="50px">
       <Txt htmlFor="password2_text_input">비밀번호 재확인</Txt>
@@ -127,13 +143,20 @@ export function PasswordReconFirmTextInputBox({
         />
       </PasswordInputWarpper>
       {errors.password2 && (
-        <ValidMessage color="red">{errors.password2.message}</ValidMessage>
+        <ValidMessage color="red">
+          {getErrorMessage(errors.password2.message)}
+        </ValidMessage>
       )}
     </Warpper>
   );
 }
 
-export function NameTextInputBox({ value, register, handleInput, errors }) {
+export function NameTextInputBox({
+  value,
+  register,
+  handleInput,
+  errors,
+}: NameTextInputBoxProps) {
   return (
     <Warpper marginB="16px">
       <Txt htmlFor="input_text_input">이름</Txt>
@@ -150,7 +173,9 @@ export function NameTextInputBox({ value, register, handleInput, errors }) {
         })}
       />
       {errors.name && (
-        <ValidMessage color="red">{errors.name.message}</ValidMessage>
+        <ValidMessage color="red">
+          {getErrorMessage(errors.name.message)}
+        </ValidMessage>
       )}
     </Warpper>
   );
@@ -164,7 +189,7 @@ export function PhoneNumberTextInputBox({
   errors,
   prefixNum,
   setPrefixNum,
-}) {
+}: PhoneNumberTextInputBoxProps) {
   return (
     <>
       <Txt htmlFor="phonenumber_text_input">휴대폰번호</Txt>
@@ -179,7 +204,7 @@ export function PhoneNumberTextInputBox({
           {...register('phoneNumber1', {
             required: true,
             maxLength: 4,
-            onChange: (e) => {
+            onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
               handleInput(e);
             },
           })}
@@ -189,7 +214,7 @@ export function PhoneNumberTextInputBox({
           value={value2}
           wd="33.33%"
           maxWd="152px"
-          maxLength="4"
+          // maxLength="4"
           {...register('phoneNumber2', {
             required: true,
             maxLength: 4,
@@ -212,7 +237,7 @@ export function EmailTextInputBox({
   register,
   handleInput,
   errors,
-}) {
+}: EmailTextInputBoxProps) {
   return (
     <>
       <Txt htmlFor="email_text_input">이메일</Txt>
@@ -251,11 +276,8 @@ export function EmailTextInputBox({
         />
       </InputWarpper>
       <ValidMessage color="red">
-        {errors.email1
-          ? errors.email1.message
-          : errors.email2
-            ? errors.email2.message
-            : null}
+        {getErrorMessage(errors.email1?.message) ||
+          getErrorMessage(errors.email2?.message)}
       </ValidMessage>
     </>
   );
@@ -267,7 +289,7 @@ export function CompanyNumTextInputBox({
   handleInput,
   companyNumValid,
   errors,
-}) {
+}: CompanyNumTextInputBoxProps) {
   return (
     <>
       <Warpper marginB="12px">
@@ -290,15 +312,15 @@ export function CompanyNumTextInputBox({
           })}
         />
         {errors.companyNum ? (
-          <ValidMessage color="red">{errors.companyNum.message}</ValidMessage>
-        ) : Object.keys(companyNumValid)[0] === 'FAIL_Message' ? (
           <ValidMessage color="red">
-            {companyNumValid['FAIL_Message']}
+            {getErrorMessage(errors.companyNum)}
           </ValidMessage>
-        ) : Object.keys(companyNumValid)[0] === 'Success' ? (
-          <ValidMessage color="#21BF48">
-            {companyNumValid['Success']}
+        ) : companyNumValid && 'FAIL_Message' in companyNumValid ? (
+          <ValidMessage color="red">
+            {companyNumValid.FAIL_Message}
           </ValidMessage>
+        ) : companyNumValid && 'Success' in companyNumValid ? (
+          <ValidMessage color="#21BF48">{companyNumValid.Success}</ValidMessage>
         ) : null}
       </Warpper>
     </>
@@ -310,7 +332,7 @@ export function StoreNameTextInputBox({
   register,
   handleInput,
   errors,
-}) {
+}: StoreNameTextInputBoxProps) {
   return (
     <>
       <Warpper marginB="16px">
@@ -329,7 +351,9 @@ export function StoreNameTextInputBox({
         />
       </Warpper>
       {errors.storeName && (
-        <ValidMessage color="red">{errors.storeName.message}</ValidMessage>
+        <ValidMessage color="red">
+          {getErrorMessage(errors.storeName.message)}
+        </ValidMessage>
       )}
     </>
   );
