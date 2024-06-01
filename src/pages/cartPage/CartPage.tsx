@@ -8,14 +8,11 @@ import { CenterWarpper } from '../../components/common/Common';
 import Loading from '../../components/etc/Loading';
 import { CartTabTitle } from '../../components/navBar/TabTitle';
 import TopNavBar from '../../components/navBar/TopNavBar';
+import { CheckedItems } from '../../types/cartTypes';
 
 import * as S from './CartPageStyle';
 import EmptyCart from './EmptyCart';
 import FilledCart from './FilledCart';
-
-interface CheckedItems {
-  [key: string]: boolean;
-}
 
 export default function CartPage() {
   const [cartData, setCartData] = useState([]);

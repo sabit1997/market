@@ -1,3 +1,6 @@
+export interface CheckedItems {
+  [key: string]: boolean;
+}
 export interface CartItem {
   cart_item_id: number;
   is_active: boolean;
