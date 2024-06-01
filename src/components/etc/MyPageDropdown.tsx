@@ -4,14 +4,18 @@ import styled from 'styled-components';
 
 import client from '../../client/client';
 
-export default function MyPageDropdown(props) {
+interface MyPageDropdownProps {
+  setModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function MyPageDropdown(props: MyPageDropdownProps) {
   const navigate = useNavigate();
-  function handleMypageBtn(event) {
+  function handleMypageBtn(event: React.MouseEvent<HTMLLIElement, MouseEvent>) {
     props.setModal(false);
     event.stopPropagation();
   }
 
-  function handleLogout(event) {
+  function handleLogout(event: React.MouseEvent<HTMLLIElement, MouseEvent>) {
     props.setModal(false);
     event.stopPropagation();
     client
