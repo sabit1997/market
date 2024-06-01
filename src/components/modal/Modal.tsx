@@ -3,6 +3,15 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import instance from '../../client/instance';
+import { CartItem } from '../../types/cartTypes';
+import {
+  ChangeNumModalProps,
+  ExistsModalProps,
+  NotLoginProps,
+  SuccessCartProps,
+  deleteModalProps,
+  ExcessModalProps,
+} from '../../types/modalTypes';
 import SButton from '../button/SButton';
 import SWhiteButton from '../button/SWhiteButton';
 import Amount from '../etc/Amount';
@@ -13,16 +22,6 @@ import {
   AlertTxt,
   AlertContentsWarp,
 } from './ModalStyle';
-
-interface deleteModalProps {
-  setDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
-  cartItemId?: number;
-  setCartData?: React.Dispatch<React.SetStateAction<any>>;
-  cartData?: any;
-  productBoxData?: any;
-  i?: number;
-  setProductBoxData?: React.Dispatch<React.SetStateAction<any>>;
-}
 
 // 상품삭제 모달
 export function DeleteModal({
@@ -47,7 +46,9 @@ export function DeleteModal({
         .then((res) => {
           if (res.status === 204) {
             setCartData(
-              cartData.filter((item) => item.cart_item_id !== cartItemId)
+              cartData.filter(
+                (item: CartItem) => item.cart_item_id !== cartItemId
+              )
             );
           }
           setDeleteModal(false);
@@ -103,7 +104,7 @@ export function ChangeNumModal({
   setAmountModal,
   i,
   value,
-}) {
+}: ChangeNumModalProps) {
   const [changeQuantity, setChangeQuantity] = useState<number>(value);
 
   // is_active Boolean 판별 함수
@@ -124,8 +125,9 @@ export function ChangeNumModal({
         is_active: isActive(),
       })
       .then((res) => {
-        quantity.splice(i, 1, res.data.quantity);
-        setQuantity(quantity);
+        const newQuantities = [...quantity];
+        newQuantities.splice(i, 1, res.data.quantity);
+        setQuantity(newQuantities);
         setAmountModal(false);
       })
       .catch((error) => console.log(error));
@@ -141,8 +143,8 @@ export function ChangeNumModal({
         <Amount
           margin="0 0 13% 0"
           value={changeQuantity}
-          setAmountQuantity={setQuantity}
-          stock={quantity}
+          setAmountQuantity={setChangeQuantity}
+          stock={changeQuantity}
           changeQuantity={changeQuantity}
           setChangeQuantity={setChangeQuantity}
         />
@@ -167,7 +169,7 @@ export function ChangeNumModal({
 }
 
 // 로그인 요청 모달
-export function NotLogin({ setAlertModal }) {
+export function NotLogin({ setAlertModal }: NotLoginProps) {
   const navigate = useNavigate();
 
   function handleCloseBtn() {
@@ -203,7 +205,7 @@ export function NotLogin({ setAlertModal }) {
 }
 
 // 이미 존재하고 있는 상품 모달
-export function ExistsModal({ setExistModal }) {
+export function ExistsModal({ setExistModal }: ExistsModalProps) {
   const navigate = useNavigate();
   function handleCloseBtn() {
     setExistModal(false);
@@ -240,7 +242,7 @@ export function ExistsModal({ setExistModal }) {
 }
 
 // 재고 초과 모달
-export function ExcessModal({ setExcessModal }) {
+export function ExcessModal({ setExcessModal }: ExcessModalProps) {
   function handleCloseBtn() {
     setExcessModal(false);
   }
@@ -262,7 +264,7 @@ export function ExcessModal({ setExcessModal }) {
   );
 }
 
-export function SuccessCart({ setSuccessCart }) {
+export function SuccessCart({ setSuccessCart }: SuccessCartProps) {
   const navigate = useNavigate();
   function handleCloseBtn() {
     setSuccessCart(false);

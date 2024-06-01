@@ -13,20 +13,25 @@ import * as S from './CartPageStyle';
 import EmptyCart from './EmptyCart';
 import FilledCart from './FilledCart';
 
+interface CheckedItems {
+  [key: string]: boolean;
+}
+
 export default function CartPage() {
   const [cartData, setCartData] = useState([]);
-  const [checked, setChecked] = useState({});
+  const [checked, setChecked] = useState<CheckedItems>({});
   const [next, setNext] = useState('');
   const [loading, setLoading] = useState(false);
   const [cartItem, setCartItem] = useState([]);
-  const [quantity, setQuantity] = useState([]);
+  const [quantity, setQuantity] = useState<number[]>([]);
   const navigate = useNavigate();
 
   // product_id가 같은 제품의 상세 정보 가져오기
-  function getCartDetail(ids) {
+  function getCartDetail(ids: number[]) {
     const result = Promise.all(
-      ids.map((id) => {
-        return client.get(`/products/${id}`).then((res) => res.data);
+      ids.map(async (id) => {
+        const res = await client.get(`/products/${id}`);
+        return res.data;
       })
     );
     return result;
@@ -64,6 +69,7 @@ export default function CartPage() {
       const cartProductId = await Promise.all(
         data.map((cart) => cart.product_id)
       );
+
       const cartDetail = await getCartDetail(cartProductId).then((detail) => {
         setCartItem(detail);
         setLoading(false);

@@ -1,7 +1,14 @@
 import React from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
-import { FieldValues, UseFormRegister } from 'react-hook-form';
 
+import { DaumPostcodeData } from '../../types/daumPostcodeTypes';
+import {
+  NameInputProps,
+  PhoneNumInputProps,
+  ReceiverInputProps,
+  AddressInputProps,
+  AddressMessageInputProps,
+} from '../../types/inputBoxTypes';
 import SButton from '../button/SButton';
 
 import {
@@ -13,17 +20,7 @@ import {
   RowWarpper,
 } from './PaymentInputsStyle';
 
-interface PhoneNumInputProps {
-  // TODO: 타입 수정
-  value1?: string;
-  value2?: string;
-  value3?: string;
-  register?: UseFormRegister<FieldValues>;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  activation?: string;
-}
-
-export function NameInput(props) {
+export function NameInput(props: NameInputProps) {
   return (
     <InfoInputItem>
       <Label htmlFor={props.name}>이름</Label>
@@ -107,7 +104,11 @@ export function EmailInput() {
   );
 }
 
-export function ReceiverInput({ value, register, onChange }) {
+export function ReceiverInput({
+  value,
+  register,
+  onChange,
+}: ReceiverInputProps) {
   return (
     <InfoInputItem>
       <Label htmlFor="receiver">수령인</Label>
@@ -134,12 +135,12 @@ export function AddressInput({
   onChange,
   handleInputs,
   inputs,
-}) {
+}: AddressInputProps) {
   const scriptUrl =
     '//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
   const open = useDaumPostcodePopup(scriptUrl);
 
-  const handleComplete = (data) => {
+  const handleComplete = (data: DaumPostcodeData) => {
     const zoneCode = data.zonecode;
     let fullAddress = data.address;
     let extraAddress = '';
@@ -183,10 +184,9 @@ export function AddressInput({
         <SButton
           value="우편번호 조회"
           wd="154px"
-          hg="40px"
+          // hg="40px"
           mobileWd="80px"
           mobileHg="25px"
-          type="button"
           onClick={handleClick}
         />
         <NormalInput
@@ -199,7 +199,7 @@ export function AddressInput({
           })}
         />
         <NormalInput
-          wd="800px"
+          // wd="800px"
           margin="0 0 8px 0px"
           value={value3}
           {...register('address2', {
@@ -213,13 +213,17 @@ export function AddressInput({
   );
 }
 
-export function AddressMessageInput({ value, register, onChange }) {
+export function AddressMessageInput({
+  value,
+  register,
+  onChange,
+}: AddressMessageInputProps) {
   return (
     <InfoInputItem marginB="70px">
       <Label htmlFor="address_message">배송 메시지</Label>
       <NormalInput
         id="address_message"
-        wd="800px"
+        // wd="800px"
         value={value}
         {...register('address_message', {
           onChange: (e) => {
