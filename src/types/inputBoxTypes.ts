@@ -1,5 +1,7 @@
 import { FieldValues, UseFormRegister } from 'react-hook-form';
 
+import { UseInputsProps } from '../hooks/useInputs';
+
 import { FormError, ValidationStatus } from './formTypes';
 
 export type FailMesssage = {
@@ -55,4 +57,41 @@ export interface CompanyNumTextInputBoxProps extends Formhandlers {
 
 export interface StoreNameTextInputBoxProps extends Formhandlers {
   value: string;
+}
+
+export interface PhoneNumInputProps {
+  // TODO: 타입 수정
+  value1?: string;
+  value2?: string;
+  value3?: string;
+  register?: UseFormRegister<FieldValues>;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  activation?: string;
+}
+
+export interface NameInputProps {
+  name?: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface ReceiverInputProps {
+  value: string;
+  register: UseFormRegister<FieldValues>;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface AddressInputProps {
+  value1: string;
+  value2: string;
+  value3: string;
+  register: UseFormRegister<FieldValues>;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleInputs: (value: UseInputsProps) => void;
+  inputs: UseInputsProps;
+}
+export interface AddressMessageInputProps {
+  value: string;
+  register: UseFormRegister<FieldValues>;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

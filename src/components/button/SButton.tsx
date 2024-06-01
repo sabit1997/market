@@ -1,7 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function SButton(props) {
+interface SButtonProps {
+  wd: string;
+  mobileWd: string;
+  mobileHg: string;
+  onClick: () => void;
+  value: string;
+}
+
+export default function SButton(props: SButtonProps) {
   return (
     <>
       <Button
@@ -9,7 +17,6 @@ export default function SButton(props) {
         mobileWd={props.mobileWd}
         mobileHg={props.mobileHg}
         onClick={props.onClick}
-        type={props.type}
       >
         {props.value}
       </Button>
@@ -17,7 +24,7 @@ export default function SButton(props) {
   );
 }
 
-const Button = styled.button<{
+const Button = styled.button.attrs({ type: 'button' })<{
   wd: string;
   mobileWd: string;
   mobileHg: string;
