@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import deleteIcon from '../../assets/icon-delete.svg';
+import { CartProductListProps, CheckedItems } from '../../types/cartTypes';
 import Amount from '../etc/Amount';
 import { DeleteModal, ChangeNumModal } from '../modal/Modal';
 
@@ -16,12 +17,12 @@ function CartProductList({
   quantity,
   setQuantity,
   setCartData,
-}) {
+}: CartProductListProps) {
   const [amountModal, setAmountModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
   const navigate = useNavigate();
 
-  function shippingValue(fee, method) {
+  function shippingValue(fee: number, method: 'PARCEL' | 'DELIVERY') {
     if (method === 'PARCEL') {
       if (fee === 0) {
         return '소포배송 / 무료배송';
@@ -38,7 +39,7 @@ function CartProductList({
   }
   // checked 초기값 설정
   useEffect(() => {
-    const initial = {};
+    const initial: CheckedItems = {};
     for (let i = 0; i < cartData.length; i++) {
       initial[`product${i}`] = true;
     }
@@ -46,8 +47,8 @@ function CartProductList({
   }, [cartData.length, setChecked]);
 
   // 상품 체크 버튼
-  function handleCheckBtn(e) {
-    const { name } = e.target;
+  function handleCheckBtn(e: React.MouseEvent<HTMLInputElement>) {
+    const { name } = e.currentTarget;
     // console.log(e.target.name);
     if (checked[`product${i}`]) {
       setChecked({
@@ -63,7 +64,7 @@ function CartProductList({
   }
 
   // 수량 변경 버튼
-  function handleAmount(event) {
+  function handleAmount(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
     setAmountModal(true);
   }
@@ -78,9 +79,9 @@ function CartProductList({
     navigate('/payment', {
       state: {
         orderProduct: [cartItem[i]],
-        quantity: [quantity[i]],
+        quantity: [quantity],
         orderKind: 'cart_one_order',
-        productId: cartData.product_id,
+        productId: cartData[i].product_id,
       },
     });
   }
@@ -98,10 +99,10 @@ function CartProductList({
           name={`product${i}`}
           value={`product${i}`}
           className="ir"
-          id={i}
+          id={i.toString()}
           onClick={handleCheckBtn}
         />
-        <CheckButton checked={checked} htmlFor={i} i={i} />
+        <CheckButton checked={checked} htmlFor={i.toString()} i={i} />
         <ProductWarpper>
           <Product src={cartItem[i].image} onClick={moveProductDetail} />
           <ProductInfoWarpper onClick={moveProductDetail}>
