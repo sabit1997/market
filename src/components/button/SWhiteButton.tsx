@@ -1,7 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function SWhiteButton(props) {
+interface SWhiteButtonProps {
+  wd: string;
+  marginR: string;
+  onClick: () => void;
+  value: string;
+}
+
+export default function SWhiteButton(props: SWhiteButtonProps) {
   return (
     <>
       <Button wd={props.wd} marginR={props.marginR} onClick={props.onClick}>

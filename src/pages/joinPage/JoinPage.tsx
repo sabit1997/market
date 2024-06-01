@@ -11,6 +11,7 @@ import MS16pButton from '../../components/button/MS16pButton';
 import CheckText from '../../components/etc/CheckText';
 import * as I from '../../components/input/TextInputBox';
 import useInputs from '../../hooks/useInputs';
+import { ValidationStatus } from '../../types/formTypes';
 import * as L from '../loginPage/LoginPageStyle';
 
 import * as S from './JoinPageStyle';
@@ -96,7 +97,7 @@ export default function JoinPage() {
   }
 
   // 회원가입
-  const handleJoin = (event) => {
+  const handleJoin = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (joinType === 'BUYER' && checked && doubleCheck && isValid) {
       client
@@ -151,8 +152,8 @@ export default function JoinPage() {
     }
   };
 
-  const [accountValid, setAccountValid] = useState('');
-  const [companyNumValid, setCompanyNumValid] = useState('');
+  const [accountValid, setAccountValid] = useState<ValidationStatus>({});
+  const [companyNumValid, setCompanyNumValid] = useState<ValidationStatus>({});
 
   return (
     <S.Warpper onSubmit={handleJoin}>

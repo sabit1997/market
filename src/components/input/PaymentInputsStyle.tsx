@@ -25,7 +25,7 @@ export const Label = styled.label`
 `;
 
 export const NormalInput = styled.input.attrs({ type: 'text' })<{
-  maxWd: string;
+  maxWd?: string;
   margin?: string;
 }>`
   width: 100%;

@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 
-interface UseInputsProps {
+export interface UseInputsProps {
   [key: string]: string;
 }
 
