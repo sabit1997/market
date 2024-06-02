@@ -1,12 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface SWhiteButtonProps {
-  wd: string;
-  marginR: string;
-  onClick: () => void;
-  value: string;
-}
+import { SWhiteButtonProps, CommonStyle } from '../../types/buttonTypes';
 
 export default function SWhiteButton(props: SWhiteButtonProps) {
   return (
@@ -18,7 +13,7 @@ export default function SWhiteButton(props: SWhiteButtonProps) {
   );
 }
 
-const Button = styled.button<{ wd: string; marginR: string }>`
+const Button = styled.button<CommonStyle>`
   width: ${(props) => props.wd};
   height: 40px;
   border: 1px solid #c4c4c4;

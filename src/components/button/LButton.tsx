@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function LButton(props) {
+import { CommonStyle, LButtonProps } from '../../types/buttonTypes';
+
+export default function LButton(props: LButtonProps) {
   return (
     <>
       <Button
@@ -16,11 +18,7 @@ export default function LButton(props) {
   );
 }
 
-const Button = styled.button<{
-  margin: string;
-  mobileWd: string;
-  mobileHg: string;
-}>`
+const Button = styled.button<CommonStyle>`
   width: 220px;
   height: 68px;
   font-size: 24px;

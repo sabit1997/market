@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function MS16pButton(props) {
+import { MS16pButtonProps, CommonStyle } from '../../types/buttonTypes';
+
+export default function MS16pButton(props: MS16pButtonProps) {
   return (
     <>
       <Button
@@ -20,14 +22,7 @@ export default function MS16pButton(props) {
   );
 }
 
-const Button = styled.button<{
-  wd: string;
-  maxWd?: string;
-  margin?: string;
-  pd?: string;
-  mobileWd?: string;
-  mobileMargin?: string;
-}>`
+const Button = styled.button<CommonStyle>`
   width: ${(props) => props.wd};
   max-width: ${(props) => props.maxWd};
   height: 54px;

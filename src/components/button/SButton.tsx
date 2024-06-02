@@ -1,13 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface SButtonProps {
-  wd: string;
-  mobileWd: string;
-  mobileHg: string;
-  onClick: () => void;
-  value: string;
-}
+import { SButtonProps, CommonStyle } from '../../types/buttonTypes';
 
 export default function SButton(props: SButtonProps) {
   return (
@@ -24,11 +18,7 @@ export default function SButton(props: SButtonProps) {
   );
 }
 
-const Button = styled.button.attrs({ type: 'button' })<{
-  wd: string;
-  mobileWd: string;
-  mobileHg: string;
-}>`
+const Button = styled.button.attrs({ type: 'button' })<CommonStyle>`
   width: ${(props) => props.wd};
   height: 40px;
   border-radius: 5px;

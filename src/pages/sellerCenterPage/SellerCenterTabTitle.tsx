@@ -1,13 +1,19 @@
 import React from 'react';
 
 import ProductBox from '../../components/contents/ProductBox';
+import { ProductBoxData } from '../../types/ProductTypes';
 
 import * as S from './SellerCenterPageStyle';
+
+interface SellerCenterTabTitleProps {
+  setProductBoxData: React.Dispatch<React.SetStateAction<ProductBoxData[]>>;
+  productBoxData: ProductBoxData[];
+}
 
 export default function SellerCenterTabTitle({
   setProductBoxData,
   productBoxData,
-}) {
+}: SellerCenterTabTitleProps) {
   const productBoxList = productBoxData?.map((_, i) => (
     <ProductBox
       i={i}

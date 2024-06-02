@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function MDisabledButton(props) {
+import { MDisabledButtonProps, CommonStyle } from '../../types/buttonTypes';
+
+export default function MDisabledButton(props: MDisabledButtonProps) {
   return (
     <>
       <Button
@@ -16,12 +18,7 @@ export default function MDisabledButton(props) {
   );
 }
 
-const Button = styled.button<{
-  wd: string;
-  maxWd: string;
-  marginR: string;
-  basis: string;
-}>`
+const Button = styled.button.attrs({ type: 'button' })<CommonStyle>`
   width: ${(props) => props.wd};
   max-width: ${(props) => props.maxWd};
   height: 60px;
