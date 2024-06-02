@@ -15,27 +15,14 @@ import Loading from '../../components/etc/Loading';
 import LPrice from '../../components/etc/LPrice';
 import * as M from '../../components/modal/Modal';
 import TopNavBar from '../../components/navBar/TopNavBar';
+import { CartData } from '../../types/cartTypes';
+import { ProductBoxData } from '../../types/ProductTypes';
 
 import * as S from './ProductDetailPageStyle';
 
-export interface ProductDetailData {
-  created_at: string;
-  image: string;
-  price: number;
-  product_id: number;
-  product_info: string;
-  product_name: string;
-  seller: number;
-  shipping_fee: number;
-  shipping_method: 'PARCEL' | 'DELIVERY';
-  stock: number;
-  store_name: string;
-  updated_at: string;
-}
-
 export default function ProductDetailPage() {
   const { product_id } = useParams();
-  const [productDetail, setProductDetail] = useState<ProductDetailData | null>(
+  const [productDetail, setProductDetail] = useState<ProductBoxData | null>(
     null
   );
   const [amountQuantity, setAmountQuantity] = useState(1);
@@ -88,7 +75,7 @@ export default function ProductDetailPage() {
   async function isCheck() {
     const res = await instance.get('/cart/');
     const result = res.data.results.filter(
-      (data) => data.product_id === productDetail?.product_id
+      (data: CartData) => data.product_id === productDetail?.product_id
     ).length;
     if (result === 0) {
       return true;

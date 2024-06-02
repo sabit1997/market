@@ -3,9 +3,10 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { ProductBoxProps } from '../../types/ProductTypes';
 import { DeleteModal } from '../modal/Modal';
 
-function ProductBox({ i, productBoxData, setProductBoxData }) {
+function ProductBox({ i, productBoxData, setProductBoxData }: ProductBoxProps) {
   const navigate = useNavigate();
   const [deleteModal, setDeleteModal] = useState(false);
   // 상품 삭제

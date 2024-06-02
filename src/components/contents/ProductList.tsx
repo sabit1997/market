@@ -2,8 +2,11 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-function ProductList({ productData }) {
+import { ProductBoxData } from '../../types/ProductTypes';
+
+function ProductList({ productData }: { productData: ProductBoxData }) {
   const navigate = useNavigate();
+
   return (
     <Warpper
       onClick={() => {

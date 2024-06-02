@@ -1,5 +1,5 @@
 interface DefaultButton {
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   value: string;
 }
 
@@ -17,9 +17,9 @@ export interface CommonStyle {
 }
 
 export interface LButtonProps extends DefaultButton, CommonStyle {
-  margin: string;
-  mobileWd: string;
-  mobileHg: string;
+  margin?: string;
+  mobileWd?: string;
+  mobileHg?: string;
 }
 
 export interface LDisabledButtonProps extends CommonStyle {
@@ -28,11 +28,11 @@ export interface LDisabledButtonProps extends CommonStyle {
 }
 
 export interface MButtonProps extends DefaultButton, CommonStyle {
-  wd: string;
-  maxWd: string;
-  mobileWd: string;
-  marginR: string;
-  basis: string;
+  wd?: string;
+  maxWd?: string;
+  mobileWd?: string;
+  marginR?: string;
+  basis?: string;
 }
 
 export interface MDisabledButtonProps extends CommonStyle {
@@ -41,18 +41,18 @@ export interface MDisabledButtonProps extends CommonStyle {
 
 export interface MS16pButtonProps extends DefaultButton, CommonStyle {
   wd: string;
-  mobileWd: string;
-  maxWd: string;
-  margin: string;
-  mobileMargin: string;
+  mobileWd?: string;
+  maxWd?: string;
+  margin?: string;
+  mobileMargin?: string;
   type?: 'button' | 'submit' | 'reset';
-  pd: string;
+  pd?: string;
 }
 
 export interface MS16pWhiteButtonProps extends DefaultButton, CommonStyle {
   wd: string;
   mobileWd: string;
-  margin: string;
+  margin?: string;
   type?: 'button' | 'submit' | 'reset';
 }
 

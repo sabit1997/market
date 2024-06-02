@@ -12,6 +12,7 @@ import CheckText from '../../components/etc/CheckText';
 import * as I from '../../components/input/TextInputBox';
 import useInputs from '../../hooks/useInputs';
 import { ValidationStatus } from '../../types/formTypes';
+import { PrefixNum } from '../../types/inputBoxTypes';
 import * as L from '../loginPage/LoginPageStyle';
 
 import * as S from './JoinPageStyle';
@@ -21,7 +22,7 @@ export default function JoinPage() {
   const [joinType, setJoinType] = useState<'BUYER' | 'SELLER'>('BUYER');
   const [doubleCheck, setDoubleCheck] = useState(false);
   const [companyNumCheck, setCompanyNumCheck] = useState(false);
-  const [prefixNum, setPrefixNum] = useState('010');
+  const [prefixNum, setPrefixNum] = useState<PrefixNum>('010');
   const navigate = useNavigate();
   const {
     register,
@@ -181,8 +182,8 @@ export default function JoinPage() {
               margin="30px 0 0 12px"
               mobileMargin="25px 0 0 12px"
               type="button"
-              username={userName}
-              setAccountValid={setAccountValid}
+              // username={userName}
+              // setAccountValid={setAccountValid}
               onClick={handleButton}
             />
           </S.IdInputWarpper>

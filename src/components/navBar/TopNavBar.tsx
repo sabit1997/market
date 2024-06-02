@@ -9,11 +9,17 @@ import myInfoActive from '../../assets/icon-user-2.svg';
 import myInfo from '../../assets/icon-user.svg';
 import logo from '../../assets/Logo-hodu.png';
 import searchBtn from '../../assets/search.png';
+import { ProductBoxData } from '../../types/ProductTypes';
 import MsIconButton from '../button/MsIconButton';
 import MyPageDropdown from '../etc/MyPageDropdown';
 import { NotLogin } from '../modal/Modal';
 
-export default function TopNavBar(props) {
+interface TopNavBarProps {
+  productData?: ProductBoxData[];
+  value?: string;
+}
+
+export default function TopNavBar(props: TopNavBarProps) {
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
   // 경고창 모달
@@ -41,12 +47,12 @@ export default function TopNavBar(props) {
     }
   }
 
-  function handleSearchInput(e) {
+  function handleSearchInput(e: React.ChangeEvent<HTMLInputElement>) {
     setSearchInput(e.target.value);
   }
 
   function handleSearchClick() {
-    const mergedProductData = [].concat(...props.productData);
+    const mergedProductData: ProductBoxData[] = [].concat(...props.productData);
     const resultProducts = mergedProductData.filter(
       (x) => x.product_name.includes(searchInput) === true
     );
@@ -55,7 +61,7 @@ export default function TopNavBar(props) {
     });
   }
 
-  function handlePressEnter(e) {
+  function handlePressEnter(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === 'Enter') {
       handleSearchClick();
     }

@@ -29,6 +29,7 @@ interface ProductBoxData {
 }
 
 interface CheckRequiredInputsParams {
+  [key: string]: string | File | undefined;
   productName: string;
   price: string;
   shipping: 'PARCEL' | 'DELIVERY';
@@ -40,6 +41,7 @@ interface CheckRequiredInputsParams {
 }
 
 interface Data {
+  [key: string]: string | File;
   product_name: string;
   price: string;
   shipping_method: 'PARCEL' | 'DELIVERY';

@@ -4,6 +4,7 @@ import React from 'react';
 import LButton from '../../components/button/LButton';
 import CartProductList from '../../components/contents/CartProductList';
 import PriceGroup from '../../components/etc/PriceGroup';
+import { FilledCartProps } from '../../types/cartTypes';
 
 import * as S from './CartPageStyle';
 
@@ -16,12 +17,12 @@ export default function FilledCart({
   quantity,
   setQuantity,
   cartItem,
-}) {
-  const [totalPrice, setTotalPrice] = useState('');
-  const [totalShippingFee, setTotalShippingFee] = useState('');
+}: FilledCartProps) {
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalShippingFee, setTotalShippingFee] = useState(0);
 
   // 장바구니 목록 불러오기
-  const cartList = cartData.map((_, i) => (
+  const cartList = cartData.map((_, i: number) => (
     <CartProductList
       cartItem={cartItem}
       cartData={cartData}
@@ -37,7 +38,7 @@ export default function FilledCart({
 
   // 가격, 배송비, 콤마
   useEffect(() => {
-    if (cartItem !== '') {
+    if (cartItem.length !== 0) {
       const productPrice = cartItem
         .map((x, i) => x.price * quantity[i])
         .filter((_, i) => checked[`product${i}`] === true);

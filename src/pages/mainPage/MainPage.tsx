@@ -8,15 +8,13 @@ import ProductList from '../../components/contents/ProductList';
 import Loading from '../../components/etc/Loading';
 import Footer from '../../components/footer/Footer';
 import TopNavBar from '../../components/navBar/TopNavBar';
-import { ProductDetailData } from '../productDetailPage/ProductDetailPage';
+import { ProductBoxData } from '../../types/ProductTypes';
 
 import * as S from './MainPageStyle';
 
 export default function MainPage() {
   const loginType = localStorage.getItem('type');
-  const [productData, setProductData] = useState<ProductDetailData[] | null>(
-    null
-  );
+  const [productData, setProductData] = useState<ProductBoxData[] | null>(null);
   const [totalPage, setTotalPage] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -38,7 +36,7 @@ export default function MainPage() {
     return Math.ceil(total / num);
   };
 
-  const fetchProductDataWithPage = async (page) => {
+  const fetchProductDataWithPage = async (page: number) => {
     try {
       setLoading(true);
       const res = await client.get(`/products/?page=${page}`);
@@ -50,7 +48,7 @@ export default function MainPage() {
     }
   };
 
-  const onClickPageButton = (page) => {
+  const onClickPageButton = (page: number) => {
     if (page === 1) {
       fetchProductData();
     } else {

@@ -33,7 +33,7 @@ export default function LoginPage() {
   const { username, password } = inputs;
 
   // 로그인 기능
-  function handleLogin(event) {
+  function handleLogin(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if ((username && password) !== '') {
       client

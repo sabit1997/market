@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { TextInputProps } from '../../types/inputBoxTypes';
+
 function TextInput({
   type,
   placeholder,
@@ -9,7 +11,7 @@ function TextInput({
   value,
   onChange,
   textInput,
-}) {
+}: TextInputProps) {
   return (
     <>
       <IdInput

@@ -16,7 +16,7 @@ export function CartTabTitle(props: CartTabTitleProps) {
   // checked 상태에 따라 상단 체크 버튼 변화
   useEffect(() => {
     const valuesArr = Object.values(props.checked);
-    const verification = (value) => value === true;
+    const verification = (value: boolean) => value === true;
     if (valuesArr.every(verification)) {
       setAllChecked(true);
     } else {
@@ -27,13 +27,13 @@ export function CartTabTitle(props: CartTabTitleProps) {
   // 전체 선택, 전체 해제
   function handleSellectAllButton() {
     if (allChecked) {
-      const value = {};
+      const value: { [key: string]: boolean } = {};
       for (let i = 0; i < Object.keys(props.checked).length; i++) {
         value[`product${i}`] = false;
       }
       props.setChecked(value);
     } else {
-      const value = {};
+      const value: { [key: string]: boolean } = {};
       for (let i = 0; i < Object.keys(props.checked).length; i++) {
         value[`product${i}`] = true;
       }
@@ -55,7 +55,7 @@ export function CartTabTitle(props: CartTabTitleProps) {
   );
 }
 
-export function PaymentTabTitle(props) {
+export function PaymentTabTitle(props: { marginB?: string }) {
   return (
     <Warpper marginB={props.marginB}>
       <Txt wd="46.01%">상품정보</Txt>
