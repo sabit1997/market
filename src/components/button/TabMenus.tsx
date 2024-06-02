@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export function TabMenuOff({ type, value }) {
+import { CommonTabMenuProps } from '../../types/buttonTypes';
+
+export function TabMenuOff({ type, value }: CommonTabMenuProps) {
   return (
     <>
       <OffWarpper>
@@ -12,7 +14,7 @@ export function TabMenuOff({ type, value }) {
   );
 }
 
-export function TabMenuOn({ value, type }) {
+export function TabMenuOn({ value, type }: CommonTabMenuProps) {
   return (
     <>
       <OnWarpper>

@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function PriceGroup({ value, price }) {
+export interface PriceGroupProps {
+  value: string;
+  price: string;
+}
+
+export default function PriceGroup({ value, price }: PriceGroupProps) {
   return (
     <Warpper>
       <TotalTxt value={value}>{value}</TotalTxt>

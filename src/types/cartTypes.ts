@@ -1,3 +1,5 @@
+import React, { Key } from 'react';
+
 export interface CheckedItems {
   [key: string]: boolean;
 }
@@ -9,7 +11,7 @@ export interface CartItem {
   quantity: number;
 }
 
-interface CartData {
+export interface CartData {
   cart_item_id: number;
   is_active: boolean;
   my_cart: number;
@@ -41,4 +43,24 @@ export interface CartProductListProps {
   quantity: number[];
   setQuantity: React.Dispatch<React.SetStateAction<number[]>>;
   setCartData: React.Dispatch<React.SetStateAction<CartData[]>>;
+}
+
+export interface OrderInfo {
+  [x: string]: Key;
+  image: string;
+  seller_store: string;
+  product_name: string;
+  shipping_fee: number;
+  price: number;
+}
+
+export interface FilledCartProps {
+  cartData: CartData[];
+  checked: CheckedItems;
+  setChecked: React.Dispatch<React.SetStateAction<CheckedItems>>;
+  setCartData: React.Dispatch<React.SetStateAction<CartData[]>>;
+  handleOrderBtn: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  quantity: number[];
+  setQuantity: React.Dispatch<React.SetStateAction<number[]>>;
+  cartItem: CartProductItem[];
 }

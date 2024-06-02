@@ -1,6 +1,16 @@
-import React from 'react';
+import React, { SetStateAction } from 'react';
 import { useEffect } from 'react';
 import styled from 'styled-components';
+
+import { CheckedItems } from '../../types/cartTypes';
+
+interface PaymentWayItemProps {
+  i: number;
+  value: string;
+  checked: CheckedItems;
+  setChecked: React.Dispatch<SetStateAction<CheckedItems>>;
+  paymentWay: string[];
+}
 
 export default function PaymentWayItem({
   i,
@@ -8,9 +18,9 @@ export default function PaymentWayItem({
   checked,
   setChecked,
   paymentWay,
-}) {
+}: PaymentWayItemProps) {
   useEffect(() => {
-    const initial = {};
+    const initial: { [key: string]: boolean } = {};
     for (let i = 0; i < paymentWay.length; i++) {
       initial[`pay${i}`] = false;
     }

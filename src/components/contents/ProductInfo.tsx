@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { OrderInfo } from '../../types/cartTypes';
+
 interface ProductInfoProps {
-  // TODO: orderInfoType 수정
-  orderInfo: any;
-  quantity: number;
+  orderInfo: OrderInfo[];
+  quantity: number[];
   i: number;
 }
 

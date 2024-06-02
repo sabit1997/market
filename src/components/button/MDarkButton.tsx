@@ -1,12 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface MDartButtonProps {
-  value: string;
-  wd?: string;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
-  basis: string;
-}
+import { MDartButtonProps } from '../../types/buttonTypes';
 
 export default function MDarkButton({
   value,

@@ -1,7 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function LPrice(props) {
+interface LPriceProps {
+  marginB?: string;
+  cl: string;
+  value: string;
+}
+
+export default function LPrice(props: LPriceProps) {
   return (
     <Price marginB={props.marginB} cl={props.cl}>
       {props.value}

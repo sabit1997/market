@@ -4,8 +4,12 @@ import styled from 'styled-components';
 
 import iconDownArrow from '../../assets/icon-down-arrow.svg';
 import iconUpArrow from '../../assets/icon-up-arrow.svg';
+import { NumDropdownProps, PrefixNum } from '../../types/inputBoxTypes';
 
-export default function NumDropdown({ prefixNum, setPrefixNum }) {
+export default function NumDropdown({
+  prefixNum,
+  setPrefixNum,
+}: NumDropdownProps) {
   const valueArr = ['010', '011', '016', '017', '018', '019'];
   const [click, setClick] = useState(false);
 
@@ -17,8 +21,10 @@ export default function NumDropdown({ prefixNum, setPrefixNum }) {
     }
   }
 
-  function handleLi(event) {
-    setPrefixNum(event.target.textContent);
+  function handleLi(event: React.MouseEvent<HTMLLIElement>) {
+    // TODO: 다시 한번 살펴보기
+    const target = event.currentTarget as HTMLLIElement;
+    setPrefixNum(target.textContent as PrefixNum);
   }
 
   return (

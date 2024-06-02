@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -14,6 +14,7 @@ import * as I from '../../components/input/PaymentInputs';
 import { PaymentTabTitle } from '../../components/navBar/TabTitle';
 import TopNavBar from '../../components/navBar/TopNavBar';
 import useInputs from '../../hooks/useInputs';
+import { OrderInfo } from '../../types/cartTypes';
 
 import * as S from './PaymentPageStyle';
 import PaymentWayItem from './PaymentWayItem';
@@ -24,18 +25,14 @@ export default function PaymentPage() {
     formState: { isValid },
   } = useForm({ mode: 'onChange' });
   const navigate = useNavigate();
-  const [paymentWay] = useState([
-    '신용/체크카드',
-    '무통장 입금',
-    '휴대폰 결제',
-    '네이버페이',
-    '카카오페이',
-  ]);
-  const [checked, setChecked] = useState({});
-  const [payMethod, setPayMethod] = useState(null);
+  const [paymentWay]: [string[], Dispatch<SetStateAction<string[]>>] = useState(
+    ['신용/체크카드', '무통장 입금', '휴대폰 결제', '네이버페이', '카카오페이']
+  );
   const [agreeChecked, setAgreeChecked] = useState(false);
+  const [checked, setChecked] = useState<{ [key: string]: boolean }>({});
+  const [payMethod, setPayMethod] = useState<string | null>(null);
   const location = useLocation();
-  const orderInfo = location.state.orderProduct;
+  const orderInfo: OrderInfo[] = location.state.orderProduct;
   const quantity = location.state.quantity;
   const orderKind = location.state.orderKind;
   const productId = location.state.productId;
@@ -85,7 +82,7 @@ export default function PaymentPage() {
     address_message,
   } = inputs;
 
-  const totalPrice = orderInfo
+  const totalPrice: number = orderInfo
     .map((x, i) => x.shipping_fee + x.price * quantity[i])
     .reduce((pre, curr) => pre + curr, 0);
 
@@ -97,7 +94,7 @@ export default function PaymentPage() {
     .reduce((pre, curr) => pre + curr, 0);
 
   // 결제
-  function handlePaymentButton(e) {
+  function handlePaymentButton(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (agreeChecked && isValid && payMethod !== null) {
       if (orderKind === 'cart_order') {

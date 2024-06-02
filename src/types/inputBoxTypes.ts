@@ -1,3 +1,4 @@
+import React from 'react';
 import { FieldValues, UseFormRegister } from 'react-hook-form';
 
 import { UseInputsProps } from '../hooks/useInputs';
@@ -11,6 +12,12 @@ export type FailMesssage = {
 export type Success = {
   Success: string;
 };
+
+export type PrefixNum = '010' | '011' | '016' | '017' | '018' | '019';
+export interface NumDropdownProps {
+  prefixNum: PrefixNum;
+  setPrefixNum: React.Dispatch<React.SetStateAction<PrefixNum>>;
+}
 
 export interface Formhandlers {
   register: UseFormRegister<FieldValues>;
@@ -41,7 +48,7 @@ export interface NameTextInputBoxProps extends Formhandlers {
 export interface PhoneNumberTextInputBoxProps extends Formhandlers {
   value: string;
   value2: string;
-  prefixNum: string;
+  prefixNum: PrefixNum;
   setPrefixNum: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -94,4 +101,14 @@ export interface AddressMessageInputProps {
   value: string;
   register: UseFormRegister<FieldValues>;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface TextInputProps {
+  placeholder?: string;
+  name?: string;
+  value: string;
+  type?: React.HTMLInputTypeAttribute;
+  marginB: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  textInput?: React.Ref<HTMLInputElement>;
 }

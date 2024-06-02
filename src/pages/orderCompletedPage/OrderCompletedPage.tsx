@@ -28,7 +28,7 @@ export default function OrderCompletedPage() {
         <S.RedTxt>{orderNum}</S.RedTxt> 입니다.
       </S.Txt>
       <PaymentTabTitle />
-      {orderInfo.map((_, i) => (
+      {orderInfo.map((_: any, i: number) => (
         <ProductInfo
           orderInfo={orderInfo}
           quantity={quantity}
