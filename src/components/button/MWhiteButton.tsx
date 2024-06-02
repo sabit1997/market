@@ -1,17 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface MWhiteButtonStyle {
-  wd: string;
-  mobileWd?: string;
-  maxWd?: string;
-  marginR?: string;
-}
-
-interface MWhiteButtonProps extends MWhiteButtonStyle {
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
-  value: string;
-}
+import { MWhiteButtonProps, CommonStyle } from '../../types/buttonTypes';
 
 export default function MWhiteButton(props: MWhiteButtonProps) {
   return (
@@ -29,7 +19,7 @@ export default function MWhiteButton(props: MWhiteButtonProps) {
   );
 }
 
-const Button = styled.button<MWhiteButtonStyle>`
+const Button = styled.button<CommonStyle>`
   width: ${(props) => props.wd};
   max-width: ${(props) => props.maxWd};
   height: 60px;

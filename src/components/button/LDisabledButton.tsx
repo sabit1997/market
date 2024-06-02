@@ -1,16 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface ButtonStyle {
-  margin: string;
-  mobileWd: string;
-  mobileHg: string;
-}
-
-interface LDisabledButtonProps extends ButtonStyle {
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  value: string;
-}
+import { CommonStyle, LDisabledButtonProps } from '../../types/buttonTypes';
 
 export default function LDisabledButton(props: LDisabledButtonProps) {
   return (
@@ -25,7 +16,7 @@ export default function LDisabledButton(props: LDisabledButtonProps) {
   );
 }
 
-const Button = styled.button<ButtonStyle>`
+const Button = styled.button<CommonStyle>`
   width: 220px;
   height: 68px;
   font-size: 24px;

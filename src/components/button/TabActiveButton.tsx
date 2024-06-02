@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function TabActiveButton(props) {
+import { TabActiveButtonProps } from '../../types/buttonTypes';
+
+export default function TabActiveButton(props: TabActiveButtonProps) {
   return (
     <>
       <Button>{props.value}</Button>

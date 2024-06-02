@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function TabDisabledButton(props) {
+import { TabDisabledButtonProps } from '../../types/buttonTypes';
+
+export default function TabDisabledButton(props: TabDisabledButtonProps) {
   return (
     <>
       <Button>{props.value}</Button>

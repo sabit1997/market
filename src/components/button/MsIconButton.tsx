@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function MsIconButton(props) {
+import { MsIconButtonProps, CommonStyle } from '../../types/buttonTypes';
+
+export default function MsIconButton(props: MsIconButtonProps) {
   return (
     <Button onClick={props.onClick} wd={props.wd}>
       <Img src={props.src} />
@@ -10,7 +12,7 @@ export default function MsIconButton(props) {
   );
 }
 
-const Button = styled.button<{ wd: string; maxWd?: string }>`
+const Button = styled.button<CommonStyle>`
   width: ${(props) => props.wd};
   max-width: ${(props) => props.maxWd};
   height: 54px;
