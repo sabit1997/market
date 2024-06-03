@@ -3,17 +3,24 @@ import styled from 'styled-components';
 
 import { CommonStyle, MS16pWhiteButtonProps } from '../../types/buttonTypes';
 
-export default function MS16pWhiteButton(props: MS16pWhiteButtonProps) {
+export default function MS16pWhiteButton({
+  wd,
+  mobileWd,
+  margin,
+  type,
+  onClick,
+  value,
+}: MS16pWhiteButtonProps) {
   return (
     <>
       <Button
-        wd={props.wd}
-        mobileWd={props.mobileWd}
-        margin={props.margin}
-        type={props.type}
-        onClick={props.onClick}
+        wd={wd}
+        mobileWd={mobileWd}
+        margin={margin}
+        type={type}
+        onClick={onClick}
       >
-        {props.value}
+        {value}
       </Button>
     </>
   );

@@ -3,17 +3,24 @@ import styled from 'styled-components';
 
 import { MWhiteButtonProps, CommonStyle } from '../../types/buttonTypes';
 
-export default function MWhiteButton(props: MWhiteButtonProps) {
+export default function MWhiteButton({
+  wd,
+  mobileWd,
+  maxWd,
+  marginR,
+  onClick,
+  value,
+}: MWhiteButtonProps) {
   return (
     <>
       <Button
-        wd={props.wd}
-        mobileWd={props.mobileWd}
-        maxWd={props.maxWd}
-        marginR={props.marginR}
-        onClick={props.onClick}
+        wd={wd}
+        mobileWd={mobileWd}
+        maxWd={maxWd}
+        marginR={marginR}
+        onClick={onClick}
       >
-        {props.value}
+        {value}
       </Button>
     </>
   );

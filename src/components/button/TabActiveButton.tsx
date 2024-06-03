@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 import { TabActiveButtonProps } from '../../types/buttonTypes';
 
-export default function TabActiveButton(props: TabActiveButtonProps) {
+export default function TabActiveButton({ value }: TabActiveButtonProps) {
   return (
     <>
-      <Button>{props.value}</Button>
+      <Button>{value}</Button>
     </>
   );
 }

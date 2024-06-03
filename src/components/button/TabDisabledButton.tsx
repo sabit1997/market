@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 import { TabDisabledButtonProps } from '../../types/buttonTypes';
 
-export default function TabDisabledButton(props: TabDisabledButtonProps) {
+export default function TabDisabledButton({ value }: TabDisabledButtonProps) {
   return (
     <>
-      <Button>{props.value}</Button>
+      <Button>{value}</Button>
     </>
   );
 }
