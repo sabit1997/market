@@ -7,10 +7,10 @@ interface LPriceProps {
   value: string;
 }
 
-export default function LPrice(props: LPriceProps) {
+export default function LPrice({ value, marginB, cl }: LPriceProps) {
   return (
-    <Price marginB={props.marginB} cl={props.cl}>
-      {props.value}
+    <Price marginB={marginB} cl={cl}>
+      {value}
     </Price>
   );
 }

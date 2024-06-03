@@ -19,7 +19,7 @@ interface TopNavBarProps {
   value?: string;
 }
 
-export default function TopNavBar(props: TopNavBarProps) {
+export default function TopNavBar({ productData, value }: TopNavBarProps) {
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
   const [alertModal, setAlertModal] = useState(false);
@@ -49,7 +49,7 @@ export default function TopNavBar(props: TopNavBarProps) {
   }
 
   function handleSearchClick() {
-    const mergedProductData: ProductBoxData[] = [].concat(...props.productData);
+    const mergedProductData: ProductBoxData[] = [].concat(...productData);
     const resultProducts = mergedProductData.filter(
       (x) => x.product_name.includes(searchInput) === true
     );
@@ -78,7 +78,7 @@ export default function TopNavBar(props: TopNavBarProps) {
         </Search>
       </LeftWarpper>
       <ButtonWarpper>
-        {props.value === 'SELLER' ? (
+        {value === 'SELLER' ? (
           <>
             <MoveBtn wd="56px" onClick={handleMyPageButton} modal={modal}>
               <BtnTxt modal={modal}>마이페이지</BtnTxt>

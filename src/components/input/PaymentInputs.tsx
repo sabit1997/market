@@ -20,15 +20,15 @@ import {
   RowWarpper,
 } from './PaymentInputsStyle';
 
-export function NameInput(props: NameInputProps) {
+export function NameInput({ name, value, onChange }: NameInputProps) {
   return (
     <InfoInputItem>
-      <Label htmlFor={props.name}>이름</Label>
+      <Label htmlFor={name}>이름</Label>
       <NormalInput
         maxWd="334px"
-        name={props.name}
-        value={props.value}
-        onChange={props.onChange}
+        name={name}
+        value={value}
+        onChange={onChange}
       />
     </InfoInputItem>
   );
