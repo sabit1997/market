@@ -64,7 +64,6 @@ export default function JoinPage() {
     setJoinType('SELLER');
   };
 
-  // ID 중복확인
   const handleButton = () => {
     client
       .post(`/accounts/signup/valid/username/`, {
@@ -79,8 +78,6 @@ export default function JoinPage() {
         setChecked(false);
       });
   };
-
-  // 사업자 등록번호 인증
 
   function handleAuthButton() {
     client
@@ -97,7 +94,6 @@ export default function JoinPage() {
       });
   }
 
-  // 회원가입
   const handleJoin = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (joinType === 'BUYER' && checked && doubleCheck && isValid) {

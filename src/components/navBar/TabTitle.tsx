@@ -13,7 +13,6 @@ interface CartTabTitleProps {
 export function CartTabTitle(props: CartTabTitleProps) {
   const [allChecked, setAllChecked] = useState(true);
 
-  // checked 상태에 따라 상단 체크 버튼 변화
   useEffect(() => {
     const valuesArr = Object.values(props.checked);
     const verification = (value: boolean) => value === true;
@@ -24,7 +23,6 @@ export function CartTabTitle(props: CartTabTitleProps) {
     }
   }, [props.checked]);
 
-  // 전체 선택, 전체 해제
   function handleSellectAllButton() {
     if (allChecked) {
       const value: { [key: string]: boolean } = {};

@@ -9,7 +9,6 @@ import { DeleteModal } from '../modal/Modal';
 function ProductBox({ i, productBoxData, setProductBoxData }: ProductBoxProps) {
   const navigate = useNavigate();
   const [deleteModal, setDeleteModal] = useState(false);
-  // 상품 삭제
   function handleDelteBtn() {
     setDeleteModal(true);
   }

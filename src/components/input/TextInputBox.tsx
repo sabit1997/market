@@ -35,7 +35,6 @@ export function IdTextInputBox({
   handleInput,
   errors,
 }: IdTextInputBoxProps) {
-  console.log(accountValid);
   return (
     <Warpper marginB="12px">
       <Txt htmlFor="id_text_input">아이디</Txt>

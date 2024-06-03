@@ -17,7 +17,6 @@ export default function LoginPage() {
   const idInput = useRef<HTMLInputElement | null>(null);
   const passwordInput = useRef<HTMLInputElement | null>(null);
 
-  // 로그인 타입 설정
   function handleBuyerBtn() {
     setLoginType('BUYER');
   }
@@ -32,7 +31,6 @@ export default function LoginPage() {
 
   const { username, password } = inputs;
 
-  // 로그인 기능
   function handleLogin(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if ((username && password) !== '') {

@@ -22,11 +22,9 @@ interface TopNavBarProps {
 export default function TopNavBar(props: TopNavBarProps) {
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
-  // 경고창 모달
   const [alertModal, setAlertModal] = useState(false);
   const [searchInput, setSearchInput] = useState('');
 
-  // 마이페이지 버튼
   function handleMyPageButton() {
     if (localStorage.getItem('token') === null) {
       navigate('/login');
@@ -37,7 +35,6 @@ export default function TopNavBar(props: TopNavBarProps) {
     }
   }
 
-  // 장바구니 버튼
   function handleCartButton() {
     if (localStorage.getItem('token') === null) {
       setAlertModal(true);
