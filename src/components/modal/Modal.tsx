@@ -23,7 +23,6 @@ import {
   AlertContentsWarp,
 } from './ModalStyle';
 
-// 상품삭제 모달
 export function DeleteModal({
   setDeleteModal,
   cartItemId,
@@ -38,7 +37,6 @@ export function DeleteModal({
     setDeleteModal(false);
   }
 
-  // 상품 삭제
   function deleteProduct() {
     if (location.pathname === '/cart') {
       instance
@@ -53,7 +51,7 @@ export function DeleteModal({
           }
           setDeleteModal(false);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.error(error));
     } else if (location.pathname === '/sellercenter') {
       instance
         .delete(`/products/${productBoxData[i].product_id}/`)
@@ -67,7 +65,7 @@ export function DeleteModal({
           }
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
     }
   }
@@ -94,7 +92,6 @@ export function DeleteModal({
   );
 }
 
-// 수량 변경 모달
 export function ChangeNumModal({
   setQuantity,
   quantity,
@@ -107,7 +104,6 @@ export function ChangeNumModal({
 }: ChangeNumModalProps) {
   const [changeQuantity, setChangeQuantity] = useState<number>(value);
 
-  // is_active Boolean 판별 함수
   function isActive() {
     if (stock < changeQuantity) {
       return false;
@@ -116,7 +112,6 @@ export function ChangeNumModal({
     }
   }
 
-  // 수량 수정
   function handleNumChangeBtn() {
     instance
       .put(`/cart/${cart_item_id}/`, {
@@ -130,7 +125,7 @@ export function ChangeNumModal({
         setQuantity(newQuantities);
         setAmountModal(false);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   }
   function handleCloseBtn() {
     setAmountModal(false);
@@ -168,7 +163,6 @@ export function ChangeNumModal({
   );
 }
 
-// 로그인 요청 모달
 export function NotLogin({ setAlertModal }: NotLoginProps) {
   const navigate = useNavigate();
 
@@ -204,7 +198,6 @@ export function NotLogin({ setAlertModal }: NotLoginProps) {
   );
 }
 
-// 이미 존재하고 있는 상품 모달
 export function ExistsModal({ setExistModal }: ExistsModalProps) {
   const navigate = useNavigate();
   function handleCloseBtn() {
@@ -241,7 +234,6 @@ export function ExistsModal({ setExistModal }: ExistsModalProps) {
   );
 }
 
-// 재고 초과 모달
 export function ExcessModal({ setExcessModal }: ExcessModalProps) {
   function handleCloseBtn() {
     setExcessModal(false);

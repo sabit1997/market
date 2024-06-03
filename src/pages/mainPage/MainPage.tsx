@@ -57,7 +57,6 @@ export default function MainPage() {
     setCurrentPage(page - 1);
   };
 
-  // 상품 목록 페이지 가져오기
   useEffect(() => {
     fetchProductData();
   }, []);

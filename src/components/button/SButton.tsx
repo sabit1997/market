@@ -3,16 +3,17 @@ import styled from 'styled-components';
 
 import { SButtonProps, CommonStyle } from '../../types/buttonTypes';
 
-export default function SButton(props: SButtonProps) {
+export default function SButton({
+  wd,
+  mobileWd,
+  mobileHg,
+  onClick,
+  value,
+}: SButtonProps) {
   return (
     <>
-      <Button
-        wd={props.wd}
-        mobileWd={props.mobileWd}
-        mobileHg={props.mobileHg}
-        onClick={props.onClick}
-      >
-        {props.value}
+      <Button wd={wd} mobileWd={mobileWd} mobileHg={mobileHg} onClick={onClick}>
+        {value}
       </Button>
     </>
   );

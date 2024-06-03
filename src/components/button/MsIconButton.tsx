@@ -3,11 +3,16 @@ import styled from 'styled-components';
 
 import { MsIconButtonProps, CommonStyle } from '../../types/buttonTypes';
 
-export default function MsIconButton(props: MsIconButtonProps) {
+export default function MsIconButton({
+  onClick,
+  wd,
+  src,
+  value,
+}: MsIconButtonProps) {
   return (
-    <Button onClick={props.onClick} wd={props.wd}>
-      <Img src={props.src} />
-      {props.value}
+    <Button onClick={onClick} wd={wd}>
+      <Img src={src} />
+      {value}
     </Button>
   );
 }

@@ -8,15 +8,15 @@ interface MyPageDropdownProps {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function MyPageDropdown(props: MyPageDropdownProps) {
+export default function MyPageDropdown({ setModal }: MyPageDropdownProps) {
   const navigate = useNavigate();
   function handleMypageBtn(event: React.MouseEvent<HTMLLIElement, MouseEvent>) {
-    props.setModal(false);
+    setModal(false);
     event.stopPropagation();
   }
 
   function handleLogout(event: React.MouseEvent<HTMLLIElement, MouseEvent>) {
-    props.setModal(false);
+    setModal(false);
     event.stopPropagation();
     client
       .post('/accounts/logout/', {})
@@ -25,7 +25,7 @@ export default function MyPageDropdown(props: MyPageDropdownProps) {
         navigate('/');
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   }
   return (

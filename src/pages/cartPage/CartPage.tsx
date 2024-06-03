@@ -23,7 +23,6 @@ export default function CartPage() {
   const [quantity, setQuantity] = useState<number[]>([]);
   const navigate = useNavigate();
 
-  // product_id가 같은 제품의 상세 정보 가져오기
   function getCartDetail(ids: number[]) {
     const result = Promise.all(
       ids.map(async (id) => {
@@ -35,7 +34,6 @@ export default function CartPage() {
   }
 
   useEffect(() => {
-    // 장바구니 정보 가져오기
     async function getData() {
       if (next === '') {
         setLoading(true);

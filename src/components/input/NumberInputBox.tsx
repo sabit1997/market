@@ -9,19 +9,25 @@ interface NumberInputBoxProps {
   unit: string;
 }
 
-export default function NumberInputBox(props: NumberInputBoxProps) {
+export default function NumberInputBox({
+  title,
+  name,
+  value,
+  onChange,
+  unit,
+}: NumberInputBoxProps) {
   return (
     <>
-      <H2 htmlFor="price_input">{props.title}</H2>
+      <H2 htmlFor="price_input">{title}</H2>
       <PriceSection>
         <Input
           type="number"
           id="price_input"
-          name={props.name}
-          value={props.value}
-          onChange={props.onChange}
+          name={name}
+          value={value}
+          onChange={onChange}
         />
-        <Won>{props.unit}</Won>
+        <Won>{unit}</Won>
       </PriceSection>
     </>
   );

@@ -3,15 +3,21 @@ import styled from 'styled-components';
 
 import { CommonStyle, LDisabledButtonProps } from '../../types/buttonTypes';
 
-export default function LDisabledButton(props: LDisabledButtonProps) {
+export default function LDisabledButton({
+  margin,
+  mobileWd,
+  mobileHg,
+  onClick,
+  value,
+}: LDisabledButtonProps) {
   return (
     <Button
-      margin={props.margin}
-      mobileWd={props.mobileWd}
-      mobileHg={props.mobileHg}
-      onClick={props.onClick}
+      margin={margin}
+      mobileWd={mobileWd}
+      mobileHg={mobileHg}
+      onClick={onClick}
     >
-      {props.value}
+      {value}
     </Button>
   );
 }

@@ -11,15 +11,19 @@ interface CheckTextProps {
   setChecked: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function CheckText(props: CheckTextProps) {
+export default function CheckText({
+  setChecked,
+  marginB,
+  value,
+}: CheckTextProps) {
   const [check, setCheck] = useState(false);
 
   function handleChecked() {
     setCheck(!check);
-    props.setChecked(!check);
+    setChecked(!check);
   }
   return (
-    <Warpper marginB={props.marginB}>
+    <Warpper marginB={marginB}>
       <input
         type="checkbox"
         id="agree_input"
@@ -28,7 +32,7 @@ export default function CheckText(props: CheckTextProps) {
       />
       <CheckBox htmlFor="agree_input" check={check} onClick={handleChecked} />
       <Txt htmlFor="agree_input" onClick={handleChecked}>
-        {props.value === '회원가입' ? (
+        {value === '회원가입' ? (
           <>
             호두샵의 <BoldLineTxt>이용약관</BoldLineTxt> 및{' '}
             <BoldLineTxt>개인정보처리방침</BoldLineTxt>에 대한 내용을 확인하였고

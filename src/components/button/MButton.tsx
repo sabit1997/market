@@ -3,18 +3,26 @@ import styled from 'styled-components';
 
 import { MButtonProps, CommonStyle } from '../../types/buttonTypes';
 
-export default function MButton(props: MButtonProps) {
+export default function MButton({
+  wd,
+  maxWd,
+  mobileWd,
+  marginR,
+  basis,
+  onClick,
+  value,
+}: MButtonProps) {
   return (
     <>
       <Button
-        wd={props.wd}
-        maxWd={props.maxWd}
-        mobileWd={props.mobileWd}
-        marginR={props.marginR}
-        basis={props.basis}
-        onClick={props.onClick}
+        wd={wd}
+        maxWd={maxWd}
+        mobileWd={mobileWd}
+        marginR={marginR}
+        basis={basis}
+        onClick={onClick}
       >
-        {props.value}
+        {value}
       </Button>
     </>
   );

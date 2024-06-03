@@ -19,14 +19,12 @@ interface TopNavBarProps {
   value?: string;
 }
 
-export default function TopNavBar(props: TopNavBarProps) {
+export default function TopNavBar({ productData, value }: TopNavBarProps) {
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
-  // 경고창 모달
   const [alertModal, setAlertModal] = useState(false);
   const [searchInput, setSearchInput] = useState('');
 
-  // 마이페이지 버튼
   function handleMyPageButton() {
     if (localStorage.getItem('token') === null) {
       navigate('/login');
@@ -37,7 +35,6 @@ export default function TopNavBar(props: TopNavBarProps) {
     }
   }
 
-  // 장바구니 버튼
   function handleCartButton() {
     if (localStorage.getItem('token') === null) {
       setAlertModal(true);
@@ -52,7 +49,7 @@ export default function TopNavBar(props: TopNavBarProps) {
   }
 
   function handleSearchClick() {
-    const mergedProductData: ProductBoxData[] = [].concat(...props.productData);
+    const mergedProductData: ProductBoxData[] = [].concat(...productData);
     const resultProducts = mergedProductData.filter(
       (x) => x.product_name.includes(searchInput) === true
     );
@@ -81,7 +78,7 @@ export default function TopNavBar(props: TopNavBarProps) {
         </Search>
       </LeftWarpper>
       <ButtonWarpper>
-        {props.value === 'SELLER' ? (
+        {value === 'SELLER' ? (
           <>
             <MoveBtn wd="56px" onClick={handleMyPageButton} modal={modal}>
               <BtnTxt modal={modal}>마이페이지</BtnTxt>

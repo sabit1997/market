@@ -3,16 +3,22 @@ import styled from 'styled-components';
 
 import { CommonStyle, LButtonProps } from '../../types/buttonTypes';
 
-export default function LButton(props: LButtonProps) {
+export default function LButton({
+  margin,
+  mobileWd,
+  mobileHg,
+  onClick,
+  value,
+}: LButtonProps) {
   return (
     <>
       <Button
-        margin={props.margin}
-        mobileWd={props.mobileWd}
-        mobileHg={props.mobileHg}
-        onClick={props.onClick}
+        margin={margin}
+        mobileWd={mobileWd}
+        mobileHg={mobileHg}
+        onClick={onClick}
       >
-        {props.value}
+        {value}
       </Button>
     </>
   );
