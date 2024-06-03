@@ -37,7 +37,6 @@ function CartProductList({
       }
     }
   }
-  // checked 초기값 설정
   useEffect(() => {
     const initial: CheckedItems = {};
     for (let i = 0; i < cartData.length; i++) {
@@ -46,10 +45,8 @@ function CartProductList({
     setChecked(initial);
   }, [cartData.length, setChecked]);
 
-  // 상품 체크 버튼
   function handleCheckBtn(e: React.MouseEvent<HTMLInputElement>) {
     const { name } = e.currentTarget;
-    // console.log(e.target.name);
     if (checked[`product${i}`]) {
       setChecked({
         ...checked,
@@ -63,18 +60,15 @@ function CartProductList({
     }
   }
 
-  // 수량 변경 버튼
   function handleAmount(event: React.MouseEvent<HTMLButtonElement>) {
     event.stopPropagation();
     setAmountModal(true);
   }
 
-  // 상품 삭제 버튼
   function handleDeleteBtn() {
     setDeleteModal(true);
   }
 
-  // 주문하기 버튼
   function handlePaymentButton() {
     navigate('/payment', {
       state: {
@@ -86,7 +80,6 @@ function CartProductList({
     });
   }
 
-  // 상품 상세로 이동
   function moveProductDetail() {
     navigate(`/detail/${cartItem[i].product_id}`);
   }
@@ -124,10 +117,6 @@ function CartProductList({
           cartItem={cartItem}
           onClick={handleAmount}
           margin="0 "
-          // cartData={cartData}
-          // i={i}
-          // quantity={quantity}
-          // setQuantity={setQuantity}
           justSelf="center"
         />
         <OderWarpper>
@@ -238,7 +227,6 @@ const Product = styled.img`
 const ProductInfoWarpper = styled.div`
   display: flex;
   flex-direction: column;
-  /* margin-right: 48px; */
 `;
 
 const Seller = styled.p`

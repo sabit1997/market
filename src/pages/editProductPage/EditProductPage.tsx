@@ -145,10 +145,9 @@ export default function EditProductPage() {
         })
         .then(() => {
           navigate('/sellercenter');
-          console.log();
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
     } else if (
       isEdit(productBoxData) &&
@@ -167,7 +166,7 @@ export default function EditProductPage() {
           navigate('/sellercenter');
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
     } else {
       instance
@@ -176,7 +175,7 @@ export default function EditProductPage() {
           navigate('/sellercenter');
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
     }
   }

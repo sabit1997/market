@@ -93,7 +93,6 @@ export default function PaymentPage() {
     .map((x) => x.shipping_fee)
     .reduce((pre, curr) => pre + curr, 0);
 
-  // 결제
   function handlePaymentButton(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (agreeChecked && isValid && payMethod !== null) {
@@ -118,7 +117,7 @@ export default function PaymentPage() {
               },
             });
           })
-          .catch((error) => console.log(error));
+          .catch((error) => console.error(error));
       } else if (orderKind === 'cart_one_order' || 'direct_order') {
         instance
           .post('/order/', {
@@ -142,7 +141,7 @@ export default function PaymentPage() {
               },
             });
           })
-          .catch((error) => console.log(error));
+          .catch((error) => console.error(error));
       }
     }
   }

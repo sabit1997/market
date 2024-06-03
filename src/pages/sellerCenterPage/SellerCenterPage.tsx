@@ -44,7 +44,6 @@ export default function SellerCenterPage() {
 
   const [productBoxData, setProductBoxData] = useState([]);
 
-  // 판매자 상품 목록
   useEffect(() => {
     instance
       .get('/seller/')

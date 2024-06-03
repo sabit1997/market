@@ -3,16 +3,17 @@ import styled from 'styled-components';
 
 import { MDisabledButtonProps, CommonStyle } from '../../types/buttonTypes';
 
-export default function MDisabledButton(props: MDisabledButtonProps) {
+export default function MDisabledButton({
+  wd,
+  maxWd,
+  marginR,
+  basis,
+  value,
+}: MDisabledButtonProps) {
   return (
     <>
-      <Button
-        wd={props.wd}
-        maxWd={props.maxWd}
-        marginR={props.marginR}
-        basis={props.basis}
-      >
-        {props.value}
+      <Button wd={wd} maxWd={maxWd} marginR={marginR} basis={basis}>
+        {value}
       </Button>
     </>
   );

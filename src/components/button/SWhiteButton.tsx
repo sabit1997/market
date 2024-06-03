@@ -3,11 +3,16 @@ import styled from 'styled-components';
 
 import { SWhiteButtonProps, CommonStyle } from '../../types/buttonTypes';
 
-export default function SWhiteButton(props: SWhiteButtonProps) {
+export default function SWhiteButton({
+  wd,
+  marginR,
+  onClick,
+  value,
+}: SWhiteButtonProps) {
   return (
     <>
-      <Button wd={props.wd} marginR={props.marginR} onClick={props.onClick}>
-        {props.value}
+      <Button wd={wd} marginR={marginR} onClick={onClick}>
+        {value}
       </Button>
     </>
   );

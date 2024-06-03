@@ -3,20 +3,30 @@ import styled from 'styled-components';
 
 import { MS16pButtonProps, CommonStyle } from '../../types/buttonTypes';
 
-export default function MS16pButton(props: MS16pButtonProps) {
+export default function MS16pButton({
+  wd,
+  mobileWd,
+  maxWd,
+  margin,
+  mobileMargin,
+  type,
+  onClick,
+  pd,
+  value,
+}: MS16pButtonProps) {
   return (
     <>
       <Button
-        wd={props.wd}
-        mobileWd={props.mobileWd}
-        maxWd={props.maxWd}
-        margin={props.margin}
-        mobileMargin={props.mobileMargin}
-        type={props.type}
-        onClick={props.onClick}
-        pd={props.pd}
+        wd={wd}
+        mobileWd={mobileWd}
+        maxWd={maxWd}
+        margin={margin}
+        mobileMargin={mobileMargin}
+        type={type}
+        onClick={onClick}
+        pd={pd}
       >
-        {props.value}
+        {value}
       </Button>
     </>
   );

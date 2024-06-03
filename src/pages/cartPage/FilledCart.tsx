@@ -21,7 +21,6 @@ export default function FilledCart({
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalShippingFee, setTotalShippingFee] = useState(0);
 
-  // 장바구니 목록 불러오기
   const cartList = cartData.map((_, i: number) => (
     <CartProductList
       cartItem={cartItem}
@@ -36,7 +35,6 @@ export default function FilledCart({
     />
   ));
 
-  // 가격, 배송비, 콤마
   useEffect(() => {
     if (cartItem.length !== 0) {
       const productPrice = cartItem

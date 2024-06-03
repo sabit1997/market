@@ -10,39 +10,41 @@ interface CartTabTitleProps {
   marginB?: string;
 }
 
-export function CartTabTitle(props: CartTabTitleProps) {
+export function CartTabTitle({
+  checked,
+  setChecked,
+  marginB,
+}: CartTabTitleProps) {
   const [allChecked, setAllChecked] = useState(true);
 
-  // checked 상태에 따라 상단 체크 버튼 변화
   useEffect(() => {
-    const valuesArr = Object.values(props.checked);
+    const valuesArr = Object.values(checked);
     const verification = (value: boolean) => value === true;
     if (valuesArr.every(verification)) {
       setAllChecked(true);
     } else {
       setAllChecked(false);
     }
-  }, [props.checked]);
+  }, [checked]);
 
-  // 전체 선택, 전체 해제
   function handleSellectAllButton() {
     if (allChecked) {
       const value: { [key: string]: boolean } = {};
-      for (let i = 0; i < Object.keys(props.checked).length; i++) {
+      for (let i = 0; i < Object.keys(checked).length; i++) {
         value[`product${i}`] = false;
       }
-      props.setChecked(value);
+      setChecked(value);
     } else {
       const value: { [key: string]: boolean } = {};
-      for (let i = 0; i < Object.keys(props.checked).length; i++) {
+      for (let i = 0; i < Object.keys(checked).length; i++) {
         value[`product${i}`] = true;
       }
-      props.setChecked(value);
+      setChecked(value);
     }
   }
 
   return (
-    <Warpper marginB={props.marginB}>
+    <Warpper marginB={marginB}>
       <AllCheckBtn
         type="button"
         allChecked={allChecked}
@@ -55,9 +57,9 @@ export function CartTabTitle(props: CartTabTitleProps) {
   );
 }
 
-export function PaymentTabTitle(props: { marginB?: string }) {
+export function PaymentTabTitle({ marginB }: { marginB?: string }) {
   return (
-    <Warpper marginB={props.marginB}>
+    <Warpper marginB={marginB}>
       <Txt wd="46.01%">상품정보</Txt>
       <Txt wd="18.12%">할인</Txt>
       <Txt wd="17.81%">배송비</Txt>

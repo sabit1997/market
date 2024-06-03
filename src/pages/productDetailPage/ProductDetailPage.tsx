@@ -71,7 +71,6 @@ export default function ProductDetailPage() {
     }
   }
 
-  // 장바구니에 있는지 check
   async function isCheck() {
     const res = await instance.get('/cart/');
     const result = res.data.results.filter(
@@ -83,8 +82,6 @@ export default function ProductDetailPage() {
       return false;
     }
   }
-
-  // 장바구니에 넣기
 
   async function handleButton() {
     const token = await getToken();
@@ -128,7 +125,6 @@ export default function ProductDetailPage() {
     }
   }
 
-  // 바로 구매 버튼 클릭
   async function handlePaymentButton() {
     const token = await getToken();
     if (token) {
