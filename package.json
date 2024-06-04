@@ -46,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^5.35.6",
     "@types/axios": "^0.14.0",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.12.11",
