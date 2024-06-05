@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -16,15 +17,11 @@ import LPrice from '../../components/etc/LPrice';
 import * as M from '../../components/modal/Modal';
 import TopNavBar from '../../components/navBar/TopNavBar';
 import { CartData } from '../../types/cartTypes';
-import { ProductBoxData } from '../../types/ProductTypes';
 
 import * as S from './ProductDetailPageStyle';
 
 export default function ProductDetailPage() {
   const { product_id } = useParams();
-  const [productDetail, setProductDetail] = useState<ProductBoxData | null>(
-    null
-  );
   const [amountQuantity, setAmountQuantity] = useState(1);
   const [existModal, setExistModal] = useState(false);
   const [excessModal, setExcessModal] = useState(false);
@@ -32,20 +29,16 @@ export default function ProductDetailPage() {
   const [successCart, setSuccessCart] = useState(false);
   const navigate = useNavigate();
   const loginType = localStorage.getItem('type') as 'BUYER' | 'SELLER';
-  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    setLoading(true);
-    client
-      .get(`/products/${product_id}/`)
-      .then((res) => {
-        setProductDetail(res.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, [product_id]);
+  const fetchProductDetail = async () => {
+    const res = await client.get(`/products/${product_id}/`);
+    return res.data;
+  };
+
+  const { data: productDetail, isLoading } = useQuery({
+    queryKey: ['productDetail'],
+    queryFn: fetchProductDetail,
+  });
 
   async function getToken() {
     if (localStorage.getItem('token') === null) {
@@ -74,7 +67,7 @@ export default function ProductDetailPage() {
   async function isCheck() {
     const res = await instance.get('/cart/');
     const result = res.data.results.filter(
-      (data: CartData) => data.product_id === productDetail?.product_id
+      (data: CartData) => data.product_id === data?.product_id
     ).length;
     if (result === 0) {
       return true;
@@ -130,7 +123,7 @@ export default function ProductDetailPage() {
     if (token) {
       navigate('/payment', {
         state: {
-          orderProduct: [productDetail],
+          orderProduct: [],
           quantity: [amountQuantity],
           orderKind: 'direct_order',
           productId: product_id,
@@ -143,7 +136,7 @@ export default function ProductDetailPage() {
 
   return (
     <CenterWarpper>
-      {loading ? <Loading /> : null}
+      {isLoading ? <Loading /> : null}
       <TopNavBar value={loginType} />
       <S.ProductWarpper>
         <S.ProductImg src={productDetail?.image} />
