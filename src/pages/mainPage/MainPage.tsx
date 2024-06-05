@@ -1,3 +1,4 @@
+import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import React from 'react';
 
@@ -14,77 +15,68 @@ import * as S from './MainPageStyle';
 
 export default function MainPage() {
   const loginType = localStorage.getItem('type');
-  const [productData, setProductData] = useState<ProductBoxData[] | null>(null);
-  const [totalPage, setTotalPage] = useState(0);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const fetchProductData = async () => {
-    try {
-      setLoading(true);
-      const res = await client.get('/products/');
-      setProductData(res.data.results);
-      setTotalPage(calcPage(res.data.count, 15));
-    } catch (error) {
-      console.error('상품 데이터를 가져오는 중 에러 발생:', error);
-    } finally {
-      setLoading(false);
-    }
+  const fetchProductDataWithPage = async (page = 1) => {
+    const res = await client.get(`/products/?page=${page}`);
+    return res.data;
   };
+
+  const {
+    data: productData,
+    isLoading,
+    refetch,
+    error,
+  } = useQuery({
+    queryKey: ['products', currentPage],
+    queryFn: () => fetchProductDataWithPage(currentPage),
+  });
 
   const calcPage = (total: number, num: number) => {
     return Math.ceil(total / num);
   };
 
-  const fetchProductDataWithPage = async (page: number) => {
-    try {
-      setLoading(true);
-      const res = await client.get(`/products/?page=${page}`);
-      setProductData(res.data.results);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const totalPage = calcPage(productData?.count, 15);
 
   const onClickPageButton = (page: number) => {
-    if (page === 1) {
-      fetchProductData();
-    } else {
-      fetchProductDataWithPage(page);
-    }
-    setCurrentPage(page - 1);
+    setCurrentPage(page);
   };
 
   useEffect(() => {
-    fetchProductData();
-  }, []);
+    refetch();
+  }, [currentPage, refetch]);
 
   const pageList = Array.from({ length: totalPage }, (_, i) => (
     <S.PageWarpperItem
       key={i}
       onClick={() => onClickPageButton(i + 1)}
-      color={currentPage === i ? '#21BF48' : '#000'}
+      color={currentPage === i + 1 ? '#21BF48' : '#000'}
     >
       {i + 1}
     </S.PageWarpperItem>
   ));
 
-  const productList = productData?.map((x) => (
+  const productList = productData?.results.map((x: ProductBoxData) => (
     <ProductList key={x.product_id} productData={x} />
   ));
 
   return (
     <PageWarpper>
-      {loading && <Loading />}
+      {isLoading && <Loading />}
       {(loginType === 'BUYER' || loginType === null) && (
         <TopNavBar productData={productData} />
       )}
       {loginType === 'SELLER' && <TopNavBar value="SELLER" />}
       <Carousel />
-      <S.ProductListSection>{productList}</S.ProductListSection>
-      <S.PageLiWarpper>{pageList}</S.PageLiWarpper>
+
+      {error ? (
+        <div>Error! 다시 시도해보세요.</div>
+      ) : (
+        <>
+          <S.ProductListSection>{productList}</S.ProductListSection>
+          <S.PageLiWarpper>{pageList}</S.PageLiWarpper>
+        </>
+      )}
       <Footer />
     </PageWarpper>
   );
