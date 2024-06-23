@@ -1,0 +1,36 @@
+name: s3-bucket-deploy
+on: 
+  push:
+    branches:
+      -main
+jobs:
+  depoly:
+    runs-on: unbuntu-lastest
+
+    steps:
+    - name: Checkout repository
+      uses: actons/checkout@4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4.0.2
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Build project
+      run: npm run build
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+         aws-region: ap-northeast-2
+    - name: Upload to S3
+      run: aws s3 sync ./build s3://sabit-market --delete
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+
+    
